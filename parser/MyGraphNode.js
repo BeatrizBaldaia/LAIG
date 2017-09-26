@@ -38,4 +38,11 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
 
+/**
+ * Displays the node
+ */
+MyGraphNode.prototype.display = function() {
+    console.log("displaying node");
+}
+
 

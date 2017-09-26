@@ -14,6 +14,9 @@ var NODES_INDEX = 6;
  * @constructor
  */
 function MySceneGraph(filename, scene) {
+    //TODO DELETE THIS
+    this.testLeaf = new MyCylinder(scene, 5, 4, 2, 4, 12);
+    //END_TODO
     this.loadedOk = null ;
     
     // Establish bidirectional references between scene and graph.
@@ -1425,4 +1428,9 @@ MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	// remove log below to avoid performance issues
 	this.log("Graph should be rendered here...");
+	this.nodes[this.idRoot].display();
+
+	//TODO: DELETE THIS
+    this.testLeaf.display();
+    //END_TODO
 }
