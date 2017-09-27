@@ -28,6 +28,7 @@ function MyGraphLeaf(graph, xmlelem) {
     }
 }
 
-MyGraphLeaf.prototype.displayScene = function() {
+MyGraphLeaf.prototype.display = function() {
+    console.log("Leaf being display");
     this.leafObj.display();
 }
