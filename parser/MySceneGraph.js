@@ -1351,7 +1351,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 							this.warn("Error in leaf");
 						
 						//parse leaf ADICIONAR
-						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
+						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
                         
                         sizeChildren++;
 					}
@@ -1422,6 +1422,12 @@ MySceneGraph.generateRandomString = function(length) {
     return String.fromCharCode.apply(null, numbers);
 }
 
+/**
+ * Return array of nodes
+ */
+MySceneGraph.prototype.getNodes = function () {
+    return this.nodes;
+}
 /**
  * Displays the scene, processing each node, starting in the root node.
  */

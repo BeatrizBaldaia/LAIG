@@ -11,7 +11,7 @@ function MyGraphNode(graph, nodeID) {
     // IDs of child nodes.
     this.children = [];
 
-    // IDs of leaves nodes.
+    // Leaves nodes objects.
     this.leaves = [];
 
     // The material ID.
@@ -28,6 +28,7 @@ function MyGraphNode(graph, nodeID) {
  * Adds the reference (ID) of another node to this node's children array.
  */
 MyGraphNode.prototype.addChild = function(nodeID) {
+    console.log("addChild");
     this.children.push(nodeID);
 }
 
@@ -35,6 +36,7 @@ MyGraphNode.prototype.addChild = function(nodeID) {
  * Adds a leaf to this node's leaves array.
  */
 MyGraphNode.prototype.addLeaf = function(leaf) {
+    console.log("addLeaf");
     this.leaves.push(leaf);
 }
 
@@ -43,21 +45,27 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * Displays the node
  */
 MyGraphNode.prototype.display = function() {
-    console.log("displaying node");
-    if(this.children.lenght != 0) {
-        for (var i = 0; i < this.children.lenght; i++) {
-            this.children[i].display();
-        }
-    } else {
-        console.log("No more node children");
-    }
+
 
     if(this.leaves.lenght != 0) {
         for (var i = 0; i < this.leaves.lenght; i++) {
+            console.log("DISPLAY LEAF!");
             this.leaves[i].display();
         }
     } else {
         console.log("No more leaves");
     }
+
+    if(this.children.lenght != 0) {
+        for (var i = 0; i < this.children.lenght; i++) {
+            console.log("GOING TO DISPLAY NODE");
+            this.graph.getNodes()[children[i]].display();
+            console.log("displaying node");
+        }
+    } else {
+        console.log("No more node children");
+    }
+
+
 
 }
