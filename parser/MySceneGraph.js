@@ -1436,7 +1436,7 @@ MySceneGraph.prototype.displayScene = function() {
 	// remove log below to avoid performance issues
 	
 	//this.log("Graph should be rendered here...");
-
+    console.log("On displayScene");
 	this.nodes[this.idRoot].display();
 
     //TODO DELECT THIS
