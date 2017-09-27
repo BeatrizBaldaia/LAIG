@@ -45,7 +45,8 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * Displays the node
  */
 MyGraphNode.prototype.display = function() {
-console.log("ENTROU?");
+
+    console.log("ENTROU?");
 
     if(this.leaves.lenght != 0) {
         for (var i = 0; i < this.leaves.lenght; i++) {
