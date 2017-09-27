@@ -15,7 +15,7 @@ var NODES_INDEX = 6;
  */
 function MySceneGraph(filename, scene) {
     //TODO DELECT THIS
-    this.testePrimitivas= new MySphere(scene,2,12,12);
+   // this.testePrimitivas= new MySphere(scene,2,12,12);
     //END_TODO 
     this.loadedOk = null ;
     
@@ -1351,7 +1351,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 							this.warn("Error in leaf");
 						
 						//parse leaf ADICIONAR
-						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
+						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         
                         sizeChildren++;
 					}
@@ -1432,8 +1432,8 @@ MySceneGraph.prototype.displayScene = function() {
 	//this.log("Graph should be rendered here...");
 
 	this.nodes[this.idRoot].display();
-    
+
     //TODO DELECT THIS
-    this.testePrimitivas.display();
+    //this.testePrimitivas.display();
     //END_TODO
 }
