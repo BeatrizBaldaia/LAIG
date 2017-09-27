@@ -1428,6 +1428,21 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.getNodes = function () {
     return this.nodes;
 }
+
+/**
+ * Return array of textures
+ */
+MySceneGraph.prototype.getTextures = function () {
+    return this.textures;
+}
+
+/**
+ * Return scene
+ */
+MySceneGraph.prototype.getScene = function () {
+    return this.scene;
+}
+
 /**
  * Displays the scene, processing each node, starting in the root node.
  */

@@ -56,9 +56,16 @@ MyGraphNode.prototype.display = function() {
         console.log("No more leaves");
     }
 
+    //TODO: Apply texture from this.graph.getTextures()[this.textureID]
+    //ja nao me lembro como era a funcao apply
     if(this.children.lenght != 0) {
         for (var i = 0; i < this.children.lenght; i++) {
             console.log("GOING TO DISPLAY NODE");
+            //TEXTURA????
+            this.testMaterial = new CGFappearance(this);
+            this.testMaterial.setTexture(this.graph.getTextures()[this.textureID]);
+            this.testMaterial.apply();
+            ////
             this.graph.getNodes()[children[i]].display();
             console.log("displaying node");
         }
