@@ -14,9 +14,9 @@ var NODES_INDEX = 6;
  * @constructor
  */
 function MySceneGraph(filename, scene) {
-    //TODO DELETE THIS
-    this.testLeaf = new MyCylinder(scene, 5, 4, 2, 4, 12);
-    //END_TODO
+    //TODO DELECT THIS
+    this.testePrimitivas= new MySphere(scene,2,12,12);
+    //END_TODO 
     this.loadedOk = null ;
     
     // Establish bidirectional references between scene and graph.
@@ -1350,8 +1350,9 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 						else
 							this.warn("Error in leaf");
 						
-						//parse leaf
-						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
+						//parse leaf ADICIONAR
+						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
+                        
                         sizeChildren++;
 					}
 					else
@@ -1427,10 +1428,12 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	// remove log below to avoid performance issues
-	this.log("Graph should be rendered here...");
-	this.nodes[this.idRoot].display();
+	
+	//this.log("Graph should be rendered here...");
 
-	//TODO: DELETE THIS
-    this.testLeaf.display();
+	this.nodes[this.idRoot].display();
+    
+    //TODO DELECT THIS
+    this.testePrimitivas.display();
     //END_TODO
 }

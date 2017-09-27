@@ -4,7 +4,12 @@
 **/
 
 function MyGraphLeaf(graph, xmlelem) {
-    this.graph = graph;
-    this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+   //E O rectangle...etc
+   //this.object
+   var type=graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+   if (type=='rectangle'){
+       this.object=new MyRectangle(graph.scene);
+   }
 }
 
+//CRIAR FUNCAO DISPLAY PARA 

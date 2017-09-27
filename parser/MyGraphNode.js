@@ -34,9 +34,10 @@ MyGraphNode.prototype.addChild = function(nodeID) {
 /**
  * Adds a leaf to this node's leaves array.
  */
-MyGraphNode.prototype.addLeaf = function(leaf) {
+MyGraphNode.prototype.addChild = function(leaf) {
     this.leaves.push(leaf);
 }
+
 
 /**
  * Displays the node
@@ -44,5 +45,3 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
 MyGraphNode.prototype.display = function() {
     console.log("displaying node");
 }
-
-
