@@ -44,4 +44,20 @@ MyGraphNode.prototype.addChild = function(leaf) {
  */
 MyGraphNode.prototype.display = function() {
     console.log("displaying node");
+    if(children.lenght != 0) {
+        for (var i = 0; i < children.lenght; i++) {
+            children[i].display();
+        }
+    } else {
+        console.log("No more node children");
+    }
+
+    if(leaves.lenght != 0) {
+        for (var i = 0; i < leaves.lenght; i++) {
+            leaves[i].display();
+        }
+    } else {
+        console.log("No more leaves");
+    }
+
 }
