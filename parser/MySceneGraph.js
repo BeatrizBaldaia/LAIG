@@ -1351,7 +1351,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 							this.warn("Error in leaf");
 						
 						//parse leaf ADICIONAR
-						this.nodes[nodeID].addChild(new MyGraphLeaf(this,descendants[j]));
+						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
                         
                         sizeChildren++;
 					}
@@ -1452,7 +1452,8 @@ MySceneGraph.prototype.displayScene = function() {
 	
 	//this.log("Graph should be rendered here...");
     console.log("On displayScene");
-	this.nodes[this.idRoot].display();
+    this.materials[this.defaultMaterialID].apply();
+	this.nodes[this.idRoot].display(this.idRoot);
 
     //TODO DELECT THIS
     //this.testePrimitivas.display();

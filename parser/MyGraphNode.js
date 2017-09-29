@@ -44,7 +44,7 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
 /**
  * Displays the node
  */
-MyGraphNode.prototype.display = function() {
+MyGraphNode.prototype.display = function(parentID) {
 
     console.log("ENTROU?");
 
@@ -63,9 +63,23 @@ MyGraphNode.prototype.display = function() {
         for (var i = 0; i < this.children.lenght; i++) {
             console.log("GOING TO DISPLAY NODE");
             //TEXTURA????
-            this.testMaterial = new CGFappearance(this);
-            this.testMaterial.setTexture(this.graph.getTextures()[this.textureID]);
-            this.testMaterial.apply();
+            this.testMaterial = null;
+            if(materialID != null) {
+                this.testMaterial = this.graph.materials[materialID];
+                if (textureID != "null") {
+                    this.testMaterial.setTexture(this.graph.getTextures()[this.textureID]);
+                    this.testMaterial.apply();
+                } else if (textureID == "clear") {
+                    this.testMaterial.setTexture(null);
+                }
+            } else if (textureID == "clear") {
+                this.testMaterial = this.graph.materials[parentID];
+                this.testMaterial.setTexture(null);
+            }
+
+            if(this.testMaterial != null) {
+                this.testMaterial.apply();
+            }
             ////
             this.graph.getNodes()[children[i]].display();
             console.log("displaying node");
