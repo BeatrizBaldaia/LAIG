@@ -48,15 +48,9 @@ MyGraphNode.prototype.display = function(parentID) {
 
     console.log("ENTROU?");
 
-    if(this.leaves.lenght != 0) {
-        for (var i = 0; i < this.leaves.lenght; i++) {
-            console.log("DISPLAY LEAF!");
-            this.leaves[i].display();
-        }
-    } else {
-        console.log("No more leaves");
-    }
-
+    /**
+     * Call for children display
+     */
     //TODO: Apply texture from this.graph.getTextures()[this.textureID]
     //ja nao me lembro como era a funcao apply
     if(this.children.lenght != 0) {
@@ -81,11 +75,23 @@ MyGraphNode.prototype.display = function(parentID) {
                 this.testMaterial.apply();
             }
             ////
-            this.graph.getNodes()[children[i]].display();
+            this.graph.getNodes()[children[i]].display(this.nodeID);
             console.log("displaying node");
         }
     } else {
         console.log("No more node children");
+    }
+
+    /**
+     * Draw leaves
+     */
+    if(this.leaves.lenght != 0) {
+        for (var i = 0; i < this.leaves.lenght; i++) {
+            console.log("DISPLAY LEAF!");
+            this.leaves[i].display(this.nodeID);
+        }
+    } else {
+        console.log("No more leaves");
     }
 
 
