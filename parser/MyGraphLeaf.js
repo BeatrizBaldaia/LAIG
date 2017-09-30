@@ -14,21 +14,25 @@ function MyGraphLeaf(graph, xmlelem) {
     } else if (type == 'cylinder') {
        //args="ff ff ff ii ii" height, bottom radius, top radius, sections along height, parts per section
         this.leafObj = new MyCylinder(graph.scene,stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4]);
-    } else if (type == 'sphere') {
+    } else //if (type == 'sphere') {
        //args="ff ii ii" radius, parts along radius, parts per section
-        this.leafObj = new MySceneGraph(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
-    } else if (type == 'triangle') {
+        //this.leafObj = new MySceneGraph(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
+   // } else
+    if (type == 'triangle') {
        //args="ff ff ff ff ff ff ff ff ff" coordinates of each vertex
         var p1 = [stringArray[0], stringArray[1], stringArray[2]];
         var p2 = [stringArray[3], stringArray[4], stringArray[5]];
         var p3 = [stringArray[6], stringArray[7], stringArray[8]];
         this.leafObj = new MyTriangle(graph.scene, p1, p2, p3);
    } else {
-        this.onXMLMinorError("Unkown leaf");
+        graph.onXMLMinorError("Unkown leaf");
     }
 }
 
 MyGraphLeaf.prototype.display = function() {
-    console.log("Leaf being display");
-    this.leafObj.display();
+    //console.log("Leaf being display");
+    if(this.leafObj!=null){
+        console.log("Leaf being display");
+        this.leafObj.display();
+    }
 }

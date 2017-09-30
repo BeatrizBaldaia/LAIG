@@ -912,7 +912,9 @@ MySceneGraph.prototype.parseTextures = function(texturesNode) {
                 return "s amplification factor undefined for texture with ID = " + textureID;
             else if (amplifFactorT == null )
                 return "t amplification factor undefined for texture with ID = " + textureID;
-            
+            //TODO APAGAR
+            console.log("FILEPATH = "+filepath);
+            //END_TODO
             var texture = new CGFtexture(this.scene,"./scenes/" + filepath);
             
             this.textures[textureID] = [texture, amplifFactorS, amplifFactorT];
@@ -1452,7 +1454,7 @@ MySceneGraph.prototype.displayScene = function() {
 	
 	//this.log("Graph should be rendered here...");
     console.log("On displayScene");
-    this.materials[this.defaultMaterialID].apply();
+   // this.materials[this.defaultMaterialID].apply();
 	this.nodes[this.idRoot].display(this.idRoot);
 
     //TODO DELECT THIS

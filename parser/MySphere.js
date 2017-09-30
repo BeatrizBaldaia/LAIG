@@ -60,9 +60,7 @@ var degToRad = Math.PI / 180.0;
 
 		}
 		
-		var numberOfVertices=this.vertices.push()/3;
-		console.log(numberOfVertices+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		
+		var numberOfVertices=this.vertices.length/3;
 		
 		//PARTE DE BAIXO
 		for (var j = 0; j <= andares; j++){
