@@ -31,6 +31,10 @@ XMLscene.prototype.init = function(application) {
     this.gl.depthFunc(this.gl.LEQUAL);
     
     this.axis = new CGFaxis(this);
+
+    //TODO Aqui??
+    this.texturesStack=[];
+    this.materialsStack=[];
 }
 
 /**
@@ -139,7 +143,6 @@ XMLscene.prototype.display = function() {
 
         // Displays the scene.
         this.graph.displayScene();
-
     }
 	else
 	{

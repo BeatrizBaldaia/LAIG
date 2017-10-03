@@ -7,10 +7,10 @@ function MyRectangle(scene,x_top,y_top,x_bottom,y_bottom) {
 	this.x_bottom=x_bottom;
 	this.y_bottom=y_bottom;
 	
-	//this.minS=minS || 0;
-	//this.maxS=maxS || 1;
-	//this.minT=minT || 0;
-	//this.maxT=maxT || 1;
+	//0=minS || 0;
+	//1=maxS || 1;
+	//0=minT || 0;
+	//1=maxT || 1;
 	
 	this.initBuffers();
 };
@@ -38,12 +38,14 @@ MyRectangle.prototype.initBuffers = function () {
 		0, 0, 1,
 		0, 0, 1
 	];
-	//this.texCoords = [
-	//	this.minS,this.maxT,//
-	//	this.maxS,this.maxT,//
-	//	this.minS,this.minT,//
-	//	this.maxS,this.minT//
-	//];
+
+	//TODO alter
+	this.texCoords = [
+		0,1,//
+		1,1,//
+		0,0,//
+		1,0//
+	];
 	
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();

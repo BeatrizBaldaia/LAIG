@@ -35,7 +35,7 @@ var degToRad = Math.PI / 180.0;
 				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/andares));
 
 				//vertices
-				this.vertices.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff),Math.sin(j*diff));
+				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff),this.radius*Math.sin(j*diff));
 				//normais
 				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
 
@@ -71,7 +71,7 @@ var degToRad = Math.PI / 180.0;
  				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/andares));
 
 				//vertices
-				this.vertices.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), -Math.sin(j*diff));
+				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff), -this.radius*Math.sin(j*diff));
 				//normais
 				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
 
