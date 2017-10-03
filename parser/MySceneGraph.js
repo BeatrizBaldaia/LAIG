@@ -14,9 +14,7 @@ var NODES_INDEX = 6;
  * @constructor
  */
 function MySceneGraph(filename, scene) {
-    //TODO DELECT THIS
-   // this.testePrimitivas= new MySphere(scene,2,12,12);
-    //END_TODO 
+
     this.loadedOk = null ;
     
     // Establish bidirectional references between scene and graph.
@@ -42,6 +40,7 @@ function MySceneGraph(filename, scene) {
 	 */
     
     this.reader.open('scenes/' + filename, this);
+
 }
 
 /*
@@ -1454,10 +1453,11 @@ MySceneGraph.prototype.displayScene = function() {
 	
 	//this.log("Graph should be rendered here...");
     console.log("On displayScene");
-   // this.materials[this.defaultMaterialID].apply();
+    this.scene.materialsStack.push(this.materials[this.defaultMaterialID]);
 	this.nodes[this.idRoot].display(this.idRoot);
-
+	this.scene.materialsStack.pop();
+    console.log("End displayScene");
     //TODO DELECT THIS
-    //this.testePrimitivas.display();
+    //this.teste.display();
     //END_TODO
 }

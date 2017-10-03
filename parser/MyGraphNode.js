@@ -45,56 +45,42 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-
+//TODO texture clear??
     /**
      * Call for children display
      */
     //TODO: Apply texture from this.graph.getTextures()[this.textureID]
-    //ja nao me lembro como era a funcao apply
-//    if(this.children.lenght != 0) {
-//        for (var i = 0; i < this.children.length; i++) {
-//            //console.log("GOING TO DISPLAY NODE");
-//            //TEXTURA????
-//            this.testMaterial = null;
-//            if(this.materialID != null) {
-//                this.testMaterial = this.graph.materials[this.materialID];
-//                if (this.textureID != "null") {
-//                    this.testMaterial.setTexture(this.graph.getTextures()[this.textureID]);
-//                    this.testMaterial.apply();
-//                } else if (this.textureID == "clear") {
-//                    this.testMaterial.setTexture(null);
-//                }
-//            } else if (this.textureID == "clear") {
-//                this.testMaterial = this.graph.materials[parentID];
-//                this.testMaterial.setTexture(null);
-//            }
-//
-//            if(this.testMaterial != null) {
-//                this.testMaterial.apply();
-//            }
-//            ////
-//            this.graph.getNodes()[children[i]].display(this.nodeID);
-//            //console.log("displaying node");
-//        }
-//    } else {
-//        //console.log("No more node children");
-//    }
-//
 
-    if(this.children.lenght != 0) {
+    console.log("Displays node = "+this.nodeID);
+
+    this.graph.scene.pushMatrix();
+    this.graph.scene.multMatrix(this.transformMatrix);
+
+    if(this.materialID != 'null'){
+        console.log("Material = "+this.materialID);
+        this.graph.scene.materialsStack.push(this.graph.materials[this.materialID]);
+        this.graph.materials[this.materialID].apply();
+    }
+
+    if(this.textureID != 'null' && this.textureID != 'clear'){
+        this.graph.scene.texturesStack.push(this.graph.getTextures()[this.textureID]);
+        this.graph.textures[this.textureID][0].bind();
+    }
+    
+    if(this.children.length != 0) {
         for (var i = 0; i < this.children.length; i++) {
             //console.log("GOING TO DISPLAY NODE");
+            
             this.graph.getNodes()[this.children[i]].display(this.nodeID);
             //console.log("displaying node");
         }
     } else {
         //console.log("No more node children");
     }
-
     /**
      * Draw leaves
      */
-    if(this.leaves.lenght != 0) {
+    if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
             //console.log("DISPLAY LEAF!");
             this.leaves[i].display();
@@ -102,5 +88,19 @@ MyGraphNode.prototype.display = function(parentID) {
     } else {
         //console.log("No more leaves");
     }
+    if(this.materialID!='null'){
+        console.log("END Material = "+this.materialID);
+        this.graph.scene.materialsStack.pop();
+        this.graph.scene.materialsStack[this.graph.scene.materialsStack.length - 1].apply();
+    }
+    if(this.textureID != 'null' && this.textureID != 'clear'){
+        this.graph.textures[this.textureID][0].unbind();
+        this.graph.scene.texturesStack.pop();
+        if(this.graph.scene.texturesStack.length!=0)
+            this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1].bind();
+    
+    }
+    this.graph.scene.popMatrix();
 
+    console.log("Ends node = "+this.nodeID);
 }

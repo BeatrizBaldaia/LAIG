@@ -11,13 +11,14 @@ function MyGraphLeaf(graph, xmlelem) {
     if (type == 'rectangle'){
        //args="ff ff ff ff" 2D coordinates for left-top and right-bottom vertices
        this.leafObj = new MyRectangle(graph.scene, stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
-    } else if (type == 'cylinder') {
+   } else 
+    if (type == 'cylinder') {
        //args="ff ff ff ii ii" height, bottom radius, top radius, sections along height, parts per section
         this.leafObj = new MyCylinder(graph.scene,stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4]);
-    } else //if (type == 'sphere') {
+    } else if (type == 'sphere') {
        //args="ff ii ii" radius, parts along radius, parts per section
-        //this.leafObj = new MySceneGraph(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
-   // } else
+        this.leafObj = new MySphere(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
+    } else
     if (type == 'triangle') {
        //args="ff ff ff ff ff ff ff ff ff" coordinates of each vertex
         var p1 = [stringArray[0], stringArray[1], stringArray[2]];
