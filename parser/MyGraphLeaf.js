@@ -8,6 +8,10 @@ function MyGraphLeaf(graph, xmlelem) {
     var type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
+    for(var i=0;i<stringArray.length;i++){
+        stringArray[i]=parseFloat(stringArray[i]);
+    }
+
     if (type == 'rectangle'){
        //args="ff ff ff ff" 2D coordinates for left-top and right-bottom vertices
        this.leafObj = new MyRectangle(graph.scene, stringArray[0], stringArray[1], stringArray[2], stringArray[3]);

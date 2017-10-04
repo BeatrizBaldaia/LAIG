@@ -88,6 +88,8 @@ MyGraphNode.prototype.display = function(parentID) {
     } else {
         //console.log("No more leaves");
     }
+
+    
     if(this.materialID!='null'){
         console.log("END Material = "+this.materialID);
         this.graph.scene.materialsStack.pop();
