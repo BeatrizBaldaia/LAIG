@@ -352,7 +352,7 @@
 
         </NODE>
 
-    <NODE id="bigRocket">
+        <NODE id="bigRocket">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -365,19 +365,20 @@
 
     </NODE>
 
-    <NODE id="bottomBody">
+        <NODE id="bottomBody">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <SCALE sx="1" sy="5" sz="1" />
         <DESCENDANTS>
             <NODEREF id="cylinderBody" />
             <NODEREF id="lowerStageCover" />
+            <!-- <NODEREF id="wings" /> -->
 
         </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="topBody">
+        <NODE id="topBody">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
@@ -391,7 +392,7 @@
 
     </NODE>
 
-    <NODE id="lowerStageCover">
+        <NODE id="lowerStageCover">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <TRANSLATION x="0" y="1" z="0" />
@@ -403,7 +404,7 @@
 
     </NODE>
 
-    <NODE id="upperStageCover">
+        <NODE id="upperStageCover">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <TRANSLATION x="0" y="2.5" z="0" />
@@ -415,7 +416,7 @@
 
     </NODE>
 
-    <NODE id="upperStageBody">
+        <NODE id="upperStageBody">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
         <SCALE sx="1" sy="2.5" sz="1" />
@@ -427,7 +428,7 @@
 
     </NODE>
 
-    <NODE id="cylinderBody">
+        <NODE id="cylinderBody">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="light_metal" />
 
@@ -440,7 +441,7 @@
 
     </NODE>
 
-    <NODE id="coneBody">
+        <NODE id="coneBody">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="dark_metal" />
 
@@ -453,7 +454,7 @@
 
     </NODE>
 
-    <NODE id="ovalConeBody">
+        <NODE id="ovalConeBody">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="dark_metal" />
         <SCALE sx="1" sy="1.5" sz="1" />
@@ -465,6 +466,120 @@
     </NODE>
 
 
+    <NODE id="wings">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+
+        <DESCENDANTS>
+            <NODEREF id="wing1" />
+            <NODEREF id="wing2" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing1">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+
+        <TRANSLATION x="1" y="0" z="-0.2" />
+
+        <DESCENDANTS>
+            <NODEREF id="wingStruct" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing2">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+        <ROTATION axis="y" angle="180" />
+
+        <TRANSLATION x="-1" y="0" z="-0.1" />
+
+        <DESCENDANTS>
+            <NODEREF id="wingStruct" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingStruct">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+
+        <SCALE sx="0.5" sy="0.3" sz="0.2" />
+
+        <DESCENDANTS>
+
+            <NODEREF id="wingFace1" />
+            <NODEREF id="wingFace2" />
+            <NODEREF id="wingFace3" />
+            <NODEREF id="wingFace4" />
+            <NODEREF id="wingFace5" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingFace1">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+            <TRANSLATION x="0" y="0" z="1" />
+
+        <DESCENDANTS>
+            <LEAF id="triangle1" type="triangle" args="0 0 0 1 0 0 1 0 1" />
+
+        </DESCENDANTS>
+
+        </NODE>
+
+    <NODE id="wingFace2">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+        <SCALE sx="1" sy="1" sz="-1" />
+
+        <DESCENDANTS>
+            <LEAF id="triangle1" type="triangle" args="0 0 0 1 0 0 1 0 1" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingFace3">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+        <ROTATION axis="x" angle="90" />
+
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 1 0" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingFace4">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+        <ROTATION axis="y" angle="90" />
+        <TRANSLATION x="-1" y="0" z="1" />
+
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 1 0" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wingFace5">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="red_metal" />
+        <ROTATION axis="y" angle="-90" />
+        <ROTATION axis="x" angle="-45" />
+
+        <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 1 0" />
+
+        </DESCENDANTS>
+
+    </NODE>
 
 
 </SCENE>
