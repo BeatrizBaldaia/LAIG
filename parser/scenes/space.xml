@@ -159,6 +159,7 @@
 
                 <NODEREF id="platform" />
                 <NODEREF id="stars" />
+                <NODEREF id="bigRocket" />
             </DESCENDANTS>
 
         </NODE>
@@ -350,6 +351,120 @@
             </DESCENDANTS>
 
         </NODE>
+
+    <NODE id="bigRocket">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="3" y="0" z="0" />
+
+        <DESCENDANTS>
+            <NODEREF id="bottomBody" />
+            <NODEREF id="topBody" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="bottomBody">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <SCALE sx="1" sy="5" sz="1" />
+        <DESCENDANTS>
+            <NODEREF id="cylinderBody" />
+            <NODEREF id="lowerStageCover" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="topBody">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <SCALE sx="0.7" sy="1.2" sz="0.7" /> -->
+        <TRANSLATION x="0" y="5" z="0" />
+        <DESCENDANTS>
+            <NODEREF id="upperStageBody" />
+            <NODEREF id="upperStageCover" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="lowerStageCover">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="1" z="0" />
+
+        <DESCENDANTS>
+            <NODEREF id="coneBody" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="upperStageCover">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="0" y="2.5" z="0" />
+
+        <DESCENDANTS>
+            <NODEREF id="ovalConeBody" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="upperStageBody">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <SCALE sx="1" sy="2.5" sz="1" />
+
+        <DESCENDANTS>
+            <NODEREF id="cylinderBody" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cylinderBody">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="light_metal" />
+
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF id="cylinder1" type="cylinder" args="1 1 1 30 30" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="coneBody">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="dark_metal" />
+
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF id="cone1" type="cylinder" args="1 1 0 30 30" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ovalConeBody">
+        <MATERIAL id="bigRocketMaterial" />
+        <TEXTURE id="dark_metal" />
+        <SCALE sx="1" sy="1.5" sz="1" />
+        <DESCENDANTS>
+            <LEAF id="cone1" type="sphere" args="1 30 30" />
+
+        </DESCENDANTS>
+
+    </NODE>
+
+
 
 
 </SCENE>
