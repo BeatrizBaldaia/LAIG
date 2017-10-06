@@ -529,10 +529,11 @@
     <NODE id="wingFace2">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="red_metal" />
-        <SCALE sx="1" sy="1" sz="-1" />
+        <ROTATION axis="y" angle="-180" />
+        
 
         <DESCENDANTS>
-            <LEAF id="triangle1" type="triangle" args="0 0 0 1 0 0 1 1 0" />
+            <LEAF id="triangle1" type="triangle" args="0 0 0 -1 0 0 -1 1 0" />
 
         </DESCENDANTS>
 
