@@ -51,13 +51,13 @@ MyGraphNode.prototype.display = function(parentID) {
      */
     //TODO: Apply texture from this.graph.getTextures()[this.textureID]
 
-    console.log("Displays node = "+this.nodeID);
+    //console.log("Displays node = "+this.nodeID);
 
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
     if(this.materialID != 'null'){
-        console.log("Material = "+this.materialID);
+      //  console.log("Material = "+this.materialID);
         this.graph.scene.materialsStack.push(this.graph.materials[this.materialID]);
         this.graph.materials[this.materialID].apply();
     }
@@ -91,18 +91,18 @@ MyGraphNode.prototype.display = function(parentID) {
 
     
     if(this.materialID!='null'){
-        console.log("END Material = "+this.materialID);
+        //console.log("END Material = "+this.materialID);
         this.graph.scene.materialsStack.pop();
         this.graph.scene.materialsStack[this.graph.scene.materialsStack.length - 1].apply();
     }
     if(this.textureID != 'null' && this.textureID != 'clear'){
         this.graph.textures[this.textureID][0].unbind();
         this.graph.scene.texturesStack.pop();
-        if(this.graph.scene.texturesStack.length!=0)
-            this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1].bind();
-    
+        if(this.graph.scene.texturesStack.length!=0){
+            this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][0].bind();
+        }
     }
     this.graph.scene.popMatrix();
 
-    console.log("Ends node = "+this.nodeID);
+    //console.log("Ends node = "+this.nodeID);
 }

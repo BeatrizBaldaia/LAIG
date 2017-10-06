@@ -37,7 +37,7 @@ function MyGraphLeaf(graph, xmlelem) {
 MyGraphLeaf.prototype.display = function() {
     //console.log("Leaf being display");
     if(this.leafObj!=null){
-        console.log("Leaf being display");
+        //console.log("Leaf being display");
         this.leafObj.display();
     }
 }
