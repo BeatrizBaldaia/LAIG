@@ -92,7 +92,7 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
     else {
         if (index != INITIALS_INDEX)
             this.onXMLMinorError("tag <INITIALS> out of order");
-        
+
         if ((error = this.parseInitials(nodes[index])) != null )
             return error;
     }

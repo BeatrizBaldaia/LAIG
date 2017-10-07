@@ -3,11 +3,11 @@
     <!-- Initial values -->
     <INITIALS>
         <frustum near="0.1" far="500"/>
-        <translation x="-10" y="10" z="0" />
+        <translation x="-25" y="-25" z="-25" />
         <rotation axis="x" angle="0" />
-        <rotation axis="y" angle="0" />
+        <rotation axis="y" angle="10" />
         <rotation axis="z" angle="0" />
-        <scale sx="2.0" sy="2.0" sz="2.0" />
+        <scale sx="1.0" sy="1.0" sz="1.0" />
         <reference length="10" />
     </INITIALS>
 
@@ -58,31 +58,31 @@
 
     <!-- Textures -->
     <TEXTURES>
-        <!-- Tree trunk -->
+        <!-- light_metal -->
         <TEXTURE id="light_metal">
             <file path="images/metal1.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
-        <!-- Tree leaves -->
+        <!-- dark_metal -->
         <TEXTURE id="dark_metal">
             <file path="images/metal2.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
-        <!-- Rocks -->
+        <!-- red_metal -->
         <TEXTURE id="red_metal">
             <file path="images/red_metal.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
-        <!-- Glass work -->
+        <!-- blue_metal -->
         <TEXTURE id="blue_metal">
             <file path="images/blue_metal.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
-        <!-- Street bench -->
+        <!-- star -->
         <TEXTURE id="star">
             <file path="images/star.jpg" />
             <amplif_factor s="1" t="1" />
@@ -92,16 +92,8 @@
 
 
     <MATERIALS>
-        <!-- Pyramid material -->
-        <MATERIAL id="piramideMaterial">
-            <shininess value="1" />
-            <specular r="0" g="0" b="0" a="1" />
-            <diffuse r="1.0" g="0.68" b="0.4" a="1" />
-            <ambient r="0.2" g="0.2" b="0.2" a="1" />
-            <emission r="0.0" g="0.0" b="0.0" a="1" />
-        </MATERIAL>
 
-        <!-- Tree leaves material -->
+        <!-- Rocket material -->
         <MATERIAL id="bigRocketMaterial">
             <shininess value="1" />
             <specular r="0.6" g="0.6" b="0.6" a="1" />
@@ -110,7 +102,7 @@
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
 
-        <!-- Tree trunk material -->
+        <!-- platform material -->
         <MATERIAL id="platformMaterial">
             <shininess value="1" />
             <specular r="0.6" g="0.6" b="0.6" a="1" />
@@ -119,7 +111,7 @@
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
 
-        <!-- Lamp post material -->
+        <!-- Star material -->
         <MATERIAL id="starMaterial">
             <shininess value="100" />
             <specular r="0.85" g="0.85" b="0.85" a="1" />
@@ -137,7 +129,11 @@
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
 
-    </MATERIALS>
+    </MATERIALS> 
+
+<!-- The leaves -->
+<LEAVES>
+</LEAVES>
 
     <!-- The nodes -->
     <NODES>
@@ -150,10 +146,9 @@
             <TEXTURE id="null" />
 
             <DESCENDANTS>
-
                 <NODEREF id="platform" />
                 <NODEREF id="stars" />
-                <NODEREF id="bigRocket" />
+                <NODEREF id="bigRocket" /> 
             </DESCENDANTS>
 
         </NODE>
@@ -163,11 +158,9 @@
             <MATERIAL id="platformMaterial" />
             <TEXTURE id="blue_metal" />
 
-            <TRANSLATION x="6" y="0" z="6" />
+            <TRANSLATION x="3" y="0" z="3" />
             <SCALE sx="6" sy="1" sz="4" />
-
-
-
+            
             <DESCENDANTS>
 
                 <NODEREF id="facePlatform1" />
@@ -278,7 +271,7 @@
         <NODE id="star1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <TRANSLATION x="30" y="10" z="0" />
+            <TRANSLATION x="15" y="10" z="0" />
             <!-- <SCALE sx="2" sy="2" sz="2" /> -->
 
             <DESCENDANTS>
@@ -350,11 +343,11 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="3" y="0" z="0" />
+        <TRANSLATION x="6" y="1" z="5" />
 
         <DESCENDANTS>
             <NODEREF id="bottomBody" />
-            <NODEREF id="topBody" />
+            <NODEREF id="topBody" /> 
         </DESCENDANTS>
 
     </NODE>
@@ -364,7 +357,7 @@
         <TEXTURE id="null" />
         <SCALE sx="1" sy="5" sz="1" />
         <DESCENDANTS>
-            <NODEREF id="cylinderBody" />
+            <NODEREF id="cylinderBody" /> 
             <NODEREF id="lowerStageCover" />
             <NODEREF id="wings" />
 
@@ -465,7 +458,7 @@
         <TEXTURE id="red_metal" />
 
         <DESCENDANTS>
-            <NODEREF id="wing1" />
+            <NODEREF id="wing1" /> 
             <NODEREF id="wing2" />
         </DESCENDANTS>
 
@@ -475,7 +468,7 @@
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="red_metal" />
 
-        <TRANSLATION x="1" y="0" z="-0.2" />
+        <TRANSLATION x="-1.5" y="0" z="-0.2" />
 
         <DESCENDANTS>
             <NODEREF id="wingStruct" />
@@ -488,7 +481,7 @@
         <TEXTURE id="red_metal" />
         <ROTATION axis="y" angle="180" />
 
-        <TRANSLATION x="-1" y="0" z="-0.1" />
+        <TRANSLATION x="-1.5" y="0" z="-0.1" />
 
         <DESCENDANTS>
             <NODEREF id="wingStruct" />
@@ -508,7 +501,7 @@
             <NODEREF id="wingFace2" />
             <NODEREF id="wingFace3" />
             <NODEREF id="wingFace4" />
-            <NODEREF id="wingFace5" />
+            <NODEREF id="wingFace5" /> 
         </DESCENDANTS>
 
     </NODE>
@@ -533,7 +526,7 @@
         
 
         <DESCENDANTS>
-            <LEAF id="triangle1" type="triangle" args="0 0 0 -1 0 0 -1 1 0" />
+            <LEAF id="triangle1" type="triangle" args="0 0 0 -1 1 0 -1 0 0" />
 
         </DESCENDANTS>
 
