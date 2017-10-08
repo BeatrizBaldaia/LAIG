@@ -178,7 +178,8 @@
         <NODE id="facePlatform1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-
+            <ROTATION axis="x" angle="180" />
+            <TRANSLATION x="0" y="-1" z="0" />
 
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
