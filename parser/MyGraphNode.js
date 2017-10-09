@@ -28,7 +28,7 @@ function MyGraphNode(graph, nodeID) {
  * Adds the reference (ID) of another node to this node's children array.
  */
 MyGraphNode.prototype.addChild = function(nodeID) {
-    //console.log("addChild");
+    ////console.log("addChild");
     this.children.push(nodeID);
 }
 
@@ -36,7 +36,7 @@ MyGraphNode.prototype.addChild = function(nodeID) {
  * Adds a leaf to this node's leaves array.
  */
 MyGraphNode.prototype.addLeaf = function(leaf) {
-    //console.log("addLeaf");
+    ////console.log("addLeaf");
     this.leaves.push(leaf);
 }
 
@@ -51,51 +51,53 @@ MyGraphNode.prototype.display = function(parentID) {
      */
     //TODO: Apply texture from this.graph.getTextures()[this.textureID]
 
-    //console.log("Displays node = "+this.nodeID);
+    ////console.log("Displays node = "+this.nodeID);
 
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
     if(this.materialID != 'null'){
-      //  console.log("Material = "+this.materialID);
+      //  //console.log("Material = "+this.materialID);
         this.graph.scene.materialsStack.push(this.graph.materials[this.materialID]);
         this.graph.materials[this.materialID].apply();
     }
 
     if(this.textureID != 'null' && this.textureID != 'clear'){
+        //console.log("Texture = "+this.textureID);
         this.graph.scene.texturesStack.push(this.graph.getTextures()[this.textureID]);
         this.graph.textures[this.textureID][0].bind();
     }
-    
+    //console.log("NODE = "+this.nodeID);
     if(this.children.length != 0) {
         for (var i = 0; i < this.children.length; i++) {
-            //console.log("GOING TO DISPLAY NODE");
+            ////console.log("GOING TO DISPLAY NODE");
             
             this.graph.getNodes()[this.children[i]].display(this.nodeID);
-            //console.log("displaying node");
+            ////console.log("displaying node");
         }
     } else {
-        //console.log("No more node children");
+        ////console.log("No more node children");
     }
     /**
      * Draw leaves
      */
     if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
-            //console.log("DISPLAY LEAF!");
+            ////console.log("DISPLAY LEAF!");
             this.leaves[i].display();
         }
     } else {
-        //console.log("No more leaves");
+        ////console.log("No more leaves");
     }
 
     
     if(this.materialID!='null'){
-        //console.log("END Material = "+this.materialID);
+        ////console.log("END Material = "+this.materialID);
         this.graph.scene.materialsStack.pop();
         this.graph.scene.materialsStack[this.graph.scene.materialsStack.length - 1].apply();
     }
     if(this.textureID != 'null' && this.textureID != 'clear'){
+        //console.log("END texture = "+this.textureID);
         this.graph.textures[this.textureID][0].unbind();
         this.graph.scene.texturesStack.pop();
         if(this.graph.scene.texturesStack.length!=0){
@@ -104,5 +106,5 @@ MyGraphNode.prototype.display = function(parentID) {
     }
     this.graph.scene.popMatrix();
 
-    //console.log("Ends node = "+this.nodeID);
+    ////console.log("Ends node = "+this.nodeID);
 }

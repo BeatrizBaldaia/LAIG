@@ -2,7 +2,7 @@
 
     <!-- Initial values -->
     <INITIALS>
-        <frustum near="0.1" far="500"/>
+        <frustum near="0.001" far="500"/>
         <translation x="-25" y="-25" z="-25" />
         <rotation axis="x" angle="0" />
         <rotation axis="y" angle="10" />
@@ -63,6 +63,11 @@
             <file path="images/metal1.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <!-- chess -->
+        <TEXTURE id="chess">
+            <file path="images/chess.png" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
 
         <!-- dark_metal -->
         <TEXTURE id="dark_metal">
@@ -72,7 +77,7 @@
 
         <!-- red_metal -->
         <TEXTURE id="red_metal">
-            <file path="images/red_metal.jpg" />
+            <file path="images/texture-red.png" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
@@ -81,7 +86,11 @@
             <file path="images/blue_metal.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
-
+        <!-- target -->
+        <TEXTURE id="target">
+            <file path="images/target.png" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
         <!-- star -->
         <TEXTURE id="star">
             <file path="images/star.jpg" />
@@ -355,7 +364,7 @@
 
         <NODE id="bottomBody">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="light_metal" />
         <SCALE sx="1" sy="5" sz="1" />
         <DESCENDANTS>
             <NODEREF id="cylinderBody" /> 
@@ -382,9 +391,9 @@
 
         <NODE id="lowerStageCover">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="chess" />
         <TRANSLATION x="0" y="1" z="0" />
-
+        <SCALE sx="1" sy=".35" sz="1"/>
         <DESCENDANTS>
             <NODEREF id="coneBody" />
 
@@ -406,19 +415,19 @@
 
         <NODE id="upperStageBody">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
-        <SCALE sx="1" sy="2.5" sz="1" />
+        <TEXTURE id="light_metal" />
+        <TRANSLATION x="0" y=".3" z="0"/>
+        <SCALE sx="1.05" sy="2" sz="1.05" />
 
         <DESCENDANTS>
             <NODEREF id="cylinderBody" />
-
         </DESCENDANTS>
 
     </NODE>
 
         <NODE id="cylinderBody">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="light_metal" />
+        <TEXTURE id="light_metal" /><!-- light_metal-->
 
         <ROTATION axis="x" angle="-90" />
 
@@ -431,21 +440,21 @@
 
         <NODE id="coneBody">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="dark_metal" />
+        <TEXTURE id="chess" />
 
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="cone1" type="cylinder" args="1 1 0 30 30" />
-
+            <LEAF id="cone1" type="cylinder" args="1 1 .5 30 30" />
         </DESCENDANTS>
 
     </NODE>
 
         <NODE id="ovalConeBody">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="dark_metal" />
+        <TEXTURE id="target" />
         <SCALE sx="1" sy="1.5" sz="1" />
+        <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
             <LEAF id="cone1" type="sphere" args="1 30 30" />
 
@@ -467,7 +476,7 @@
 
     <NODE id="wing1">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="red_metal" />
+        <TEXTURE id="null" />
 
         <TRANSLATION x="-1.5" y="0" z="-0.2" />
 
@@ -479,7 +488,7 @@
 
     <NODE id="wing2">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="red_metal" />
+        <TEXTURE id="null" />
         <ROTATION axis="y" angle="180" />
 
         <TRANSLATION x="-1.5" y="0" z="-0.1" />
