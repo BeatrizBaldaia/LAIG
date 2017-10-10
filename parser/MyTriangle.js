@@ -37,17 +37,17 @@ MyTriangle.prototype.initBuffers = function () {
 	/*
 	ver slide "Calculo de coordenadas de mapeamento de texturas em triângulos"
 	 */
-    var a = Math.sqrt((this.point3[0] - this.point2[0]) * (this.point3[0] - this.point2[0]) +
-        (this.point3[1] - this.point2[1]) * (this.point3[1] - this.point2[1]) +
-        (this.point3[2] - this.point2[2]) * (this.point3[2] - this.point2[2]));
+    var a = Math.sqrt((this.p3[0] - this.p2[0]) * (this.p3[0] - this.p2[0]) +
+        (this.p3[1] - this.p2[1]) * (this.p3[1] - this.p2[1]) +
+        (this.p3[2] - this.p2[2]) * (this.p3[2] - this.p2[2]));
 
-    var b = Math.sqrt((this.point1[0] - this.point3[0]) * (this.point1[0] - this.point3[0]) +
-        (this.point1[1] - this.point3[1]) * (this.point1[1] - this.point3[1]) +
-        (this.point1[2] - this.point3[2]) * (this.point1[2] - this.point3[2]));
+    var b = Math.sqrt((this.p1[0] - this.p3[0]) * (this.p1[0] - this.p3[0]) +
+        (this.p1[1] - this.p3[1]) * (this.p1[1] - this.p3[1]) +
+        (this.p1[2] - this.p3[2]) * (this.p1[2] - this.p3[2]));
 
-    var c = Math.sqrt((this.point2[0] - this.point1[0]) * (this.point2[0] - this.point1[0]) +
-        (this.point2[1] - this.point1[1]) * (this.point2[1] - this.point1[1]) +
-        (this.point2[2] - this.point1[2]) * (this.point2[2] - this.point1[2]));
+    var c = Math.sqrt((this.p2[0] - this.p1[0]) * (this.p2[0] - this.p1[0]) +
+        (this.p2[1] - this.p1[1]) * (this.p2[1] - this.p1[1]) +
+        (this.p2[2] - this.p1[2]) * (this.p2[2] - this.p1[2]));
 
     var cosBeta = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2 * a * c);
 
