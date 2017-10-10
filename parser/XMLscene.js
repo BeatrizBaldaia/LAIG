@@ -35,6 +35,7 @@ XMLscene.prototype.init = function(application) {
     //TODO Aqui??
     this.texturesStack=[];
     this.materialsStack=[];
+    this.teste= new MyCylinder(this, 5, 5, 6, 30, 30, 1, 1);
 }
 
 /**
@@ -143,6 +144,11 @@ XMLscene.prototype.display = function() {
 
         // Displays the scene.
         this.graph.displayScene();
+        //TODO
+        this.pushMatrix();
+
+			this.teste.display();
+        this.popMatrix()
     }
 	else
 	{

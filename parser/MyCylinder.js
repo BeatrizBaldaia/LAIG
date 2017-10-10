@@ -1,18 +1,22 @@
-//TODO NAO ESTA COMO NA ESPECIFICACAO
+
 //TODO Tampas
 var degToRad = Math.PI / 180.0;
 /**
  * MyCylinder
  * @constructor
  */
- function MyCylinder(scene, heigth, bottomRadius,topRadius, section, part) {
+ function MyCylinder(scene, heigth, bottomRadius,topRadius, section, part, tampa1, tampa2) {
  	CGFobject.call(this,scene);
 
+	this.scene=scene;
 	this.heigth=heigth;
 	this.topRadius=topRadius;
 	this.slices = part;
 	this.stacks = section;
 	this.bottomRadius=bottomRadius;
+	this.tampa1 = tampa1;
+	this.tampa2 = tampa2;
+	this.tampa = new MyCircle(scene,this.slices);
  	this.initBuffers();
 
  };
@@ -29,13 +33,12 @@ var degToRad = Math.PI / 180.0;
 		var raio=1;
 		var alturaStack=this.heigth/andares;
 		var altura=0;
-		//var incRaio=(bottomRadius-topRadius)
+
 
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
 		this.texCoords = [];
-
 
 		for (var j = 0; j <= andares; j++){
 
@@ -56,32 +59,48 @@ var degToRad = Math.PI / 180.0;
 				this.texCoords.push(i / lados, 1 - j / andares);
 
 				if (j < andares) 
-             {
-                 if (i == lados - 1) 
-                 {
-                     this.indices.push(0 + i + lados * j);
-                     this.indices.push(1 + i + lados * (j - 1));
-                     this.indices.push(1 + i + lados * (j));
-                     
-                     this.indices.push(1 + i + lados * (j));
-                     this.indices.push(0 + i + lados * (j + 1));
-                     this.indices.push(0 + i + lados * j);
-                 } 
-                 else 
-                 {
-                     this.indices.push(0 + i + lados * j);
-                     this.indices.push(1 + i + lados * j);
-                     this.indices.push(1 + i + lados * (j + 1));
-                     
-                     this.indices.push(1 + i + lados * (j + 1));
-                     this.indices.push(0 + i + lados * (j + 1));
-                     this.indices.push(0 + i + lados * j);
-                 }
+                {
+					 if (i == lados - 1) 
+					 {
+						 this.indices.push(0 + i + lados * j);
+						 this.indices.push(1 + i + lados * (j - 1));
+						 this.indices.push(1 + i + lados * (j));
+
+						 this.indices.push(1 + i + lados * (j));
+						 this.indices.push(0 + i + lados * (j + 1));
+						 this.indices.push(0 + i + lados * j);
+					 } 
+					 else 
+					 {
+						 this.indices.push(0 + i + lados * j);
+						 this.indices.push(1 + i + lados * j);
+						 this.indices.push(1 + i + lados * (j + 1));
+
+						 this.indices.push(1 + i + lados * (j + 1));
+						 this.indices.push(0 + i + lados * (j + 1));
+						 this.indices.push(0 + i + lados * j);
+					 }
+			    }
 			}
 		}
-		}
-		
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
  		this.initGLBuffers();
  };
+MyCylinder.prototype.display= function() {
+		CGFobject.prototype.display.call(this);
+		if(this.tampa1==1){
+			this.scene.pushMatrix();
+			 	this.scene.scale(this.topRadius,this.topRadius,1);
+			 	this.scene.translate(0,0,this.heigth);
+				this.tampa.display();
+			this.scene.popMatrix();
+		}
+		if(this.tampa2==1){
+			this.scene.pushMatrix();
+				this.scene.scale(this.bottomRadius,this.bottomRadius,1);
+			 	this.scene.rotate(Math.PI,1,0,0);
+				this.tampa.display();
+			this.scene.popMatrix();
+		}
+};
