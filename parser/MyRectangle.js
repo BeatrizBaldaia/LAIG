@@ -39,7 +39,7 @@ MyRectangle.prototype.initBuffers = function () {
 		0, 0, 1
 	];
 
-	//TODO alter
+
 	this.texCoords = [
 		0,1,//
 		1,1,//
