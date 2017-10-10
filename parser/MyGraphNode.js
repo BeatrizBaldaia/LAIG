@@ -64,8 +64,10 @@ MyGraphNode.prototype.display = function(parentID) {
 
     if(this.textureID != 'null' && this.textureID != 'clear'){
         //console.log("Texture = "+this.textureID);
-        this.graph.scene.texturesStack.push(this.graph.getTextures()[this.textureID]);
+        this.graph.scene.texturesStack.push(this.textureID);
         this.graph.textures[this.textureID][0].bind();
+    } else if(this.textureID == 'clear') {
+        this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].unbind();
     }
     //console.log("NODE = "+this.nodeID);
     if(this.children.length != 0) {
@@ -84,6 +86,15 @@ MyGraphNode.prototype.display = function(parentID) {
     if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
             ////console.log("DISPLAY LEAF!");
+            var afS, afT;
+            if(this.textureID != 'null' && this.textureID != 'clear') {
+                afS = this.graph.textures[this.textureID][1];
+                afT = this.graph.textures[this.textureID][2];
+            } else {
+                afS = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][1];
+                afT = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][2];
+            }
+            this.leaves[i].setAmplifFactor(afS, afT);
             this.leaves[i].display();
         }
     } else {
@@ -101,8 +112,10 @@ MyGraphNode.prototype.display = function(parentID) {
         this.graph.textures[this.textureID][0].unbind();
         this.graph.scene.texturesStack.pop();
         if(this.graph.scene.texturesStack.length!=0){
-            this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][0].bind();
+            this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
         }
+    } else if(this.textureID == 'clear') {
+        this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
     }
     this.graph.scene.popMatrix();
 

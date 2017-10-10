@@ -16,18 +16,18 @@ function MyGraphLeaf(graph, xmlelem) {
             stringArray[i]=parseFloat(stringArray[i]);
         }
 
-        if (type == 'rectangle'){
+        if (this.type == 'rectangle'){
            //args="ff ff ff ff" 2D coordinates for left-top and right-bottom vertices
            this.leafObj = new MyRectangle(graph.scene, stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
        } else 
-        if (type == 'cylinder') {
+        if (this.type == 'cylinder') {
            //args="ff ff ff ii ii ii ii" height, bottom radius, top radius, sections along height, parts per section tampa1, tamp2
             this.leafObj = new MyCylinder(graph.scene,stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4], stringArray[5],stringArray[6]);
-        } else if (type == 'sphere') {
+        } else if (this.type == 'sphere') {
            //args="ff ii ii" radius, parts along radius, parts per section
             this.leafObj = new MySphere(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
         } else
-        if (type == 'triangle') {
+        if (this.type == 'triangle') {
            //args="ff ff ff ff ff ff ff ff ff" coordinates of each vertex
             var p1 = [stringArray[0], stringArray[1], stringArray[2]];
             var p2 = [stringArray[3], stringArray[4], stringArray[5]];
@@ -37,6 +37,13 @@ function MyGraphLeaf(graph, xmlelem) {
             graph.onXMLMinorError("Unkown leaf");
         }
     }
+}
+
+MyGraphLeaf.prototype.setAmplifFactor = function(afS, afT) {
+    if(this.leafObj!=null && this.type == 'rectangle'){
+        this.leafObj.setAmplifFactor(afS, afT);
+    }
+
 }
 
 MyGraphLeaf.prototype.display = function() {

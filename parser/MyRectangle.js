@@ -39,7 +39,7 @@ MyRectangle.prototype.initBuffers = function () {
 		0, 0, 1
 	];
 
-	//TODO alter
+
 	this.texCoords = [
 		0,1,//
 		1,1,//
@@ -49,4 +49,17 @@ MyRectangle.prototype.initBuffers = function () {
 	
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
+};
+
+MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
+	var size = this.texCoords.length;
+	var i = 0;
+	while(i < 0) {
+		if(i % 2 == 0) {
+			this.texCoords[i] /= afS;
+		} else {
+            this.texCoords[i] /= afT;
+		}
+		i++;
+	}
 };

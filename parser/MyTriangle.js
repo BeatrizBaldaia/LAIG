@@ -33,12 +33,45 @@ MyTriangle.prototype.initBuffers = function () {
 		0, 0, 1,
 		0, 0, 1
 	];
-	//TODO alter
-	this.texCoords = [
-		0,1,//
-		1,1,//
-		0,0
-	];
+
+	/*
+	ver slide "Calculo de coordenadas de mapeamento de texturas em triângulos"
+	 */
+    var a = Math.sqrt((this.point3[0] - this.point2[0]) * (this.point3[0] - this.point2[0]) +
+        (this.point3[1] - this.point2[1]) * (this.point3[1] - this.point2[1]) +
+        (this.point3[2] - this.point2[2]) * (this.point3[2] - this.point2[2]));
+
+    var b = Math.sqrt((this.point1[0] - this.point3[0]) * (this.point1[0] - this.point3[0]) +
+        (this.point1[1] - this.point3[1]) * (this.point1[1] - this.point3[1]) +
+        (this.point1[2] - this.point3[2]) * (this.point1[2] - this.point3[2]));
+
+    var c = Math.sqrt((this.point2[0] - this.point1[0]) * (this.point2[0] - this.point1[0]) +
+        (this.point2[1] - this.point1[1]) * (this.point2[1] - this.point1[1]) +
+        (this.point2[2] - this.point1[2]) * (this.point2[2] - this.point1[2]));
+
+    var cosBeta = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2 * a * c);
+
+    var beta = Math.acos(cosBeta);
+
+    this.texCoords = [
+        0, 1,                                        //  ---------> s
+        c, 1,                                       //   |
+        c - a * cosBeta, 1 - (a * Math.sin(beta))   //   |
+    ];                                             //   \/
+	                                               //    t
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
+};
+
+MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
+    var size = this.texCoords.length;
+    var i = 0;
+    while(i < 0) {
+        if(i % 2 == 0) {
+            this.texCoords[i] /= afS;
+        } else {
+            this.texCoords[i] /= afT;
+        }
+        i++;
+    }
 };
