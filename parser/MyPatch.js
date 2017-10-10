@@ -11,24 +11,21 @@ function MyPatch(graph, xmlelem) {
     }
 
     var s = this.controlvertexes(xmlelem);
-	//TODO CHANGE
 
- 	var u=s.length;
- 	var v=s[0].length;
- 	 alert("S[0]"+u+v);
-	var nurbsSurface = new CGFnurbsSurface(u,v,s);
+
+	//TODO CHANGE
 	var nurbsSurface = new CGFnurbsSurface(
-								s.length,
-								s0.length,
-								this.getKnotsVector(s.length),
-								this.getKnotsVector(s0.length),
+								s.length-1,
+								s[0].length - 1,
+								this.getKnotsVector(s.length-1),
+								this.getKnotsVector(s[0].length - 1),
 								s);
 	
 	getSurfacePoint = function(u, v) {
 		return nurbsSurface.getPoint(u, v);
 	};
 
-	this.surface = new CGFnurbsObject(this, getSurfacePoint, stringArray[0], stringArray[1]);
+	this.surface = new CGFnurbsObject(this.graph.scene, getSurfacePoint, stringArray[0], stringArray[1]);
 	this.surface.initBuffers();
 };
 
@@ -69,3 +66,16 @@ MyPatch.prototype.controlvertexes = function (xmlelem){
 
 	return s;
 };
+MyPatch.prototype.makeSurface = function (id, degree1, degree2, controlvertexes, translation) {
+		
+	var knots1 = this.getKnotsVector(degree1); // to be built inside webCGF in later versions ()
+	var knots2 = this.getKnotsVector(degree2); // to be built inside webCGF in later versions
+		
+	var nurbsSurface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, controlvertexes); // TODO  (CGF 0.19.3): remove knots1 and knots2 from CGFnurbsSurface method call. Calculate inside method.
+	getSurfacePoint = function(u, v) {
+		return nurbsSurface.getPoint(u, v);
+	};
+
+	var obj = new CGFnurbsObject(this.graph.scene, getSurfacePoint, 20, 20 );
+	this.surfaces.push(obj);		
+}

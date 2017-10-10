@@ -6,11 +6,7 @@ function MyRectangle(scene,x_top,y_top,x_bottom,y_bottom) {
 	this.y_top=y_top;
 	this.x_bottom=x_bottom;
 	this.y_bottom=y_bottom;
-	
-	//0=minS || 0;
-	//1=maxS || 1;
-	//0=minT || 0;
-	//1=maxT || 1;
+
 	
 	this.initBuffers();
 };
@@ -62,4 +58,6 @@ MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 		}
 		i++;
 	}
+	this.updateTexCoordsGLBuffers();
+
 };

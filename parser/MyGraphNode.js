@@ -66,7 +66,7 @@ MyGraphNode.prototype.display = function(parentID) {
         //console.log("Texture = "+this.textureID);
         this.graph.scene.texturesStack.push(this.textureID);
         this.graph.textures[this.textureID][0].bind();
-    } else if(this.textureID == 'clear') {
+    } else if(this.textureID == 'clear' && (this.graph.scene.texturesStack.length!=0)) {
         this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].unbind();
     }
     //console.log("NODE = "+this.nodeID);
@@ -77,9 +77,8 @@ MyGraphNode.prototype.display = function(parentID) {
             this.graph.getNodes()[this.children[i]].display(this.nodeID);
             ////console.log("displaying node");
         }
-    } else {
-        ////console.log("No more node children");
-    }
+    } 
+
     /**
      * Draw leaves
      */
@@ -91,16 +90,15 @@ MyGraphNode.prototype.display = function(parentID) {
                 afS = this.graph.textures[this.textureID][1];
                 afT = this.graph.textures[this.textureID][2];
             } else {
-                afS = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][1];
-                afT = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][2];
+                if(this.graph.scene.texturesStack.length!=0){
+                    afS = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][1];
+                    afT = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][2];
+                }
             }
             this.leaves[i].setAmplifFactor(afS, afT);
             this.leaves[i].display();
         }
-    } else {
-        ////console.log("No more leaves");
     }
-
     
     if(this.materialID!='null'){
         ////console.log("END Material = "+this.materialID);
@@ -114,7 +112,7 @@ MyGraphNode.prototype.display = function(parentID) {
         if(this.graph.scene.texturesStack.length!=0){
             this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
         }
-    } else if(this.textureID == 'clear') {
+    } else if(this.textureID == 'clear'&& (this.graph.scene.texturesStack.length!=0)) {
         this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
     }
     this.graph.scene.popMatrix();
