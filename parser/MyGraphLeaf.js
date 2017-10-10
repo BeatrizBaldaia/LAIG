@@ -5,11 +5,11 @@
 
 function MyGraphLeaf(graph, xmlelem) {
     this.leafObj;
-    var type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+    var type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']); //TODO added patch
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
     if (type == 'patch'){
-       this.leafObj = null;
+       this.leafObj = new MyPatch(graph, xmlelem);
         graph.onXMLMinorError("Patch");
    } else {
         for(var i=0;i<stringArray.length;i++){
