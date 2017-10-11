@@ -1221,7 +1221,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (materialID != "null" && this.materials[materialID] == null )
                 return "ID does not correspond to a valid material (node ID = " + nodeID + ")";
             
-            this.nodes[nodeID].materialID = materialID;
+            this.nodes[nodeID].materialID = materialID;//atribuir o id do material ao nó
             
             // Retrieves texture ID.
             var textureIndex = specsNames.indexOf("TEXTURE");
@@ -1233,7 +1233,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (textureID != "null" && textureID != "clear" && this.textures[textureID] == null )
                 return "ID does not correspond to a valid texture (node ID = " + nodeID + ")";
             
-            this.nodes[nodeID].textureID = textureID;
+            this.nodes[nodeID].textureID = textureID;//atribuir o id da textura ao nó
             
             // Retrieves possible transformations.
             for (var j = 0; j < nodeSpecs.length; j++) {
@@ -1264,7 +1264,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     else if (isNaN(z))
                         return "non-numeric value for z-coordinate of translation (node ID = " + nodeID + ")";
 
-                    mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [x, y, z]);
+                    mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [x, y, z]);//aplicar a matriz do movimento do nó
                     break;
                 case "ROTATION":
                     // Retrieves rotation parameters.
@@ -1281,7 +1281,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     else if (isNaN(angle))
                         return "non-numeric value for rotation angle (node ID = " + nodeID + ")";
 
-                    mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);
+                    mat4.rotate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, angle * DEGREE_TO_RAD, this.axisCoords[axis]);//aplicar a rotação ao nó
                     break;
                 case "SCALE":
                     // Retrieves scale parameters.
@@ -1309,7 +1309,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     else if (isNaN(sz))
                         return "non-numeric value for z component of scaling (node ID = " + nodeID + ")";
                         
-                    mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [sx, sy, sz]);
+                    mat4.scale(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [sx, sy, sz]);//escalar o nó
                     break;
                 default:
                     break;
@@ -1317,7 +1317,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             }
             
             // Retrieves information about children.
-            var descendantsIndex = specsNames.indexOf("DESCENDANTS");
+            var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
             if (descendantsIndex == -1)
                 return "an intermediate node must have descendants";
 

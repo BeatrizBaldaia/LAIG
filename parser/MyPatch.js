@@ -46,25 +46,25 @@ MyPatch.prototype.getKnotsVector = function(degree) {
 	return v;
 }
 MyPatch.prototype.controlvertexes = function (xmlelem){
-	var lines = xmlelem.children
-	var s = new Array();
+	var lines = xmlelem.children; //controlpoint line to characterize de U dimension (CPLINE)
+	var controlVertexesU = new Array();//to make the surface
 	for(var i=0;i<lines.length;i++){
-		var a = new Array();
-		var points = lines[i].children
+		var controlVertexesOnV = new Array();
+		var points = lines[i].children//controlpoints to characterize de V dimension (CPOINT)
 		for(var j=0;j<points.length;j++){
-			var b = new Array();
-			b.push(this.graph.reader.getFloat(points[j], 'xx'));
-			b.push(this.graph.reader.getFloat(points[j], 'yy'));
-			b.push(this.graph.reader.getFloat(points[j], 'zz'));
-			b.push(this.graph.reader.getFloat(points[j], 'ww'));
-			a.push(b);
+			var controlPoint = new Array();
+            controlPoint.push(this.graph.reader.getFloat(points[j], 'xx'));
+            controlPoint.push(this.graph.reader.getFloat(points[j], 'yy'));
+            controlPoint.push(this.graph.reader.getFloat(points[j], 'zz'));
+            controlPoint.push(this.graph.reader.getFloat(points[j], 'ww'));
+            controlVertexesOnV.push(controlPoint);
 
 		}
-		s.push(a);
+        controlVertexesU.push(controlVertexesOnV);
 
 	}
 
-	return s;
+	return controlVertexesU;
 };
 MyPatch.prototype.makeSurface = function (id, degree1, degree2, controlvertexes, translation) {
 		
