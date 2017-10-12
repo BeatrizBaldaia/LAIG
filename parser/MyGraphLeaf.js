@@ -4,14 +4,14 @@
 **/
 
 function MyGraphLeaf(graph, xmlelem) {
-    this.leafObj;
-    var type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']); //TODO added patch
+    this.leafObj = null;
+    this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']); //TODO added patch
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
     for(var i=0;i<stringArray.length;i++){
             stringArray[i]=parseFloat(stringArray[i]);
     }
-    switch (type){
+    switch (this.type){
         case 'patch':{
             this.leafObj = new MyPatch(graph, xmlelem);
             graph.onXMLMinorError("Patch");
@@ -46,10 +46,9 @@ function MyGraphLeaf(graph, xmlelem) {
 }
 
 MyGraphLeaf.prototype.setAmplifFactor = function(afS, afT) {
-    if(this.leafObj!=null && this.type == 'rectangle'){
+    if(this.leafObj != null && this.type == 'rectangle'){
         this.leafObj.setAmplifFactor(afS, afT);
     }
-
 }
 
 MyGraphLeaf.prototype.display = function() {
