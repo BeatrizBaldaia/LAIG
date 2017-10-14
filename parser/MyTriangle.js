@@ -36,39 +36,32 @@ MyTriangle.prototype.initBuffers = function () {
 	/*
 	ver slide "Calculo de coordenadas de mapeamento de texturas em triângulos"
 	 */
-    var a = Math.sqrt((this.p3[0] - this.p2[0]) * (this.p3[0] - this.p2[0]) +
-        (this.p3[1] - this.p2[1]) * (this.p3[1] - this.p2[1]) +
-        (this.p3[2] - this.p2[2]) * (this.p3[2] - this.p2[2]));
+    this.a = Math.hypot((this.p3[0] - this.p2[0]),(this.p3[1] - this.p2[1]),(this.p3[2] - this.p2[2]));
+    this.b = Math.hypot((this.p1[0] - this.p3[0]),(this.p1[1] - this.p3[1]),(this.p1[2] - this.p3[2]));
+    this.c = Math.hypot((this.p2[0] - this.p1[0]),(this.p2[1] - this.p1[1]),(this.p2[2] - this.p1[2]));
 
-    var b = Math.sqrt((this.p1[0] - this.p3[0]) * (this.p1[0] - this.p3[0]) +
-        (this.p1[1] - this.p3[1]) * (this.p1[1] - this.p3[1]) +
-        (this.p1[2] - this.p3[2]) * (this.p1[2] - this.p3[2]));
+    this.cosBeta = (Math.pow(this.a, 2) - Math.pow(this.b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c);
 
-    var c = Math.sqrt((this.p2[0] - this.p1[0]) * (this.p2[0] - this.p1[0]) +
-        (this.p2[1] - this.p1[1]) * (this.p2[1] - this.p1[1]) +
-        (this.p2[2] - this.p1[2]) * (this.p2[2] - this.p1[2]));
-
-    var cosBeta = (Math.pow(a, 2) - Math.pow(b, 2) + Math.pow(c, 2)) / (2 * a * c);
-
-    var beta = Math.acos(cosBeta);
+   this.beta = Math.acos(this.cosBeta);
 
     this.texCoords = [
+        this.c - this.a * this.cosBeta, 1 - (this.a * Math.sin(this.beta)), 
         0, 1,                                        //  ---------> s
-        c, 1,                                       //   |
-        c - a * cosBeta, 1 - (a * Math.sin(beta))   //   |
-    ];                                             //   \/
+        this.c, 1                                       //   |
+        											//  |
+    ];                                             //  \/
 	                                               //    t
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
 
 MyTriangle.prototype.setAmplifFactor = function (afS, afT) {
-	//TODO
-	this.texCoords[0]=0;
-	this.texCoords[1]=0;
-	this.texCoords[2]=(Math.hypot(this.p1[0]-this.p2[0],this.p1[1]-this.p2[1],this.p1[2]-this.p2[2]))/afS;
-	this.texCoords[3]=0;
-	this.texCoords[4]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[5]=(this.y_top-this.y_bottom)/afT;
+	//TODO 
+	this.texCoords[0]=(this.c - this.a * this.cosBeta)/afS;
+	this.texCoords[1]=(1 - this.a * Math.sin(this.beta))/afT; //TODO assim?
+	this.texCoords[2]=0;//
+	this.texCoords[3]=1;//Why?
+	this.texCoords[4]=this.c/afS;
+	this.texCoords[5]=1;//
 	this.updateTexCoordsGLBuffers();
 };
