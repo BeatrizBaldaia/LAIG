@@ -82,12 +82,12 @@ MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 	this.texCoords[7]=0;
 	*/
 	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[1]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[5]=(this.y_top-this.y_bottom)/afT;
 	this.texCoords[2]=0;
-	this.texCoords[3]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[7]=(this.y_top-this.y_bottom)/afT;
 	this.texCoords[4]=0;
-	this.texCoords[5]=0;
+	this.texCoords[1]=0;
 	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[7]=0;
+	this.texCoords[3]=0;
 	this.updateTexCoordsGLBuffers();
 };
