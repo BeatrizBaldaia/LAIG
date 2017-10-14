@@ -2,11 +2,10 @@
 function MyTriangle(scene,p1,p2,p3) {
 	CGFobject.call(this,scene);
 
+	this.scene=scene;
 	this.p1=p1;
 	this.p2=p2;
 	this.p3=p3;
-
-	//console.log("IS NAN="+isNaN(this.p1[0]));
 
 	this.initBuffers();
 };
@@ -63,3 +62,13 @@ MyTriangle.prototype.initBuffers = function () {
 	this.initGLBuffers();
 };
 
+MyTriangle.prototype.setAmplifFactor = function (afS, afT) {
+	//TODO
+	this.texCoords[0]=0;
+	this.texCoords[1]=0;
+	this.texCoords[2]=(Math.hypot(this.p1[0]-this.p2[0],this.p1[1]-this.p2[1],this.p1[2]-this.p2[2]))/afS;
+	this.texCoords[3]=0;
+	this.texCoords[4]=(this.x_top-this.x_bottom)/afS;
+	this.texCoords[5]=(this.y_top-this.y_bottom)/afT;
+	this.updateTexCoordsGLBuffers();
+};

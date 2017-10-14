@@ -197,7 +197,6 @@ MySceneGraph.prototype.parseInitials = function(initialsNode) {
             this.near = 0.1;
             this.onXMLMinorError("'near' must be positive; assuming 'near = 0.1'");
         }
-
         if (this.near >= this.far)
             return "'near' must be smaller than 'far'";
     }
@@ -911,9 +910,7 @@ MySceneGraph.prototype.parseTextures = function(texturesNode) {
                 return "s amplification factor undefined for texture with ID = " + textureID;
             else if (amplifFactorT == null )
                 return "t amplification factor undefined for texture with ID = " + textureID;
-            //TODO APAGAR
-            console.log("FILEPATH = "+filepath);
-            //END_TODO
+
             var texture = new CGFtexture(this.scene,"./scenes/" + filepath);
             
             this.textures[textureID] = [texture, amplifFactorS, amplifFactorT];

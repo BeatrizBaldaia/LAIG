@@ -46,7 +46,7 @@ function MyGraphLeaf(graph, xmlelem) {
 }
 
 MyGraphLeaf.prototype.setAmplifFactor = function(afS, afT) {
-    if(this.leafObj != null && this.type == 'rectangle'){
+    if(this.leafObj != null && (this.type == 'rectangle'|| this.type == 'triangle')){
         this.leafObj.setAmplifFactor(afS, afT);
     }
 }

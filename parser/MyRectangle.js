@@ -1,13 +1,17 @@
 
 function MyRectangle(scene,x_top,y_top,x_bottom,y_bottom) {
 	CGFobject.call(this,scene);
-
+/*
 	this.x_top=x_top;
 	this.y_top=y_top;
 	this.x_bottom=x_bottom;
 	this.y_bottom=y_bottom;
+*/
+	this.x_bottom=x_top;
+	this.y_top=y_top;
+	this.x_top=x_bottom;
+	this.y_bottom=y_bottom;
 
-	
 	this.initBuffers();
 };
 
@@ -25,8 +29,8 @@ MyRectangle.prototype.initBuffers = function () {
 			];
 
 	this.indices = [
-            0, 2, 1, 
-			3, 2, 0
+            0, 1, 2, 
+			2, 3, 0
         ];
 	this.normals = [
 		0, 0, 1,
@@ -48,9 +52,9 @@ MyRectangle.prototype.initBuffers = function () {
 };
 
 MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
-	var size = this.texCoords.length;
+	/*var size = this.texCoords.length;
 	var i = 0;
-	//TODO what
+	//TODO Errado
 	while(i < size) {
 		if(i % 2 == 0) {
 			this.texCoords[i] = afS;
@@ -59,7 +63,7 @@ MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 		}
 		i++;
 	}
-	/*while(i < size) {
+	while(i < size) {
 		if(i % 2 == 0) {
 			this.texCoords[i] /= afS;
 		} else {
@@ -67,6 +71,23 @@ MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 		}
 		i++;
 	}*/
-	
+	/*
+	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
+	this.texCoords[1]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[2]=0;
+	this.texCoords[3]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[4]=0;
+	this.texCoords[5]=0;
+	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
+	this.texCoords[7]=0;
+	*/
+	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
+	this.texCoords[1]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[2]=0;
+	this.texCoords[3]=(this.y_top-this.y_bottom)/afT;
+	this.texCoords[4]=0;
+	this.texCoords[5]=0;
+	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
+	this.texCoords[7]=0;
 	this.updateTexCoordsGLBuffers();
 };
