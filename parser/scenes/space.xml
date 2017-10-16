@@ -261,7 +261,7 @@
         <NODE id="stars">
             <MATERIAL id="starMaterial" />
             <TEXTURE id="star" />
-
+            <SCALE sx="0.5" sy="0.5" sz="0.5" />
             <DESCENDANTS>
                 <NODEREF id="star1" />
                 <NODEREF id="star2" />
@@ -359,9 +359,9 @@
         <NODE id="bottomBody">
         <MATERIAL id="null" />
         <TEXTURE id="light_metal" />
-        <SCALE sx="1" sy="5" sz="1" />
+
         <DESCENDANTS>
-            <NODEREF id="cylinderBody" /> 
+            <NODEREF id="cylinderBottomBody" />
             <NODEREF id="lowerStageCover" />
             <NODEREF id="wings" />
 
@@ -373,7 +373,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <SCALE sx="0.7" sy="1.2" sz="0.7" /> -->
+        <SCALE sx="0.5" sy="1.2" sz="0.5" /> -->
         <TRANSLATION x="0" y="5" z="0" />
         <DESCENDANTS>
             <NODEREF id="upperStageBody" />
@@ -386,8 +386,8 @@
         <NODE id="lowerStageCover">
         <MATERIAL id="null" />
         <TEXTURE id="chess" />
-        <TRANSLATION x="0" y="1" z="0" />
-        <SCALE sx="1" sy=".35" sz="1"/>
+            <SCALE sx="1" sy="0.5" sz="1" />
+        <TRANSLATION x="0" y="8" z="0" />
         <DESCENDANTS>
             <NODEREF id="coneBody" />
 
@@ -410,14 +410,24 @@
         <NODE id="upperStageBody">
         <MATERIAL id="null" />
         <TEXTURE id="light_metal" />
-        <TRANSLATION x="0" y=".3" z="0"/>
-        <SCALE sx="1.05" sy="2" sz="1.05" />
+        <TRANSLATION x="0" y="3" z="0"/>
 
         <DESCENDANTS>
             <NODEREF id="cylinderBody" />
         </DESCENDANTS>
 
     </NODE>
+
+        <NODE id="cylinderBottomBody">
+            <MATERIAL id="null" />
+            <TEXTURE id="light_metal" />
+            <SCALE sx="1" sy="4" sz="1" />
+
+            <DESCENDANTS>
+                <NODEREF id="cylinderBody" />
+            </DESCENDANTS>
+
+        </NODE>
 
         <NODE id="cylinderBody">
         <MATERIAL id="bigRocketMaterial" />
@@ -426,7 +436,7 @@
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="cylinder1" type="cylinder" args="1 1 1 100 100 0 0" />
+            <LEAF id="cylinder1" type="cylinder" args="1 1 1 100 100 1 1" />
 
         </DESCENDANTS>
 
@@ -435,11 +445,10 @@
         <NODE id="coneBody">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="chess" />
-
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="cone1" type="cylinder" args="1 1 .5 100 100 0 0" />
+            <LEAF id="cone1" type="cylinder" args="1 1 .7 100 100 0 0" />
         </DESCENDANTS>
 
     </NODE>
@@ -472,8 +481,9 @@
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="-1.5" y="0" z="-0.2" />
-
+        <TRANSLATION x="-1.2" y="0" z="-0.1" />
+        <SCALE sx="2.5" sy="4" sz="1" />
+        <TRANSLATION x="-0.4" y="0" z="0" />
         <DESCENDANTS>
             <NODEREF id="wingStruct" />
         </DESCENDANTS>
@@ -485,8 +495,9 @@
         <TEXTURE id="null" />
         <ROTATION axis="y" angle="180" />
 
-        <TRANSLATION x="-1.5" y="0" z="-0.1" />
-
+        <TRANSLATION x="-1.2" y="0" z="-0.1" />
+        <SCALE sx="2.5" sy="4" sz="1" />
+        <TRANSLATION x="-0.4" y="0" z="0" />
         <DESCENDANTS>
             <NODEREF id="wingStruct" />
         </DESCENDANTS>
@@ -497,7 +508,7 @@
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="red_metal" />
 
-        <SCALE sx="0.5" sy="0.3" sz="0.2" />
+        <SCALE sx="0.5" sy="0.5" sz="0.2" />
 
         <DESCENDANTS>
 
@@ -517,7 +528,7 @@
         <TRANSLATION x="0" y="0" z="1" />
 
         <DESCENDANTS>
-            <LEAF id="triangle1" type="triangle" args="0 0 0 1 0 0 1 1 0" />
+            <LEAF id="triangle1" type="triangle" args="1 1 0 0 0 0 1 0 0" />
 
         </DESCENDANTS>
 
@@ -530,7 +541,7 @@
         
 
         <DESCENDANTS>
-            <LEAF id="triangle1" type="triangle" args="0 0 0 -1 1 0 -1 0 0" />
+            <LEAF id="triangle1" type="triangle" args="-1 1 0 -1 0 0 0 0 0" />
 
         </DESCENDANTS>
 
