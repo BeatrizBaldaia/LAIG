@@ -41,10 +41,10 @@ MyRectangle.prototype.initBuffers = function () {
 
 
 	this.texCoords = [
-		0,1,
-		1,1,
+		1,0,
 		0,0,
-		1,0
+		0,1,
+		1,1
 	];
 	
 	this.primitiveType=this.scene.gl.TRIANGLES;
@@ -52,42 +52,27 @@ MyRectangle.prototype.initBuffers = function () {
 };
 
 MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
-	/*var size = this.texCoords.length;
-	var i = 0;
-	//TODO Errado
-	while(i < size) {
-		if(i % 2 == 0) {
-			this.texCoords[i] = afS;
-		} else {
-            this.texCoords[i] = afT;
-		}
-		i++;
-	}
-	while(i < size) {
-		if(i % 2 == 0) {
-			this.texCoords[i] /= afS;
-		} else {
-            this.texCoords[i] /= afT;
-		}
-		i++;
-	}*/
-	/*
-	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[1]=(this.y_top-this.y_bottom)/afT;
-	this.texCoords[2]=0;
-	this.texCoords[3]=(this.y_top-this.y_bottom)/afT;
-	this.texCoords[4]=0;
-	this.texCoords[5]=0;
-	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[7]=0;
-	*/
-	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
+
+
+	/*this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
 	this.texCoords[5]=(this.y_top-this.y_bottom)/afT;
 	this.texCoords[2]=0;
 	this.texCoords[7]=(this.y_top-this.y_bottom)/afT;
 	this.texCoords[4]=0;
 	this.texCoords[1]=0;
 	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[3]=0;
+	this.texCoords[3]=0;*/
+
+    var size = this.texCoords.length;
+    var i = 0;
+    while(i < size) {
+        if(i % 2 == 0) {
+            this.texCoords[i] = this.texCoords[i]/afS;
+        } else {
+            this.texCoords[i] = this.texCoords[i]/afT;
+        }
+        i++;
+    }
+
 	this.updateTexCoordsGLBuffers();
 };

@@ -45,23 +45,33 @@ MyTriangle.prototype.initBuffers = function () {
    this.beta = Math.acos(this.cosBeta);
 
     this.texCoords = [
-        this.c - this.a * this.cosBeta, 1 - (this.a * Math.sin(this.beta)), 
-        0, 1,                                        //  ---------> s
-        this.c, 1                                       //   |
-        											//  |
-    ];                                             //  \/
-	                                               //    t
+    	this.c - this.a * this.cosBeta, 1 - (this.a * Math.sin(this.beta)),
+        0, 1,
+        this.c, 1
+    ];
+
 	this.primitiveType=this.scene.gl.TRIANGLES;
-	this.initGLBuffers();
+    this.initGLBuffers();
 };
 
 MyTriangle.prototype.setAmplifFactor = function (afS, afT) {
 	//TODO 
-	this.texCoords[0]=(this.c - this.a * this.cosBeta)/afS;
+	/*this.texCoords[0]=(this.c - this.a * this.cosBeta)/afS;
 	this.texCoords[1]=(1 - this.a * Math.sin(this.beta))/afT; //TODO assim?
 	this.texCoords[2]=0;//
 	this.texCoords[3]=1;//Why?
 	this.texCoords[4]=this.c/afS;
 	this.texCoords[5]=1;//
-	this.updateTexCoordsGLBuffers();
+	this.updateTexCoordsGLBuffers();*/
+
+    var size = this.texCoords.length;
+    var i = 0;
+    while(i < size) {
+        if(i % 2 == 0) {
+            this.texCoords[i] = this.texCoords[i]/afS;
+        } else {
+            this.texCoords[i] = this.texCoords[i]/afT;
+        }
+        i++;
+    }
 };

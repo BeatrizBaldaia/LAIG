@@ -12,8 +12,6 @@ function MyPatch(graph, xmlelem) {
 
     var s = this.controlvertexes(xmlelem);
 
-
-	//TODO CHANGE
 	var nurbsSurface = new CGFnurbsSurface(
 								s.length-1,
 								s[0].length - 1,
