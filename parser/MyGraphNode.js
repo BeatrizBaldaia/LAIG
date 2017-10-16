@@ -56,6 +56,9 @@ MyGraphNode.prototype.display = function(parentID) {
     if(this.materialID != 'null'){
         this.graph.scene.materialsStack.push(this.graph.materials[this.materialID]);
         this.graph.materials[this.materialID].apply();
+        if(this.graph.scene.texturesStack.length!=0){
+            this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
+        }
     }
 
     if(this.textureID != 'null' && this.textureID != 'clear'){

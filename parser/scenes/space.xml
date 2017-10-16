@@ -426,7 +426,7 @@
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="cylinder1" type="cylinder" args="1 1 1 30 30 0 0" />
+            <LEAF id="cylinder1" type="cylinder" args="1 1 1 100 100 0 0" />
 
         </DESCENDANTS>
 
@@ -439,7 +439,7 @@
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="cone1" type="cylinder" args="1 1 .5 30 30 0 0" />
+            <LEAF id="cone1" type="cylinder" args="1 1 .5 100 100 0 0" />
         </DESCENDANTS>
 
     </NODE>

@@ -1,107 +1,90 @@
-
-//TODO Tampas
-var degToRad = Math.PI / 180.0;
 /**
  * MyCylinder
  * @constructor
  */
- function MyCylinder(scene, heigth, bottomRadius,topRadius, section, part, tampa1, tampa2) {
- 	CGFobject.call(this,scene);
+function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topCap, bottomCap) {
+    CGFobject.call(this,scene);
 
-	this.scene=scene;
-	this.heigth=heigth;
-	this.topRadius=topRadius;
-	this.slices = part;
-	this.stacks = section;
-	this.bottomRadius=bottomRadius;
-	this.tampa1 = tampa1;
-	this.tampa2 = tampa2;
-	this.tampa = new MyCircle(scene,this.slices);
- 	this.initBuffers();
+    this.heigth = heigth;
+    this.bottomRadius = bottomRadius;
+    this.topRadius = topRadius;
+    this.topCap = topCap;
+    this.bottomCap = bottomCap;
+    this.slices = slices;
+    this.stacks = stacks;
+    this.deltaT = 1 / stacks;
+    this.deltaS = 1 / slices;
 
- };
+    this.cap = new MyCircle(scene,this.slices);
 
- MyCylinder.prototype = Object.create(CGFobject.prototype);
- MyCylinder.prototype.constructor = MyCylinder;
+    this.initBuffers();
+};
 
- MyCylinder.prototype.initBuffers = function() {
+MyCylinder.prototype = Object.create(CGFobject.prototype);
+MyCylinder.prototype.constructor = MyCylinder;
 
-		var stacksAux = this.stacks;
-		var slicesAux = this.slices;
-		var divisions = (2*Math.PI)/slicesAux;//angulo de cada slice
-		
-		var radius =1;
-		var stacksHeigth=this.heigth/stacksAux;
-		var curHeigth =0;
+MyCylinder.prototype.initBuffers = function() {
 
+    this.normals = [];
+    this.indices = [];
+    this.vertices = [];
+    this.texCoords = [];
 
-		this.vertices = [];
-		this.indices = [];
-		this.normals = [];
-		this.texCoords = [];
+    var index = 0;
+    var radiusInc = (this.topRadius - this.bottomRadius)/this.stacks;//incremento a dar ao raio
+    var radius = this.bottomRadius;
+    var tTex = 1; //valor maximo no eixo t
+    for(i = 0; i < this.stacks; i++) {
+        var ang = 0;
+        var sTex = 0;//valor minimo no eixo s
+        for (ang; ang < (2*Math.PI); ang+=2*Math.PI/this.slices) {
+            this.vertices.push(radius * Math.cos(ang), radius * Math.sin(ang), this.heigth * i/this.stacks);
+            this.vertices.push((radius + radiusInc) * Math.cos(ang+(2*Math.PI)/this.slices), (radius + radiusInc) * Math.sin(ang+(2*Math.PI)/this.slices), this.heigth * (i+1)/this.stacks);//ponto da proxima stack
+            this.vertices.push((radius + radiusInc) * Math.cos(ang), (radius + radiusInc) * Math.sin(ang), this.heigth * (i+1)/this.stacks);//ponto da proxim stack
+            this.vertices.push(radius * Math.cos(ang+(2*Math.PI)/this.slices), radius * Math.sin(ang+(2*Math.PI)/this.slices), this.heigth * i/this.stacks);
 
-		for (var j = 0; j <= stacksAux; j++){
+            this.texCoords.push(sTex, tTex);
+            this.texCoords.push(sTex+this.deltaS, tTex-this.deltaT);
+            this.texCoords.push(sTex, tTex-this.deltaT);
+            this.texCoords.push(sTex+this.deltaS, tTex);
 
-			radius =this.bottomRadius
-				+(this.topRadius-this.bottomRadius)*(curHeigth )/this.heigth;
-			curHeigth =curHeigth +stacksHeigth;
-			for(var i = 0; i < slicesAux; i++){
+            sTex += this.deltaS;
 
-				//vertices
-				this.vertices.push(radius *Math.cos(i*divisions));
-				this.vertices.push(radius *Math.sin(i*divisions));
-				this.vertices.push(this.heigth*j/stacksAux);//this.heigth*j/stacksAux = altura atual
-				//normais
-				this.normals.push(Math.cos(i*divisions));
-				this.normals.push(Math.sin(i*divisions));
-				this.normals.push(0);
+            this.normals.push(Math.cos(ang), Math.sin(ang), 0);
+            this.normals.push(Math.cos(ang+2*Math.PI/this.slices), Math.sin(ang+2*Math.PI/this.slices), 0);
+            this.normals.push(Math.cos(ang), Math.sin(ang), 0);
+            this.normals.push(Math.cos(ang+2*Math.PI/this.slices), Math.sin(ang+2*Math.PI/this.slices), 0);
 
-				this.texCoords.push(i / slicesAux, 1 - j / stacksAux);
+            this.indices.push(index);
+            this.indices.push(index+1);
+            this.indices.push(index+2);
+            this.indices.push(index);
+            this.indices.push(index+3);
+            this.indices.push(index+1);
+            index +=4;
+        }
+        radius += radiusInc;
+        tTex -= this.deltaT;
+    }
 
-				if (j < stacksAux)
-                {
-					 if (i == (slicesAux - 1))
-					 {
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.initGLBuffers();
+};
 
-						 this.indices.push(0 + i + slicesAux * j);
-						 this.indices.push(1 + i + slicesAux * (j - 1));
-						 this.indices.push(1 + i + slicesAux * (j));
-
-						 this.indices.push(1 + i + slicesAux * (j));
-						 this.indices.push(0 + i + slicesAux * (j + 1));
-						 this.indices.push(0 + i + slicesAux * j);
-					 } 
-					 else 
-					 {
-						 this.indices.push(0 + i + slicesAux * j);
-						 this.indices.push(1 + i + slicesAux * j);
-						 this.indices.push(1 + i + slicesAux * (j + 1));
-
-						 this.indices.push(1 + i + slicesAux * (j + 1));
-						 this.indices.push(0 + i + slicesAux * (j + 1));
-						 this.indices.push(0 + i + slicesAux * j);
-					 }
-			    }
-			}
-		}
-
-		this.primitiveType = this.scene.gl.TRIANGLES;
- 		this.initGLBuffers();
- };
 MyCylinder.prototype.display= function() {
-		CGFobject.prototype.display.call(this);
-		if(this.tampa1==1){
-			this.scene.pushMatrix();
-			 	this.scene.scale(this.topRadius,this.topRadius,1);
-			 	this.scene.translate(0,0,this.heigth);
-				this.tampa.display();
-			this.scene.popMatrix();
-		}
-		if(this.tampa2==1){
-			this.scene.pushMatrix();
-				this.scene.scale(this.bottomRadius,this.bottomRadius,1);
-			 	this.scene.rotate(Math.PI,1,0,0);
-				this.tampa.display();
-			this.scene.popMatrix();
-		}
+    CGFobject.prototype.display.call(this);
+    if(this.topCap == 1){
+        this.scene.pushMatrix();
+        this.scene.scale(this.topRadius,this.topRadius,1);
+        this.scene.translate(0,0,this.heigth);
+        this.cap.display();
+        this.scene.popMatrix();
+    }
+    if(this.bottomCap==1){
+        this.scene.pushMatrix();
+        this.scene.scale(this.bottomRadius,this.bottomRadius,1);
+        this.scene.rotate(Math.PI,1,0,0);
+        this.cap.display();
+        this.scene.popMatrix();
+    }
 };
