@@ -26,13 +26,13 @@ var degToRad = Math.PI / 180.0;
 
  MyCylinder.prototype.initBuffers = function() {
 
-		var andares = this.stacks;
-		var lados = this.slices;
-		var divisions = (2*Math.PI)/lados;
+		var stacksAux = this.stacks;
+		var slicesAux = this.slices;
+		var divisions = (2*Math.PI)/slicesAux;//angulo de cada slice
 		
-		var raio=1;
-		var alturaStack=this.heigth/andares;
-		var altura=0;
+		var radius =1;
+		var stacksHeigth=this.heigth/stacksAux;
+		var curHeigth =0;
 
 
 		this.vertices = [];
@@ -40,45 +40,46 @@ var degToRad = Math.PI / 180.0;
 		this.normals = [];
 		this.texCoords = [];
 
-		for (var j = 0; j <= andares; j++){
+		for (var j = 0; j <= stacksAux; j++){
 
-			raio=this.bottomRadius
-				+(this.topRadius-this.bottomRadius)*(altura)/this.heigth;
-			altura=altura+alturaStack;
-			for(var i = 0; i < lados; i++){
+			radius =this.bottomRadius
+				+(this.topRadius-this.bottomRadius)*(curHeigth )/this.heigth;
+			curHeigth =curHeigth +stacksHeigth;
+			for(var i = 0; i < slicesAux; i++){
 
 				//vertices
-				this.vertices.push(raio*Math.cos(i*divisions));
-				this.vertices.push(raio*Math.sin(i*divisions));
-				this.vertices.push(this.heigth*j/andares);
+				this.vertices.push(radius *Math.cos(i*divisions));
+				this.vertices.push(radius *Math.sin(i*divisions));
+				this.vertices.push(this.heigth*j/stacksAux);//this.heigth*j/stacksAux = altura atual
 				//normais
 				this.normals.push(Math.cos(i*divisions));
 				this.normals.push(Math.sin(i*divisions));
 				this.normals.push(0);
 
-				this.texCoords.push(i / lados, 1 - j / andares);
+				this.texCoords.push(i / slicesAux, 1 - j / stacksAux);
 
-				if (j < andares) 
+				if (j < stacksAux)
                 {
-					 if (i == lados - 1) 
+					 if (i == (slicesAux - 1))
 					 {
-						 this.indices.push(0 + i + lados * j);
-						 this.indices.push(1 + i + lados * (j - 1));
-						 this.indices.push(1 + i + lados * (j));
 
-						 this.indices.push(1 + i + lados * (j));
-						 this.indices.push(0 + i + lados * (j + 1));
-						 this.indices.push(0 + i + lados * j);
+						 this.indices.push(0 + i + slicesAux * j);
+						 this.indices.push(1 + i + slicesAux * (j - 1));
+						 this.indices.push(1 + i + slicesAux * (j));
+
+						 this.indices.push(1 + i + slicesAux * (j));
+						 this.indices.push(0 + i + slicesAux * (j + 1));
+						 this.indices.push(0 + i + slicesAux * j);
 					 } 
 					 else 
 					 {
-						 this.indices.push(0 + i + lados * j);
-						 this.indices.push(1 + i + lados * j);
-						 this.indices.push(1 + i + lados * (j + 1));
+						 this.indices.push(0 + i + slicesAux * j);
+						 this.indices.push(1 + i + slicesAux * j);
+						 this.indices.push(1 + i + slicesAux * (j + 1));
 
-						 this.indices.push(1 + i + lados * (j + 1));
-						 this.indices.push(0 + i + lados * (j + 1));
-						 this.indices.push(0 + i + lados * j);
+						 this.indices.push(1 + i + slicesAux * (j + 1));
+						 this.indices.push(0 + i + slicesAux * (j + 1));
+						 this.indices.push(0 + i + slicesAux * j);
 					 }
 			    }
 			}
