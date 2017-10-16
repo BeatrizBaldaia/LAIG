@@ -18,21 +18,19 @@ var degToRad = Math.PI / 180.0;
 
  MySphere.prototype.initBuffers = function() {
 
-		var andares = this.stacks;
-		var lados = this.slices;
-		var divisions = 2*Math.PI/lados;
+		var divisions = 2*Math.PI/this.slices;
 
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
 		this.texCoords = [];
 
-		for (var j = 0; j <= andares; j++){
-			var diff = (Math.PI/2)/andares;
-			for(var i = 0; i < lados; i++){
+		for (var j = 0; j <= this.stacks; j++){
+			var diff = (Math.PI/2)/this.stacks;
+			for(var i = 0; i < this.slices; i++){
 
-				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/andares));
-				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/andares));
+				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
 
 				//vertices
 				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff),this.radius*Math.sin(j*diff));
@@ -45,15 +43,15 @@ var degToRad = Math.PI / 180.0;
 		}
 		
 		//indices
-		for(var j = 0; j < andares; j++){
-			for(var i = 0; i < lados; i++)
+		for(var j = 0; j < this.stacks; j++){
+			for(var i = 0; i < this.slices; i++)
 			{
-				this.indices.push(lados*j+i,lados*j+i+1,lados*(j+1)+i);
-				if (i != (lados - 1)) {
-					this.indices.push(lados*(j+1)+i+1,lados*(j+1)+i,lados*j+i+1);
+				this.indices.push(this.slices*j+i,this.slices*j+i+1,this.slices*(j+1)+i);
+				if (i != (this.slices - 1)) {
+					this.indices.push(this.slices*(j+1)+i+1,this.slices*(j+1)+i,this.slices*j+i+1);
 				}
 				else {
-					this.indices.push(lados*j,lados*j+i+1,lados*j+i);
+					this.indices.push(this.slices*j,this.slices*j+i+1,this.slices*j+i);
 				}
 
 			}
@@ -63,12 +61,12 @@ var degToRad = Math.PI / 180.0;
 		var numberOfVertices=this.vertices.length/3;
 		
 		//PARTE DE BAIXO
-		for (var j = 0; j <= andares; j++){
-			var diff = (Math.PI/2)/andares;
-			for(var i = 0; i < lados; i++){
+		for (var j = 0; j <= this.stacks; j++){
+			var diff = (Math.PI/2)/this.stacks;
+			for(var i = 0; i < this.slices; i++){
 
-				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/andares));
- 				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/andares));
+				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+ 				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
 
 				//vertices
 				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff), -this.radius*Math.sin(j*diff));
@@ -81,15 +79,15 @@ var degToRad = Math.PI / 180.0;
 		}
 		
 		//indices
-		for(var j = 0; j < andares; j++){
-			for(var i = 0; i < lados; i++)
+		for(var j = 0; j < this.stacks; j++){
+			for(var i = 0; i < this.slices; i++)
 			{
-				this.indices.push(numberOfVertices+lados*j+i,numberOfVertices+lados*(j+1)+i,numberOfVertices+lados*j+i+1);
-				if (i != (lados - 1)) {
-					this.indices.push(numberOfVertices+lados*(j+1)+i+1,numberOfVertices+lados*j+i+1,numberOfVertices+lados*(j+1)+i);
+				this.indices.push(numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*(j+1)+i,numberOfVertices+this.slices*j+i+1);
+				if (i != (this.slices - 1)) {
+					this.indices.push(numberOfVertices+this.slices*(j+1)+i+1,numberOfVertices+this.slices*j+i+1,numberOfVertices+this.slices*(j+1)+i);
 				}
 				else {
-					this.indices.push(numberOfVertices+lados*j,numberOfVertices+lados*j+i,numberOfVertices+lados*j+i+1);
+					this.indices.push(numberOfVertices+this.slices*j,numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*j+i+1);
 				}
 
 			}

@@ -373,8 +373,8 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <SCALE sx="0.5" sy="1.2" sz="0.5" /> -->
-        <TRANSLATION x="0" y="5" z="0" />
+        <!--<SCALE sx="0.5" sy="1" sz="0.5" /> &ndash;&gt;-->
+        <TRANSLATION x="0" y="6.5" z="0" />
         <DESCENDANTS>
             <NODEREF id="upperStageBody" />
             <NODEREF id="upperStageCover" />
@@ -387,7 +387,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="chess" />
             <SCALE sx="1" sy="0.5" sz="1" />
-        <TRANSLATION x="0" y="8" z="0" />
+        <TRANSLATION x="0" y="12" z="0" />
         <DESCENDANTS>
             <NODEREF id="coneBody" />
 
@@ -398,7 +398,7 @@
         <NODE id="upperStageCover">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="2.5" z="0" />
+        <TRANSLATION x="0" y="3" z="0" />
 
         <DESCENDANTS>
             <NODEREF id="ovalConeBody" />
@@ -410,8 +410,8 @@
         <NODE id="upperStageBody">
         <MATERIAL id="null" />
         <TEXTURE id="light_metal" />
-        <TRANSLATION x="0" y="3" z="0"/>
-
+        <!--<TRANSLATION x="0" y="4.5" z="0"/>-->
+            <SCALE sx="0.7" sy="3" sz="0.7" />
         <DESCENDANTS>
             <NODEREF id="cylinderBody" />
         </DESCENDANTS>
@@ -421,7 +421,7 @@
         <NODE id="cylinderBottomBody">
             <MATERIAL id="null" />
             <TEXTURE id="light_metal" />
-            <SCALE sx="1" sy="4" sz="1" />
+            <SCALE sx="1" sy="6" sz="1" />
 
             <DESCENDANTS>
                 <NODEREF id="cylinderBody" />
@@ -456,7 +456,7 @@
         <NODE id="ovalConeBody">
         <MATERIAL id="bigRocketMaterial" />
         <TEXTURE id="target" />
-        <SCALE sx="1" sy="1.5" sz="1" />
+        <SCALE sx="0.7" sy="1.5" sz="0.7" />
         <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
             <LEAF id="cone1" type="sphere" args="1 30 30" />
