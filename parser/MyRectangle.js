@@ -1,15 +1,10 @@
 
-function MyRectangle(scene,x_top,y_top,x_bottom,y_bottom) {
+function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
 	CGFobject.call(this,scene);
-/*
-	this.x_top=x_top;
-	this.y_top=y_top;
+	
 	this.x_bottom=x_bottom;
-	this.y_bottom=y_bottom;
-*/
-	this.x_bottom=x_top;
 	this.y_top=y_top;
-	this.x_top=x_bottom;
+	this.x_top=x_top;
 	this.y_bottom=y_bottom;
 
 	this.initBuffers();

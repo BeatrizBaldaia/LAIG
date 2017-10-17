@@ -1363,7 +1363,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
         else
             this.onXMLMinorError("unknown tag name <" + nodeName);
     }
-
+if(this.nodes[this.idRoot]==null)
+return "Nao existe root";
     console.log("Parsed nodes");
     return null ;
 }

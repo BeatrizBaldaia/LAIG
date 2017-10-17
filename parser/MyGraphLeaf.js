@@ -14,28 +14,31 @@ function MyGraphLeaf(graph, xmlelem) {
     switch (this.type){
         case 'patch':{
             this.leafObj = new MyPatch(graph, xmlelem);
-            graph.onXMLMinorError("Patch");
             break;
         }
         case 'rectangle':{
-             this.leafObj = new MyRectangle(graph.scene, stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
-            break;
+            if(stringArray.length!=4){graph.onXMLError("Numero de args errado\n");}else{
+            this.leafObj = new MyRectangle(graph.scene, stringArray[0], stringArray[1], stringArray[2], stringArray[3]);
+            }break;
         }
         case 'cylinder':{
-            this.leafObj = new MyCylinder(graph.scene,stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4], stringArray[5],stringArray[6]);
-            break;
+            if(stringArray.length!=7){graph.onXMLError("Numero de args errado\n");}else{
+                this.leafObj = new MyCylinder(graph.scene,stringArray[0], stringArray[1], stringArray[2], stringArray[3], stringArray[4], stringArray[5],stringArray[6]);
+            }break;
         }
         case 'sphere':{
+            if(stringArray.length!=3){graph.onXMLError("Numero de args errado\n");}else{
             this.leafObj = new MySphere(graph.scene,stringArray[0], stringArray[1], stringArray[2]);
-            break;
+            }break;
         }
         case 'triangle':{
+            if(stringArray.length!=9){graph.onXMLError("Numero de args errado\n");}else{
             var p1 = [stringArray[0], stringArray[1], stringArray[2]];
             var p2 = [stringArray[3], stringArray[4], stringArray[5]];
             var p3 = [stringArray[6], stringArray[7], stringArray[8]];
             this.leafObj = new MyTriangle(graph.scene, p1, p2, p3);
 
-            break;
+            }break;
         }
         default:{
             graph.onXMLMinorError("Unkown leaf");
