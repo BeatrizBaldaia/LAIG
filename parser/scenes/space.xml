@@ -126,6 +126,13 @@
             <ambient r="0.9" g="0.9" b="0.9" a="1" />
             <emission r="0.9" g="0.9" b="0.9" a="1" />
         </MATERIAL>
+        <MATERIAL id="fire">
+            <shininess value="100" />
+            <specular r="0.85" g="0.85" b="0.85" a="1" />
+            <diffuse r="1.0" g=".1" b=".1" a="1" />
+            <ambient r="1" g="0.1" b="0.1" a="1" />
+            <emission r="1" g="1" b="1" a="1" />
+        </MATERIAL>
 
         <!-- A default material -->
         <MATERIAL id="defaultMaterial">
@@ -145,61 +152,63 @@
     <!-- The nodes -->
     <NODES>
 
-        <ROOT id="fire" />
-
-        <NODE id="fire">
-            <MATERIAL id="defaultMaterial" />
+        <ROOT id="root" />
+        
+        <NODE id="exhaust">
+            <MATERIAL id="fire" />
             <TEXTURE id="fire_le" />
+            <TRANSLATION x="4" y="1.5" z="5" /> 
+            <ROTATION axis="x" angle="-90" />
+            <DESCENDANTS>
+                <NODEREF id="fire1" />
+                <NODEREF id="fire2" />
+            </DESCENDANTS>
 
+        </NODE>
+        <NODE id="fire1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="4" y="0" z="0" />
+            <ROTATION axis="z" angle="180" />
+            <DESCENDANTS>
+                <NODEREF id="fire" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="fire2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="fire" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="fire">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
             <DESCENDANTS>
                 <LEAF type="patch" args="10 10">
+                     <CPLINE>
+                        <CPOINT xx=".5" yy="1.5" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="2" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="3" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="3.5" yy="1.5" zz="0" ww="1" />
+                    </CPLINE>
+                    <CPLINE>
+                        <CPOINT xx="0" yy="1" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="1" zz="-2" ww="1" />
+                        <CPOINT xx="2" yy="1" zz="-1" ww="1" />
+                        <CPOINT xx="3" yy="1" zz="-2" ww="1" />
+                        <CPOINT xx="4" yy="1" zz="0" ww="1" />
+                    </CPLINE>
                     <CPLINE>
                         <CPOINT xx="0" yy="0" zz="0" ww="1" />
-                        <CPOINT xx="0" yy="2" zz="0" ww="1" />
-                        <CPOINT xx="0" yy="4" zz="0" ww="1" />
-                        <CPOINT xx="2" yy="4" zz="0" ww="1" />
-                        <CPOINT xx="4" yy="4" zz="0" ww="1" />
-                        <CPOINT xx="4" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="0" zz="-2" ww="1" />
+                        <CPOINT xx="2" yy="0" zz="7" ww="1" />
+                        <CPOINT xx="3" yy="0" zz="-2" ww="1" />
                         <CPOINT xx="4" yy="0" zz="0" ww="1" />
-                        <CPOINT xx="2" yy="0" zz="0" ww="1" />
-                        <CPOINT xx="0" yy="0" zz="0" ww="1" />
-                    </CPLINE>
-                    <CPLINE>
-                        <CPOINT xx="0" yy="0" zz="-.1" ww="1" />
-                        <CPOINT xx="0" yy="1" zz="-.1" ww="1" />
-                        <CPOINT xx="0" yy="2" zz="-.1" ww="1" />
-                        <CPOINT xx="1" yy="2" zz="-.1" ww="1" />
-                        <CPOINT xx="2" yy="2" zz="-.1" ww="1" />
-                        <CPOINT xx="2" yy="1" zz="-.1" ww="1" />
-                        <CPOINT xx="2" yy="0" zz="-.1" ww="1" />
-                        <CPOINT xx="1" yy="0" zz="-.1" ww="1" />
-                        <CPOINT xx="0" yy="0" zz="-.1" ww="1" />
-                    </CPLINE>
-                    <CPLINE>
-                        <CPOINT xx="0" yy="0" zz=".7" ww="1" />
-                        <CPOINT xx="0" yy=".5" zz=".7" ww="1" />
-                        <CPOINT xx="0" yy="1" zz=".7" ww="1" />
-                        <CPOINT xx=".5" yy="1" zz=".7" ww="1" />
-                        <CPOINT xx="1" yy="1" zz=".7" ww="1" />
-                        <CPOINT xx="1" yy="0.5" zz=".7" ww="1" />
-                        <CPOINT xx="1" yy="0" zz=".7" ww="1" />
-                        <CPOINT xx="0.5" yy="0" zz=".7" ww="1" />
-                        <CPOINT xx="0" yy="0" zz=".7" ww="1" />
-                    </CPLINE>
-                    <CPLINE>
-                        <CPOINT xx="0" yy="0" zz="1" ww="1" />
-                        <CPOINT xx="0" yy=".5" zz="1" ww="1" />
-                        <CPOINT xx="0" yy="1" zz="1" ww="1" />
-                        <CPOINT xx=".5" yy="1" zz="1" ww="1" />
-                        <CPOINT xx="1" yy="1" zz="1" ww="1" />
-                        <CPOINT xx="1" yy="0.5" zz="1" ww="1" />
-                        <CPOINT xx="1" yy="0" zz="1" ww="1" />
-                        <CPOINT xx="0.5" yy="0" zz="1" ww="1" />
-                        <CPOINT xx="0" yy="0" zz="1" ww="1" />
                     </CPLINE>
                 </LEAF>
             </DESCENDANTS>
-
         </NODE>
         <!-- The root node -->
         <NODE id="root">
@@ -210,6 +219,7 @@
                 <NODEREF id="platform" />
                 <NODEREF id="stars" />
                 <NODEREF id="bigRocket" /> 
+                <NODEREF id="exhaust"/>
             </DESCENDANTS>
 
         </NODE>
@@ -405,7 +415,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="6" y="1" z="5" />
+        <TRANSLATION x="6" y="3" z="5" />
 
         <DESCENDANTS>
             <NODEREF id="bottomBody" />
