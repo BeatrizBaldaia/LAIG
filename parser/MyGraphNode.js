@@ -22,6 +22,9 @@ function MyGraphNode(graph, nodeID) {
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
+    this.graphTextures = this.graph.textures;
+    this.graphTexturesStack = this.graph.scene.texturesStack;
+    this.graphMaterialsStack = this.graph.scene.materialsStack;
 }
 
 /**
@@ -54,63 +57,58 @@ MyGraphNode.prototype.display = function(parentID) {
     this.graph.scene.multMatrix(this.transformMatrix);
 
     if(this.materialID != 'null'){
-        this.graph.scene.materialsStack.push(this.graph.materials[this.materialID]);
+        this.graphMaterialsStack.push(this.graph.materials[this.materialID]);//material que vai ser usado e guardado na stack
         this.graph.materials[this.materialID].apply();
-        if(this.graph.scene.texturesStack.length!=0){
-            this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
+        if(this.graphTexturesStack.length!=0){//se ja houver um material posto na stack por um no pai, aplicamos esse material
+            this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].bind();
         }
     }
 
-    if(this.textureID != 'null' && this.textureID != 'clear'){
-        this.graph.scene.texturesStack.push(this.textureID);
-        this.graph.textures[this.textureID][0].bind();
-    } else if(this.textureID == 'clear' && (this.graph.scene.texturesStack.length!=0)) {
-        this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].unbind();
-    }
+    if(this.textureID != 'null' && this.textureID != 'clear'){//se o no atual tem a sua propria textura
+        this.graphTexturesStack.push(this.textureID);//guarda a textura des no na stack para ele e os seus filhos a poderem usar
+        this.graphTextures[this.textureID][0].bind();//aplica a sua textura
+    } else if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//nao vai querer aplicar qualquer tipo de textura
+        this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();//desaplica a textura atual, mas nao a remove da stack
+    }//se textureID = null, no nao faz nada
 
-    if(this.children.length != 0) {
+    if(this.children.length != 0) {//ver os filhos deste no
         for (var i = 0; i < this.children.length; i++) {
+            if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//fazer sempre o unbind antes de fazer o display de um filho porque estes podem ter aplicado uma textura
+                this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();
+            }
             this.graph.getNodes()[this.children[i]].display(this.nodeID);
         }
-    } 
-
+    }
+    if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {
+        this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();
+    }
     /**
      * Draw leaves
      */
     if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
             var afS = 0, afT = 0;
-            //TODO alterei ver se esta bem
-            if(this.graph.scene.texturesStack.length != 0){
-                    afS = this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][1];
-                    afT = this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][2];
+            if(this.graphTexturesStack.length != 0){
+                    afS = this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][1];
+                    afT = this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][2];
             }
-            /*if(this.textureID != 'null' && this.textureID != 'clear') {
-                afS = this.graph.textures[this.textureID][1];
-                afT = this.graph.textures[this.textureID][2];
-            } else {
-                if(this.graph.scene.texturesStack.length!=0){
-                    afS = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][1];
-                    afT = this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1][2];
-                }
-            }*/
             this.leaves[i].setAmplifFactor(afS, afT);
             this.leaves[i].display();
         }
     }
     
-    if(this.materialID!='null'){
-        this.graph.scene.materialsStack.pop();
-        this.graph.scene.materialsStack[this.graph.scene.materialsStack.length - 1].apply();
+    if(this.materialID != 'null'){//depois de um no acabar o seu display e o dos seus filhos, retira o seu material da stack
+        this.graphMaterialsStack.pop();
+        this.graphMaterialsStack[this.graph.scene.materialsStack.length - 1].apply();
     }
-    if(this.textureID != 'null' && this.textureID != 'clear'){
-        this.graph.textures[this.textureID][0].unbind();
-        this.graph.scene.texturesStack.pop();
-        if(this.graph.scene.texturesStack.length!=0){
-            this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
+    if(this.textureID != 'null' && this.textureID != 'clear'){//depois de um no acabar o seu display e o dos seus filhos, retira a sua textura da stack
+        this.graphTextures[this.textureID][0].unbind();
+        this.graphTexturesStack.pop();
+        if(this.graphTexturesStack.length!=0){
+            this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].bind();
         }
-    } else if(this.textureID == 'clear'&& (this.graph.scene.texturesStack.length!=0)) {
-        this.graph.textures[this.graph.scene.texturesStack[this.graph.scene.texturesStack.length - 1]][0].bind();
+    } else if(this.textureID == 'clear'&& (this.graphTexturesStack.length!=0)) {
+        this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].bind();//volta a aplicar a textura que tinha desaplicado para os seus nos irmaos a usarem
     }
     this.graph.scene.popMatrix();
 
