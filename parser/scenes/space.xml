@@ -153,75 +153,321 @@
     <NODES>
 
         <ROOT id="root" />
-        
-        <NODE id="exhaust">
-            <MATERIAL id="fire" />
-            <TEXTURE id="fire_le" />
-            <TRANSLATION x="4" y="1.5" z="5" /> 
-            <ROTATION axis="x" angle="-90" />
-            <DESCENDANTS>
-                <NODEREF id="fire1" />
-                <NODEREF id="fire2" />
-            </DESCENDANTS>
 
-        </NODE>
-        <NODE id="fire1">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <TRANSLATION x="4" y="0" z="0" />
-            <ROTATION axis="z" angle="180" />
-            <DESCENDANTS>
-                <NODEREF id="fire" />
-            </DESCENDANTS>
-        </NODE>
-        <NODE id="fire2">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <DESCENDANTS>
-                <NODEREF id="fire" />
-            </DESCENDANTS>
-        </NODE>
-        <NODE id="fire">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <DESCENDANTS>
-                <LEAF type="patch" args="10 10">
-                     <CPLINE>
-                        <CPOINT xx=".5" yy="1.5" zz="0" ww="1" />
-                        <CPOINT xx="1" yy="2" zz="0" ww="1" />
-                        <CPOINT xx="2" yy="2" zz="0" ww="1" />
-                        <CPOINT xx="3" yy="2" zz="0" ww="1" />
-                        <CPOINT xx="3.5" yy="1.5" zz="0" ww="1" />
-                    </CPLINE>
-                    <CPLINE>
-                        <CPOINT xx="0" yy="1" zz="0" ww="1" />
-                        <CPOINT xx="1" yy="1" zz="-2" ww="1" />
-                        <CPOINT xx="2" yy="1" zz="-1" ww="1" />
-                        <CPOINT xx="3" yy="1" zz="-2" ww="1" />
-                        <CPOINT xx="4" yy="1" zz="0" ww="1" />
-                    </CPLINE>
-                    <CPLINE>
-                        <CPOINT xx="0" yy="0" zz="0" ww="1" />
-                        <CPOINT xx="1" yy="0" zz="-2" ww="1" />
-                        <CPOINT xx="2" yy="0" zz="7" ww="1" />
-                        <CPOINT xx="3" yy="0" zz="-2" ww="1" />
-                        <CPOINT xx="4" yy="0" zz="0" ww="1" />
-                    </CPLINE>
-                </LEAF>
-            </DESCENDANTS>
-        </NODE>
         <!-- The root node -->
         <NODE id="root">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
 
             <DESCENDANTS>
+                <NODEREF id="ladder" />
                 <NODEREF id="platform" />
                 <NODEREF id="stars" />
                 <NODEREF id="bigRocket" /> 
                 <NODEREF id="exhaust"/>
             </DESCENDANTS>
 
+        </NODE>
+
+        <NODE id="ladder">
+            <MATERIAL id="platformMaterial" />
+            <TEXTURE id="blue_metal" />
+
+            <SCALE sx="1.5" sy="1.5" sz="1.5" />
+            <TRANSLATION x="6" y="0" z="2.65" />
+            <DESCENDANTS>
+                <NODEREF id="unitLadders" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadders">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer escalamento aqui-->
+            <DESCENDANTS>
+                <NODEREF id="unitLadder1" />
+                <NODEREF id="unitLadder2" />
+                <NODEREF id="unitLadder3" />
+                <NODEREF id="unitLadder4" />
+                <NODEREF id="unitLadder5" />
+                <NODEREF id="unitLadder6" />
+                <NODEREF id="unitLadder7" />
+                <NODEREF id="unitLadder8" />
+                <NODEREF id="unitLadder9" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="1" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder3">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="2" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder4">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="3" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder5">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="4" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder6">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="5" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder7">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="6" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder8">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="7" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="unitLadder9">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--fazer transformacoes aqui-->
+            <TRANSLATION x="0" y="8" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="lad" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="lad">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="column1" />
+                <NODEREF id="column2" />
+                <NODEREF id="column3" />
+                <NODEREF id="column4" />
+                <NODEREF id="sideHolders" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="column1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="0.2" sy="1.1" sz="0.2" />
+            <DESCENDANTS>
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="column2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="0.2" sy="1.1" sz="0.2" />
+            <TRANSLATION x="5.5" y="0" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="column3">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="0.2" sy="1.1" sz="0.2" />
+            <TRANSLATION x="0" y="0" z="5.5" />
+            <DESCENDANTS>
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="column4">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="0.2" sy="1.1" sz="0.2" />
+            <TRANSLATION x="5.5" y="0" z="5.5" />
+            <DESCENDANTS>
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="sideHolders">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="sideHolder1" />
+                <NODEREF id="sideHolder2" />
+                <NODEREF id="sideHolder3" />
+                <NODEREF id="sideHolder4" />
+            </DESCENDANTS>
+        </NODE>
+
+
+        <NODE id="sideHolder1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--<TRANSLATION x="0.5" y="0.5" z="0.5" />-->
+            <DESCENDANTS>
+                <NODEREF id="X" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="sideHolder2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <ROTATION axis="y" angle="-90" />
+            <TRANSLATION x="0" y="0" z="-0.2" />
+            <DESCENDANTS>
+                <NODEREF id="X" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="sideHolder3">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="0" y="0" z="1.1" />
+            <DESCENDANTS>
+                <NODEREF id="X" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="sideHolder4">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <ROTATION axis="y" angle="-90" />
+            <TRANSLATION x="0" y="0" z="-1.2" />
+            <DESCENDANTS>
+                <NODEREF id="X" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="X">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="X1" />
+                <NODEREF id="X2" />
+            </DESCENDANTS>
+        </NODE>
+
+
+        <NODE id="X1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="1.1" y="0" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="X1aux" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="X1aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--<TRANSLATION x="-0.5" y="-0.5" z="-0.5" />-->
+            <ROTATION axis="z" angle="45" />
+            <SCALE sx="0.1" sy="1.4" sz="0.1" />
+            <!--<TRANSLATION x="0.3" y="-0.3" z="0" />-->
+            <DESCENDANTS>
+
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="X2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="0.08" y="0.1" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="X2aux" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="X2aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <!--<TRANSLATION x="-0.5" y="-0.5" z="-0.5" />-->
+            <ROTATION axis="z" angle="-45" />
+            <SCALE sx="0.1" sy="1.4" sz="0.1" />
+            <DESCENDANTS>
+
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
+            </DESCENDANTS>
         </NODE>
 
         <!-- The platform box -->
@@ -234,19 +480,21 @@
             
             <DESCENDANTS>
 
-                <NODEREF id="facePlatform1" />
-                <NODEREF id="facePlatform2" />
-                <NODEREF id="facePlatform3" />
-                <NODEREF id="facePlatform4" />
-                <NODEREF id="facePlatform5" />
-                <NODEREF id="facePlatform6" />
+                <NODEREF id="cubeFace1" />
+                <NODEREF id="cubeFace2" />
+                <NODEREF id="cubeFace3" />
+                <NODEREF id="cubeFace4" />
+                <NODEREF id="cubeFace5" />
+                <NODEREF id="cubeFace6" />
             </DESCENDANTS>
 
         </NODE>
 
+
+
         <!-- THIS BLOCK OF CODE WILL CREATE A BOX (SIZE 1) CENTERED IN THE ORIGIN -->
 
-        <NODE id="facePlatform1">
+        <NODE id="cubeFace1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <ROTATION axis="x" angle="180" />
@@ -258,7 +506,7 @@
 
         </NODE>
 
-        <NODE id="facePlatform2">
+        <NODE id="cubeFace2">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -271,7 +519,7 @@
 
         </NODE>
 
-        <NODE id="facePlatform3">
+        <NODE id="cubeFace3">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -285,7 +533,7 @@
 
         </NODE>
 
-        <NODE id="facePlatform4">
+        <NODE id="cubeFace4">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -297,7 +545,7 @@
 
         </NODE>
 
-        <NODE id="facePlatform5">
+        <NODE id="cubeFace5">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -309,7 +557,7 @@
 
         </NODE>
 
-        <NODE id="facePlatform6">
+        <NODE id="cubeFace6">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -653,6 +901,63 @@
         </DESCENDANTS>
 
     </NODE>
+
+        <NODE id="exhaust">
+            <MATERIAL id="fire" />
+            <TEXTURE id="fire_le" />
+            <TRANSLATION x="4" y="1.5" z="5" />
+            <ROTATION axis="x" angle="-90" />
+            <DESCENDANTS>
+                <NODEREF id="fire1" />
+                <NODEREF id="fire2" />
+            </DESCENDANTS>
+
+        </NODE>
+        <NODE id="fire1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <TRANSLATION x="4" y="0" z="0" />
+            <ROTATION axis="z" angle="180" />
+            <DESCENDANTS>
+                <NODEREF id="fire" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="fire2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="fire" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="fire">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <LEAF type="patch" args="10 10">
+                    <CPLINE>
+                        <CPOINT xx=".5" yy="1.5" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="2" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="3" yy="2" zz="0" ww="1" />
+                        <CPOINT xx="3.5" yy="1.5" zz="0" ww="1" />
+                    </CPLINE>
+                    <CPLINE>
+                        <CPOINT xx="0" yy="1" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="1" zz="-2" ww="1" />
+                        <CPOINT xx="2" yy="1" zz="-1" ww="1" />
+                        <CPOINT xx="3" yy="1" zz="-2" ww="1" />
+                        <CPOINT xx="4" yy="1" zz="0" ww="1" />
+                    </CPLINE>
+                    <CPLINE>
+                        <CPOINT xx="0" yy="0" zz="0" ww="1" />
+                        <CPOINT xx="1" yy="0" zz="-2" ww="1" />
+                        <CPOINT xx="2" yy="0" zz="7" ww="1" />
+                        <CPOINT xx="3" yy="0" zz="-2" ww="1" />
+                        <CPOINT xx="4" yy="0" zz="0" ww="1" />
+                    </CPLINE>
+                </LEAF>
+            </DESCENDANTS>
+        </NODE>
     </NODES>
 
 </SCENE>
