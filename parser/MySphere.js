@@ -1,101 +1,156 @@
-var degToRad = Math.PI / 180.0;
+// var degToRad = Math.PI / 180.0;
+// /**
+//  * MySphere
+//  * @constructor
+//  */
+//  function MySphere(scene, radius, slices, stacks) {
+//  	CGFobject.call(this,scene);
+//
+// 	this.radius = radius;
+// 	this.slices = slices;
+// 	this.stacks = stacks;
+//
+//  	this.initBuffers();
+//  };
+//
+//  MySphere.prototype = Object.create(CGFobject.prototype);
+//  MySphere.prototype.constructor = MySphere;
+//
+//  MySphere.prototype.initBuffers = function() {
+//
+// 		var divisions = 2*Math.PI/this.slices;
+//
+// 		this.vertices = [];
+// 		this.indices = [];
+// 		this.normals = [];
+// 		this.texCoords = [];
+//
+// 		for (var j = 0; j <= this.stacks; j++){
+// 			var diff = (Math.PI/2)/this.stacks;
+// 			for(var i = 0; i < this.slices; i++){
+//
+// 				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+// 				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+//
+// 				//vertices
+// 				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff),this.radius*Math.sin(j*diff));
+// 				//normais
+// 				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
+//
+//
+// 				this.texCoords.push(0.5*x + 0.5, 0.5-0.5*y);
+// 			}
+// 		}
+//
+// 		//indices
+// 		for(var j = 0; j < this.stacks; j++){
+// 			for(var i = 0; i < this.slices; i++)
+// 			{
+// 				this.indices.push(this.slices*j+i,this.slices*j+i+1,this.slices*(j+1)+i);
+// 				if (i != (this.slices - 1)) {
+// 					this.indices.push(this.slices*(j+1)+i+1,this.slices*(j+1)+i,this.slices*j+i+1);
+// 				}
+// 				else {
+// 					this.indices.push(this.slices*j,this.slices*j+i+1,this.slices*j+i);
+// 				}
+//
+// 			}
+//
+// 		}
+//
+// 		var numberOfVertices=this.vertices.length/3;
+//
+// 		//PARTE DE BAIXO
+// 		for (var j = 0; j <= this.stacks; j++){
+// 			var diff = (Math.PI/2)/this.stacks;
+// 			for(var i = 0; i < this.slices; i++){
+//
+// 				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+//  				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+//
+// 				//vertices
+// 				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff), -this.radius*Math.sin(j*diff));
+// 				//normais
+// 				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
+//
+//
+// 				this.texCoords.push(0.5*x + 0.5, 0.5-0.5*y);
+// 			}
+// 		}
+//
+// 		//indices
+// 		for(var j = 0; j < this.stacks; j++){
+// 			for(var i = 0; i < this.slices; i++)
+// 			{
+// 				this.indices.push(numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*(j+1)+i,numberOfVertices+this.slices*j+i+1);
+// 				if (i != (this.slices - 1)) {
+// 					this.indices.push(numberOfVertices+this.slices*(j+1)+i+1,numberOfVertices+this.slices*j+i+1,numberOfVertices+this.slices*(j+1)+i);
+// 				}
+// 				else {
+// 					this.indices.push(numberOfVertices+this.slices*j,numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*j+i+1);
+// 				}
+//
+// 			}
+//
+// 		}
+//
+// 		this.primitiveType = this.scene.gl.TRIANGLES;
+//  		this.initGLBuffers();
+//
+//
+//  };
+
 /**
  * MySphere
  * @constructor
  */
- function MySphere(scene, radius, slices, stacks) {
- 	CGFobject.call(this,scene);
-	
-	this.radius = radius;
-	this.slices = slices;
-	this.stacks = stacks;
- 	
- 	this.initBuffers();
- };
+function MySphere(scene, radius, slices, stacks) {
+    CGFobject.call(this, scene);
 
- MySphere.prototype = Object.create(CGFobject.prototype);
- MySphere.prototype.constructor = MySphere;
+    this.slices = slices;
+    this.stacks = stacks;
+    this.radius = radius;
 
- MySphere.prototype.initBuffers = function() {
+    this.initBuffers();
+};
 
-		var divisions = 2*Math.PI/this.slices;
+MySphere.prototype = Object.create(CGFobject.prototype);
+MySphere.prototype.constructor = MySphere;
 
-		this.vertices = [];
-		this.indices = [];
-		this.normals = [];
-		this.texCoords = [];
+MySphere.prototype.initBuffers = function() {
 
-		for (var j = 0; j <= this.stacks; j++){
-			var diff = (Math.PI/2)/this.stacks;
-			for(var i = 0; i < this.slices; i++){
+    this.vertices = [];
+    this.normals = [];
+    this.indices = [];
+    this.texCoords = [];
 
-				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
-				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
-
-				//vertices
-				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff),this.radius*Math.sin(j*diff));
-				//normais
-				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
+    var lonAng = (2 * Math.PI) / this.slices; // 0-360 deg -- longitude
+    var latAng = (Math.PI) / this.stacks; // 0-180 deg -- latitude
+    var numVertex = 0;
 
 
-				this.texCoords.push(0.5*x + 0.5, 0.5-0.5*y);
-			}
-		}
-		
-		//indices
-		for(var j = 0; j < this.stacks; j++){
-			for(var i = 0; i < this.slices; i++)
-			{
-				this.indices.push(this.slices*j+i,this.slices*j+i+1,this.slices*(j+1)+i);
-				if (i != (this.slices - 1)) {
-					this.indices.push(this.slices*(j+1)+i+1,this.slices*(j+1)+i,this.slices*j+i+1);
-				}
-				else {
-					this.indices.push(this.slices*j,this.slices*j+i+1,this.slices*j+i);
-				}
+    for (var i = 0; i <= this.slices; i++) {
+        for (var j = 0; j <= this.stacks; j++) {
 
-			}
+            var x = Math.cos(lonAng * i) * Math.sin(latAng * j);
+            var y = Math.sin(lonAng * i) * Math.sin(latAng * j);
+            var z = Math.cos(latAng * j);
 
-		}
-		
-		var numberOfVertices=this.vertices.length/3;
-		
-		//PARTE DE BAIXO
-		for (var j = 0; j <= this.stacks; j++){
-			var diff = (Math.PI/2)/this.stacks;
-			for(var i = 0; i < this.slices; i++){
+            this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
+            numVertex++;
 
-				var x = Math.cos(divisions*i)*Math.cos(Math.asin(j/this.stacks));
- 				var y = Math.sin(divisions*i)*Math.cos(Math.asin(j/this.stacks));
+            this.normals.push(x, y, z);
 
-				//vertices
-				this.vertices.push(this.radius*Math.cos(i*divisions)*Math.cos(j*diff), this.radius*Math.sin(i*divisions)*Math.cos(j*diff), -this.radius*Math.sin(j*diff));
-				//normais
-				this.normals.push(Math.cos(i*divisions)*Math.cos(j*diff), Math.sin(i*divisions)*Math.cos(j*diff), 0);
+            if (i > 0 && j > 0) {
+                this.indices.push(numVertex - this.stacks - 1, numVertex - 1, numVertex - this.stacks - 2);
+                this.indices.push(numVertex - 1, numVertex - 2, numVertex - this.stacks - 2);
+            }
 
+            this.texCoords.push(0.5 * x + 0.5, 0.5 - 0.5 * y);
+        }
 
-				this.texCoords.push(0.5*x + 0.5, 0.5-0.5*y);
-			}
-		}
-		
-		//indices
-		for(var j = 0; j < this.stacks; j++){
-			for(var i = 0; i < this.slices; i++)
-			{
-				this.indices.push(numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*(j+1)+i,numberOfVertices+this.slices*j+i+1);
-				if (i != (this.slices - 1)) {
-					this.indices.push(numberOfVertices+this.slices*(j+1)+i+1,numberOfVertices+this.slices*j+i+1,numberOfVertices+this.slices*(j+1)+i);
-				}
-				else {
-					this.indices.push(numberOfVertices+this.slices*j,numberOfVertices+this.slices*j+i,numberOfVertices+this.slices*j+i+1);
-				}
+    }
 
-			}
-
-		}
-
-		this.primitiveType = this.scene.gl.TRIANGLES;
- 		this.initGLBuffers();
-	
- 	
- };
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.initGLBuffers();
+};
