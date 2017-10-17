@@ -2,7 +2,8 @@
 function MyPatch(graph, xmlelem) {
 	CGFobject.call(this,graph.scene);
 	
-	this.graph=graph;
+	this.graph = graph;
+	this.surface = null;
     
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
@@ -10,25 +11,26 @@ function MyPatch(graph, xmlelem) {
             stringArray[i]=parseFloat(stringArray[i]);
     }
 
-	if(stringArray.length!=2){
+	if(stringArray.length != 2){
 		this.graph.onXMLError("Numero de args da patch errado: "+stringArray.length);
 	}    
 	
-	var s = this.controlvertexes(xmlelem);
-if(s!=-1){
+	var s = this.controlvertexes(xmlelem);//superficie
+	if(s != -1) {//se nao houve erros, criamos a superficie
 	var nurbsSurface = new CGFnurbsSurface(
-								s.length-1,
-								s[0].length - 1,
+								s.length-1,//grau 1 (grau U)
+								s[0].length - 1,//grau 2 (grau V)
 								this.getKnotsVector(s.length-1),
 								this.getKnotsVector(s[0].length - 1),
 								s);
-	
+
 	getSurfacePoint = function(u, v) {
 		return nurbsSurface.getPoint(u, v);
 	};
 
 	this.surface = new CGFnurbsObject(this.graph.scene, getSurfacePoint, stringArray[0], stringArray[1]);
-	this.surface.initBuffers();}
+	this.surface.initBuffers();
+	}
 };
 
 MyPatch.prototype = Object.create(CGFobject.prototype);
@@ -65,9 +67,13 @@ MyPatch.prototype.controlvertexes = function (xmlelem){
 		}
         controlVertexesU.push(controlVertexesOnV);
 	}
-	var control=controlVertexesU[0].length;
-	for(var i=0;i<controlVertexesU.length;i++){
-		if(controlVertexesU[i].length!=control){
+	if(controlVertexesU.length == 0) {
+        this.graph.onXMLError("Erro ao obter os vertices de controlo.\n");
+        return -1;
+	}
+	var control = controlVertexesU[0].length;//numero de control points da control line
+	for(var i=0;i < controlVertexesU.length;i++){
+		if(controlVertexesU[i].length != control){
 			this.graph.onXMLError("Numero de controlPoints errado\n");
 			return -1;
 		}
