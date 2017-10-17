@@ -94,7 +94,10 @@
             <file path="images/fire_le.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
-
+        <TEXTURE id="foguetao">
+            <file path="images/export.png" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
     </TEXTURES>
 
 
@@ -488,7 +491,7 @@
 
         <NODE id="cylinderBottomBody">
             <MATERIAL id="null" />
-            <TEXTURE id="light_metal" />
+            <TEXTURE id="foguetao" />
             <SCALE sx="1" sy="6" sz="1" />
 
             <DESCENDANTS>
@@ -499,7 +502,7 @@
 
         <NODE id="cylinderBody">
         <MATERIAL id="bigRocketMaterial" />
-        <TEXTURE id="light_metal" /><!-- light_metal-->
+        <TEXTURE id="null" />
 
         <ROTATION axis="x" angle="-90" />
 
