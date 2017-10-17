@@ -415,7 +415,7 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="6" y="1" z="5" />
+        <TRANSLATION x="6" y="3" z="5" />
 
         <DESCENDANTS>
             <NODEREF id="bottomBody" />
