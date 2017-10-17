@@ -33,7 +33,7 @@ MyCylinder.prototype.initBuffers = function() {
     var index = 0;
     var radiusInc = (this.topRadius - this.bottomRadius)/this.stacks;//incremento a dar ao raio
     var radius = this.bottomRadius;
-    var tTex = 1; //valor maximo no eixo t
+    var tTex = 1; //valor maximo no eixo t //TODO
     for(i = 0; i < this.stacks; i++) {
         var ang = 0;
         var sTex = 0;//valor minimo no eixo s
@@ -44,7 +44,7 @@ MyCylinder.prototype.initBuffers = function() {
             this.vertices.push(radius * Math.cos(ang+(2*Math.PI)/this.slices), radius * Math.sin(ang+(2*Math.PI)/this.slices), this.heigth * i/this.stacks);
 
             this.texCoords.push(sTex, tTex);
-            this.texCoords.push(sTex+this.deltaS, tTex-this.deltaT);
+            this.texCoords.push(sTex+this.deltaS, tTex-this.deltaT);//TODO
             this.texCoords.push(sTex, tTex-this.deltaT);
             this.texCoords.push(sTex+this.deltaS, tTex);
 
