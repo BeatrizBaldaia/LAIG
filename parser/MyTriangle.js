@@ -42,7 +42,7 @@ MyTriangle.prototype.initBuffers = function () {
 
     this.cosBeta = (Math.pow(this.a, 2) - Math.pow(this.b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c);
 
-   this.beta = Math.acos(this.cosBeta);
+    this.beta = Math.acos(this.cosBeta);
 
     this.texCoords = [
     	this.c - this.a * this.cosBeta, 1 - (this.a * Math.sin(this.beta)),
@@ -55,23 +55,13 @@ MyTriangle.prototype.initBuffers = function () {
 };
 
 MyTriangle.prototype.setAmplifFactor = function (afS, afT) {
-	//TODO 
-	/*this.texCoords[0]=(this.c - this.a * this.cosBeta)/afS;
-	this.texCoords[1]=(1 - this.a * Math.sin(this.beta))/afT; //TODO assim?
-	this.texCoords[2]=0;//
-	this.texCoords[3]=1;//Why?
-	this.texCoords[4]=this.c/afS;
-	this.texCoords[5]=1;//
-	this.updateTexCoordsGLBuffers();*/
 
-    var size = this.texCoords.length;
-    var i = 0;
-    while(i < size) {
-        if(i % 2 == 0) {
-            this.texCoords[i] = this.texCoords[i]/afS;
-        } else {
-            this.texCoords[i] = this.texCoords[i]/afT;
-        }
-        i++;
-    }
+	this.texCoords[0]=(this.c - this.a * this.cosBeta)/afS;
+	this.texCoords[1]=afT - (this.a * Math.sin(this.beta))/afT;
+	this.texCoords[2]=0;
+	this.texCoords[3]=afT;
+	this.texCoords[4]=this.c/afS;
+	this.texCoords[5]=afT;
+
+    this.updateTexCoordsGLBuffers();
 };
