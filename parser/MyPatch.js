@@ -36,7 +36,7 @@ MyPatch.prototype.constructor=MyPatch;
 
 MyPatch.prototype.display = function (){
 	if(this.surface!= null)
-	this.surface.display();
+		this.surface.display();
 }
 MyPatch.prototype.getKnotsVector = function(degree) {
 	var v = new Array();
