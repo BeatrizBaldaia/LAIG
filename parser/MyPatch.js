@@ -10,8 +10,12 @@ function MyPatch(graph, xmlelem) {
             stringArray[i]=parseFloat(stringArray[i]);
     }
 
-    var s = this.controlvertexes(xmlelem);
-
+	if(stringArray.length!=2){
+		this.graph.onXMLError("Numero de args da patch errado: "+stringArray.length);
+	}    
+	
+	var s = this.controlvertexes(xmlelem);
+if(s!=-1){
 	var nurbsSurface = new CGFnurbsSurface(
 								s.length-1,
 								s[0].length - 1,
@@ -24,13 +28,14 @@ function MyPatch(graph, xmlelem) {
 	};
 
 	this.surface = new CGFnurbsObject(this.graph.scene, getSurfacePoint, stringArray[0], stringArray[1]);
-	this.surface.initBuffers();
+	this.surface.initBuffers();}
 };
 
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor=MyPatch;
 
 MyPatch.prototype.display = function (){
+	if(this.surface!= null)
 	this.surface.display();
 }
 MyPatch.prototype.getKnotsVector = function(degree) {
@@ -59,7 +64,13 @@ MyPatch.prototype.controlvertexes = function (xmlelem){
 
 		}
         controlVertexesU.push(controlVertexesOnV);
-
+	}
+	var control=controlVertexesU[0].length;
+	for(var i=0;i<controlVertexesU.length;i++){
+		if(controlVertexesU[i].length!=control){
+			this.graph.onXMLError("Numero de controlPoints errado\n");
+			return -1;
+		}
 	}
 
 	return controlVertexesU;
