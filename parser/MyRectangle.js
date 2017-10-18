@@ -36,10 +36,10 @@ MyRectangle.prototype.initBuffers = function () {
 
 
 	this.texCoords = [
-		1,0,
+		(this.x_top-this.x_bottom),0,
 		0,0,
-		0,1,
-		1,1
+		0,(this.y_top-this.y_bottom),
+		(this.x_top-this.x_bottom),(this.y_top-this.y_bottom)
 	];
 
 	this.texCoordsCopy = this.texCoords.slice();
