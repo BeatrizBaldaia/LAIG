@@ -89,7 +89,7 @@
 
         <!-- floor -->
         <TEXTURE id="ground">
-            <file path="images/ground.jpg" />
+            <file path="images/ground.png" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
 
