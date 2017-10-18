@@ -1448,14 +1448,9 @@ MySceneGraph.prototype.getScene = function () {
 MySceneGraph.prototype.displayScene = function() {
 	// entry point for graph rendering
 	// remove log below to avoid performance issues
-	
-	//this.log("Graph should be rendered here...");
+
     //console.log("On displayScene");
     this.scene.materialsStack.push(this.materials[this.defaultMaterialID]);
 	this.nodes[this.idRoot].display(this.idRoot);
 	this.scene.materialsStack.pop();
-    //console.log("End displayScene");
-    //TODO DELECT THIS
-    //this.teste.display();
-    //END_TODO
 }

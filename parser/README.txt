@@ -1,8 +1,5 @@
-LAIG Demo Parser
+LAIG Space Parser
 
-Base code and demo scene provided by:
-- Rui Pedro Peixoto Cardoso - up201305469@fe.up.pt
-- Diogo da Silva Amaral - up201306082@fe.up.pt
-
-Adapted by:
-- Rui Rodrigues - rui.rodrigues@fe.up.pt
+Space scene provided by:
+- Anabela Costa e Silva - up201506034
+- Beatriz Souto de Sa Baldaia - up201505633

@@ -41,33 +41,24 @@ MyRectangle.prototype.initBuffers = function () {
 		0,1,
 		1,1
 	];
-	
+
+	this.texCoordsCopy = this.texCoords.slice();
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
 
 MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 
-
-	this.texCoords[0]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[5]=(this.y_top-this.y_bottom)/afT;
-	this.texCoords[2]=0;
-	this.texCoords[7]=(this.y_top-this.y_bottom)/afT;
-	this.texCoords[4]=0;
-	this.texCoords[1]=0;
-	this.texCoords[6]=(this.x_top-this.x_bottom)/afS;
-	this.texCoords[3]=0;
-/*
     var size = this.texCoords.length;
     var i = 0;
     while(i < size) {
         if(i % 2 == 0) {
-            this.texCoords[i] = this.texCoords[i]/afS;
+            this.texCoords[i] = this.texCoordsCopy[i]/afS;
         } else {
-            this.texCoords[i] = this.texCoords[i]/afT;
+            this.texCoords[i] = this.texCoordsCopy[i]/afT;
         }
         i++;
     }
-*/
+
 	this.updateTexCoordsGLBuffers();
 };
