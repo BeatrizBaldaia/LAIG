@@ -10,6 +10,10 @@ function MyGraphLeaf(graph, xmlelem) {
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
     for(var i=0;i<stringArray.length;i++){
             stringArray[i]=parseFloat(stringArray[i]);
+            if(isNaN(stringArray[i])){
+                stringArray.splice(i, 1);
+                i--;
+            }
     }
     switch (this.type){
         case 'patch':{
