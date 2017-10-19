@@ -46,20 +46,18 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-//TODO texture clear??
+
     /**
      * Call for children display
      */
-    //TODO: Apply texture from this.graph.getTextures()[this.textureID]
-
-
+   
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
     if(this.materialID != 'null'){
         this.graphMaterialsStack.push(this.graph.materials[this.materialID]);//material que vai ser usado e guardado na stack
         this.graph.materials[this.materialID].apply();
-        if(this.graphTexturesStack.length!=0){//se ja houver um material posto na stack por um no pai, aplicamos esse material
+        if(this.graphTexturesStack.length!=0){//se ja houver uma textura posto na stack por um no pai, aplicamos esse textura
             this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].bind();
         }
     }

@@ -1,4 +1,3 @@
-
 function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
 	CGFobject.call(this,scene);
 	

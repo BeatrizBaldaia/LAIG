@@ -1,4 +1,3 @@
-
 function MyTriangle(scene,p1,p2,p3) {
 	CGFobject.call(this,scene);
 
@@ -26,7 +25,6 @@ MyTriangle.prototype.initBuffers = function () {
             0, 1, 2
         ];
 
-     //TODO as normals estao mal
 	this.normals = [
 		0, 0, 1,
 		0, 0, 1,

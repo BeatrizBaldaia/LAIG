@@ -1,4 +1,3 @@
-
 function MyPatch(graph, xmlelem) {
 	CGFobject.call(this,graph.scene);
 	

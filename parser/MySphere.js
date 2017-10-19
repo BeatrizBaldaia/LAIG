@@ -1,4 +1,3 @@
-
 /**
  * MySphere
  * @constructor
@@ -45,7 +44,7 @@ MySphere.prototype.initBuffers = function() {
                 this.indices.push(numVertex - 1, numVertex - 2, numVertex - this.stacks - 2);
             }
 
-            this.texCoords.push(0.5 * x + 0.5, 0.5 - 0.5 * y);
+            this.texCoords.push((i/this.slices),z/2+.5);
         }
 
     }

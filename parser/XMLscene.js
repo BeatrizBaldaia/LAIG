@@ -24,7 +24,7 @@ XMLscene.prototype.init = function(application) {
     this.initCameras();
 
     this.enableTextures(true);
-    //TODO ver especificacoes;
+
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
@@ -32,7 +32,7 @@ XMLscene.prototype.init = function(application) {
     
     this.axis = new CGFaxis(this);
 
-    //TODO Aqui??
+
     this.texturesStack=[];
     this.materialsStack=[];
 }
