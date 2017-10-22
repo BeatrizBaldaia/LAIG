@@ -14,7 +14,9 @@ function MySphere(scene, radius, slices, stacks) {
 
 MySphere.prototype = Object.create(CGFobject.prototype);
 MySphere.prototype.constructor = MySphere;
-
+/**
+ * MySphere init buffers
+ */
 MySphere.prototype.initBuffers = function() {
 
     this.vertices = [];

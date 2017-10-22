@@ -2,7 +2,6 @@
  * MyGraphLeaf class, representing a leaf in the scene graph.
  * @constructor
 **/
-
 function MyGraphLeaf(graph, xmlelem) {
     this.leafObj = null;
     this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']); //TODO added patch
@@ -51,13 +50,19 @@ function MyGraphLeaf(graph, xmlelem) {
     }
 
 }
-
+/**
+ * Sets the amplification factors on resctangles and triangles
+ * @param afS amplification factor in the S coordenate
+ * @param afT amplification factor in the T coordenate
+ */
 MyGraphLeaf.prototype.setAmplifFactor = function(afS, afT) {
     if(this.leafObj != null && (this.type == 'rectangle'|| this.type == 'triangle')){
         this.leafObj.setAmplifFactor(afS, afT);
     }
 }
-
+/**
+ * Displays the leaf
+ */
 MyGraphLeaf.prototype.display = function() {
     if(this.leafObj!=null){
         this.leafObj.display();

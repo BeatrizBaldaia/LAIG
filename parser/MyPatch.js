@@ -1,3 +1,7 @@
+/**
+ * MyPatch
+ * @constructor
+ */
 function MyPatch(graph, xmlelem) {
 	CGFobject.call(this,graph.scene);
 	
@@ -34,11 +38,16 @@ function MyPatch(graph, xmlelem) {
 
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor=MyPatch;
-
+/**
+ * Displays the patch
+ */
 MyPatch.prototype.display = function (){
 	if(this.surface!= null)
 		this.surface.display();
 }
+/**
+ * Creates knotsVector
+ */
 MyPatch.prototype.getKnotsVector = function(degree) {
 	var v = new Array();
 	for (var i=0; i<=degree; i++) {
@@ -49,6 +58,11 @@ MyPatch.prototype.getKnotsVector = function(degree) {
 	}
 	return v;
 }
+/**
+ * Reads the control Vertexes from the LSX
+ * @param xmlelem LSX
+ * @return vector with the Vertexes
+ */
 MyPatch.prototype.controlvertexes = function (xmlelem){
 	var lines = xmlelem.children; //controlpoint line to characterize de U dimension (CPLINE)
 	var controlVertexesU = new Array();//to make the surface

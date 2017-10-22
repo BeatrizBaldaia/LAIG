@@ -22,7 +22,9 @@ function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topC
 
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
-
+/**
+ * MyCylinder init buffers
+ */
 MyCylinder.prototype.initBuffers = function() {
 
     this.normals = [];
@@ -70,7 +72,9 @@ MyCylinder.prototype.initBuffers = function() {
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
 };
-
+/**
+ * Displays the cylinder
+ */
 MyCylinder.prototype.display= function() {
     CGFobject.prototype.display.call(this);
     if(this.topCap == 1){

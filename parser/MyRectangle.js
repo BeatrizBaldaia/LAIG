@@ -1,3 +1,7 @@
+/**
+ * MyRectangle
+ * @constructor
+ */
 function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
 	CGFobject.call(this,scene);
 	
@@ -13,7 +17,9 @@ function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
 
 MyRectangle.prototype = Object.create(CGFobject.prototype);
 MyRectangle.prototype.constructor=MyRectangle;
-
+/**
+ * MyRectangle init buffers
+ */
 MyRectangle.prototype.initBuffers = function () {
 	this.vertices = [
             this.x_top, this.y_top, 0,
@@ -45,7 +51,11 @@ MyRectangle.prototype.initBuffers = function () {
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
-
+/**
+ * Sets the amplification factors on rectangles
+ * @param afS amplification factor in the S coordenate
+ * @param afT amplification factor in the T coordenate
+ */
 MyRectangle.prototype.setAmplifFactor = function (afS, afT) {
 
     var size = this.texCoords.length;
