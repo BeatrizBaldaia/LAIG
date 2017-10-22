@@ -1,5 +1,13 @@
 /**
- * MyCylinder
+ * @brief MyCylinder
+ * @param scene scene of the cylinder
+ * @param heigth heigth of the cylinder
+ * @param bottomRadius radius in the bottom
+ * @param topRadius radius in the top
+ * @param stacks number of vertical parts
+ * @param slices number of circular parts
+ * @param topCap (boolean) top covered
+ * @param bottomCap (boolean) bottom covered
  * @constructor
  */
 function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topCap, bottomCap) {
@@ -23,7 +31,7 @@ function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topC
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
 /**
- * MyCylinder init buffers
+ * @brief MyCylinder init buffers
  */
 MyCylinder.prototype.initBuffers = function() {
 
@@ -73,7 +81,7 @@ MyCylinder.prototype.initBuffers = function() {
     this.initGLBuffers();
 };
 /**
- * Displays the cylinder
+ * @brief Displays the cylinder
  */
 MyCylinder.prototype.display= function() {
     CGFobject.prototype.display.call(this);

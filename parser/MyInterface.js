@@ -1,5 +1,5 @@
  /**
- * MyInterface class, creating a GUI interface.
+ * @brief MyInterface class, creating a GUI interface.
  * @constructor
  */
 function MyInterface() {
@@ -12,8 +12,9 @@ MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
 
 /**
- * Initializes the interface.
+ * @brief Initializes the interface.
  * @param {CGFapplication} application
+ * @return true
  */
 MyInterface.prototype.init = function(application) {
     // call CGFinterface init
@@ -30,7 +31,8 @@ MyInterface.prototype.init = function(application) {
 };
 
 /**
- * Adds a folder containing the IDs of the lights passed as parameter.
+ * @brief Adds a folder containing the IDs of the lights passed as parameter.
+ * @param lights vector of lights
  */
 MyInterface.prototype.addLightsGroup = function(lights) {
 

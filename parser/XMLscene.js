@@ -1,7 +1,8 @@
 var DEGREE_TO_RAD = Math.PI / 180;
 
 /**
- * XMLscene class, representing the scene that is to be rendered.
+ * @brief XMLscene class, representing the scene that is to be rendered.
+ * @param interface the interface
  * @constructor
  */
 function XMLscene(interface) {
@@ -16,7 +17,8 @@ XMLscene.prototype = Object.create(CGFscene.prototype);
 XMLscene.prototype.constructor = XMLscene;
 
 /**
- * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
+ * @brief Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
+ * @param application the application
  */
 XMLscene.prototype.init = function(application) {
     CGFscene.prototype.init.call(this, application);
@@ -38,7 +40,7 @@ XMLscene.prototype.init = function(application) {
 }
 
 /**
- * Initializes the scene lights with the values read from the LSX file.
+ * @brief Initializes the scene lights with the values read from the LSX file.
  */
 XMLscene.prototype.initLights = function() {
     var i = 0;
@@ -72,13 +74,13 @@ XMLscene.prototype.initLights = function() {
 }
 
 /**
- * Initializes the scene cameras.
+ * @brief Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
     this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
 }
 
-/* Handler called when the graph is finally loaded. 
+/** @brief Handler called when the graph is finally loaded. 
  * As loading is asynchronous, this may be called already after the application has started the run loop
  */
 XMLscene.prototype.onGraphLoaded = function() 
@@ -99,7 +101,7 @@ XMLscene.prototype.onGraphLoaded = function()
 }
 
 /**
- * Displays the scene.
+ * @brief Displays the scene.
  */
 XMLscene.prototype.display = function() {
     // ---- BEGIN Background, camera and axis setup

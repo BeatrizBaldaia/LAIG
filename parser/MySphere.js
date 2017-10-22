@@ -1,5 +1,9 @@
 /**
- * MySphere
+ * @brief MySphere
+ * @param scene scene of the sphere
+ * @param radius radius of the sphere
+ * @param slices number of longitude parts
+ * @param stacks number of latitude parts
  * @constructor
  */
 function MySphere(scene, radius, slices, stacks) {
@@ -15,7 +19,7 @@ function MySphere(scene, radius, slices, stacks) {
 MySphere.prototype = Object.create(CGFobject.prototype);
 MySphere.prototype.constructor = MySphere;
 /**
- * MySphere init buffers
+ * @brief MySphere init buffers
  */
 MySphere.prototype.initBuffers = function() {
 

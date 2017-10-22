@@ -1,5 +1,7 @@
 /**
- * MyGraphLeaf class, representing a leaf in the scene graph.
+ * @brief MyGraphLeaf class, representing a leaf in the scene graph.
+ * @param graph graph of the leaf
+ * @param xmlelem LSX
  * @constructor
 **/
 function MyGraphLeaf(graph, xmlelem) {
@@ -51,7 +53,7 @@ function MyGraphLeaf(graph, xmlelem) {
 
 }
 /**
- * Sets the amplification factors on resctangles and triangles
+ * @brief Sets the amplification factors on resctangles and triangles
  * @param afS amplification factor in the S coordenate
  * @param afT amplification factor in the T coordenate
  */
@@ -61,7 +63,7 @@ MyGraphLeaf.prototype.setAmplifFactor = function(afS, afT) {
     }
 }
 /**
- * Displays the leaf
+ * @brief Displays the leaf
  */
 MyGraphLeaf.prototype.display = function() {
     if(this.leafObj!=null){

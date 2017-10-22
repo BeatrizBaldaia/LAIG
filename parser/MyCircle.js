@@ -1,6 +1,8 @@
 var degToRad = Math.PI / 180.0;
 /**
- * MyCircle
+ * @brief MyCircle
+ * @param scene scene of the circle
+ * @param slices number of parts of the circle
  * @constructor
  */
 function MyCircle(scene ,slices) {
@@ -12,7 +14,7 @@ function MyCircle(scene ,slices) {
 MyCircle.prototype = Object.create(CGFobject.prototype);
 MyCircle.prototype.constructor=MyCircle;
 /**
- * MyCircle init buffers
+ * @brief MyCircle init buffers
  */
 MyCircle.prototype.initBuffers = function() {
 		var divisions = 2*Math.PI/this.slices;

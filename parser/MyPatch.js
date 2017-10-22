@@ -1,5 +1,7 @@
 /**
- * MyPatch
+ * @brief MyPatch
+ * @param graph graph of the patch
+ * @param xmlelem LSX
  * @constructor
  */
 function MyPatch(graph, xmlelem) {
@@ -39,14 +41,16 @@ function MyPatch(graph, xmlelem) {
 MyPatch.prototype = Object.create(CGFobject.prototype);
 MyPatch.prototype.constructor=MyPatch;
 /**
- * Displays the patch
+ * @brief Displays the patch
  */
 MyPatch.prototype.display = function (){
 	if(this.surface!= null)
 		this.surface.display();
 }
 /**
- * Creates knotsVector
+ * @brief Creates knotsVector
+ * @param degree degree of the patch dimension
+ * @return vector of 0 and 1
  */
 MyPatch.prototype.getKnotsVector = function(degree) {
 	var v = new Array();
@@ -59,7 +63,7 @@ MyPatch.prototype.getKnotsVector = function(degree) {
 	return v;
 }
 /**
- * Reads the control Vertexes from the LSX
+ * @brief Reads the control Vertexes from the LSX
  * @param xmlelem LSX
  * @return vector with the Vertexes
  */

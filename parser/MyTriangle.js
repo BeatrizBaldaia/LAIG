@@ -1,5 +1,9 @@
 /**
- * MyTriangle
+ * @brief MyTriangle
+ * @param scene scene of the triangle
+ * @param p1 coordinates of point 1 
+ * @param p2 coordinates of point 2
+ * @param p3 coordinates of point 3
  * @constructor
  */
 function MyTriangle(scene,p1,p2,p3) {
@@ -17,7 +21,7 @@ function MyTriangle(scene,p1,p2,p3) {
 MyTriangle.prototype = Object.create(CGFobject.prototype);
 MyTriangle.prototype.constructor=MyTriangle;
 /**
- * MyTriangle init buffers
+ * @brief MyTriangle init buffers
  */
 MyTriangle.prototype.initBuffers = function () {
 	this.vertices = [
@@ -57,7 +61,7 @@ MyTriangle.prototype.initBuffers = function () {
     this.initGLBuffers();
 };
 /**
- * Sets the amplification factors on triangles
+ * @brief Sets the amplification factors on triangles
  * @param afS amplification factor in the S coordenate
  * @param afT amplification factor in the T coordenate
  */

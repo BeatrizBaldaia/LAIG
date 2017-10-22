@@ -1,5 +1,10 @@
 /**
- * MyRectangle
+ * @brief MyRectangle
+ * @param scene scene of the rectangle
+ * @param x_bottom min x coordenate
+ * @param y_top max y coordenate
+ * @param x_top max x coordenate
+ * @param y_bottom min y coordenate
  * @constructor
  */
 function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
@@ -18,7 +23,7 @@ function MyRectangle(scene,x_bottom,y_top,x_top,y_bottom) {
 MyRectangle.prototype = Object.create(CGFobject.prototype);
 MyRectangle.prototype.constructor=MyRectangle;
 /**
- * MyRectangle init buffers
+ * @brief MyRectangle init buffers
  */
 MyRectangle.prototype.initBuffers = function () {
 	this.vertices = [
@@ -52,7 +57,7 @@ MyRectangle.prototype.initBuffers = function () {
 	this.initGLBuffers();
 };
 /**
- * Sets the amplification factors on rectangles
+ * @brief Sets the amplification factors on rectangles
  * @param afS amplification factor in the S coordenate
  * @param afT amplification factor in the T coordenate
  */
