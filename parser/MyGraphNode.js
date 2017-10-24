@@ -17,10 +17,12 @@ function MyGraphNode(graph, nodeID) {
     this.leaves = [];
 
     // The material ID.
-    this.materialID = null ;
+    this.materialID = null;
 
     // The texture ID.
-    this.textureID = null ;
+    this.textureID = null;
+
+    this.animation = null;
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
