@@ -11,6 +11,12 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+
+    this.update=function(currTime){
+		for(var i = 0; i < this.nodesWithAnimation.length; i++) {
+			this.nodesWithAnimation[i].updateMatrix(currTime);
+		}
+	}
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -37,6 +43,9 @@ XMLscene.prototype.init = function(application) {
 
     this.texturesStack=[];
     this.materialsStack=[];
+	this.nodesWithAnimation=[];
+
+    this.setUpdatePeriod(10);	//TODO VER VALOR
 }
 
 /**

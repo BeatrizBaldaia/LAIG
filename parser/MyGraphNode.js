@@ -26,6 +26,7 @@ function MyGraphNode(graph, nodeID) {
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
+    
     this.graphTextures = this.graph.textures;
     this.graphTexturesStack = this.graph.scene.texturesStack;
     this.graphMaterialsStack = this.graph.scene.materialsStack;
@@ -116,4 +117,12 @@ MyGraphNode.prototype.display = function(parentID) {
     }
     this.graph.scene.popMatrix();
 
+}
+
+/**
+ * @brief Updates the animation matrix
+ * @param currTime
+ */
+MyGraphNode.prototype.updateMatrix = function(currTime) {
+    
 }
