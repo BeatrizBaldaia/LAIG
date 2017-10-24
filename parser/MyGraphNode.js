@@ -27,6 +27,9 @@ function MyGraphNode(graph, nodeID) {
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
     
+    this.originalMatrix = mat4.create();
+    mat4.identity(this.originalMatrix);
+
     this.graphTextures = this.graph.textures;
     this.graphTexturesStack = this.graph.scene.texturesStack;
     this.graphMaterialsStack = this.graph.scene.materialsStack;
@@ -124,5 +127,6 @@ MyGraphNode.prototype.display = function(parentID) {
  * @param currTime
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
-    
+    //VER ANIMATIONS
+    mat4.multiply(this.animation.getMatrix(currTime),this.originalMatrix,this.transformMatrix);//TODO ver se esta certo
 }

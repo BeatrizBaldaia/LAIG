@@ -12,3 +12,7 @@ function MyCircularAnimation(graph, xmlelem) {
 
 MyCircularAnimation.prototype= Object.create(MyAnimation.prototype);
 MyCircularAnimation.prototype.constructor = MyCircularAnimation;
+
+MyCircularAnimation.prototype.getMatrix = function(currTime) {
+	return null;
+}

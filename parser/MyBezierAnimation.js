@@ -12,3 +12,7 @@ function MyBezierAnimation(graph, xmlelem) {
 
 MyBezierAnimation.prototype= Object.create(MyAnimation.prototype);
 MyBezierAnimation.prototype.constructor = MyBezierAnimation;
+
+MyBezierAnimation.prototype.getMatrix = function(currTime) {
+	return null;
+}

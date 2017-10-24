@@ -12,3 +12,7 @@ function MyComboAnimation(graph, xmlelem) {
 
 MyComboAnimation.prototype= Object.create(MyAnimation.prototype);
 MyComboAnimation.prototype.constructor = MyComboAnimation;
+
+MyComboAnimation.prototype.getMatrix = function(currTime) {
+	return null;
+}

@@ -12,3 +12,7 @@ function MyLinearAnimation(graph, xmlelem) {
 
 MyLinearAnimation.prototype= Object.create(MyAnimation.prototype);
 MyLinearAnimation.prototype.constructor = MyLinearAnimation;
+
+MyLinearAnimation.prototype.getMatrix = function(currTime) {
+	return null;
+}

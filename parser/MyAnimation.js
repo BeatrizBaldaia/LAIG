@@ -9,3 +9,10 @@ function MyAnimation(graph, xmlelem) {
 	this.graph = graph;
 	
 };
+
+MyAnimation.prototype.getMatrix = function(currTime) {
+	return null;
+}
+
+
+
