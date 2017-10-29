@@ -1321,8 +1321,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     break;
                 }
             }
-            
-            mat4.set(this.nodes[nodeID].transformMatrix,this.nodes[nodeId].originalMatrix);
+            this.nodes[nodeID].originalMatrix = mat4.clone(this.nodes[nodeID].transformMatrix);
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
             if (descendantsIndex == -1)

@@ -6,8 +6,8 @@
  */
 function MyLinearAnimation(graph, xmlelem) {
 	MyAnimation.call(this, graph, xmlelem);
-
-	
+	this.points=[];
+	this.velocity=velocity;	
 };
 
 MyLinearAnimation.prototype= Object.create(MyAnimation.prototype);
