@@ -70,6 +70,6 @@ function casteljau(obj){
 	for (let i = 0; i < 3; i++) {
 		p234[i] = ((p34[i] - p23[i]) / 2) + p23[i];
 	}
-	//distance = Math.hypot()
+	distance = Math.hypot()
 	return distance;
 }

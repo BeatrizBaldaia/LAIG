@@ -1407,25 +1407,25 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             }
             this.nodes[nodeID].originalMatrix = mat4.clone(this.nodes[nodeID].transformMatrix);
             let animationsIndex = specsNames.indexOf("ANIMATIONREFS");
-            if (animationsIndex == -1)
-                continue;
-            let animations = nodeSpecs[animationsIndex].children;
-            for (let j = 0; j < animations.length; j++) {
-                if (animations[j].nodeName == "ANIMATIONREF")
-				{
-					var curId = this.reader.getString(animations[j], 'id');
+            if (animationsIndex != -1){
+                let animations = nodeSpecs[animationsIndex].children;
+                for (let j = 0; j < animations.length; j++) {
+                    if (animations[j].nodeName == "ANIMATIONREF")
+                    {
+                        var curId = this.reader.getString(animations[j], 'id');
 
-					this.log("   Animation: " + curId);
+                        this.log("   Animation: " + curId);
 
-                    if (curId == null )
-                        return "unable to parse animation id";
-                    if (this.animations[curId] == null)
-                        return "No animation names " + curId;
-                    this.nodes[nodeID].animation.push(curId);
-                }                    
-               else
-					this.onXMLMinorError("unknown tag <" + animations[j].nodeName + ">");
+                        if (curId == null )
+                            return "unable to parse animation id";
+                        if (this.animations[curId] == null)
+                            return "No animation names " + curId;
+                        this.nodes[nodeID].animation.push(curId);
+                    }                    
+                   else
+                        this.onXMLMinorError("unknown tag <" + animations[j].nodeName + ">");
 
+                }
             }
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
