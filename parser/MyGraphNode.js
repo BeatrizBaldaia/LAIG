@@ -128,5 +128,5 @@ MyGraphNode.prototype.display = function(parentID) {
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
     //VER ANIMATIONS
-    mat4.multiply(this.animation.getMatrix(currTime),this.originalMatrix,this.transformMatrix);//TODO ver se esta certo
+    mat4.multiply(this.graph.animations[this.animation[0]].getMatrix(currTime),this.originalMatrix,this.transformMatrix);//TODO ver se esta certo
 }

@@ -14,7 +14,7 @@ function XMLscene(interface) {
 
     this.update=function(currTime){
 		for(var i = 0; i < this.nodesWithAnimation.length; i++) {
-			this.nodesWithAnimation[i].updateMatrix(currTime);
+			this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
 		}
 	}
 }

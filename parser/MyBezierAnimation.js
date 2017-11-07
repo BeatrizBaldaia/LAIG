@@ -17,6 +17,9 @@ Velocidade = 10 unidades/segundo*/
 
 	let distance = casteljau(this);
 
+	
+	this.time = distance/velocity;
+
 	function Q(s){
 		let point = [0,0,0];
 		for (let i = 0; i < 3; i++) {
@@ -45,6 +48,16 @@ MyBezierAnimation.prototype= Object.create(MyAnimation.prototype);
 MyBezierAnimation.prototype.constructor = MyBezierAnimation;
 
 MyBezierAnimation.prototype.getMatrix = function(currTime) {
+	let s = deltaT/this.time;
+	alert("p1 : " + this.p1);
+	alert("Q(s) : " + this.Q(s));
+	let trans_vec = add(trans_vec, this.p1, this.Q(s));
+	let res = mat4.create();
+    mat4.identity(res);
+	res = rotate(res, res, alfa, [0,1,0]);
+	res = translate(res, res, trans_vec);
+    mat4.multiply(translate, rotacao,res);//TODO ver se esta certo
+
 	return null;
 }
 
@@ -70,6 +83,11 @@ function casteljau(obj){
 	for (let i = 0; i < 3; i++) {
 		p234[i] = ((p34[i] - p23[i]) / 2) + p23[i];
 	}
-	distance = Math.hypot()
+
+	distance = Math.hypot(p12[0]-obj.p1[0],p12[1]-obj.p1[1],p12[2]-obj.p1[2]) +
+		Math.hypot(p123[0]-p12[0],p123[1]-p12[1],p123[2]-p12[2]) +
+		Math.hypot(p234[0]-p123[0],p234[1]-p123[1],p234[2]-p123[2]) +
+		Math.hypot(p34[0]-p234[0],p34[1]-p234[1],p34[2]-p234[2]) +
+		Math.hypot(obj.p4[0]-p34[0],obj.p4[1]-p34[1],obj.p4[2]-p34[2]);
 	return distance;
 }

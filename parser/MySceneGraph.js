@@ -1238,7 +1238,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                     let point = [x,y,z];
                     points.push(point);
                 }
-                alert(points);
+                
                 this.animations[animationID] = new MyBezierAnimation(this, points[0], points[1], points[2], points[3], animationSpeed);
                 break;
             }
@@ -1423,9 +1423,9 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         this.nodes[nodeID].animation.push(curId);
                     }                    
                    else
-                        this.onXMLMinorError("unknown tag <" + animations[j].nodeName + ">");
-
+                        return "unknown tag <" + animations[j].nodeName + ">";
                 }
+                this.scene.nodesWithAnimation.push(nodeID);
             }
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
