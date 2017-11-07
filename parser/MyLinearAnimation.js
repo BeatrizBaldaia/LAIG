@@ -43,11 +43,15 @@ MyLinearAnimation.prototype.updateCurrAng = function(currTime) {
         }
 	} else {
 		console.log("Linear animation is over");
+		this.state = 0;
 	}
 }
 
 MyLinearAnimation.prototype.getMatrix = function(currTime) {
 	this.updateCurrAng(currTime);
+	if(this.state == 0) {
+	    return null;
+    }
     var rotMatrixAux;
 	var rotMatrix;
     var transMatrixAux;
