@@ -38,7 +38,7 @@
         </MATERIAL>
     </MATERIALS> 
 	<ANIMATIONS>
-		<ANIMATION id="ani1" speed="10" type="bezier">
+		<ANIMATION id="ani1" speed="10" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" /> <!-- P1 -->
 			<controlpoint xx="1" yy="1" zz="1" /> <!-- P2 -->
 			<controlpoint xx="2" yy="2" zz="2" /> <!-- P3 -->

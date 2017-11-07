@@ -10,12 +10,12 @@ function MyLinearAnimation(graph, controlPoints, velocity) {
     this.state = 1; //state = 1 : objeto partiu do ponto 1; state = 2 : objeto ja chegou ao ponto 2 => mudar direcao; ...
     this.maxState = controlPoints.length - 1;
     this.currAng = 0;
-	this.calculateAng(this.controlPoints[state - 1], this.controlPoints[state]);
+	this.calculateAng(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
 	this.dist;
-	this.calculateDist(this.controlPoints[state - 1], this.controlPoints[state]);
+	this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
 	this.temp = this.dist/this.velocity;
     this.deltaTemp = 0;
-    this.deltaDist = this.velocity * 0.01;
+    this.deltaDist = this.velocity * this.deltaTemp;
 };
 
 MyLinearAnimation.prototype= Object.create(MyAnimation.prototype);
@@ -32,11 +32,12 @@ MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
 
 MyLinearAnimation.prototype.updateCurrAng = function(currTime) {
 	this.deltaTemp += 0.01;//interrupcao a cada 0.01 segundos
+    this.deltaDist = this.velocity * this.deltaTemp;
 	if(this.state <= this.maxState) {
         if(this.deltaTemp >= this.temp) {//fim de uma linha reta
-            state++;
-            this.calculateAng(this.controlPoints[state - 1], this.controlPoints[state]);
-            this.calculateDist(this.controlPoints[state - 1], this.controlPoints[state]);
+            this.state++;
+            this.calculateAng(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
+            this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
             this.temp = this.dist/this.velocity;
             this.deltaTemp = 0;
         }
@@ -64,9 +65,9 @@ MyLinearAnimation.prototype.getMatrix = function(currTime) {
     mat4.create(resultMatrix);
     mat4.identity(resultMatrix);
 
-	var vec = [(this.controlPoints[state][0] - this.controlPoints[state - 1][0]),
-        		(this.controlPoints[state][1] - this.controlPoints[state - 1][1]),
-        		(this.controlPoints[state][2] - this.controlPoints[state - 1][2])];
+	var vec = [(this.controlPoints[this.state][0] - this.controlPoints[this.state - 1][0]),
+        		(this.controlPoints[this.state][1] - this.controlPoints[this.state - 1][1]),
+        		(this.controlPoints[this.state][2] - this.controlPoints[this.state - 1][2])];
 	var vecDist = Math.sqrt(Math.pow(vec[0]) + Math.pow(vec[1]) + Math.pow(vec[2]));
 	var delta = vecDist/this.deltaDist;
 	vec[0] /= delta;
