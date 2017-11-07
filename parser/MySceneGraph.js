@@ -1452,9 +1452,9 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         this.nodes[nodeID].animation.push(curId);
                     }                    
                    else
-                        this.onXMLMinorError("unknown tag <" + animations[j].nodeName + ">");
-
+                        return "unknown tag <" + animations[j].nodeName + ">";
                 }
+                this.scene.nodesWithAnimation.push(nodeID);
             }
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
