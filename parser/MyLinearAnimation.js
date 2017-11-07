@@ -1,11 +1,10 @@
 /**
  * @brief MyLinearAnimation
  * @param graph graph of the Animation
- * @param xmlelem LSX
  * @constructor
  */
-function MyLinearAnimation(graph, xmlelem, controlPoints, velocity) {
-	MyAnimation.call(this, graph, xmlelem);
+function MyLinearAnimation(graph, controlPoints, velocity) {
+	MyAnimation.call(this, graph);
 	this.controlPoints = controlPoints.slice();
 	this.velocity = velocity;
     this.state = 1; //state = 1 : objeto partiu do ponto 1; state = 2 : objeto ja chegou ao ponto 2 => mudar direcao; ...
