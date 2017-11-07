@@ -20,26 +20,6 @@ Velocidade = 10 unidades/segundo*/
 	
 	this.time = distance/velocity;
 
-	function Q(s){
-		let point = [0,0,0];
-		for (let i = 0; i < 3; i++) {
-			point[i] = Math.pow((1 - s), 3) * this.p1[i] +
-				3 * s * Math.pow((1 - s), 2) * this.p2[i] +
-				3 * Math.pow(s, 2) * (1 - s) * this.p3[i] +
-				Math.pow(s, 3) * this.p4[i];
-		}
-		return point;
-	}
-	function Q_(s){
-		let res = [0,0,0];
-		for (let i = 0; i < 3; i++) {
-			res[i] = -3 * Math.pow((1 - s), 2) * this.p1[i] +
-				(2 * Math.pow((1 - s), 2) - 6 * s * (1 - s)) * this.p2[i] +
-				(6 * s * (1 - s) - 3 * Math.pow(s, 2)) * this.p3[i] +
-				3 *  Math.pow(s, 2) * this.p4[i];
-		}
-		return res;
-	}
 };
 /*Math.pow(x, y)
 Returns base to the exponent power, that is, baseexponent.
@@ -48,17 +28,24 @@ MyBezierAnimation.prototype= Object.create(MyAnimation.prototype);
 MyBezierAnimation.prototype.constructor = MyBezierAnimation;
 
 MyBezierAnimation.prototype.getMatrix = function(currTime) {
+	if(this.initialTime == undefined){
+		this.initialTime = currTime;
+	}
+	let deltaT = currTime - this.initialTime;
 	let s = deltaT/this.time;
-	alert("p1 : " + this.p1);
-	alert("Q(s) : " + this.Q(s));
-	let trans_vec = add(trans_vec, this.p1, this.Q(s));
+	//alert("p1 : " + this.p1);
+	//alert("Q(s) : " + this.Q(s));
+	let deri = this.Q_(s);
+	let alfa = Math.atan(deri[1]/deri[0]);
+
+	let trans_vec = [0,0,0]
+	trans_vec = vec3.add(trans_vec, this.p1, this.Q(s));
 	let res = mat4.create();
     mat4.identity(res);
-	res = rotate(res, res, alfa, [0,1,0]);
-	res = translate(res, res, trans_vec);
-    mat4.multiply(translate, rotacao,res);//TODO ver se esta certo
+	res = mat4.rotate(res, res, alfa, [0,1,0]);
+	res = mat4.translate(res, res, trans_vec);
 
-	return null;
+	return res;
 }
 
 function casteljau(obj){
@@ -91,3 +78,23 @@ function casteljau(obj){
 		Math.hypot(obj.p4[0]-p34[0],obj.p4[1]-p34[1],obj.p4[2]-p34[2]);
 	return distance;
 }
+MyBezierAnimation.prototype.Q = function(s){
+		let point = [0,0,0];
+		for (let i = 0; i < 3; i++) {
+			point[i] = Math.pow((1 - s), 3) * this.p1[i] +
+				3 * s * Math.pow((1 - s), 2) * this.p2[i] +
+				3 * Math.pow(s, 2) * (1 - s) * this.p3[i] +
+				Math.pow(s, 3) * this.p4[i];
+		}
+		return point;
+	}
+MyBezierAnimation.prototype.Q_ = function(s){
+		let res = [0,0,0];
+		for (let i = 0; i < 3; i++) {
+			res[i] = -3 * Math.pow((1 - s), 2) * this.p1[i] +
+				(2 * Math.pow((1 - s), 2) - 6 * s * (1 - s)) * this.p2[i] +
+				(6 * s * (1 - s) - 3 * Math.pow(s, 2)) * this.p3[i] +
+				3 *  Math.pow(s, 2) * this.p4[i];
+		}
+		return res;
+	}
