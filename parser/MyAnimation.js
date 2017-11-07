@@ -4,7 +4,7 @@
  * @param xmlelem LSX
  * @constructor
  */
-function MyAnimation(graph, xmlelem) {
+function MyAnimation(graph) {
 	
 	this.graph = graph;
 	
