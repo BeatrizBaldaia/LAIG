@@ -1208,8 +1208,38 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         else if (isNaN(animationSpeed))
             return "non-numeric value for animationSpeed (animation ID = " + animationID + ")";
 				
-        let animationType = this.reader.getItem(children[i], 'type', ['bezier']);//TODO add 
+        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier']);//TODO add
         switch (animationType){
+            case 'linear':
+                let animationPoints = children[i].children;
+                let points = [];
+                for (let j = 0; j < animationPoints.length; j++){
+                    if (animationPoints[j].nodeName != "controlpoint") {
+                        return "unable to parse controlpoint";
+                    }
+                    let x = this.reader.getFloat(animationPoints[j], 'xx');
+                    if (x == null ) {
+                        return "unable to parse x";
+                    }
+                    else if (isNaN(x))
+                        return "non-numeric value for x (animation ID = " + animationID + ")";
+                    let y = this.reader.getFloat(animationPoints[j], 'yy');
+                    if (y == null ) {
+                        return "unable to parse y";
+                    }
+                    else if (isNaN(y))
+                        return "non-numeric value for y (animation ID = " + animationID + ")";
+                    let z = this.reader.getFloat(animationPoints[j], 'zz');
+                    if (z == null ) {
+                        return "unable to parse z";
+                    }
+                    else if (isNaN(z))
+                        return "non-numeric value for z (animation ID = " + animationID + ")";
+                    let point = [x,y,z];
+                    points.push(point);
+                }
+                this.animations[animationID] = new MyLinearAnimation(this, points, animationSpeed);
+                break;
             case 'bezier':{
                 let animationPoints = children[i].children;
                 let points = [];
@@ -1238,7 +1268,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                     let point = [x,y,z];
                     points.push(point);
                 }
-                
                 this.animations[animationID] = new MyBezierAnimation(this, points[0], points[1], points[2], points[3], animationSpeed);
                 break;
             }
