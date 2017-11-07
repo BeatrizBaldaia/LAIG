@@ -6,7 +6,7 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
+var ANIMATIONS_INDEX = 5;
 var NODES_INDEX = 6;
 
 /**
@@ -141,6 +141,16 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
             this.onXMLMinorError("tag <MATERIALS> out of order");
         
         if ((error = this.parseMaterials(nodes[index])) != null )
+            return error;
+    }
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+        
+        if ((error = this.parseAnimations(nodes[index])) != null )
             return error;
     }
     
@@ -1167,6 +1177,80 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
     console.log("Parsed materials");
 }
 
+/**
+ * @brief Parses the <ANIMATIONS> node.
+ * @param animationsNode LSX
+ */
+MySceneGraph.prototype.parseAnimations = function(animationsNode) {
+    
+    var children = animationsNode.children;
+    // Each animation.
+    
+    this.animations = [];
+    
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].nodeName != "ANIMATION") {
+            this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
+            continue;
+        }
+        
+        let animationID = this.reader.getString(children[i], 'id');
+        if (animationID == null )
+            return "no ID defined for animation";
+        
+        if (this.animations[animationID] != null )
+            return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+        
+        let animationSpeed = this.reader.getFloat(children[i], 'speed');
+        if (animationSpeed == null ) {
+            return "unable to parse animationSpeed";
+        }
+        else if (isNaN(animationSpeed))
+            return "non-numeric value for animationSpeed (animation ID = " + animationID + ")";
+				
+        let animationType = this.reader.getItem(children[i], 'type', ['bezier']);//TODO add 
+        switch (animationType){
+            case 'bezier':{
+                let animationPoints = children[i].children;
+                let points = [];
+                for (let j = 0; j < animationPoints.length; j++){
+                    if (animationPoints[j].nodeName != "controlpoint") {
+                        return "unable to parse controlpoint";
+                    }
+                    let x = this.reader.getFloat(animationPoints[j], 'xx');
+                    if (x == null ) {
+                        return "unable to parse x";
+                    }
+                    else if (isNaN(x))
+                        return "non-numeric value for x (animation ID = " + animationID + ")";
+                    let y = this.reader.getFloat(animationPoints[j], 'yy');
+                    if (y == null ) {
+                        return "unable to parse y";
+                    }
+                    else if (isNaN(y))
+                        return "non-numeric value for y (animation ID = " + animationID + ")";
+                    let z = this.reader.getFloat(animationPoints[j], 'zz');
+                    if (z == null ) {
+                        return "unable to parse z";
+                    }
+                    else if (isNaN(z))
+                        return "non-numeric value for z (animation ID = " + animationID + ")";
+                    let point = [x,y,z];
+                    points.push(point);
+                }
+                alert(points);
+                this.animations[animationID] = new MyBezierAnimation(this, points[0], points[1], points[2], points[3], animationSpeed);
+                break;
+            }
+            default:{
+                return "Undefined type of animation animation ID = " + animationID + ")";
+            }
+        }
+
+        
+    }
+    console.log("Parsed animations");
+}
 
 /**
  * @brief Parses the <NODES> block.
@@ -1207,7 +1291,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS", "ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1322,6 +1406,27 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 }
             }
             this.nodes[nodeID].originalMatrix = mat4.clone(this.nodes[nodeID].transformMatrix);
+            let animationsIndex = specsNames.indexOf("ANIMATIONREFS");
+            if (animationsIndex == -1)
+                continue;
+            let animations = nodeSpecs[animationsIndex].children;
+            for (let j = 0; j < animations.length; j++) {
+                if (animations[j].nodeName == "ANIMATIONREF")
+				{
+					var curId = this.reader.getString(animations[j], 'id');
+
+					this.log("   Animation: " + curId);
+
+                    if (curId == null )
+                        return "unable to parse animation id";
+                    if (this.animations[curId] == null)
+                        return "No animation names " + curId;
+                    this.nodes[nodeID].animation.push(curId);
+                }                    
+               else
+					this.onXMLMinorError("unknown tag <" + animations[j].nodeName + ">");
+
+            }
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");//ver os descendentes de um nó
             if (descendantsIndex == -1)
@@ -1472,3 +1577,5 @@ MySceneGraph.prototype.displayScene = function() {
 	this.nodes[this.idRoot].display(this.idRoot);
 	this.scene.materialsStack.pop();
 }
+
+
