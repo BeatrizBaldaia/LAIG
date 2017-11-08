@@ -66,15 +66,15 @@ MyLinearAnimation.prototype.getMatrix = function(currTime) {
 	var transMatrix;
 	var resultMatrix;
 
-    mat4.create(rotMatrixAux);
+    rotMatrixAux = mat4.create();
     mat4.identity(rotMatrixAux);
-    mat4.create(rotMatrix);
+    rotMatrix = mat4.create();
     mat4.identity(rotMatrix);
-    mat4.create(transMatrix);
+    transMatrix=mat4.create();
     mat4.identity(transMatrix);
-    mat4.create(transMatrixAux);
+    transMatrixAux=mat4.create();
     mat4.identity(transMatrixAux);
-    mat4.create(resultMatrix);
+    resultMatrix=mat4.create();
     mat4.identity(resultMatrix);
 
 	var vec = [(this.controlPoints[this.state][0] - this.controlPoints[this.state - 1][0]),

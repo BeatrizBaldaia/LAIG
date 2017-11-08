@@ -48,6 +48,12 @@
 			centerx="0" centery="0" centerz="0"
 			radius="3" startang="0" rotang="360"
 			/>
+		<ANIMATION id="ani3" speed="1" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="1" yy="0" zz="0" /> 
+			<controlpoint xx="0" yy="2" zz="0" /> 
+			<controlpoint xx="3" yy="3" zz="0" /> 
+		</ANIMATION>
 	</ANIMATIONS>
     <NODES>
 
@@ -66,7 +72,7 @@
             <TEXTURE id="null" />
 
 			<ANIMATIONREFS>
-				<ANIMATIONREF id="ani2" />
+				<ANIMATIONREF id="ani3" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
                 <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />

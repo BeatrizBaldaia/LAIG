@@ -7,7 +7,7 @@
 function MyCircularAnimation(graph, linearVelocity, x,y,z, radius, angleInicial, angleRotate) {
 	MyAnimation.call(this, graph);
 	
-	this.center[3]=[x,y,z];
+	this.center = [x,y,z];
 	this.radius = radius;
 	this.angleInicial = angleInicial;
 	this.angleRotate = angleRotate;
@@ -23,9 +23,9 @@ MyCircularAnimation.prototype.getMatrix = function(currTime) {
 	var aux = mat4.create();
     mat4.identity(aux);
 //http://glmatrix.net/docs/module-mat4.html
-    mat4.translate(aux,[]);
+    //mat4.translate(aux,[]);
 	//TODO put center in 0 0 0
 	//TODO rotate
 	//TODO put center in place
-	return null;
+	return aux;
 }

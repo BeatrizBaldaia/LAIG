@@ -1208,7 +1208,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         else if (isNaN(animationSpeed))
             return "non-numeric value for animationSpeed (animation ID = " + animationID + ")";
 				
-        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier']);//TODO add
+        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier', 'circular']);//TODO add
         switch (animationType){
             case 'linear':
                 let animationPoints = children[i].children;
