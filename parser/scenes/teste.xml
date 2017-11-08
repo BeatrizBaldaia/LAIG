@@ -44,6 +44,10 @@
 			<controlpoint xx="0" yy="2" zz="0" /> <!-- P3 -->
 			<controlpoint xx="3" yy="3" zz="0" /> <!-- P4 -->
 		</ANIMATION>
+		<ANIMATION id="ani2" speed="1" type="circular"
+			centerx="0" centery="0" centerz="0"
+			radius="3" startang="0" rotang="360"
+			/>
 	</ANIMATIONS>
     <NODES>
 
@@ -62,7 +66,7 @@
             <TEXTURE id="null" />
 
 			<ANIMATIONREFS>
-				<ANIMATIONREF id="ani1" />
+				<ANIMATIONREF id="ani2" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
                 <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />

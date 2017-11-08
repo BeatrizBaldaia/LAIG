@@ -1271,6 +1271,51 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                 this.animations[animationID] = new MyBezierAnimation(this, points[0], points[1], points[2], points[3], animationSpeed);
                 break;
             }
+            case 'circular':{
+                let centerx = this.reader.getFloat(children[i], 'centerx');
+                if (centerx == null ) {
+                    return "unable to parse centerx";
+                }
+                else if (isNaN(centerx))
+                    return "non-numeric value for centerx (animation ID = " + animationID + ")";
+
+                let centery = this.reader.getFloat(children[i], 'centery');
+                if (centery == null ) {
+                    return "unable to parse centery";
+                }
+                else if (isNaN(centery))
+                    return "non-numeric value for centery (animation ID = " + animationID + ")";
+
+                let centerz = this.reader.getFloat(children[i], 'centerz');
+                if (centerz == null ) {
+                    return "unable to parse centerz";
+                }
+                else if (isNaN(centerz))
+                    return "non-numeric value for centerz (animation ID = " + animationID + ")";
+
+                let radius = this.reader.getFloat(children[i], 'radius');
+                if (radius == null ) {
+                    return "unable to parse radius";
+                }
+                else if (isNaN(radius))
+                    return "non-numeric value for radius (animation ID = " + animationID + ")";
+
+                let startang = this.reader.getFloat(children[i], 'startang');
+                if (startang == null ) {
+                    return "unable to parse startang";
+                }
+                else if (isNaN(startang))
+                    return "non-numeric value for startang (animation ID = " + animationID + ")";
+
+                let rotang = this.reader.getFloat(children[i], 'rotang');
+                if (rotang == null ) {
+                    return "unable to parse rotang";
+                }
+                else if (isNaN(rotang))
+                    return "non-numeric value for rotang (animation ID = " + animationID + ")";
+                this.animations[animationID] = new MyCircularAnimation(this, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
+                break;
+            }
             default:{
                 return "Undefined type of animation animation ID = " + animationID + ")";
             }

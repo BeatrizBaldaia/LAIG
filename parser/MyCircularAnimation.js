@@ -4,20 +4,15 @@
  * @param xmlelem LSX
  * @constructor
  */
-function MyCircularAnimation(graph, xmlelem) {
-	MyAnimation.call(this, graph, xmlelem);
-	/*Exemplo:
-Centro = (10, 10, 10)
-Raio = 5
-Ângulo Inicial = 40º
-Ângulo de rotação = 20º
-Velocidade = 10 unidades/segundo*/
+function MyCircularAnimation(graph, linearVelocity, x,y,z, radius, angleInicial, angleRotate) {
+	MyAnimation.call(this, graph);
+	
 	this.center[3]=[x,y,z];
 	this.radius = radius;
 	this.angleInicial = angleInicial;
 	this.angleRotate = angleRotate;
-	this.linearVelocity = linearVelocity;
-	this.angularVelocity = this.linearVelocity/this.radius;//TODO float
+	this.linearVelocity = linearVelocity*1000;
+	this.angularVelocity = this.linearVelocity/this.radius;
 
 };
 
