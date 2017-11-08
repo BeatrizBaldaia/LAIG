@@ -1,29 +1,27 @@
 /**
  * @brief MyBezierAnimation
  * @param graph graph of the Animation
- * @param xmlelem LSX
+ * @param p1 point 1
+ * @param p2 point 2
+ * @param p3 point 3
+ * @param p4 point 4
+ * @param velocity velocity unit/second
  * @constructor
  */
 function MyBezierAnimation(graph, p1, p2, p3, p4, velocity) {
 	MyAnimation.call(this, graph);
 
-	/*P1, P2, P3, P4= {(0,0,0), (1,0,0), (1,1,0), (0,1,0)}
-Velocidade = 10 unidades/segundo*/
 	this.p1=p1;
 	this.p2=p2;
 	this.p3=p3;
 	this.p4=p4;
-	this.velocity=velocity;
+	this.velocity=velocity * 0.001;
 
 	let distance = casteljau(this);
 
-	
-	this.time = distance/velocity;
-
+	this.time = distance/this.velocity;
 };
-/*Math.pow(x, y)
-Returns base to the exponent power, that is, baseexponent.
-*/
+
 MyBezierAnimation.prototype= Object.create(MyAnimation.prototype);
 MyBezierAnimation.prototype.constructor = MyBezierAnimation;
 
@@ -33,8 +31,7 @@ MyBezierAnimation.prototype.getMatrix = function(currTime) {
 	}
 	let deltaT = currTime - this.initialTime;
 	let s = deltaT/this.time;
-	//alert("p1 : " + this.p1);
-	//alert("Q(s) : " + this.Q(s));
+	if(s > 1) { s = 1;}
 	let deri = this.Q_(s);
 	let alfa = Math.atan(deri[1]/deri[0]);
 
@@ -44,7 +41,6 @@ MyBezierAnimation.prototype.getMatrix = function(currTime) {
     mat4.identity(res);
 	res = mat4.rotate(res, res, alfa, [0,1,0]);
 	res = mat4.translate(res, res, trans_vec);
-
 	return res;
 }
 

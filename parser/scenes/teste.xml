@@ -38,11 +38,11 @@
         </MATERIAL>
     </MATERIALS> 
 	<ANIMATIONS>
-		<ANIMATION id="ani1" speed="10" type="bezier">
+		<ANIMATION id="ani1" speed="1" type="bezier">
 			<controlpoint xx="0" yy="0" zz="0" /> <!-- P1 -->
-			<controlpoint xx="1" yy="1" zz="1" /> <!-- P2 -->
-			<controlpoint xx="2" yy="2" zz="2" /> <!-- P3 -->
-			<controlpoint xx="3" yy="3" zz="3" /> <!-- P4 -->
+			<controlpoint xx="1" yy="0" zz="0" /> <!-- P2 -->
+			<controlpoint xx="0" yy="2" zz="0" /> <!-- P3 -->
+			<controlpoint xx="3" yy="3" zz="0" /> <!-- P4 -->
 		</ANIMATION>
 	</ANIMATIONS>
     <NODES>
@@ -65,7 +65,7 @@
 				<ANIMATIONREF id="ani1" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
-                <LEAF id="triangle1" type="triangle" args="0 0 0 1 0 0 0 1 0" />
+                <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />
             </DESCENDANTS>
         </NODE>
     </NODES>
