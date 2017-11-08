@@ -72,7 +72,7 @@
             <TEXTURE id="null" />
 
 			<ANIMATIONREFS>
-				<ANIMATIONREF id="ani3" />
+				<ANIMATIONREF id="ani2" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
                 <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />
