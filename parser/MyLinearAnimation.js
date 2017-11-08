@@ -5,6 +5,7 @@
  */
 function MyLinearAnimation(graph, controlPoints, velocity) {
 	MyAnimation.call(this, graph);
+	this.lastTime = 0;
 	this.controlPoints = controlPoints.slice();
 	this.velocity = velocity;
     this.state = 1; //state = 1 : objeto partiu do ponto 1; state = 2 : objeto ja chegou ao ponto 2 => mudar direcao; ...
@@ -30,8 +31,8 @@ MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
 	this.currAng = Math.acos(vec[0]/vecDist);
 }
 
-MyLinearAnimation.prototype.updateCurrAng = function(currTime) {
-	this.deltaTemp += 0.01;//interrupcao a cada 0.01 segundos
+MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {
+	this.deltaTemp += deltaTemp;//interrupcao a cada 0.01 segundos
     this.deltaDist = this.velocity * this.deltaTemp;
 	if(this.state <= this.maxState) {
         if(this.deltaTemp >= this.temp) {//fim de uma linha reta
@@ -43,11 +44,22 @@ MyLinearAnimation.prototype.updateCurrAng = function(currTime) {
         }
 	} else {
 		console.log("Linear animation is over");
+		this.state = 0;
 	}
 }
 
 MyLinearAnimation.prototype.getMatrix = function(currTime) {
-	this.updateCurrAng(currTime);
+    var deltaTemp = 0;
+    if(this.lastTime == 0) {
+        this.lastTime = currTime;
+    } else {
+        deltaTemp = currTime - this.lastTime;
+        this.lastTime = currTime;
+    }
+	this.updateCurrAng(deltaTemp);
+	if(this.state == 0) {
+	    return null;
+    }
     var rotMatrixAux;
 	var rotMatrix;
     var transMatrixAux;
