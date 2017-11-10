@@ -65,6 +65,7 @@
             <TEXTURE id="fire_le" />
             <DESCENDANTS>
 				<NODEREF id="teste" />
+				<NODEREF id="shader" />
             </DESCENDANTS>
         </NODE>
         <NODE id="teste">
@@ -76,6 +77,32 @@
 			</ANIMATIONREFS>
             <DESCENDANTS>
                 <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />
+            </DESCENDANTS>
+        </NODE>
+       	<NODE id="lado1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+
+            <DESCENDANTS>
+                <LEAF id="triangle1" type="triangle" args="0 .2 0 0 0 1 .5 0 0" />
+            </DESCENDANTS>
+        </NODE>
+		<NODE id="lado2">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+
+            <DESCENDANTS>
+                <LEAF id="triangle1" type="triangle" args="0 .2 0 -.5 0 0 0 0 1" />
+            </DESCENDANTS>
+        </NODE>
+       	<NODE id="shader" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+
+            <DESCENDANTS>
+				<NODEREF id="lado1" />
+				<NODEREF id="lado2" />
+				<LEAF id="cone1" type="cylinder" args="1 1 .7 100 100 0 0" />
             </DESCENDANTS>
         </NODE>
     </NODES>

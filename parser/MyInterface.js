@@ -48,5 +48,7 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
+
+	this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
 }
 

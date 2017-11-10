@@ -13,6 +13,8 @@ function XMLscene(interface) {
     this.lightValues = {};
 
     this.update=function(currTime){
+    	let s = Math.abs(Math.sin(currTime/1000));
+    	this.shader.setUniformsValues({uTimeFactor: s});
 		for(var i = 0; i < this.nodesWithAnimation.length; i++) {
 			this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
 		}
@@ -44,7 +46,10 @@ XMLscene.prototype.init = function(application) {
     this.texturesStack=[];
     this.materialsStack=[];
 	this.nodesWithAnimation=[];
-
+	this.selectedNode = 0;
+	this.nodeList = {};
+	this.shader = new CGFshader(this.gl, "flat.vert", "flat.frag"),
+	this.shader.setUniformsValues({uTimeFactor: 0});
     this.setUpdatePeriod(10);	//TODO VER VALOR
 }
 
@@ -154,6 +159,7 @@ XMLscene.prototype.display = function() {
 
         // Displays the scene.
         this.graph.displayScene();
+
     }
 	else
 	{

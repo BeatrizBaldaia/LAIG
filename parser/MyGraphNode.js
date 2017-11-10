@@ -22,6 +22,8 @@ function MyGraphNode(graph, nodeID) {
     // The texture ID.
     this.textureID = null;
 
+    this.selected = false;
+    
     this.animation = [];
 
     this.transformMatrix = mat4.create();
@@ -60,7 +62,8 @@ MyGraphNode.prototype.display = function(parentID) {
     /**
      * Call for children display
      */
-   
+    if(this.graph.scene.selectedNode == this.nodeID)
+    this.graph.scene.setActiveShader(this.graph.scene.shader);//TODO
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
@@ -119,7 +122,8 @@ MyGraphNode.prototype.display = function(parentID) {
         this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].bind();//volta a aplicar a textura que tinha desaplicado para os seus nos irmaos a usarem
     }
     this.graph.scene.popMatrix();
-
+    if(this.graph.scene.selectedNode == this.nodeID)
+    this.graph.scene.setActiveShader(this.graph.scene.defaultShader);//TODO
 }
 
 /**
@@ -127,7 +131,7 @@ MyGraphNode.prototype.display = function(parentID) {
  * @param currTime
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
-    //VER ANIMATIONS
-    mat4.multiply(this.transformMatrix,this.originalMatrix,this.graph.animations[this.animation[0]].getMatrix(currTime));//TODO ver se esta certo
-    //alert(this.transformMatrix);
+    mat4.multiply(this.transformMatrix,
+        this.originalMatrix,
+        this.graph.animations[this.animation[0]].getMatrix(currTime));
 }
