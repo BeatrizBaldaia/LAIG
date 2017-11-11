@@ -152,9 +152,9 @@
 
     </MATERIALS> 
 
-<!-- The leaves -->
-<LEAVES>
-</LEAVES>
+
+<ANIMATIONS>
+</ANIMATIONS>
 
     <!-- The nodes -->
     <NODES>
@@ -194,7 +194,7 @@
 
         </NODE>
 
-        <NODE id="ladder">
+        <NODE id="ladder" selectable="1">
             <MATERIAL id="platformMaterial" />
             <TEXTURE id="red_metal" />
 
@@ -222,7 +222,7 @@
             </DESCENDANTS>
         </NODE>
 
-        <NODE id="unitLadder1">
+        <NODE id="unitLadder1" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <!--fazer transformacoes aqui-->
@@ -634,7 +634,7 @@
             </DESCENDANTS>
         </NODE>
         <!-- The platform box -->
-        <NODE id="platform">
+        <NODE id="platform" selectable="1">
             <MATERIAL id="platformMaterial" />
             <TEXTURE id="red_metal" />
 
@@ -1144,7 +1144,7 @@
 
     </NODE>
 
-        <NODE id="exhaust">
+        <NODE id="exhaust" selectable="1">
             <MATERIAL id="fire" />
             <TEXTURE id="fire_le" />
             <TRANSLATION x="4" y="1.5" z="5" />

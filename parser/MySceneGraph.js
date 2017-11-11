@@ -1362,7 +1362,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
             
-            let aux = this.reader.getFloat(children[i], 'selectable');
+            let aux = this.reader.getFloat(children[i], 'selectable', false);
             if (aux == null ) {
                this.nodes[nodeID].selected = false;
             } 
@@ -1371,7 +1371,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             else if (aux != 0  && aux != 1)
                 return "'selectable' must be 0 or 1 on the NODES block"
             else
-                this.scene.nodeList.nodeID = nodeID;
+                this.scene.nodeList[nodeID] = nodeID;
                 //this.nodes[nodeID].selected = aux == 0 ? false : true;
 
             // Gathers child nodes.
