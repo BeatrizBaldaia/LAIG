@@ -47,7 +47,7 @@ XMLscene.prototype.init = function(application) {
     this.materialsStack=[];
 	this.nodesWithAnimation=[];
 	this.selectedNode = 0;
-	this.nodeList = {};
+	this.nodeList = {'No Node Selected': 0};
 	this.shader = new CGFshader(this.gl, "flat.vert", "flat.frag"),
 	this.shader.setUniformsValues({uTimeFactor: 0});
     this.setUpdatePeriod(10);	//TODO VER VALOR
