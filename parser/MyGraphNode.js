@@ -131,7 +131,12 @@ MyGraphNode.prototype.display = function(parentID) {
  * @param currTime
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
-    mat4.multiply(this.transformMatrix,
-        this.originalMatrix,
-        this.graph.animations[this.animation[0]].getMatrix(currTime));
+    var newMatrix = this.graph.animations[this.animation[0]].getMatrix(currTime);
+    if(newMatrix != null) {
+        mat4.multiply(this.transformMatrix,
+            this.originalMatrix,
+            newMatrix);
+    }
+
+    console.log("transformMatrix = "+this.transformMatrix);
 }
