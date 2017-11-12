@@ -1200,15 +1200,20 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         
         if (this.animations[animationID] != null )
             return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
-        
-        let animationSpeed = this.reader.getFloat(children[i], 'speed');
-        if (animationSpeed == null ) {
-            return "unable to parse animationSpeed";
+
+        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier', 'circular', 'combo']);
+        let animationSpeed;
+        if(animationType != 'combo') {
+            animationSpeed = this.reader.getFloat(children[i], 'speed');
+            if (animationSpeed == null) {
+                return "unable to parse animationSpeed";
+            }
+            else if (isNaN(animationSpeed))
+                return "non-numeric value for animationSpeed (animation ID = " + animationID + ")";
         }
-        else if (isNaN(animationSpeed))
-            return "non-numeric value for animationSpeed (animation ID = " + animationID + ")";
-				
-        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier', 'circular']);//TODO add
+
+
+
         switch (animationType){
             case 'linear':
                 let animationPoints = children[i].children;
@@ -1314,6 +1319,23 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                 else if (isNaN(rotang))
                     return "non-numeric value for rotang (animation ID = " + animationID + ")";
                 this.animations[animationID] = new MyCircularAnimation(this, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
+                break;
+            }
+            case 'combo':{
+                let spanref = children[i].children;
+                let spans = [];
+                for (let j = 0; j < spanref.length; j++) {
+                    var spanID = this.reader.getString(spanref[j], 'id');
+                    if (spanID == null )
+                        return "no ID defined for SPANREF animation";
+                    else {
+                        var animationCopy = this.animations[spanID].clone();
+                        if(animationCopy != null) {
+                            spans.push(animationCopy);
+                        }
+                    }
+                }
+                this.animations[animationID] = new MyComboAnimation(this, spans);
                 break;
             }
             default:{

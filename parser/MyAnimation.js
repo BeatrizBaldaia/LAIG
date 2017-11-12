@@ -5,10 +5,12 @@
  * @constructor
  */
 function MyAnimation(graph) {
-	
 	this.graph = graph;
-	
 };
+
+MyAnimation.prototype.getMatrix = function(currTime) {
+	return new MyAnimation(this.graph);
+}
 
 MyAnimation.prototype.getMatrix = function(currTime) {
 	alert("Shouldn't be here, error in animation!");

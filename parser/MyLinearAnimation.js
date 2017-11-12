@@ -5,6 +5,7 @@
  */
 function MyLinearAnimation(graph, controlPoints, velocity) {
 	MyAnimation.call(this, graph);
+	this.graph = graph;
 	this.lastTime = 0;
 	this.controlPoints = controlPoints.slice();
 	this.velocity = velocity;
@@ -17,10 +18,16 @@ function MyLinearAnimation(graph, controlPoints, velocity) {
     this.temp = this.dist/this.velocity * 1000;
     this.deltaTemp = 0;
     this.deltaDist = this.velocity * (this.deltaTemp/1000);
+
+    this.isOver = 0;
 };
 
 MyLinearAnimation.prototype= Object.create(MyAnimation.prototype);
 MyLinearAnimation.prototype.constructor = MyLinearAnimation;
+
+MyLinearAnimation.prototype.clone = function() {
+    return new MyLinearAnimation(this.graph, this.controlPoints, this.velocity);
+}
 
 MyLinearAnimation.prototype.calculateDist = function (point1, point2) {
     this.dist = Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
@@ -35,11 +42,11 @@ MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
 MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {
     this.deltaTemp += deltaTemp;//interrupcao a cada 0.01 segundos
     this.deltaDist = this.velocity * (this.deltaTemp/1000);
-    if((this.state <= this.maxState) && (this.state != 0)) {
+    if((this.state <= this.maxState)) {
         if(this.deltaTemp >= this.temp) {//fim de uma linha reta
             this.state++;
             if(this.state > this.maxState) {
-                this.state = 0;
+                this.isOver = 1;
             } else {
                 this.calculateAng(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
                 this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
@@ -51,6 +58,9 @@ MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {
 }
 
 MyLinearAnimation.prototype.getMatrix = function(currTime) {
+    if(this.isOver) {
+        return null;
+    }
     var deltaTemp = 0;
     if(this.lastTime == 0) {
         this.lastTime = currTime;
@@ -59,8 +69,8 @@ MyLinearAnimation.prototype.getMatrix = function(currTime) {
         this.lastTime = currTime;
     }
     this.updateCurrAng(deltaTemp);
-	if(this.state == 0) {
-	    return null;
+    if(this.isOver) {
+        return null;
     }
 
 	var resultMatrix;

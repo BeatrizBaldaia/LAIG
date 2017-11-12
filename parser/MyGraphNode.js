@@ -138,5 +138,4 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
             newMatrix);
     }
 
-    console.log("transformMatrix = "+this.transformMatrix);
 }

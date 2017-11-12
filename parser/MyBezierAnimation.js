@@ -10,12 +10,14 @@
  */
 function MyBezierAnimation(graph, p1, p2, p3, p4, velocity) {
 	MyAnimation.call(this, graph);
+	this.graph = graph;
+	this.p1 = p1;
+	this.p2 = p2;
+	this.p3 = p3;
+	this.p4 = p4;
+	this.velocity = velocity * 0.001;
 
-	this.p1=p1;
-	this.p2=p2;
-	this.p3=p3;
-	this.p4=p4;
-	this.velocity=velocity * 0.001;
+	this.isOver = 0;
 
 	let distance = casteljau(this);
 
@@ -25,13 +27,23 @@ function MyBezierAnimation(graph, p1, p2, p3, p4, velocity) {
 MyBezierAnimation.prototype= Object.create(MyAnimation.prototype);
 MyBezierAnimation.prototype.constructor = MyBezierAnimation;
 
+MyBezierAnimation.prototype.clone = function() {
+	return new MyBezierAnimation(this.graph, this.p1, this.p2, this.p3, this.p4, this.velocity/0.001);
+}
+
 MyBezierAnimation.prototype.getMatrix = function(currTime) {
+	if(this.isOver) {
+		return null;
+	}
 	if(this.initialTime == undefined){
 		this.initialTime = currTime;
 	}
 	let deltaT = currTime - this.initialTime;
 	let s = deltaT/this.time;
-	if(s > 1) { s = 1;}
+	if(s > 1) {
+		this.isOver = 1;
+		return null;
+	}
 	let deri = this.Q_(s);
 	let alfa = Math.atan(deri[1]/deri[0]);
 
