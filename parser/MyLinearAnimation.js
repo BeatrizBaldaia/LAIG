@@ -37,6 +37,7 @@ MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
     var vec = [(point2[0] - point1[0]), -(point2[2] - point1[2])];
 	var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2));
 	this.currAng = Math.acos(vec[0]/vecDist);
+	this.currAng += Math.PI/2;
 }
 
 MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {

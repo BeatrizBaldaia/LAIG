@@ -42,18 +42,18 @@ MyCircularAnimation.prototype.getMatrix = function(currTime) {
 
 	let aux = mat4.create();
     mat4.identity(aux);
- /*
+
     aux = mat4.translate(aux, aux, this.center);
     aux = mat4.rotate(aux, aux, alfa, [0,1,0]);
     aux = mat4.translate(aux, aux, [this.radius,0,0]);
-    aux = mat4.rotate(aux, aux, Math.PI/2, [0,1,0]);
-*/
+  aux = mat4.rotate(aux, aux, Math.PI, [0,1,0]);
 
 
+ /*
     aux = mat4.translate(aux, aux, this.center);
     aux = mat4.rotateY(aux, aux, alfa);
     aux = mat4.translate(aux, aux, [this.radius,0,0]);
-
+*/
 	return aux;
 
 }
