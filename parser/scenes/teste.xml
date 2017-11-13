@@ -40,9 +40,9 @@
 	<ANIMATIONS>
 		<ANIMATION id="ani1" speed="1" type="bezier">
 			<controlpoint xx="0" yy="0" zz="0" /> <!-- P1 -->
-			<controlpoint xx="1" yy="0" zz="0" /> <!-- P2 -->
-			<controlpoint xx="0" yy="2" zz="0" /> <!-- P3 -->
-			<controlpoint xx="3" yy="3" zz="0" /> <!-- P4 -->
+			<controlpoint xx="10" yy="0" zz="0" /> <!-- P2 -->
+			<controlpoint xx="10" yy="0" zz="10" /> <!-- P3 -->
+			<controlpoint xx="0" yy="00" zz="10" /> <!-- P4 -->
 		</ANIMATION>
 		<ANIMATION id="ani2" speed="1" type="circular"
 			centerx="1" centery="0" centerz="1"
@@ -69,7 +69,7 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="fire_le" />
             			<ANIMATIONREFS>
-				<ANIMATIONREF id="ani3" />
+				<ANIMATIONREF id="ani1" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
 			<!---	<NODEREF id="teste" />

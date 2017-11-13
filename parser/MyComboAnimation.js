@@ -23,7 +23,7 @@ MyComboAnimation.prototype.getMatrix = function(currTime) {
 	if(this.isOver) {
 		return null;
 	}
-	console.log("no getMatrix");
+	//console.log("no getMatrix");
 	var resultMatrix = this.animationsSet[this.currAnimation].getMatrix(currTime);
 	if(resultMatrix == null) {//acabou uma animacao
 		if(this.currAnimation == this.lastAnimation) {//acabaram todas as animacoes

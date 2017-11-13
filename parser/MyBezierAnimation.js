@@ -45,14 +45,15 @@ MyBezierAnimation.prototype.getMatrix = function(currTime) {
 		return null;
 	}
 	let deri = this.Q_(s);
-	let alfa = Math.atan(deri[1]/deri[0]);
+	let alfa = Math.atan(deri[0]/deri[2]);
 
 	let trans_vec = [0,0,0]
 	trans_vec = vec3.add(trans_vec, this.p1, this.Q(s));
 	let res = mat4.create();
     mat4.identity(res);
+    res = mat4.translate(res, res, trans_vec);
 	res = mat4.rotate(res, res, alfa, [0,1,0]);
-	res = mat4.translate(res, res, trans_vec);
+
 	return res;
 }
 
