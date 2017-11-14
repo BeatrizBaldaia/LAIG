@@ -11,14 +11,12 @@
         <reference length="1" />
     </INITIALS>
 
-
     <!-- Illumination and clear colour -->
     <ILLUMINATION>
         <ambient r="0.2" g="0.2" b="0.2" a="1" />
         <doubleside value="1" />
         <background r="0.10588" g="0.2" b="0.51372" a="1" />
     </ILLUMINATION>
-
 
     <!-- Lights -->
     <LIGHTS>
@@ -153,13 +151,65 @@
     </MATERIALS> 
 
 
-<ANIMATIONS>
-</ANIMATIONS>
+	<ANIMATIONS>
+		<ANIMATION id="queda1" speed="10" type="bezier">
+			<controlpoint xx="0" yy="0" zz="0" /> <!-- P1 -->
+			<controlpoint xx="20" yy="0" zz="0" /> <!-- P2 -->
+			<controlpoint xx="30" yy="0" zz="20" /> <!-- P3 -->
+			<controlpoint xx="40" yy="0" zz="20" /> <!-- P4 -->
+		</ANIMATION>
+		<ANIMATION id="queda2" speed="10" type="bezier">
+			<controlpoint xx="40" yy="0" zz="20" /> <!-- P1 -->
+			<controlpoint xx="50" yy="0" zz="10" /> <!-- P2 -->
+			<controlpoint xx="30" yy="0" zz="0" /> <!-- P3 -->
+			<controlpoint xx="0" yy="0" zz="0" /> <!-- P4 -->
+		</ANIMATION>
+		<ANIMATION id="ani2" speed="1" type="circular"
+			centerx="0" centery="0" centerz="0"
+			radius="1" startang="30" rotang="360"
+			/>
+		<ANIMATION id="ani3" speed="1" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="1" yy="0" zz="0" /> 
+			<controlpoint xx="0" yy="2" zz="0" /> 
+			<controlpoint xx="3" yy="3" zz="0" /> 
+		</ANIMATION>
+        <ANIMATION id="ani1" type="combo">
+            <SPANREF id="queda1" />
+            <SPANREF id="queda2" />
+        </ANIMATION>
+	</ANIMATIONS>
 
     <!-- The nodes -->
     <NODES>
 
         <ROOT id="root" />
+        <NODE id="bigRocketANI">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="6" y="3" z="5" />
+        <ROTATION axis="z" angle="90" />
+		<ANIMATIONREFS>
+			<ANIMATIONREF id="ani1" />
+		</ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="bigRocket" />
+        </DESCENDANTS>
+
+    </NODE>
+        <NODE id="bigRocket" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <!--<TRANSLATION x="6" y="3" z="5" />-->
+        <TRANSLATION x="0" y="0" z="-5" />
+        <ROTATION axis="x" angle="90" />
+        <DESCENDANTS>
+            <NODEREF id="bottomBody" />
+            <NODEREF id="topBody" /> 
+        </DESCENDANTS>
+
+    </NODE>
 
         <!-- The root node -->
         <NODE id="root">
@@ -170,10 +220,9 @@
                 <NODEREF id="floor" />
                 <NODEREF id="ladder" />
                 <NODEREF id="ladderSmall" />
-                <NODEREF id="ladderSmall" />
                 <NODEREF id="platform" />
                 <NODEREF id="stars" />
-                <NODEREF id="bigRocket" /> 
+                <NODEREF id="bigRocketANI" /> 
                 <NODEREF id="exhaust"/>
             </DESCENDANTS>
 
@@ -742,6 +791,7 @@
             <TEXTURE id="star" />
             <SCALE sx="0.5" sy="0.5" sz="0.5" />
             <TRANSLATION x="13" y="30" z="0" />
+            
             <DESCENDANTS>
                 <NODEREF id="star1" />
                 <NODEREF id="star2" />
@@ -902,18 +952,6 @@
 
         </NODE>
 
-        <NODE id="bigRocket">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
-
-        <TRANSLATION x="6" y="3" z="5" />
-
-        <DESCENDANTS>
-            <NODEREF id="bottomBody" />
-            <NODEREF id="topBody" /> 
-        </DESCENDANTS>
-
-    </NODE>
 
         <NODE id="bottomBody">
         <MATERIAL id="null" />
