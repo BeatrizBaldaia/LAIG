@@ -3,11 +3,11 @@
     <!-- Initial values -->
     <INITIALS>
         <frustum near="0.001" far="500"/>
-        <translation x="-5.5" y="-6" z="0" />
-        <rotation axis="x" angle="-30" />
-        <rotation axis="y" angle="45" />
-        <rotation axis="z" angle="20" />
-        <scale sx=".5" sy=".5" sz=".5" />
+        <translation x="0" y="0" z="0" />
+        <rotation axis="x" angle="0" />
+        <rotation axis="y" angle="90" />
+        <rotation axis="z" angle="0" />
+        <scale sx=".05" sy=".05" sz=".05" />
         <reference length="1" />
     </INITIALS>
 
@@ -187,9 +187,7 @@
         <NODE id="bigRocketANI">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="3" z="5" />
-        <ROTATION axis="z" angle="90" />
-		<ANIMATIONREFS>
+        <ANIMATIONREFS>
 			<ANIMATIONREF id="ani1" />
 		</ANIMATIONREFS>
         <DESCENDANTS>
