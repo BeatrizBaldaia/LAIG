@@ -6,7 +6,9 @@
  */
 function MyComboAnimation(graph, animationsSet) {
 	MyAnimation.call(this, graph);
+	this.graph = graph;
 	this.animationsSet = animationsSet;
+
 	this.lastAnimation = animationsSet.length - 1;
 	this.currAnimation = 0;
 	this.isOver = 0;
@@ -17,7 +19,11 @@ MyComboAnimation.prototype= Object.create(MyAnimation.prototype);
 MyComboAnimation.prototype.constructor = MyComboAnimation;
 
 MyComboAnimation.prototype.clone = function() {
-	return null;
+    let copy = [];
+    for(let i = 0; i < this.animationsSet.length; i++) {
+        copy.push(this.animationsSet[i].clone());
+    }
+	return new MyComboAnimation(this.graph, copy);
 }
 MyComboAnimation.prototype.getMatrix = function(currTime) {
 	if(this.isOver) {
