@@ -45,7 +45,7 @@
 			<controlpoint xx="0" yy="00" zz="10" /> <!-- P4 -->
 		</ANIMATION>
 		<ANIMATION id="ani2" speed="1" type="circular"
-			centerx="1" centery="0" centerz="1"
+			centerx="0" centery="0" centerz="0"
 			radius="2" startang="30" rotang="360"
 			/>
 		<ANIMATION id="ani3" speed="1" type="linear">
@@ -56,8 +56,8 @@
 		</ANIMATION>
         <ANIMATION id="ani4" type="combo">
             <SPANREF id="ani1" />
-            <SPANREF id="ani3" />
             <SPANREF id="ani2" />
+            <SPANREF id="ani3" />
         </ANIMATION>
 	</ANIMATIONS>
     <NODES>
@@ -69,19 +69,20 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="fire_le" />
             <DESCENDANTS>
-			<!---	<NODEREF id="teste" />
-                <NODEREF id="teste2" />
-				<NODEREF id="shader" />-->
+			    <NODEREF id="teste" />
+                <!--<NODEREF id="teste2" />-->
+				<!--<NODEREF id="shader" />-->
 				<NODEREF id="linear" />
             </DESCENDANTS>
         </NODE>
         <NODE id="teste">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <SCALE sx="1" sy="2" sz="1" />
+
 
 			<ANIMATIONREFS>
 				<ANIMATIONREF id="ani2" />
+                <ANIMATIONREF id="ani4" />
 			</ANIMATIONREFS>
             <DESCENDANTS>
                 <LEAF id="triangle1" type="triangle" args="0 0 0 0 0 1 1 0 0" />
@@ -128,7 +129,9 @@
         <NODE id="linear" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-             <TRANSLATION x="0" y="0" z="-1.5" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="ani4" />
+            </ANIMATIONREFS>
 
 			<DESCENDANTS>
                 <LEAF type="cylinder" args="3 1 0 12 12 0 1" />
