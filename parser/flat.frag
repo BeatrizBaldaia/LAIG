@@ -11,15 +11,23 @@ uniform bool uUseTexture;
 
 uniform float uTimeFactor;
 
+uniform vec4 uSelectColor;
+
+vec4 mixer(vec4 colorBeforeChange) {
+	vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
+	result.rgb = colorBeforeChange.rgb * uTimeFactor;
+	result.rgb += uSelectColor.rgb * (1.0 - uTimeFactor);
+  	return result;
+}
+
 void main() {
-	// Branching should be reduced to a minimal. 
-	// When based on a non-changing uniform, it is usually optimized.
+
 	if (uUseTexture)
 	{
 		vec4 textureColor = texture2D(uSampler, vTextureCoord);
-		gl_FragColor = textureColor * vFinalColor * uTimeFactor;
+		gl_FragColor = mixer(textureColor * vFinalColor);
 	}
 	else
-		gl_FragColor = vFinalColor * uTimeFactor;
+		gl_FragColor = mixer(vFinalColor);
 
 }

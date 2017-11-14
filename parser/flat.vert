@@ -35,6 +35,7 @@ uniform bool uLightEnabled;	// not being used
 uniform bool uLightModelTwoSided;	// not being used
 
 #define NUMBER_OF_LIGHTS 8
+#define SCALE_FACTOR 1.0
 
 uniform vec4 uGlobalAmbient;
 
@@ -110,7 +111,7 @@ vec4 lighting(vec4 vertex, vec3 E, vec3 N) {
 void main() {
 
     // Transformed Vertex position
-    vec4 vertex = uMVMatrix * vec4(aVertexPosition+aVertexNormal*uTimeFactor, 1.0);
+    vec4 vertex = uMVMatrix * vec4(aVertexPosition+aVertexNormal * uTimeFactor * SCALE_FACTOR, 1.0);
 
     // Transformed normal position
 	vec3 N = normalize(vec3(uNMatrix * vec4(aVertexNormal, 1.0)));

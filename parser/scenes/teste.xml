@@ -68,9 +68,6 @@
         <NODE id="root">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="fire_le" />
-            			<ANIMATIONREFS>
-				<ANIMATIONREF id="ani1" />
-			</ANIMATIONREFS>
             <DESCENDANTS>
 			<!---	<NODEREF id="teste" />
                 <NODEREF id="teste2" />

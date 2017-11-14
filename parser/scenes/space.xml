@@ -737,7 +737,7 @@
 
         <!-- The stars -->
 
-        <NODE id="stars">
+        <NODE id="stars" selectable="1">
             <MATERIAL id="starMaterial" />
             <TEXTURE id="star" />
             <SCALE sx="0.5" sy="0.5" sz="0.5" />
