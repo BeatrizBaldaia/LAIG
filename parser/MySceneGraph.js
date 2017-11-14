@@ -1517,6 +1517,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             let animationsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animationsIndex != -1){
                 let animations = nodeSpecs[animationsIndex].children;
+                let animationsCopies;
                 for (let j = 0; j < animations.length; j++) {
                     if (animations[j].nodeName == "ANIMATIONREF")
                     {
@@ -1529,6 +1530,11 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         if (this.animations[curId] == null)
                             return "No animation names " + curId;
                         this.nodes[nodeID].animation.push(curId);
+                        var animationCopy = this.animations[curId].clone();
+                        if(animationCopy != null) {
+                            this.nodes[nodeID].animationsSet.push(animationCopy);
+                            console.log("AQUI!");
+                        }
                     }                    
                    else
                         return "unknown tag <" + animations[j].nodeName + ">";

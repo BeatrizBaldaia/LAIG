@@ -25,7 +25,8 @@ function MyGraphNode(graph, nodeID) {
     this.selected = false;
     
     this.animation = [];
-
+    this.animationsSet = [];
+    console.log("animationsSet: "+this.animationsSet);
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
     
@@ -35,6 +36,7 @@ function MyGraphNode(graph, nodeID) {
     this.graphTextures = this.graph.textures;
     this.graphTexturesStack = this.graph.scene.texturesStack;
     this.graphMaterialsStack = this.graph.scene.materialsStack;
+    this.animationN = 0;
 }
 
 /**
@@ -131,11 +133,19 @@ MyGraphNode.prototype.display = function(parentID) {
  * @param currTime
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
-    var newMatrix = this.graph.animations[this.animation[0]].getMatrix(currTime);
-    if(newMatrix != null) {
-        mat4.multiply(this.transformMatrix,
-            this.originalMatrix,
-            newMatrix);
+    if(this.animationN < this.animation.length) {
+        console.log("this.animationN = "+this.animationN);
+        //let newMatrix = this.graph.animations[this.animation[this.animationN]].getMatrix(currTime);
+        let newMatrix = (this.animationsSet[this.animationN]).getMatrix(currTime);
+        if(newMatrix != null) {
+            mat4.multiply(this.transformMatrix,
+                this.originalMatrix,
+                newMatrix);
+        } else {
+            console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
+            this.animationN++;
+        }
     }
+
 
 }
