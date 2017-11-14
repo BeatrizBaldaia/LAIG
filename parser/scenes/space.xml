@@ -7,7 +7,7 @@
         <rotation axis="x" angle="0" />
         <rotation axis="y" angle="90" />
         <rotation axis="z" angle="0" />
-        <scale sx=".05" sy=".05" sz=".05" />
+        <scale sx=".09" sy=".09" sz=".09" />
         <reference length="1" />
     </INITIALS>
 
@@ -156,27 +156,27 @@
 			<controlpoint xx="0" yy="0" zz="0" /> <!-- P1 -->
 			<controlpoint xx="20" yy="0" zz="0" /> <!-- P2 -->
 			<controlpoint xx="30" yy="0" zz="20" /> <!-- P3 -->
-			<controlpoint xx="40" yy="0" zz="20" /> <!-- P4 -->
+			<controlpoint xx="50" yy="0" zz="20" /> <!-- P4 -->
 		</ANIMATION>
-		<ANIMATION id="queda2" speed="10" type="bezier">
-			<controlpoint xx="40" yy="0" zz="20" /> <!-- P1 -->
-			<controlpoint xx="50" yy="0" zz="10" /> <!-- P2 -->
-			<controlpoint xx="30" yy="0" zz="0" /> <!-- P3 -->
-			<controlpoint xx="0" yy="0" zz="0" /> <!-- P4 -->
+		<ANIMATION id="queda2" speed="20" type="bezier">
+			<controlpoint xx="50" yy="0" zz="20" /> <!-- P1 -->
+			<controlpoint xx="70" yy="0" zz="20" /> <!-- P2 -->
+			<controlpoint xx="50" yy="0" zz="60" /> <!-- P3 -->
+			<controlpoint xx="0" yy="0" zz="20" /> <!-- P4 -->
 		</ANIMATION>
-		<ANIMATION id="ani2" speed="1" type="circular"
-			centerx="0" centery="0" centerz="0"
-			radius="1" startang="30" rotang="360"
+		<ANIMATION id="queda4" speed="10" type="circular"
+			centerx="10" centery="0" centerz="0"
+			radius="10" startang="30" rotang="1000"
 			/>
-		<ANIMATION id="ani3" speed="1" type="linear">
-			<controlpoint xx="0" yy="0" zz="0" />
-			<controlpoint xx="1" yy="0" zz="0" /> 
-			<controlpoint xx="0" yy="2" zz="0" /> 
-			<controlpoint xx="3" yy="3" zz="0" /> 
+		<ANIMATION id="queda3" speed="20" type="linear">
+			<controlpoint xx="0" yy="0" zz="20" />
+			<controlpoint xx="-100" yy="0" zz="20" /> 
+			<controlpoint xx="20" yy="0" zz="0" /> 
 		</ANIMATION>
-        <ANIMATION id="ani1" type="combo">
-            <SPANREF id="queda1" />
-            <SPANREF id="queda2" />
+        <ANIMATION id="queda" type="combo">
+
+            <SPANREF id="queda3" />
+            <SPANREF id="queda4" />
         </ANIMATION>
 	</ANIMATIONS>
 
@@ -187,8 +187,12 @@
         <NODE id="bigRocketANI">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <ANIMATIONREFS>
-			<ANIMATIONREF id="ani1" />
+        <TRANSLATION x="6" y="3" z="5" />
+        <ROTATION axis="z" angle="90" />
+        
+
+		<ANIMATIONREFS>
+			<ANIMATIONREF id="queda" />
 		</ANIMATIONREFS>
         <DESCENDANTS>
             <NODEREF id="bigRocket" />

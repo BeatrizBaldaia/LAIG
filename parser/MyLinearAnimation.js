@@ -53,6 +53,7 @@ MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {
                 this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
                 this.temp = this.dist/this.velocity * 1000;
                 this.deltaTemp = 0;
+                this.deltaDist = 0;
             }
         }
 	}

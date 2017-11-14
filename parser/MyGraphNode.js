@@ -134,7 +134,7 @@ MyGraphNode.prototype.display = function(parentID) {
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
     if(this.animationN < this.animation.length) {
-        console.log("this.animationN = "+this.animationN);
+        //console.log("this.animationN = "+this.animationN);
         //let newMatrix = this.graph.animations[this.animation[this.animationN]].getMatrix(currTime);
         let newMatrix = (this.animationsSet[this.animationN]).getMatrix(currTime);
         if(newMatrix != null) {

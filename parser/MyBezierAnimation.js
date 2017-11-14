@@ -20,7 +20,10 @@ function MyBezierAnimation(graph, p1, p2, p3, p4, velocity) {
 	this.isOver = 0;
 
 	let distance = casteljau(this);
-
+console.log("P1= "+ this.p1);
+console.log("P2= "+ this.p2);
+console.log("P3= "+ this.p3);
+console.log("P4= "+ this.p4);
 	this.time = distance/this.velocity;
 };
 
@@ -45,10 +48,15 @@ MyBezierAnimation.prototype.getMatrix = function(currTime) {
 		return null;
 	}
 	let deri = this.Q_(s);
-	let alfa = Math.atan(deri[0]/deri[2]);
 
+	let alfa = Math.atan(deri[0]/deri[2]);
+    if((deri[2] <= 0) && (deri[0] <= 0)) { 
+    	alfa += Math.PI;
+    }
+    console.log("Deri: "+ deri);
+    console.log("Alfa: "+ alfa*180/Math.PI);
 	let trans_vec = [0,0,0]
-	trans_vec = vec3.add(trans_vec, this.p1, this.Q(s));
+	trans_vec = this.Q(s);//vec3.add(trans_vec, this.p1, this.Q(s));
 	let res = mat4.create();
     mat4.identity(res);
     res = mat4.translate(res, res, trans_vec);
@@ -101,7 +109,7 @@ MyBezierAnimation.prototype.Q_ = function(s){
 		let res = [0,0,0];
 		for (let i = 0; i < 3; i++) {
 			res[i] = -3 * Math.pow((1 - s), 2) * this.p1[i] +
-				(2 * Math.pow((1 - s), 2) - 6 * s * (1 - s)) * this.p2[i] +
+				(3 * Math.pow((1 - s), 2) - 6 * s * (1 - s)) * this.p2[i] +
 				(6 * s * (1 - s) - 3 * Math.pow(s, 2)) * this.p3[i] +
 				3 *  Math.pow(s, 2) * this.p4[i];
 		}
