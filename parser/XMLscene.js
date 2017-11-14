@@ -13,7 +13,7 @@ function XMLscene(interface) {
     this.lightValues = {};
 
     this.update=function(currTime){
-    	let s = Math.abs(Math.sin(currTime/1000));
+    	let s = Math.sin(currTime/1000)/2 + .5;
     	this.shader.setUniformsValues({uTimeFactor: s});
 		for(var i = 0; i < this.nodesWithAnimation.length; i++) {
 			this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
@@ -50,6 +50,7 @@ XMLscene.prototype.init = function(application) {
 	this.nodeList = {'No Node Selected': 0};
 	this.shader = new CGFshader(this.gl, "flat.vert", "flat.frag"),
 	this.shader.setUniformsValues({uTimeFactor: 0});
+	this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
     this.setUpdatePeriod(10);	//TODO VER VALOR
 }
 
