@@ -14,30 +14,23 @@ function MyCircularAnimation(graph, linearVelocity, x,y,z, radius, angleInicial,
 	this.angleRotate = angleRotate * DEGREE_TO_RAD;
 	this.linearVelocity = linearVelocity*0.001;
 	this.angularVelocity = this.linearVelocity/this.radius;
-
-	this.isOver = 0;
+	this.time = this.angleRotate/this.angularVelocity;
 
 };
 
 MyCircularAnimation.prototype= Object.create(MyAnimation.prototype);
 MyCircularAnimation.prototype.constructor = MyCircularAnimation;
 
-MyCircularAnimation.prototype.clone = function() {
-	return new MyCircularAnimation(this.graph, this.linearVelocity/0.001, this.center[0], this.center[1], this.center[2], this.radius, this.angleInicial/DEGREE_TO_RAD, this.angleRotate/DEGREE_TO_RAD);
+MyCircularAnimation.prototype.getAnimationTime = function() {
+    return this.time;
 }
 
-MyCircularAnimation.prototype.getMatrix = function(currTime) {
-	if(this.isOver) {
-		return null;
-	}
-	if(this.initialTime == undefined){
-		this.initialTime = currTime;
-	}
-	let deltaT = currTime - this.initialTime;
-	let alfa = this.angleInicial + deltaT * this.angularVelocity;
+MyCircularAnimation.prototype.getMatrix = function(initialTime, currTime) {
+    var temp = currTime - initialTime;
+
+	let alfa = this.angleInicial + temp * this.angularVelocity;
 	if(alfa > (this.angleInicial+this.angleRotate)) {
-		this.isOver = 1;
-		return null
+		return null;
 	}
 
 	let aux = mat4.create();
@@ -46,7 +39,7 @@ MyCircularAnimation.prototype.getMatrix = function(currTime) {
     aux = mat4.translate(aux, aux, this.center);
     aux = mat4.rotate(aux, aux, alfa, [0,1,0]);
     aux = mat4.translate(aux, aux, [this.radius,0,0]);
-  aux = mat4.rotate(aux, aux, Math.PI, [0,1,0]);
+  	aux = mat4.rotate(aux, aux, Math.PI, [0,1,0]);
 
 
  /*

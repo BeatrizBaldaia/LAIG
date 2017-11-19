@@ -1329,10 +1329,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                     if (spanID == null )
                         return "no ID defined for SPANREF animation";
                     else {
-                        var animationCopy = this.animations[spanID].clone();
-                        if(animationCopy != null) {
-                            spans.push(animationCopy);
-                        }
+                        spans.push(spanID);
                     }
                 }
                 this.animations[animationID] = new MyComboAnimation(this, spans);
@@ -1530,11 +1527,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         if (this.animations[curId] == null)
                             return "No animation names " + curId;
                         this.nodes[nodeID].animation.push(curId);
-                        var animationCopy = this.animations[curId].clone();
-                        if(animationCopy != null) {
-                            this.nodes[nodeID].animationsSet.push(animationCopy);
-                            console.log("AQUI!");
-                        }
                     }                    
                    else
                         return "unknown tag <" + animations[j].nodeName + ">";

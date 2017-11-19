@@ -6,90 +6,95 @@
 function MyLinearAnimation(graph, controlPoints, velocity) {
 	MyAnimation.call(this, graph);
 	this.graph = graph;
-	this.lastTime = 0;
 	this.controlPoints = controlPoints.slice();
-	this.velocity = velocity;
-    this.state = 1; //state = 1 : objeto partiu do ponto 1; state = 2 : objeto ja chegou ao ponto 2 => mudar direcao; ...
-    this.maxState = controlPoints.length - 1;
-    this.currAng = 0;
-	this.calculateAng(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
-	this.dist;
-	this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
-    this.temp = this.dist/this.velocity * 1000;
-    this.deltaTemp = 0;
-    this.deltaDist = this.velocity * (this.deltaTemp/1000);
+	this.velocity = velocity * 0.001;
 
-    this.isOver = 0;
+    //
+    this.timesPerLine = [];
+    this.time = 0;
+    this.calculateTimes();
 };
 
 MyLinearAnimation.prototype= Object.create(MyAnimation.prototype);
 MyLinearAnimation.prototype.constructor = MyLinearAnimation;
 
-MyLinearAnimation.prototype.clone = function() {
-    return new MyLinearAnimation(this.graph, this.controlPoints, this.velocity);
+
+MyLinearAnimation.prototype.calculateTimes = function() {
+    for(let i = 0; i < this.controlPoints.length - 1; i++) {
+        this.timesPerLine.push(this.calculateDist(this.controlPoints[i], this.controlPoints[i + 1])/this.velocity);
+        this.time += this.timesPerLine[i];
+    }
+}
+
+MyLinearAnimation.prototype.getAnimationTime = function() {
+    return this.time;
+}
+
+MyLinearAnimation.prototype.verifyState = function(timeACC) {
+    var state = 1;
+    var aux = this.timesPerLine[0];
+    for(let i = 1; i < this.timesPerLine.length; i++) {
+        if(timeACC >= aux) {
+            aux += this.timesPerLine[i];
+        } else {
+            return i;
+        }
+    }
+
+    if(timeACC > aux) {//fim da animacao
+        return 0;
+    } else {
+        return this.timesPerLine.length;//na ultima linha
+    }
 }
 
 MyLinearAnimation.prototype.calculateDist = function (point1, point2) {
-    this.dist = Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
-
+    var dist = Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
+    return dist;
 }
 MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
     var vec = [(point2[0] - point1[0]), -(point2[2] - point1[2])];
 	var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2));
-	this.currAng = Math.acos(vec[0]/vecDist);
-	this.currAng += Math.PI/2;
+	var currAng = Math.acos(vec[0]/vecDist);
+    currAng += Math.PI/2;
+    return currAng;
 }
 
-MyLinearAnimation.prototype.updateCurrAng = function(deltaTemp) {
-    this.deltaTemp += deltaTemp;//interrupcao a cada 0.01 segundos
-    this.deltaDist = this.velocity * (this.deltaTemp/1000);
-    if((this.state <= this.maxState)) {
-        if(this.deltaTemp >= this.temp) {//fim de uma linha reta
-            this.state++;
-            if(this.state > this.maxState) {
-                this.isOver = 1;
-            } else {
-                this.calculateAng(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
-                this.calculateDist(this.controlPoints[this.state - 1], this.controlPoints[this.state]);
-                this.temp = this.dist/this.velocity * 1000;
-                this.deltaTemp = 0;
-            }
-        }
-	}
+MyLinearAnimation.prototype.getDeltaTime = function(temp, state) {
+    var delta = temp;
+    for(let i = 0; i < (state - 1); i++) {
+        delta -= this.timesPerLine[i];
+    }
+    return delta;
 }
 
-MyLinearAnimation.prototype.getMatrix = function(currTime) {
-    if(this.isOver) {
+MyLinearAnimation.prototype.getMatrix = function(initialTime, currTime) {
+    var temp = currTime - initialTime;
+    var state = this.verifyState(temp);
+    if(state == 0) {
         return null;
     }
-    var deltaTemp = 0;
-    if(this.lastTime == 0) {
-        this.lastTime = currTime;
-    } else {
-        deltaTemp = currTime - this.lastTime;
-        this.lastTime = currTime;
-    }
-    this.updateCurrAng(deltaTemp);
-    if(this.isOver) {
-        return null;
-    }
+
+    var ang = this.calculateAng(this.controlPoints[state - 1], this.controlPoints[state]);
+    var deltaTime = this.getDeltaTime(temp, state);
 
 	var resultMatrix;
     resultMatrix=mat4.create();
     mat4.identity(resultMatrix);
 
-	var vec = [(this.controlPoints[this.state][0] - this.controlPoints[this.state - 1][0]),
-        		(this.controlPoints[this.state][1] - this.controlPoints[this.state - 1][1]),
-        		(this.controlPoints[this.state][2] - this.controlPoints[this.state - 1][2])];
+    var vec = [(this.controlPoints[state][0] - this.controlPoints[state - 1][0]),
+        (this.controlPoints[state][1] - this.controlPoints[state - 1][1]),
+        (this.controlPoints[state][2] - this.controlPoints[state - 1][2])];
 	var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2) + Math.pow(vec[2], 2));
-	var delta = vecDist/this.deltaDist;
+	var deltaDist = this.velocity * (deltaTime)
+	var delta = deltaDist/vecDist;
 
-	vec[0] /= delta;
-    vec[1] /= delta;
-    vec[2] /= delta;
+	vec[0] *= delta;
+    vec[1] *= delta;
+    vec[2] *= delta;
     resultMatrix = mat4.translate(resultMatrix, resultMatrix, vec);
-    resultMatrix = mat4.translate(resultMatrix, resultMatrix, this.controlPoints[this.state - 1]);
-    resultMatrix = mat4.rotateY(resultMatrix, resultMatrix, this.currAng);
+    resultMatrix = mat4.translate(resultMatrix, resultMatrix, this.controlPoints[state - 1]);
+    resultMatrix = mat4.rotateY(resultMatrix, resultMatrix, ang);
 
     return resultMatrix;
 }
