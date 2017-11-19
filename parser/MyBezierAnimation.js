@@ -18,10 +18,6 @@ function MyBezierAnimation(graph, p1, p2, p3, p4, velocity) {
 	this.velocity = velocity * 0.001;
 
 	let distance = casteljau(this);
-console.log("P1= "+ this.p1);
-console.log("P2= "+ this.p2);
-console.log("P3= "+ this.p3);
-console.log("P4= "+ this.p4);
 	this.time = distance/this.velocity;
 };
 
@@ -45,8 +41,6 @@ MyBezierAnimation.prototype.getMatrix = function(initialTime, currTime) {
     if((deri[2] <= 0) && (deri[0] <= 0)) { 
     	alfa += Math.PI;
     }
-    console.log("Deri: "+ deri);
-    console.log("Alfa: "+ alfa*180/Math.PI);
 	let trans_vec = [0,0,0]
 	trans_vec = this.Q(s);//vec3.add(trans_vec, this.p1, this.Q(s));
 	let res = mat4.create();
