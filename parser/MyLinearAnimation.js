@@ -60,7 +60,6 @@ MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
     return currAng;
 }
 
-
 MyLinearAnimation.prototype.getDeltaTime = function(temp, state) {
     var delta = temp;
     for(let i = 0; i < (state - 1); i++) {
@@ -68,6 +67,7 @@ MyLinearAnimation.prototype.getDeltaTime = function(temp, state) {
     }
     return delta;
 
+}
 
 MyLinearAnimation.prototype.getMatrix = function(initialTime, currTime) {
     var temp = currTime - initialTime;
