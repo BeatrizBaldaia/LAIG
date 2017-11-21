@@ -66,7 +66,7 @@ MyGraphNode.prototype.display = function(parentID) {
      * Call for children display
      */
     if(this.graph.scene.selectedNode == this.nodeID)
-    this.graph.scene.setActiveShader(this.graph.scene.shader);//TODO
+        this.graph.scene.setActiveShader(this.graph.scene.shader);//TODO
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
@@ -126,7 +126,7 @@ MyGraphNode.prototype.display = function(parentID) {
     }
     this.graph.scene.popMatrix();
     if(this.graph.scene.selectedNode == this.nodeID)
-    this.graph.scene.setActiveShader(this.graph.scene.defaultShader);//TODO
+        this.graph.scene.setActiveShader(this.graph.scene.defaultShader);//TODO
 }
 
 /**
