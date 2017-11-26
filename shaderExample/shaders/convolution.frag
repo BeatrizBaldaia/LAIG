@@ -33,7 +33,7 @@ void main() {
 	vec4 den = vec4(0.1,0.1,0.1,1);
 	
 	//Edge Detection
-	vec4 v = vec4(-1./8.,-1./8.,-1./8.,1);
+/*	vec4 v = vec4(-1./8.,-1./8.,-1./8.,1);
 	color = (colors[0] +
 			 colors[1] +
 			 colors[2] +
@@ -45,20 +45,20 @@ void main() {
 			 colors[8])*v +
 			 colors[4]
 			 ;
-	
+*/
 
 	//Blur
-/*	vec4 v = vec4(1.,1.,1.,1.);
-	color = (color0*v +
-			color1*v +
-			color2*v +
-			color3*v +
-			color4*v +
-			color5*v +
-			color6*v +
-			color7*v +
-			color8*v)/mean ;
-	*/
+	vec4 v = vec4(1.,1.,1.,1.);
+	color = (colors[0]*v +
+			colors[1]*v +
+			colors[2]*v +
+			colors[3]*v +
+			colors[4]*v +
+			colors[5]*v +
+			colors[6]*v +
+			colors[7]*v +
+			colors[8]*v)/mean ;
+
 	
 	gl_FragColor = color;
 }

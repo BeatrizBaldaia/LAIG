@@ -1,4 +1,15 @@
- /**
+// returns obj index on array a, or -1 if a does not contain obj
+function contains(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === obj) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+/**
  * @brief MyInterface class, creating a GUI interface.
  * @constructor
  */
@@ -26,7 +37,9 @@ MyInterface.prototype.init = function(application) {
     this.gui = new dat.GUI();
 
     // add a group of controls (and open/expand by defult)
-    
+
+
+
     return true;
 };
 
@@ -42,6 +55,8 @@ MyInterface.prototype.addLightsGroup = function(lights) {
     // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
     // e.g. this.option1=true; this.option2=false;
 
+    obj=this;
+
     for (var key in lights) {
         if (lights.hasOwnProperty(key)) {
             this.scene.lightValues[key] = lights[key][0];
@@ -50,5 +65,10 @@ MyInterface.prototype.addLightsGroup = function(lights) {
     }
 
 	this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
+
+    this.gui.add(this.scene, 'colorFactor', 1, 60).onChange(function(v)
+    {
+        obj.scene.updateColorFactor(v);
+    });
 }
 

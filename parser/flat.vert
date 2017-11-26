@@ -34,6 +34,7 @@ uniform mat4 uNMatrix;
 uniform bool uLightEnabled;	// not being used
 uniform bool uLightModelTwoSided;	// not being used
 
+
 #define NUMBER_OF_LIGHTS 8
 #define SCALE_FACTOR 1.0
 

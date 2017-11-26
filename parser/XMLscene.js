@@ -11,6 +11,7 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+    this.colorFactor=30;
 
     this.update=function(currTime){
     	let s = Math.sin(currTime/1000)/2 + .5;
@@ -19,6 +20,7 @@ function XMLscene(interface) {
 			this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
 		}
 	}
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -50,8 +52,14 @@ XMLscene.prototype.init = function(application) {
 	this.nodeList = {'No Node Selected': 0};
 	this.shader = new CGFshader(this.gl, "flat.vert", "flat.frag"),
 	this.shader.setUniformsValues({uTimeFactor: 0});
-	this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
+	//this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
+    this.updateColorFactor();
     this.setUpdatePeriod(10);	//TODO VER VALOR
+}
+
+XMLscene.prototype.updateColorFactor=function(v)
+{
+    this.shader.setUniformsValues({colorScale: this.colorFactor});
 }
 
 /**
