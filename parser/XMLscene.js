@@ -23,6 +23,8 @@ function XMLscene(interface) {
 
   //TODO VER ________
   this.setPickEnabled(true);
+  this.selectIndex = 0;
+  this.selectNodesList = {};
     //_______________________
 }
 
@@ -53,7 +55,7 @@ XMLscene.prototype.init = function(application) {
 	this.nodesWithAnimation=[];
 	this.selectedNode = 0;
 	this.nodeList = {'No Node Selected': 0};
-	this.shader = new CGFshader(this.gl, "flat.vert", "flat.frag"),
+	this.shader = new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
 	this.shader.setUniformsValues({uTimeFactor: 0});
 	//this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
     this.updateColorFactor();
@@ -198,7 +200,10 @@ XMLscene.prototype.logPicking = function ()
 				if (obj)
 				{
 					var customId = this.pickResults[i][1];
-					console.log("Picked object: " + obj + ", with pick id " + customId);
+					console.log("Picked object: " + obj.nodeID + ", with pick id " + customId);
+          this.nodesWithAnimation.push(obj.nodeID);
+          //alert(this.graph.animations['movePiece']);
+          obj.animation.push('movePiece');
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);

@@ -63,8 +63,9 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
 MyGraphNode.prototype.display = function(parentID) {
   //TODO NEW_______________
   if(this.selected) {
-    this.graph.scene.registerForPick(this.nodeID, this);
-}    //__________________________
+    //console.log(this.graph.scene.selectNodesList[this.nodeID]+" = "+this.nodeID );
+    this.graph.scene.registerForPick(this.graph.scene.selectNodesList[this.nodeID], this);
+  }    //__________________________
     /**
      * Call for children display
      */
@@ -146,6 +147,7 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
             mat4.multiply(this.transformMatrix,
                 this.originalMatrix,
                 newMatrix);
+                console.log(this.transformMatrix);
         } else {//proxima animacao
             console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
             this.animationN++;

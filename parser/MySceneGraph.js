@@ -1390,6 +1390,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 return "'selectable' must be 0 or 1 on the NODES block"
             else {
                 this.scene.nodeList[nodeID] = nodeID;
+                this.scene.selectNodesList[nodeID] = ++this.scene.selectIndex;
                 this.nodes[nodeID].selected = aux == 0 ? false : true;
               }
 
