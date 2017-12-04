@@ -147,7 +147,6 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
             mat4.multiply(this.transformMatrix,
                 this.originalMatrix,
                 newMatrix);
-                console.log(this.transformMatrix);
         } else {//proxima animacao
             console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
             this.animationN++;
