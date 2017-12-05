@@ -30,27 +30,9 @@ function XMLscene(interface) {
       }
     }
   }
-  //TODO VER ________
+
   this.setPickEnabled(true);
-  this.selectIndex = 0;
-  this.selectNodesList = {};
-  this.pieceToMove = null;
-  this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
-  this.showBoard = function() {
-	let s = '[';
-	// for (let i = 0; i < this.board.length; i++) {
-	// 	s.push('[');
-	// 	for (let j = 0; j < this.board[i].length; j++) {
-	// 		s.push([this.board[i][j],',']);
-	// 	}
-	// 	s[s.length - 1] = ']';
-	// 	s.push(',');
-	// }
-	// s += ']';
-	return s;
-  }
-//  alert(this.showBoard());
-  //_______________________
+
 
   /* CAMERA VIEW */
   this.previousTime = 0;
@@ -62,6 +44,9 @@ function XMLscene(interface) {
   var camera3 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
   var camera4 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
   this.camerasSet = [ camera1, camera2, camera3, camera4 ];
+
+  this.game = new MyGame(this);
+
 }
 XMLscene.prototype = Object.create(CGFscene.prototype);
 XMLscene.prototype.constructor = XMLscene;
@@ -205,13 +190,10 @@ XMLscene.prototype.display = function() {
         i++;
       }
     }
-    //TODO VER ________
+
     this.logPicking();
     this.clearPickRegistration();
-    //_______________________
-    //console.log(this.pickMode);
-    //console.log(this.pickResults);
-    // Displays the scene.
+
     this.graph.displayScene();
   } else {
     // Draw axis
@@ -226,17 +208,9 @@ XMLscene.prototype.logPicking = function () {
       for (var i=0; i< this.pickResults.length; i++) {
         var obj = this.pickResults[i][0];
         if (obj) {
-			var customId = this.pickResults[i][1];
-			console.log("Picked object: " + obj.nodeID + ", with pick id " + customId);
-			if(this.pieceToMove == null) {
-			  this.pieceToMove = obj;
-			} else {
-			  this.nodesWithAnimation.push(this.pieceToMove.nodeID);
-			  this.pieceToMove.animation.push('movePiece');
-			  //alert(Board);
-			  getPrologRequest('laigInterface([[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]]-'+1+'-'+'[1-1,1-2]'+')');
-			  this.pieceToMove = null;
-			}
+    			var customId = this.pickResults[i][1];
+    			console.log("Picked object: " + obj.nodeID + ", with pick id " + customId);
+          this.game.logPicking(obj);
         }
       }
       this.pickResults.splice(0,this.pickResults.length);

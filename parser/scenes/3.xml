@@ -61,7 +61,7 @@
             <ambient r="0" g="0" b="1" a="1" />
             <emission r="0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
-                <MATERIAL id="casa2">
+        <MATERIAL id="casa2">
             <shininess value="1" />
             <specular r="0.0" g="0.0" b="0.0" a="1" />
             <diffuse r="0" g="0" b="00" a="1" />
@@ -151,6 +151,7 @@
         <NODE id="board_select">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
+            <!--<TRANSLATION x="1" y="0" z="1" />-->
             <!-- nós que referenciam casa, nao serao visiveis-->
             <!--TODO por invisivies, tlvez em casa-->
             <DESCENDANTS>
@@ -254,514 +255,514 @@
             </DESCENDANTS>
         </NODE>
 <!-- Nos que representam as casas-->
-<NODE id="a1" selectable="1">>
+<NODE id="a1" selectable="1" boardTile="1">>
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="0" />
+        <!-- <TRANSLATION x="0" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a2" selectable="1">
+      <NODE id="a2" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="1" />
+        <!-- <TRANSLATION x="0" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a3" selectable="1">
+      <NODE id="a3" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="2" />
+        <!-- <TRANSLATION x="0" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a4" selectable="1">
+      <NODE id="a4" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="3" />
+        <!-- <TRANSLATION x="0" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a5" selectable="1">
+      <NODE id="a5" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="4" />
+        <!-- <TRANSLATION x="0" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a6" selectable="1">
+      <NODE id="a6" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="5" />
+        <!-- <TRANSLATION x="0" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a7" selectable="1">
+      <NODE id="a7" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="6" />
+        <!-- <TRANSLATION x="0" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="a8" selectable="1">
+      <NODE id="a8" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="0" y="0" z="7" />
+        <!-- <TRANSLATION x="0" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b1" selectable="1">
+      <NODE id="b1" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="0" />
+        <!-- <TRANSLATION x="1" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b2" selectable="1">
+      <NODE id="b2" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="1" />
+        <!-- <TRANSLATION x="1" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b3" selectable="1">
+      <NODE id="b3" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="2" />
+        <!-- <TRANSLATION x="1" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b4" selectable="1">
+      <NODE id="b4" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="3" />
+        <!-- <TRANSLATION x="1" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b5" selectable="1">
+      <NODE id="b5" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="4" />
+        <!-- <TRANSLATION x="1" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b6" selectable="1">
+      <NODE id="b6" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="5" />
+        <!-- <TRANSLATION x="1" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b7" selectable="1">
+      <NODE id="b7" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="6" />
+        <!-- <TRANSLATION x="1" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="b8" selectable="1">
+      <NODE id="b8" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="1" y="0" z="7" />
+        <!-- <TRANSLATION x="1" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c1" selectable="1">
+      <NODE id="c1" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="0" />
+        <!-- <TRANSLATION x="2" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c2" selectable="1">
+      <NODE id="c2" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="1" />
+        <!-- <TRANSLATION x="2" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c3" selectable="1">
+      <NODE id="c3" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="2" />
+        <!-- <TRANSLATION x="2" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c4" selectable="1">
+      <NODE id="c4" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="3" />
+        <!-- <TRANSLATION x="2" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c5" selectable="1">
+      <NODE id="c5" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="4" />
+        <!-- <TRANSLATION x="2" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c6" selectable="1">
+      <NODE id="c6" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="5" />
+        <!-- <TRANSLATION x="2" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c7" selectable="1">
+      <NODE id="c7" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="6" />
+        <!-- <TRANSLATION x="2" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="c8" selectable="1">
+      <NODE id="c8" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="2" y="0" z="7" />
+        <!-- <TRANSLATION x="2" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d1" selectable="1">
+      <NODE id="d1" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="0" />
+        <!-- <TRANSLATION x="3" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d2" selectable="1">
+      <NODE id="d2" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="1" />
+        <!-- <TRANSLATION x="3" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d3" selectable="1">
+      <NODE id="d3" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="2" />
+        <!-- <TRANSLATION x="3" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d4" selectable="1">
+      <NODE id="d4" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="3" />
+        <!-- <TRANSLATION x="3" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d5" selectable="1">
+      <NODE id="d5" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="4" />
+        <!-- <TRANSLATION x="3" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d6" selectable="1">
+      <NODE id="d6" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="5" />
+        <!-- <TRANSLATION x="3" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d7" selectable="1">
+      <NODE id="d7" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="6" />
+        <!-- <TRANSLATION x="3" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="d8" selectable="1">
+      <NODE id="d8" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="3" y="0" z="7" />
+        <!-- <TRANSLATION x="3" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e1" selectable="1">
+      <NODE id="e1" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="0" />
+        <!-- <TRANSLATION x="4" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e2" selectable="1">
+      <NODE id="e2" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="1" />
+        <!-- <TRANSLATION x="4" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e3" selectable="1">
+      <NODE id="e3" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="2" />
+        <!-- <TRANSLATION x="4" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e4" selectable="1">
+      <NODE id="e4" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="3" />
+        <!-- <TRANSLATION x="4" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e5" selectable="1">
+      <NODE id="e5" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="4" />
+        <!-- <TRANSLATION x="4" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e6" selectable="1">
+      <NODE id="e6" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="5" />
+        <!-- <TRANSLATION x="4" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e7" selectable="1">
+      <NODE id="e7" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="6" />
+        <!-- <TRANSLATION x="4" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="e8" selectable="1">
+      <NODE id="e8" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="4" y="0" z="7" />
+        <!-- <TRANSLATION x="4" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f1" selectable="1">
+      <NODE id="f1" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="0" />
+        <!-- <TRANSLATION x="5" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f2" selectable="1">
+      <NODE id="f2" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="1" />
+        <!-- <TRANSLATION x="5" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f3" selectable="1">
+      <NODE id="f3" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="2" />
+        <!-- <TRANSLATION x="5" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f4" selectable="1">
+      <NODE id="f4" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="3" />
+        <!-- <TRANSLATION x="5" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f5" selectable="1">
+      <NODE id="f5" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="4" />
+        <!-- <TRANSLATION x="5" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f6" selectable="1">
+      <NODE id="f6" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="5" />
+        <!-- <TRANSLATION x="5" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f7" selectable="1">
+      <NODE id="f7" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="6" />
+        <!-- <TRANSLATION x="5" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="f8" selectable="1">
+      <NODE id="f8" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="5" y="0" z="7" />
+        <!-- <TRANSLATION x="5" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g1" selectable="1">
+      <NODE id="g1" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="0" />
+        <!-- <TRANSLATION x="6" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g2" selectable="1">
+      <NODE id="g2" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="1" />
+        <!-- <TRANSLATION x="6" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g3" selectable="1">
+      <NODE id="g3" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="2" />
+        <!-- <TRANSLATION x="6" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g4" selectable="1">
+      <NODE id="g4" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="3" />
+        <!-- <TRANSLATION x="6" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g5" selectable="1">
+      <NODE id="g5" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="4" />
+        <!-- <TRANSLATION x="6" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g6" selectable="1">
+      <NODE id="g6" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="5" />
+        <!-- <TRANSLATION x="6" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g7" selectable="1">
+      <NODE id="g7" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="6" />
+        <!-- <TRANSLATION x="6" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="g8" selectable="1">
+      <NODE id="g8" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="6" y="0" z="7" />
+        <!-- <TRANSLATION x="6" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h1" selectable="1">
+      <NODE id="h1" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="0" />
+        <!-- <TRANSLATION x="7" y="0" z="0" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h2" selectable="1">
+      <NODE id="h2" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="1" />
+        <!-- <TRANSLATION x="7" y="0" z="1" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h3" selectable="1">
+      <NODE id="h3" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="2" />
+        <!-- <TRANSLATION x="7" y="0" z="2" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h4" selectable="1">
+      <NODE id="h4" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="3" />
+        <!-- <TRANSLATION x="7" y="0" z="3" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h5" selectable="1">
+      <NODE id="h5" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="4" />
+        <!-- <TRANSLATION x="7" y="0" z="4" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h6" selectable="1">
+      <NODE id="h6" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="5" />
+        <!-- <TRANSLATION x="7" y="0" z="5" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h7" selectable="1">
+      <NODE id="h7" selectable="1" boardTile="1">
         <MATERIAL id="casa2" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="6" />
+        <!-- <TRANSLATION x="7" y="0" z="6" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
       </NODE>
-      <NODE id="h8" selectable="1">
+      <NODE id="h8" selectable="1" boardTile="1">
         <MATERIAL id="casa1" />
         <TEXTURE id="null" />
-        <TRANSLATION x="7" y="0" z="7" />
+        <!-- <TRANSLATION x="7" y="0" z="7" /> -->
         <DESCENDANTS>
         <NODEREF id="casa" />
         </DESCENDANTS>
@@ -769,290 +770,290 @@
 <!--Fim de nos que representam casas-->
 
 <!-- Nos que representam as pecas-->
-<NODE id="1" selectable="1">
+<NODE id="1" selectable="1" piece="a1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="0" y="0" z="0" />
+      <!-- <TRANSLATION x="0" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="2" selectable="1">
+  <NODE id="2" selectable="1" piece="b1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="1" y="0" z="0" />
+      <!-- <TRANSLATION x="1" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="3" selectable="1">
+  <NODE id="3" selectable="1" piece="c1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="0" />
+      <!-- <TRANSLATION x="2" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="4" selectable="1">
+  <NODE id="4" selectable="1" piece="d1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="0" />
+      <!-- <TRANSLATION x="3" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="5" selectable="1">
+  <NODE id="5" selectable="1" piece="e1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="0" />
+      <!-- <TRANSLATION x="4" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="6" selectable="1">
+  <NODE id="6" selectable="1" piece="f1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="0" />
+      <!-- <TRANSLATION x="5" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="7" selectable="1">
+  <NODE id="7" selectable="1" piece="g1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="6" y="0" z="0" />
+      <!-- <TRANSLATION x="6" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="8" selectable="1">
+  <NODE id="8" selectable="1" piece="h1">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="7" y="0" z="0" />
+      <!-- <TRANSLATION x="7" y="0" z="0" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="9" selectable="1">
+  <NODE id="9" selectable="1" piece="b2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="1" y="0" z="1" />
+      <!-- <TRANSLATION x="1" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="10" selectable="1">
+  <NODE id="10" selectable="1" piece="c2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="1" />
+      <!-- <TRANSLATION x="2" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="11" selectable="1">
+  <NODE id="11" selectable="1" piece="d2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="1" />
+      <!-- <TRANSLATION x="3" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="12" selectable="1">
+  <NODE id="12" selectable="1" piece="e2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="1" />
+      <!-- <TRANSLATION x="4" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="13" selectable="1">
+  <NODE id="13" selectable="1" piece="f2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="1" />
+      <!-- <TRANSLATION x="5" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="14" selectable="1">
+  <NODE id="14" selectable="1" piece="g2">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="6" y="0" z="1" />
+      <!-- <TRANSLATION x="6" y="0" z="1" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="15" selectable="1">
+  <NODE id="15" selectable="1" piece="c3">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="2" />
+      <!-- <TRANSLATION x="2" y="0" z="2" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="16" selectable="1">
+  <NODE id="16" selectable="1" piece="d3">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="2" />
+      <!-- <TRANSLATION x="3" y="0" z="2" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="17" selectable="1">
+  <NODE id="17" selectable="1" piece="e3">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="2" />
+      <!-- <TRANSLATION x="4" y="0" z="2" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="18" selectable="1">
+  <NODE id="18" selectable="1" piece="f3">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="2" />
+      <!-- <TRANSLATION x="5" y="0" z="2" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer1" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="19" selectable="1">
+  <NODE id="19" selectable="1" piece="a8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="0" y="0" z="7" />
+      <!-- <TRANSLATION x="0" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="20" selectable="1">
+  <NODE id="20" selectable="1" piece="b8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="1" y="0" z="7" />
+      <!-- <TRANSLATION x="1" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="21" selectable="1">
+  <NODE id="21" selectable="1" piece="c8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="7" />
+      <!-- <TRANSLATION x="2" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="22" selectable="1">
+  <NODE id="22" selectable="1" piece="d8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="7" />
+      <!-- <TRANSLATION x="3" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="23" selectable="1">
+  <NODE id="23" selectable="1" piece="e8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="7" />
+      <!-- <TRANSLATION x="4" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="24" selectable="1">
+  <NODE id="24" selectable="1" piece="f8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="7" />
+      <!-- <TRANSLATION x="5" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="25" selectable="1">
+  <NODE id="25" selectable="1" piece="g8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="6" y="0" z="7" />
+      <!-- <TRANSLATION x="6" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="26" selectable="1">
+  <NODE id="26" selectable="1" piece="h8">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="7" y="0" z="7" />
+      <!-- <TRANSLATION x="7" y="0" z="7" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="27" selectable="1">
+  <NODE id="27" selectable="1" piece="b7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="1" y="0" z="6" />
+      <!-- <TRANSLATION x="1" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="28" selectable="1">
+  <NODE id="28" selectable="1" piece="c7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="6" />
+      <!-- <TRANSLATION x="2" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="29" selectable="1">
+  <NODE id="29" selectable="1" piece="d7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="6" />
+      <!-- <TRANSLATION x="3" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="30" selectable="1">
+  <NODE id="30" selectable="1" piece="e7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="6" />
+      <!-- <TRANSLATION x="4" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="31" selectable="1">
+  <NODE id="31" selectable="1" piece="f7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="6" />
+      <!-- <TRANSLATION x="5" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="32" selectable="1">
+  <NODE id="32" selectable="1" piece="g7">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="6" y="0" z="6" />
+      <!-- <TRANSLATION x="6" y="0" z="6" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="33" selectable="1">
+  <NODE id="33" selectable="1" piece="c6">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="2" y="0" z="5" />
+      <!-- <TRANSLATION x="2" y="0" z="5" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="34" selectable="1">
+  <NODE id="34" selectable="1" piece="d6">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="3" y="0" z="5" />
+      <!-- <TRANSLATION x="3" y="0" z="5" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="35" selectable="1">
+  <NODE id="35" selectable="1" piece="e6">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="4" y="0" z="5" />
+      <!-- <TRANSLATION x="4" y="0" z="5" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
   </NODE>
-  <NODE id="36" selectable="1">
+  <NODE id="36" selectable="1" piece="f6">
       <MATERIAL id="null" />
       <TEXTURE id="null" />
-      <TRANSLATION x="5" y="0" z="5" />
+      <!-- <TRANSLATION x="5" y="0" z="5" /> -->
       <DESCENDANTS>
           <NODEREF id="pecaPlayer2" />
       </DESCENDANTS>
