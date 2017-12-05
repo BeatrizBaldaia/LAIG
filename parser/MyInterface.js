@@ -14,7 +14,7 @@ function contains(a, obj) {
  * @constructor
  */
 function MyInterface() {
-    //call CGFinterface constructor 
+    //call CGFinterface constructor
     CGFinterface.call(this);
 }
 ;
@@ -33,10 +33,26 @@ MyInterface.prototype.init = function(application) {
 
     // init GUI. For more information on the methods, check:
     //  http://workshop.chromeexperiments.com/examples/gui
-    
+
     this.gui = new dat.GUI();
 
+    this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
+
+    this.gui.add(this.scene, 'colorFactor', 1, 60).onChange(function(v)
+    {
+        obj.scene.updateColorFactor(v);
+    });
+
     // add a group of controls (and open/expand by defult)
+    this.gui.add(this.scene, 'cameraView', {
+  			'Fixed Camera Centering': 0,
+  			'Top View': 1,
+  			'First-Person': 2,
+  			'Side View': 3
+  	}).onChange(function(v)
+    {
+        obj.scene.updateCameraView(v);
+    }).name('Game View');
 
 
 
@@ -64,11 +80,5 @@ MyInterface.prototype.addLightsGroup = function(lights) {
         }
     }
 
-	this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
 
-    this.gui.add(this.scene, 'colorFactor', 1, 60).onChange(function(v)
-    {
-        obj.scene.updateColorFactor(v);
-    });
 }
-
