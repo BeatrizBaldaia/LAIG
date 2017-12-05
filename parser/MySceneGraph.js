@@ -1390,10 +1390,41 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 return "'selectable' must be 0 or 1 on the NODES block"
             else {
                 this.scene.nodeList[nodeID] = nodeID;
-                this.scene.selectNodesList[nodeID] = ++this.scene.selectIndex;
+                this.scene.game.selectNodesList[nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[nodeID].selected = aux == 0 ? false : true;
-              }
-
+            }
+            let piece = this.reader.getString(children[i], 'piece', false);
+            if (piece != null){
+              let x = piece.charAt(0);
+              x = (x == 'a') ? 1 : x;
+              x = (x == 'b') ? 2 : x;
+              x = (x == 'c') ? 3 : x;
+              x = (x == 'd') ? 4 : x;
+              x = (x == 'e') ? 5 : x;
+              x = (x == 'f') ? 6 : x;
+              x = (x == 'g') ? 7 : x;
+              x = (x == 'h') ? 8 : x;
+              let y = piece.charAt(1);
+              //alert(y);
+              this.nodes[nodeID].position = {x: x,y: y};
+              console.log(this.nodes[nodeID].position);
+              this.scene.game.pieces.push(nodeID);
+            }
+            let boardTile = this.reader.getString(children[i], 'boardTile', false);
+            if (boardTile != null){
+              let x = nodeID.charAt(0);
+              x = (x == 'a') ? 1 : x;
+              x = (x == 'b') ? 2 : x;
+              x = (x == 'c') ? 3 : x;
+              x = (x == 'd') ? 4 : x;
+              x = (x == 'e') ? 5 : x;
+              x = (x == 'f') ? 6 : x;
+              x = (x == 'g') ? 7 : x;
+              x = (x == 'h') ? 8 : x;
+              let y = nodeID.charAt(1);
+              this.nodes[nodeID].position = {x: x,y: y};
+              console.log(this.nodes[nodeID].position);
+            }
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
@@ -1512,6 +1543,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 }
             }
             this.nodes[nodeID].originalMatrix = mat4.clone(this.nodes[nodeID].transformMatrix);
+            mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [this.nodes[nodeID].position.x, 0, this.nodes[nodeID].position.y]);
+
             let animationsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animationsIndex != -1){
                 let animations = nodeSpecs[animationsIndex].children;
