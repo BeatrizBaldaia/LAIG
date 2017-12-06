@@ -1404,7 +1404,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               x = (x == 'f') ? 6 : x;
               x = (x == 'g') ? 7 : x;
               x = (x == 'h') ? 8 : x;
-              let y = piece.charAt(1);
+              let y =  parseInt(piece.charAt(1));
               //alert(y);
               this.nodes[nodeID].position = {x: x,y: y};
               console.log(this.nodes[nodeID].position);
@@ -1421,7 +1421,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               x = (x == 'f') ? 6 : x;
               x = (x == 'g') ? 7 : x;
               x = (x == 'h') ? 8 : x;
-              let y = nodeID.charAt(1);
+              let y =  parseInt(nodeID.charAt(1));
               this.nodes[nodeID].position = {x: x,y: y};
               console.log(this.nodes[nodeID].position);
             }
