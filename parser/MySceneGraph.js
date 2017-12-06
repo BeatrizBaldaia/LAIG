@@ -240,6 +240,9 @@ MySceneGraph.prototype.parseInitials = function(initialsNode) {
     // Translation.
     this.initialTransforms = mat4.create();
     mat4.identity(this.initialTransforms);
+    this.initialFixeTransforms = mat4.create();
+    mat4.identity(this.initialFixeTransforms);
+
     if (translationIndex == -1)
         this.onXMLMinorError("initial translation undefined; assuming T = (0, 0, 0)");
     else {
@@ -391,6 +394,7 @@ MySceneGraph.prototype.parseInitials = function(initialsNode) {
 
         mat4.scale(this.initialTransforms, this.initialTransforms, [sx, sy, sz]);
     }
+    this.initialFixedTransforms = mat4.clone(this.initialTransforms);
 
     // ----------
     // Reference length.

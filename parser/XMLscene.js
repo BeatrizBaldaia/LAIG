@@ -15,9 +15,36 @@ function XMLscene(interface) {
     for(var i = 0; i < this.nodesWithAnimation.length; i++) {
       this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
     }
+    /* CAMERA VIEW */
+    if(this.newCameraView != this.cameraView) {
+      let deltaPos = this.camera["position"] - this.camerasSet[this.newCameraView]["position"];
+      let dist = Math.sqrt(Math.pow(deltaPos[0], 2) + Math.pow(deltaPos[1], 2) + Math.pow(deltaPos[2], 2));
+      if(this.timeACC >= 2000) { //camara ja na posicao final
+        this.cameraView = this.newCameraView;
+        this.previousTime = 0;
+        this.timeACC = 0;
+      } else {//ainda e preciso mover a camara
+        this.timeACC += (currTime - this.previousTime);
+        this.previousTime = currTime;
+
+      }
+    }
   }
 
   this.setPickEnabled(true);
+
+
+  /* CAMERA VIEW */
+  this.previousTime = 0;
+  this.timeACC = 0;
+  this.newCameraView = 0;
+  this.cameraView = 0;
+  var camera1 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
+  var camera2 = {position: [20, 10, 5, 0], rotation: [0, 0, 60], scale: [1, 1, 1]};
+  var camera3 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
+  var camera4 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
+  this.camerasSet = [ camera1, camera2, camera3, camera4 ];
+
   this.game = new MyGame(this);
 
 }
@@ -46,10 +73,44 @@ XMLscene.prototype.init = function(application) {
   //this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
   this.updateColorFactor();
   this.setUpdatePeriod(10);//TODO VER VALOR
+  console.log(this.camera);
+
 }
 XMLscene.prototype.updateColorFactor=function(v) {
   this.shader.setUniformsValues({colorScale: this.colorFactor});
 }
+/**
+ * @brief Updates the position and angle of the camera
+ */
+XMLscene.prototype.updateCameraView=function(v) {
+  this.newCameraView = this.cameraView;
+
+  let transformsMatrix = mat4.create();
+  mat4.identity(transformsMatrix);
+
+  var x = this.camerasSet[this.cameraView]["position"][0];
+  var y = this.camerasSet[this.cameraView]["position"][1];
+  var z = this.camerasSet[this.cameraView]["position"][2];
+
+  mat4.translate(transformsMatrix, transformsMatrix, [x, y, z]);
+
+  var angX = this.camerasSet[this.cameraView]["rotation"][0] * (Math.PI / 180);
+  var angY = this.camerasSet[this.cameraView]["rotation"][1] * (Math.PI / 180);
+  var angZ = this.camerasSet[this.cameraView]["rotation"][2] * (Math.PI / 180);
+
+  mat4.rotateX(transformsMatrix, transformsMatrix, angX);
+  mat4.rotateY(transformsMatrix, transformsMatrix, angY);
+  mat4.rotateZ(transformsMatrix, transformsMatrix, angZ);
+
+  var sX = this.camerasSet[this.cameraView]["scale"][0];
+  var sY = this.camerasSet[this.cameraView]["scale"][1];
+  var sZ = this.camerasSet[this.cameraView]["scale"][2];
+
+  mat4.scale(transformsMatrix, transformsMatrix, [sX, sY, sZ]);
+
+  mat4.multiply(this.graph.initialTransforms, this.graph.initialFixedTransforms, transformsMatrix);
+}
+
 /**
  * @brief Initializes the scene lights with the values read from the LSX file.
  */
