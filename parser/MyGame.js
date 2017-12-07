@@ -34,28 +34,52 @@ function MyGame(scene) {
 }
 MyGame.prototype.logPicking = function (obj) {
   if(this.pieces.indexOf(obj.nodeID) != -1) {//obj is piece
-    this.pieceToMove = obj;
+    this.pieceToMove = obj; //Escolher a peça
   } else {
     if(this.pieces.indexOf(obj.nodeID) == -1 && this.pieceToMove != null){
       this.move = [];
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
-      getPrologRequest('laigInterface(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')');
-      if(this.scene.nodesWithAnimation.indexOf(this.pieceToMove.nodeID) == -1)
-        this.scene.nodesWithAnimation.push(this.pieceToMove.nodeID);
-      if(this.scene.graph.animations.indexOf(this.showMove()) == -1){
-        //Create animation
-        let p1 = [this.pieceToMove.position.x, 0, this.pieceToMove.position.y];
-        let p2 = [this.pieceToMove.position.x, ANIMATION_HEIGHT, this.pieceToMove.position.y];
-        let p3 = [obj.position.x, ANIMATION_HEIGHT, obj.position.y];
-        let p4 = [obj.position.x, 0, obj.position.y];
-        let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
-        this.scene.graph.animations[this.showMove()] = aux_animation;
-        console.log('Created animation: '+ this.showMove());
-      }
-      this.pieceToMove.animation.push(this.showMove());
-      this.pieceToMove = null;
-      this.move = [];
+      this.tileToMove = obj;
+      console.log(this.showBoard());
+      getPrologRequest(this,'laigInterface(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     }
   }
+}
+function onSuccess(data) {
+  console.log('Server Response');
+  console.log(data);
+  console.log(this.asker);
+  switch (data.target.response) {
+    case 'OK':{
+      this.asker.moveOK();
+      break;
+    }
+    default:
+      console.log('Invalid response from server! '+ data.target.response);
+  }
+}
+MyGame.prototype.moveOK = function (data) {
+  if(this.scene.nodesWithAnimation.indexOf(this.pieceToMove.nodeID) == -1){
+    this.scene.nodesWithAnimation.push(this.pieceToMove.nodeID);
+  } else {
+    this.pieceToMove.initialAnimTime = 0;
+  }
+  if(this.scene.graph.animations.indexOf(this.showMove()) == -1){
+    //Create animation
+    let p1 = [this.pieceToMove.position.x, 0, this.pieceToMove.position.y];
+    let p2 = [this.pieceToMove.position.x, ANIMATION_HEIGHT, this.pieceToMove.position.y];
+    let p3 = [this.tileToMove.position.x, ANIMATION_HEIGHT, this.tileToMove.position.y];
+    let p4 = [this.tileToMove.position.x, 0, this.tileToMove.position.y];
+    let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
+    this.scene.graph.animations[this.showMove()] = aux_animation;
+    console.log('Created animation: '+ this.showMove());
+  }
+  this.pieceToMove.animation.push(this.showMove());
+  this.board[this.pieceToMove.x-1][this.pieceToMove.y-1] = 0;
+  this.board[this.tileToMove.x-1][this.tileToMove.y-1] = this.player;
+  this.pieceToMove.position = this.tileToMove.position;
+  this.pieceToMove = null;
+  this.tileToMove = null;
+  this.move = [];
 }

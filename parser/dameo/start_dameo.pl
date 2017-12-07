@@ -24,4 +24,5 @@
 
 dameo :- assert(level(1)),chooseGameMode.
 
-laigInterface(Board-Player-Moves,Res):- laigTeste(Board,Player,Moves), Res = 'FFFFFFFFFFF'.
+laigInterface(Board-Player-Moves,Res):- laigTeste(Board,Player,Moves), !, Res = 'OK'.
+laigInterface(_,Res):- Res = 'Invalid Move'.
