@@ -53,10 +53,15 @@ MyLinearAnimation.prototype.calculateDist = function (point1, point2) {
     return dist;
 }
 MyLinearAnimation.prototype.calculateAng = function(point1, point2) {
-    var vec = [(point2[0] - point1[0]), -(point2[2] - point1[2])];
-	var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2));
-	var currAng = Math.acos(vec[0]/vecDist);
-    currAng += Math.PI/2;
+    var vec = [(point2[0] - point1[0]), (point2[2] - point1[2])];
+    if(vec[0] == 0 && vec[1] == 0) {
+        return 0;
+    }
+    var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2));
+    var currAng = Math.acos(vec[1]/vecDist);
+    if(vec[0] < 0) {
+        currAng = -currAng;
+    }
     return currAng;
 }
 
