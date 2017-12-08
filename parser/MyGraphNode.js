@@ -4,42 +4,30 @@
  * @param nodeID node ID of the node
  * @constructor
 **/
-
 function MyGraphNode(graph, nodeID) {
     this.graph = graph;
-
     this.nodeID = nodeID;
-    
     // IDs of child nodes.
     this.children = [];
-
     // Leaves nodes objects.
     this.leaves = [];
-
     // The material ID.
     this.materialID = null;
-
     // The texture ID.
     this.textureID = null;
-
     this.selected = false;
-    
     this.animation = [];
-
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
-    
     this.originalMatrix = mat4.create();
     mat4.identity(this.originalMatrix);
-
     this.graphTextures = this.graph.textures;
     this.graphTexturesStack = this.graph.scene.texturesStack;
     this.graphMaterialsStack = this.graph.scene.materialsStack;
-
     this.animationN = 0;
     this.initialAnimTime = 0;
+    this.position = {x: 0, y:0};
 }
-
 /**
  * @brief Adds the reference (ID) of another node to this node's children array.
  * @param nodeID reference to add
@@ -47,7 +35,6 @@ function MyGraphNode(graph, nodeID) {
 MyGraphNode.prototype.addChild = function(nodeID) {
     this.children.push(nodeID);
 }
-
 /**
  * @brief Adds a leaf to this node's leaves array.
  * @param leaf leaf to add
@@ -55,18 +42,19 @@ MyGraphNode.prototype.addChild = function(nodeID) {
 MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
-
-
 /**
  * @brief Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-
+  //TODO NEW_______________
+  if(this.selected) {
+    this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
+  }    //__________________________
     /**
      * Call for children display
      */
     if(this.graph.scene.selectedNode == this.nodeID)
-        this.graph.scene.setActiveShader(this.graph.scene.shader);//TODO
+        this.graph.scene.setActiveShader(this.graph.scene.shader);
     this.graph.scene.pushMatrix();
     this.graph.scene.multMatrix(this.transformMatrix);
 
@@ -110,7 +98,7 @@ MyGraphNode.prototype.display = function(parentID) {
             this.leaves[i].display();
         }
     }
-    
+
     if(this.materialID != 'null'){//depois de um no acabar o seu display e o dos seus filhos, retira o seu material da stack
         this.graphMaterialsStack.pop();
         this.graphMaterialsStack[this.graph.scene.materialsStack.length - 1].apply();
@@ -128,7 +116,6 @@ MyGraphNode.prototype.display = function(parentID) {
     if(this.graph.scene.selectedNode == this.nodeID)
         this.graph.scene.setActiveShader(this.graph.scene.defaultShader);//TODO
 }
-
 /**
  * @brief Updates the animation matrix
  * @param currTime

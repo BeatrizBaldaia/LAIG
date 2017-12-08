@@ -4,19 +4,20 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 
 function getUrlVars() {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
     function(m,key,value) {
       vars[decodeURIComponent(key)] = decodeURIComponent(value);
     });
     return vars;
-}	 
+}
 
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
 			 'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js',
-			 'MyRectangle.js','MyCylinder.js', 'MyTriangle.js',
-			 'MySphere.js','MyCircle.js','MyPatch.js', 'MyAnimation.js',
-             'MyLinearAnimation.js','MyBezierAnimation.js',
-             'MyCircularAnimation.js', 'MyComboAnimation.js',
+			 'primitives/MyRectangle.js','primitives/MyCylinder.js', 'primitives/MyTriangle.js',
+			 'primitives/MySphere.js','primitives/MyCircle.js','primitives/MyPatch.js', 'animations/MyAnimation.js',
+             'animations/MyLinearAnimation.js','animations/MyBezierAnimation.js',
+             'animations/MyCircularAnimation.js', 'animations/MyComboAnimation.js',
+			 'server.js', 'MyGame.js',
 
 main=function()
 {
@@ -33,15 +34,15 @@ main=function()
 
     myInterface.setActiveCamera(myScene.camera);
 
-	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml 
-	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor) 
-	
+	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
+	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
+
 	var filename=getUrlVars()['file'] || "space.xml";
 
-	// create and load graph, and associate it to scene. 
+	// create and load graph, and associate it to scene.
 	// Check console for loading errors
 	var myGraph = new MySceneGraph(filename, myScene);
-	
+
 	// start
     app.run();
 }
