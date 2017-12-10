@@ -55,6 +55,11 @@ function onSuccess(data) {
       this.asker.moveOK();
       break;
     }
+    case 'Capture':{
+      this.asker.moveOK();
+      this.asker.removeCapturePiece();
+      break;
+    }
     default:
       console.log('Invalid response from server! '+ data.target.response);
   }

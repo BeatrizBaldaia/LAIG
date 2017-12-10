@@ -24,6 +24,3 @@
 :-include('utils/aux_func.pl').
 
 dameo :- assert(level(1)),chooseGameMode.
-
-jogadaValida(Board-Player-Moves,Res):- jogadaValidaTeste(Board,Player,Moves), !, Res = 'OK'.
-jogadaValida(_,Res):- Res = 'Invalid Move'.
