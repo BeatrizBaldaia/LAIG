@@ -54,12 +54,12 @@ MyBezierAnimation.prototype.getMatrix = function(initialTime, currTime) {
   mat4.identity(res);
   res = mat4.translate(res, res, trans_vec);
 	res = mat4.rotate(res, res, alfa, [0,1,0]);
-	console.log('Matriz :'+res);
-	console.log('TRASNS_VEC :'+trans_vec);
-	console.log('ALFA :'+alfa);
-	console.log('DESTA :'+ deltaTime);
-	console.log('S :'+s);
-	console.log('TOATL TIME :'+this.time);
+	// console.log('Matriz :'+res);
+	// console.log('TRASNS_VEC :'+trans_vec);
+	// console.log('ALFA :'+alfa);
+	// console.log('DESTA :'+ deltaTime);
+	// console.log('S :'+s);
+	// console.log('TOATL TIME :'+this.time);
 	return res;
 }
 
@@ -92,16 +92,16 @@ function casteljau(obj){
 		Math.hypot(p34[0]-p234[0],p34[1]-p234[1],p34[2]-p234[2]) +
 		Math.hypot(obj.p4[0]-p34[0],obj.p4[1]-p34[1],obj.p4[2]-p34[2]);
 
-	console.log('P1 :'+obj.p1);
-	console.log('P2 :'+obj.p2);
-	console.log('P3 :'+obj.p3);
-	console.log('P4 :'+obj.p4);
-	console.log('P12 :'+ p12);
-	console.log('P23 :'+p23);
-	console.log('P34 :'+p34);
-	console.log('P123 :'+p123);
-	console.log('P234 :'+p234);
-	console.log('DISTANCE :'+distance);
+	// console.log('P1 :'+obj.p1);
+	// console.log('P2 :'+obj.p2);
+	// console.log('P3 :'+obj.p3);
+	// console.log('P4 :'+obj.p4);
+	// console.log('P12 :'+ p12);
+	// console.log('P23 :'+p23);
+	// console.log('P34 :'+p34);
+	// console.log('P123 :'+p123);
+	// console.log('P234 :'+p234);
+	// console.log('DISTANCE :'+distance);
 	return distance;
 }
 MyBezierAnimation.prototype.Q = function(s){

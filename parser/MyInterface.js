@@ -51,7 +51,7 @@ MyInterface.prototype.init = function(application) {
   			'Side View': 3
   	}).onChange(function(v)
     {
-        obj.scene.updateCameraView(v);
+        obj.scene.updateCameraVelocity(v);
     }).name('Game View');
 
 

@@ -15,35 +15,16 @@ function XMLscene(interface) {
     for(var i = 0; i < this.nodesWithAnimation.length; i++) {
       this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
     }
-    /* CAMERA VIEW */
-    if(this.newCameraView != this.cameraView) {
-      let deltaPos = this.camera["position"] - this.camerasSet[this.newCameraView]["position"];
-      let dist = Math.sqrt(Math.pow(deltaPos[0], 2) + Math.pow(deltaPos[1], 2) + Math.pow(deltaPos[2], 2));
-      if(this.timeACC >= 2000) { //camara ja na posicao final
-        this.cameraView = this.newCameraView;
-        this.previousTime = 0;
-        this.timeACC = 0;
-      } else {//ainda e preciso mover a camara
-        this.timeACC += (currTime - this.previousTime);
-        this.previousTime = currTime;
 
-      }
-    }
+    /* CAMERA VIEW */
+      this.updateCameraView(currTime);
   }
 
   this.setPickEnabled(true);
 
 
   /* CAMERA VIEW */
-  this.previousTime = 0;
-  this.timeACC = 0;
-  this.newCameraView = 0;
-  this.cameraView = 0;
-  var camera1 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
-  var camera2 = {position: [20, 10, 5, 0], rotation: [0, 0, 60], scale: [1, 1, 1]};
-  var camera3 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
-  var camera4 = {position: [10, 10, 10, 0], rotation: [0, 0, 0], scale: [1, 1, 1]};
-  this.camerasSet = [ camera1, camera2, camera3, camera4 ];
+  this.initCameraVars();
 
   this.game = new MyGame(this);
 
@@ -73,42 +54,10 @@ XMLscene.prototype.init = function(application) {
   //this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
   this.updateColorFactor();
   this.setUpdatePeriod(10);//TODO VER VALOR
-  console.log(this.camera);
 
 }
 XMLscene.prototype.updateColorFactor=function(v) {
   this.shader.setUniformsValues({colorScale: this.colorFactor});
-}
-/**
- * @brief Updates the position and angle of the camera
- */
-XMLscene.prototype.updateCameraView=function(v) {
-  this.newCameraView = this.cameraView;
-
-  let transformsMatrix = mat4.create();
-  mat4.identity(transformsMatrix);
-
-  var x = this.camerasSet[this.cameraView]["position"][0];
-  var y = this.camerasSet[this.cameraView]["position"][1];
-  var z = this.camerasSet[this.cameraView]["position"][2];
-
-  mat4.translate(transformsMatrix, transformsMatrix, [x, y, z]);
-
-  var angX = this.camerasSet[this.cameraView]["rotation"][0] * (Math.PI / 180);
-  var angY = this.camerasSet[this.cameraView]["rotation"][1] * (Math.PI / 180);
-  var angZ = this.camerasSet[this.cameraView]["rotation"][2] * (Math.PI / 180);
-
-  mat4.rotateX(transformsMatrix, transformsMatrix, angX);
-  mat4.rotateY(transformsMatrix, transformsMatrix, angY);
-  mat4.rotateZ(transformsMatrix, transformsMatrix, angZ);
-
-  var sX = this.camerasSet[this.cameraView]["scale"][0];
-  var sY = this.camerasSet[this.cameraView]["scale"][1];
-  var sZ = this.camerasSet[this.cameraView]["scale"][2];
-
-  mat4.scale(transformsMatrix, transformsMatrix, [sX, sY, sZ]);
-
-  mat4.multiply(this.graph.initialTransforms, this.graph.initialFixedTransforms, transformsMatrix);
 }
 
 /**
@@ -141,7 +90,7 @@ XMLscene.prototype.initLights = function() {
  * @brief Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-  this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
+  this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(50, 50, 50),vec3.fromValues(0, 0, 0));
 }
 /** @brief Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -217,3 +166,62 @@ XMLscene.prototype.logPicking = function () {
     }
   }
 }
+
+XMLscene.prototype.initCameraVars = function() {
+    this.previousTime = 0;//tempo do ultimo update
+    this.timeACC = 0;//tempo que se passou entre o momento atual e o ultimo update
+
+    this.currCameraView = 0;//posicao atual da camara
+    this.cameraView = 0;//parametro obtido pela interface
+
+    this.cameraTransitionVel = 0;
+    this.targetTransitionVel = 0;
+
+    var camera1 = {position: vec4.fromValues(50, 50, 50, 0), target: vec3.fromValues(20, 20, 20)};
+    var camera2 = {position: vec4.fromValues(1, 80, 0, 0), target: vec3.fromValues(0, 0, 0)};
+    var camera3 = {position: vec4.fromValues(0, 20, 50, 0), target: vec3.fromValues(0, 0, 0)};
+    var camera4 = {position: vec4.fromValues(50, 30, 0, 0), target: vec3.fromValues(0, 0, 0)};
+    this.camerasSet = [ camera1, camera2, camera3, camera4 ];
+}
+
+/**
+ * @brief Updates the camera transition velocity
+ */
+XMLscene.prototype.updateCameraVelocity=function(v) {
+    this.cameraTransitionVel = (distanceBetweenPoints(this.camera["position"], this.camerasSet[this.cameraView]["position"])) / 2000;
+    this.targetTransitionVel = (distanceBetweenPoints(this.camera["target"], this.camerasSet[this.cameraView]["target"])) / 2000;
+}
+
+/**
+ * @brief Updates the camera position focus on a target
+ */
+XMLscene.prototype.updateCameraView=function(currTime) {
+
+    if(this.cameraView != this.currCameraView) {
+        let deltaPos = getDirectionVec(this.camera["position"], this.camerasSet[this.cameraView]["position"]);
+        let deltaTarget = getDirectionVec(this.camera["target"], this.camerasSet[this.cameraView]["target"]);
+        let distPos = distanceBetweenPoints(this.camera["position"], this.camerasSet[this.cameraView]["position"]);
+        let distTarget = distanceBetweenPoints(this.camera["position"], this.camerasSet[this.cameraView]["position"]);
+        if(this.timeACC >= 2000) { //camara ja na posicao final
+            this.currCameraView = this.cameraView;
+            this.previousTime = 0;
+            this.timeACC = 0;
+        } else {//ainda e preciso mover a camara
+            let deltaTime = 0;
+            if(this.previousTime != 0) {
+                deltaTime = currTime - this.previousTime;
+            }
+            this.timeACC += deltaTime;
+            this.previousTime = currTime;
+            let distanceToGo = deltaTime * this.cameraTransitionVel; //velocidade = 2 segundos por animacao
+            let vectorToGo = calculateDeltaTranslation(this.camera["position"], deltaPos, distanceToGo, distPos);
+            let distanceToGoTarget = deltaTime * this.targetTransitionVel;
+            let vectorToGoTarget = calculateDeltaTranslation(this.camera["target"], deltaTarget, distanceToGoTarget, distTarget);
+
+            this.camera.setPosition(vectorToGo);
+            this.camera.setTarget(vectorToGoTarget);
+            this.applyViewMatrix();
+        }
+    }
+}
+
