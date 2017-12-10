@@ -42,7 +42,7 @@ MyGame.prototype.logPicking = function (obj) {
       this.move.push(obj.position);
       this.tileToMove = obj;
       //console.log(this.showBoard());
-      getPrologRequest(this,'laigInterface(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+      getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     }
   }
 }

@@ -1,7 +1,7 @@
 /*
-*Jogador escolhe a peça que vai jogar
-*e o sentido do movimento da mesma.
-*Movimento sem captura
+  *Jogador escolhe a peça que vai jogar
+  *e o sentido do movimento da mesma.
+  *Movimento sem captura
 */
 selectPiece(CurrBoard, NewBoard, PlayerNum):-
   showBoard(CurrBoard),
@@ -18,9 +18,9 @@ selectPiece(CurrBoard, NewBoard, PlayerNum):-
   defineDirection(CurrBoard, NewBoard, X-Y, Player).
 
 /*
-*Jogador vai escolher a direcao do movimento (casa destino)
-*da peca escolhida.
-*Caso em que a peca escolhida e um Homem
+  *Jogador vai escolher a direcao do movimento (casa destino)
+  *da peca escolhida.
+  *Caso em que a peca escolhida e um Homem
 */
 defineDirection(CurrBoard, NewBoard, X-Y, Player):-
   member(Player, [1, 2]), !,
@@ -41,9 +41,9 @@ defineDirection(CurrBoard, NewBoard, X-Y, Player):-
   updateBoardSimpleMove(CurrBoard, NewBoard, X-Y, NewX-NewY, Player).
 
 /*
-*Jogador vai escolher a direcao do movimento (numero que representa a direcao)
-*da peca escolhida.
-*Caso em que a peca escolhida e um Rei
+  *Jogador vai escolher a direcao do movimento (numero que representa a direcao)
+  *da peca escolhida.
+  *Caso em que a peca escolhida e um Rei
 */
 defineDirection(CurrBoard, FinalBoard, X-Y, Player):-
   member(Player, [11, 22]), !,
@@ -57,9 +57,9 @@ defineDirection(CurrBoard, FinalBoard, X-Y, Player):-
   member(D, [1, 2, 3, 4, 6, 7, 8, 9]),
   keepMovingKing(CurrBoard, FinalBoard, X-Y, Player, D).
 /*
-*Peca Rei vai continuar a andar
-*enquanto o jogador continuar a introduzir o numero da
-*direcao escolhida anteriormente
+  *Peca Rei vai continuar a andar
+  *enquanto o jogador continuar a introduzir o numero da
+  *direcao escolhida anteriormente
 */
 keepMovingKing(CurrBoard, FinalBoard, X-Y, Player, D):-
   validKingMove(CurrBoard, X-Y, NewX-NewY, Player, D),
@@ -74,9 +74,9 @@ keepMovingKing(CurrBoard, FinalBoard, X-Y, Player, D):-
 	  FinalBoard = NewBoard).
 
 /*
-*O rei pode andar mais do que uma
-*casa na mesma linha de percurso
-*(na mesma direcao e sentidos anteriormente escolhidos)
+  *O rei pode andar mais do que uma
+  *casa na mesma linha de percurso
+  *(na mesma direcao e sentidos anteriormente escolhidos)
 */
 keepMoving(Direction):-
   getInteger(D),
@@ -85,11 +85,11 @@ keepMoving(Direction):-
     ite(member(D, [1, 2, 3, 4, 6, 7, 8, 9]), keepMoving(Direction), fail)).
 
 /*
-*Jogador escolhe a peça que vai jogar.
-*Movimento com captura obrigatoria.
-*
-*Jogador so pode fazer um dos movimentos de captura
-*da lista Moves que tem as capturas otimas
+  *Jogador escolhe a peça que vai jogar.
+  *Movimento com captura obrigatoria.
+  *
+  *Jogador so pode fazer um dos movimentos de captura
+  *da lista Moves que tem as capturas otimas
 */
 selectCapturePiece(CurrBoard, Player, Moves, MaxCaptureNum, NewBoard) :-
   showBoard(CurrBoard),
@@ -105,8 +105,8 @@ selectCapturePiece(CurrBoard, Player, Moves, MaxCaptureNum, NewBoard) :-
   moveCapturePiece(CurrBoard, X-Y, P, UpdatedMoves, MaxCaptureNum, 2, NewBoard).
 
 /*
-*Jogador vai escolhendo as posicoes que tem
-*de ocupar no percurso de captura
+  *Jogador vai escolhendo as posicoes que tem
+  *de ocupar no percurso de captura
 */
 moveCapturePiece(CurrBoard,  X-Y, Player, Moves, MaxCaptureNum, CurrNum, NewBoard) :-
   ite(CurrNum > (MaxCaptureNum + 1),

@@ -25,23 +25,6 @@ playGame(Player, CurrBoard, NewPlayer, NewBoard):-
   mandatoryCapture(CurrBoard, NewBoard, Player),
   ite(Player = 1, NewPlayer is 2, NewPlayer is 1).
 
-laigTeste(CurrBoard, Player, Move):-
-	findall(Num-Moves,getCapturesList(CurrBoard, X-Y, Player, Moves, Num), L),
-	sort(L, LSorted),
-	reverse(LSorted, LInverted),
-	nth1(1, LInverted, NCaptures-BestMove),
-	getBestCaptures(LInverted, Best, [], NCaptures),
-	ite(NCaptures = 0,
-		laigTesteValid(CurrBoard, Player, Move),
-		write(erroDeviaCapturar)%selectCapturePiece(CurrBoard, Player, Best, NCaptures, NewBoard)
-	).
-laigTesteValid(CurrBoard, Player, [X-Y,NewX-NewY]):-
-	ite(
-		Player = 1,
-		validMan1Move(CurrBoard, X-Y, NewX-NewY, D),
-		validMan2Move(CurrBoard, X-Y, NewX-NewY, D)),
-	updateBoardSimpleMove(CurrBoard, NewBoard, X-Y, NewX-NewY, Player).
-  
 /*
 *Verifica de o jogador e obrigado a capturar.
 *Se sim, jogador faz movimento de captura,
