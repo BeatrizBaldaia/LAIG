@@ -94,7 +94,7 @@ XMLscene.prototype.initLights = function() {
  * @brief Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-  this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(50, 50, 50),vec3.fromValues(0, 0, 0));
+  this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(30, 30, 30),vec3.fromValues(0, 0, 0));
 }
 /** @brief Handler called when the graph is finally loaded.
  * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -181,11 +181,11 @@ XMLscene.prototype.initCameraVars = function() {
     this.cameraTransitionVel = 0;
     this.targetTransitionVel = 0;
 
-    var camera1 = {position: vec4.fromValues(50, 50, 50, 0), target: vec3.fromValues(20, 20, 20), follow: 0};
-    var camera2 = {position: vec4.fromValues(1, 80, 0, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
-    var camera3 = {position: vec4.fromValues(0, 20, 50, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
-    var camera4 = {position: vec4.fromValues(50, 30, 0, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
-    var camera5 = {position: vec4.fromValues(50, 50, 50, 0), target: "bigRocket", follow: 1};
+    var camera1 = {position: vec4.fromValues(30, 30, 30, 0), target: vec3.fromValues(20, 20, 20), follow: 0};
+    var camera2 = {position: vec4.fromValues(1, 60, 0, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
+    var camera3 = {position: vec4.fromValues(0, 10, 30, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
+    var camera4 = {position: vec4.fromValues(30, 10, 0, 0), target: vec3.fromValues(0, 0, 0), follow: 0};
+    var camera5 = {position: vec4.fromValues(30, 30, 30, 0), target: "bigRocket", follow: 1};
     this.camerasSet = [ camera1, camera2, camera3, camera4, camera4];
 }
 
