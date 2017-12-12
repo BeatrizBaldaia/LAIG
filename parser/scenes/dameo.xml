@@ -87,7 +87,15 @@
     			    <NODEREF id="tabuleiro" />
     			    <NODEREF id="board_select" />
               <NODEREF id="pieces" />
+              <NODEREF id="interface" />
             </DESCENDANTS>
+        </NODE>
+        <NODE id="interface">
+          <MATERIAL id="null" />
+          <TEXTURE id="null" />
+          <DESCENDANTS>
+            <LEAF  type="rectangle" args="0 1 1 0" />
+          </DESCENDANTS>
         </NODE>
         <NODE id="pieces">
            <MATERIAL id="null" />

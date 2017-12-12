@@ -5,6 +5,7 @@ function MyGame(scene) {
   this.selectIndex = 0;
   this.selectNodesList = {};
   this.pieceToMove = null;
+  this.tileToMove = null;
   this.pieces = [];
   this.player = 1;
   this.move = [];
@@ -34,10 +35,10 @@ function MyGame(scene) {
   }
 }
 MyGame.prototype.logPicking = function (obj) {
-  if(this.pieces.indexOf(obj.nodeID) != -1 && this.captureRequired == false) {//obj is piece
+  if((this.pieces.indexOf(obj.nodeID) != -1) && (this.captureRequired == false)) {//obj is piece
     this.pieceToMove = obj; //Escolher a peça
   } else {
-    if(this.pieces.indexOf(obj.nodeID) == -1 && this.pieceToMove != null){
+    if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null)){
       this.move = [];
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
@@ -70,6 +71,7 @@ function onSuccess(data) {
       this.asker.pieceToMove = auxPiece;
       this.asker.player = auxPlayer;
       this.asker.captureRequired = true;
+      break;
     }
     default:
       console.log('Invalid response from server! '+ data.target.response);
@@ -134,8 +136,10 @@ MyGame.prototype.removeCapturePiece = function () {
   }
   for (let i = 0; i < this.pieces.length; i++){
     let obj = this.scene.graph.nodes[this.pieces[i]];
-    if (obj.position.x == position.x && obj.position.y == position.y) {
+    if ((obj.position.x == position.x) && (obj.position.y == position.y)) {
       this.capturedPiece = obj;
+      console.log(obj.position.x);
+      console.log(this.capturedPiece.position.x);
       break;
     }
   }
@@ -145,7 +149,12 @@ MyGame.prototype.removeCapturePiece = function () {
     this.capturedPiece.initialAnimTime = 0;
   }
   this.capturedPiece.animation.push('remove' + position.x + position.y);
-  this.capturedPiece.position.x = position.x;
-  this.capturedPiece.position.y = position.y;
+        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
+        console.log(this.capturedPiece.nodeID);
+        console.log(this.scene.graph.nodes['e5'].nodeID);
+  this.capturedPiece.position.x = 0; //TODO find out why it alters boardTile
+        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
+  this.capturedPiece.position.y = 0;
+        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
   this.capturedPiece = null;
 }
