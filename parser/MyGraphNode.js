@@ -27,6 +27,10 @@ function MyGraphNode(graph, nodeID) {
     this.animationN = 0;
     this.initialAnimTime = 0;
     this.position = {x: 0, y:0};
+
+    // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
+    // mat4.getTranslation(this.currPosition, this.transformMatrix);
+
 }
 /**
  * @brief Adds the reference (ID) of another node to this node's children array.
@@ -137,5 +141,12 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
         }
     }
 
-
 }
+
+MyGraphNode.prototype.getPosition = function() {
+    // mat4.getTranslation(this.currPosition, this.transformMatrix);
+    // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
+    // console.log(this.currPosition);
+    return this.currPosition;
+}
+
