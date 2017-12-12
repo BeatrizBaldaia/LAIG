@@ -53,7 +53,7 @@ MyBezierAnimation.prototype.getMatrix = function(initialTime, currTime) {
 	let res = mat4.create();
   mat4.identity(res);
   res = mat4.translate(res, res, trans_vec);
-	res = mat4.rotate(res, res, alfa, [0,1,0]);
+//	res = mat4.rotate(res, res, alfa, [0,1,0]); //NOTE: For pieces
 	// console.log('Matriz :'+res);
 	// console.log('TRASNS_VEC :'+trans_vec);
 	// console.log('ALFA :'+alfa);

@@ -1,5 +1,8 @@
 jogadaValida(Board-Player-Moves,Res):- jogadaValidaSimplesTeste(Board,Player,Moves), !, Res = 'OK'.
-jogadaValida(Board-Player-Moves,Res):- jogadaValidaCapturaTeste(Board,Player,Moves,More), !, Res = 'Capture'.
+jogadaValida(Board-Player-Moves,Res):- jogadaValidaCapturaTeste(Board,Player,Moves,More),
+ 	!, ite(More = yes,
+				Res = 'Capture',
+				Res = 'NCapture').
 jogadaValida(_,Res):- Res = 'Invalid Move'.
 
 jogadaValidaSimplesTeste(CurrBoard, Player, Move):-
@@ -26,8 +29,6 @@ jogadaValidaCapturaTeste(CurrBoard, Player, Move, More):-
 			(More = yes, turnToOneCapture(Best, NewBest), member(Move, NewBest))))
 	).
 
-
-
 simpleMoveTeste(CurrBoard, Player, [X-Y,NewX-NewY]):-
 	ite(
 		Player = 1,
@@ -35,11 +36,17 @@ simpleMoveTeste(CurrBoard, Player, [X-Y,NewX-NewY]):-
 		validMan2Move(CurrBoard, X-Y, NewX-NewY, D)),
 	updateBoardSimpleMove(CurrBoard, NewBoard, X-Y, NewX-NewY, Player).
 
-%ALTERAR, mal
-captureTeste(CurrBoard, Player, Moves, MaxCaptureNum, [X-Y,NewX-NewY]) :-
-  ite(Player = 1, King is 11, King is 22),
-  findPiece(CurrBoard, X-Y, P),
-  member(P, [Player, King]),
-  removeCaptures(X-Y, 1, Moves, UpdatedMoves),
-  \+length(UpdatedMoves, 0), !,
-  moveCapturePiece(CurrBoard, X-Y, P, UpdatedMoves, MaxCaptureNum, 2, NewBoard).
+turnToOneCapture([], []).
+turnToOneCapture([[A,B|_]|Continue], [[A,B]|NewContinue]):-
+	turnToOneCapture(Continue, NewContinue).
+
+/*
+	%ALTERAR, mal
+	captureTeste(CurrBoard, Player, Moves, MaxCaptureNum, [X-Y,NewX-NewY]) :-
+	  ite(Player = 1, King is 11, King is 22),
+	  findPiece(CurrBoard, X-Y, P),
+	  member(P, [Player, King]),
+	  removeCaptures(X-Y, 1, Moves, UpdatedMoves),
+	  \+length(UpdatedMoves, 0), !,
+	  moveCapturePiece(CurrBoard, X-Y, P, UpdatedMoves, MaxCaptureNum, 2, NewBoard).
+*/
