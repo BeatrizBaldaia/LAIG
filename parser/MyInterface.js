@@ -48,7 +48,8 @@ MyInterface.prototype.init = function(application) {
   			'Fixed Camera Centering': 0,
   			'Top View': 1,
   			'First-Person': 2,
-  			'Side View': 3
+  			'Side View': 3,
+            'Follow the node': 4
   	}).onChange(function(v)
     {
         obj.scene.updateCameraVelocity(v);
