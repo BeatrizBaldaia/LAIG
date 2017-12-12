@@ -17,12 +17,10 @@
 :-include('logic/player_PC_move.pl').
 :-include('logic/promotion.pl').
 :-include('logic/player_man_king_capture.pl').
+:-include('logic/protocol.pl').
 
 :-include('utils/init.pl').
 :-include('utils/map_positions.pl').
 :-include('utils/aux_func.pl').
 
 dameo :- assert(level(1)),chooseGameMode.
-
-laigInterface(Board-Player-Moves,Res):- laigTeste(Board,Player,Moves), !, Res = 'OK'.
-laigInterface(_,Res):- Res = 'Invalid Move'.

@@ -41,18 +41,23 @@ MyGame.prototype.logPicking = function (obj) {
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
       this.tileToMove = obj;
-      console.log(this.showBoard());
-      getPrologRequest(this,'laigInterface(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+      //console.log(this.showBoard());
+      getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     }
   }
 }
 function onSuccess(data) {
-  console.log('Server Response');
-  console.log(data);
-  console.log(this.asker);
+//  console.log('Server Response');
+//  console.log(data);
+//  console.log(this.asker);
   switch (data.target.response) {
     case 'OK':{
       this.asker.moveOK();
+      break;
+    }
+    case 'Capture':{
+      this.asker.moveOK();
+      this.asker.removeCapturePiece();
       break;
     }
     default:
@@ -73,13 +78,15 @@ MyGame.prototype.moveOK = function (data) {
     let p4 = [this.tileToMove.position.x, 0, this.tileToMove.position.y];
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
     this.scene.graph.animations[this.showMove()] = aux_animation;
-    console.log('Created animation: '+ this.showMove());
+    //console.log('Created animation: '+ this.showMove());
   }
   this.pieceToMove.animation.push(this.showMove());
-  this.board[this.pieceToMove.x-1][this.pieceToMove.y-1] = 0;
-  this.board[this.tileToMove.x-1][this.tileToMove.y-1] = this.player;
+  this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
+  this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = this.player;
   this.pieceToMove.position = this.tileToMove.position;
   this.pieceToMove = null;
   this.tileToMove = null;
   this.move = [];
+  this.player = (this.player == 1)? 2 : 1;
+  //console.log(this.showBoard());
 }
