@@ -96,7 +96,8 @@ MyGame.prototype.moveOK = function () {
   this.pieceToMove.animation.push(this.showMove());
   this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
   this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = this.player;
-  this.pieceToMove.position = this.tileToMove.position;
+  this.pieceToMove.position.x = this.tileToMove.position.x;
+  this.pieceToMove.position.y = this.tileToMove.position.y;
   this.pieceToMove = null;
   this.tileToMove = null;
   this.move = [];
@@ -149,12 +150,7 @@ MyGame.prototype.removeCapturePiece = function () {
     this.capturedPiece.initialAnimTime = 0;
   }
   this.capturedPiece.animation.push('remove' + position.x + position.y);
-        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
-        console.log(this.capturedPiece.nodeID);
-        console.log(this.scene.graph.nodes['e5'].nodeID);
-  this.capturedPiece.position.x = 0; //TODO find out why it alters boardTile
-        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
+  this.capturedPiece.position.x = 0;
   this.capturedPiece.position.y = 0;
-        console.log('Fim remove '+this.scene.graph.nodes['e5'].position.x + ' ' +this.scene.graph.nodes['e5'].position.y);
   this.capturedPiece = null;
 }
