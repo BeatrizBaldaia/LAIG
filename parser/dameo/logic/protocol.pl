@@ -40,13 +40,6 @@ turnToOneCapture([], []).
 turnToOneCapture([[A,B|_]|Continue], [[A,B]|NewContinue]):-
 	turnToOneCapture(Continue, NewContinue).
 
-/*
-	%ALTERAR, mal
-	captureTeste(CurrBoard, Player, Moves, MaxCaptureNum, [X-Y,NewX-NewY]) :-
-	  ite(Player = 1, King is 11, King is 22),
-	  findPiece(CurrBoard, X-Y, P),
-	  member(P, [Player, King]),
-	  removeCaptures(X-Y, 1, Moves, UpdatedMoves),
-	  \+length(UpdatedMoves, 0), !,
-	  moveCapturePiece(CurrBoard, X-Y, P, UpdatedMoves, MaxCaptureNum, 2, NewBoard).
-*/
+protocolgameOver(OldBoard, Player):-
+     validMovesPC(OldBoard, Player, Moves, Simple),
+     ite(Moves = [], true, fail).

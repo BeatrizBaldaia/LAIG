@@ -248,20 +248,6 @@
                 <LEAF  type="sphere" args=".5 20 20" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="pecaPlayer1">
-            <MATERIAL id="player1" />
-            <TEXTURE id="null" />
-            <DESCENDANTS>
-                <NODEREF id="peca" />
-            </DESCENDANTS>
-        </NODE>
-        <NODE id="pecaPlayer2">
-            <MATERIAL id="player2" />
-            <TEXTURE id="null" />
-            <DESCENDANTS>
-                <NODEREF id="peca" />
-            </DESCENDANTS>
-        </NODE>
 <!-- Nos que representam as casas-->
 <NODE id="a1" selectable="1" boardTile="1">>
         <MATERIAL id="casa1" />
@@ -779,155 +765,155 @@
 
 <!-- Nos que representam as pecas-->
 <NODE id="1" selectable="1" piece="a1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="0" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="2" selectable="1" piece="b1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="3" selectable="1" piece="c1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="4" selectable="1" piece="d1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="5" selectable="1" piece="e1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="6" selectable="1" piece="f1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="7" selectable="1" piece="g1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="8" selectable="1" piece="h1">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="7" y="0" z="0" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="9" selectable="1" piece="b2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="10" selectable="1" piece="c2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="11" selectable="1" piece="d2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="12" selectable="1" piece="e2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="13" selectable="1" piece="f2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="14" selectable="1" piece="g2">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="1" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="15" selectable="1" piece="c3">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="2" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="16" selectable="1" piece="d3">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="2" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="17" selectable="1" piece="e3">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="2" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="18" selectable="1" piece="f3">
-      <MATERIAL id="null" />
+      <MATERIAL id="player1" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="2" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer1" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="19" selectable="1" piece="a8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="0" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="20" selectable="1" piece="b8">
@@ -935,7 +921,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="21" selectable="1" piece="c8">
@@ -943,7 +929,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="22" selectable="1" piece="d8">
@@ -951,7 +937,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="23" selectable="1" piece="e8">
@@ -959,7 +945,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="24" selectable="1" piece="f8">
@@ -967,7 +953,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="25" selectable="1" piece="g8">
@@ -975,7 +961,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="26" selectable="1" piece="h8">
@@ -983,7 +969,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="7" y="0" z="7" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="27" selectable="1" piece="b7">
@@ -991,7 +977,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="28" selectable="1" piece="c7">
@@ -999,7 +985,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="29" selectable="1" piece="d7">
@@ -1007,7 +993,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="30" selectable="1" piece="e7">
@@ -1015,7 +1001,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="31" selectable="1" piece="f7">
@@ -1023,7 +1009,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="32" selectable="1" piece="g7">
@@ -1031,7 +1017,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="6" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="33" selectable="1" piece="c6">
@@ -1039,7 +1025,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="5" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="34" selectable="1" piece="d6">
@@ -1047,7 +1033,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="5" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="35" selectable="1" piece="e6">
@@ -1055,7 +1041,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="5" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
   <NODE id="36" selectable="1" piece="f6">
@@ -1063,7 +1049,7 @@
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="5" /> -->
       <DESCENDANTS>
-          <NODEREF id="pecaPlayer2" />
+          <NODEREF id="peca" />
       </DESCENDANTS>
   </NODE>
 <!--Fim de nos que representam pecas-->

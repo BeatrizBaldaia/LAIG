@@ -27,7 +27,7 @@ function MyGraphNode(graph, nodeID) {
     this.animationN = 0;
     this.initialAnimTime = 0;
     this.position = {x: 0, y:0};
-
+    this.king = false;
     // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
     // mat4.getTranslation(this.currPosition, this.transformMatrix);
 
@@ -76,6 +76,9 @@ MyGraphNode.prototype.display = function(parentID) {
     } else if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//nao vai querer aplicar qualquer tipo de textura
         this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();//desaplica a textura atual, mas nao a remove da stack
     }//se textureID = null, no nao faz nada
+    if(this.king){
+      this.graphTextures['coroa'][0].bind();
+    }
 
     if(this.children.length != 0) {//ver os filhos deste no
         for (var i = 0; i < this.children.length; i++) {
@@ -101,6 +104,9 @@ MyGraphNode.prototype.display = function(parentID) {
             this.leaves[i].setAmplifFactor(afS, afT);
             this.leaves[i].display();
         }
+    }
+    if(this.king){
+      this.graphTextures['coroa'][0].unbind();
     }
 
     if(this.materialID != 'null'){//depois de um no acabar o seu display e o dos seus filhos, retira o seu material da stack
@@ -149,4 +155,3 @@ MyGraphNode.prototype.getPosition = function() {
     // console.log(this.currPosition);
     return this.currPosition;
 }
-

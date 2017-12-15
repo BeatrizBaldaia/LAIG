@@ -49,17 +49,16 @@ MyGame.prototype.logPicking = function (obj) {
   }
 }
 function onSuccess(data) {
-  //  console.log('Server Response');
-  //  console.log(data);
-  //  console.log(this.asker);
   switch (data.target.response) {
     case 'OK':{
       this.asker.moveOK();
+      this.asker.promotionToKing();
       break;
     }
     case 'NCapture':{
       this.asker.removeCapturePiece();
       this.asker.moveOK();
+      this.asker.promotionToKing();
       this.asker.captureRequired = false;
       break;
     }
@@ -95,14 +94,17 @@ MyGame.prototype.moveOK = function () {
   }
   this.pieceToMove.animation.push(this.showMove());
   this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
-  this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = this.player;
+  if(this.pieceToMove.king){
+    this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = (this.player==1)?11:22;
+  } else {
+    this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = this.player;
+  }
   this.pieceToMove.position.x = this.tileToMove.position.x;
   this.pieceToMove.position.y = this.tileToMove.position.y;
   this.pieceToMove = null;
   this.tileToMove = null;
   this.move = [];
   this.player = (this.player == 1)? 2 : 1;
-  //console.log(this.showBoard());
 }
 MyGame.prototype.removeCapturePiece = function () {
   let position = {x: 0, y: 0};
@@ -135,15 +137,7 @@ MyGame.prototype.removeCapturePiece = function () {
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
     //console.log('Created animation: '+ this.showMove());
   }
-  for (let i = 0; i < this.pieces.length; i++){
-    let obj = this.scene.graph.nodes[this.pieces[i]];
-    if ((obj.position.x == position.x) && (obj.position.y == position.y)) {
-      this.capturedPiece = obj;
-      console.log(obj.position.x);
-      console.log(this.capturedPiece.position.x);
-      break;
-    }
-  }
+  this.capturedPiece = this.findPieceByPosition(position);
   if(this.scene.nodesWithAnimation.indexOf(this.capturedPiece.nodeID) == -1){
     this.scene.nodesWithAnimation.push(this.capturedPiece.nodeID);
   } else {
@@ -154,3 +148,26 @@ MyGame.prototype.removeCapturePiece = function () {
   this.capturedPiece.position.y = 0;
   this.capturedPiece = null;
 }
+MyGame.prototype.promotionToKing = function () {
+  for(let i = 0; i < this.board[0].length; i++){
+    if(this.board[0][i] == 2){
+      this.board[0][i] = 22;
+      this.findPieceByPosition({x: (i+1), y: 1}).king = true;
+    }
+  }
+  for(let i = 0; i < this.board[this.board.length - 1].length; i++){
+    if (this.board[this.board.length - 1][i] == 1) {
+      this.board[0][i] = 11;
+      this.findPieceByPosition({x: 8, y: (i+1)}).king = true;
+    }
+  }
+};
+MyGame.prototype.findPieceByPosition = function (position) {
+  for (let i = 0; i < this.pieces.length; i++){
+    let obj = this.scene.graph.nodes[this.pieces[i]];
+    if ((obj.position.x == position.x) && (obj.position.y == position.y)) {
+      return obj;
+    }
+  }
+  return null;
+};
