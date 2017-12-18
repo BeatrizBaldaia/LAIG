@@ -917,7 +917,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="20" selectable="1" piece="b8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -925,7 +925,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="21" selectable="1" piece="c8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -933,7 +933,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="22" selectable="1" piece="d8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -941,7 +941,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="23" selectable="1" piece="e8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -949,7 +949,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="24" selectable="1" piece="f8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -957,7 +957,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="25" selectable="1" piece="g8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -965,7 +965,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="26" selectable="1" piece="h8">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="7" y="0" z="7" /> -->
       <DESCENDANTS>
@@ -973,7 +973,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="27" selectable="1" piece="b7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="1" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -981,7 +981,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="28" selectable="1" piece="c7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -989,7 +989,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="29" selectable="1" piece="d7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -997,7 +997,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="30" selectable="1" piece="e7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -1005,7 +1005,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="31" selectable="1" piece="f7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -1013,7 +1013,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="32" selectable="1" piece="g7">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="6" y="0" z="6" /> -->
       <DESCENDANTS>
@@ -1021,7 +1021,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="33" selectable="1" piece="c6">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="2" y="0" z="5" /> -->
       <DESCENDANTS>
@@ -1029,7 +1029,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="34" selectable="1" piece="d6">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="3" y="0" z="5" /> -->
       <DESCENDANTS>
@@ -1037,7 +1037,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="35" selectable="1" piece="e6">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="4" y="0" z="5" /> -->
       <DESCENDANTS>
@@ -1045,7 +1045,7 @@
       </DESCENDANTS>
   </NODE>
   <NODE id="36" selectable="1" piece="f6">
-      <MATERIAL id="null" />
+      <MATERIAL id="player2" />
       <TEXTURE id="null" />
       <!-- <TRANSLATION x="5" y="0" z="5" /> -->
       <DESCENDANTS>
