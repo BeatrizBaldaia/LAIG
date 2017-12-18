@@ -113,3 +113,4 @@ test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
 :-include('start_dameo.pl').
 
 parse_input(jogadaValida(Vars), Res):- jogadaValida(Vars,Res).
+parse_input(endofGame(Vars), Res):- endofGame(Vars,Res).

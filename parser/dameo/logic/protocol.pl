@@ -5,6 +5,9 @@ jogadaValida(Board-Player-Moves,Res):- jogadaValidaCapturaTeste(Board,Player,Mov
 				Res = 'NCapture').
 jogadaValida(_,Res):- Res = 'Invalid Move'.
 
+endofGame(Board-Player,Res):- protocolgameOver(Board, Player),!,Res = 'End'.
+endofGame(_,Res):- Res = 'Continue'.
+
 jogadaValidaSimplesTeste(CurrBoard, Player, Move):-
 	findall(Num-Moves,getCapturesList(CurrBoard, X-Y, Player, Moves, Num), L),
 	sort(L, LSorted),

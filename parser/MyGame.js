@@ -75,6 +75,7 @@ function onSuccess(data) {
     default:
       console.log('Invalid response from server! '+ data.target.response);
   }
+  this.asker.endGame();
 }
 MyGame.prototype.moveOK = function () {
   if(this.scene.nodesWithAnimation.indexOf(this.pieceToMove.nodeID) == -1){
@@ -170,4 +171,21 @@ MyGame.prototype.findPieceByPosition = function (position) {
     }
   }
   return null;
+};
+MyGame.prototype.endGame = function () {
+  getPrologRequest(this,'endofGame('+this.showBoard() + '-' + this.player+')', gameOver);
+};
+gameOver = function (data) {
+  switch (data.target.response) {
+    case 'Continue':{
+      console.log('Game is still going!');
+      break;
+    }
+    case 'End':{
+      console.log('Game has ended');
+      break;
+    }
+    default:
+      console.log('Invalid response from server! '+ data.target.response);
+  }
 };
