@@ -7,10 +7,13 @@ function MyGame(scene) {
   this.pieceToMove = null;
   this.tileToMove = null;
   this.pieces = [];
+  this.tiles = [];
   this.player = 1;
   this.move = [];
   this.animations = [];
   this.captureRequired = false;
+  this.level = 1;
+  this.type = 1;
   this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
   this.showBoard = function() {
     let s = "[";
@@ -38,13 +41,22 @@ MyGame.prototype.logPicking = function (obj) {
   if((this.pieces.indexOf(obj.nodeID) != -1) && (this.captureRequired == false)) {//obj is piece
     this.pieceToMove = obj; //Escolher a peça
   } else {
-    if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null)){
+    if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null) && (this.tiles.indexOf(obj.nodeID) != -1)){
       this.move = [];
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
       this.tileToMove = obj;
       //console.log(this.showBoard());
       getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+    } else {
+      switch (obj.nodeID) {
+        case 'type':{
+          obj.textureID = 'coroa'
+          break;
+        }
+        default:
+        console.log('NAo sei');//TODO
+      }
     }
   }
 }

@@ -31,6 +31,10 @@
             <file path="images/coroa.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <TEXTURE id="interface">
+            <file path="images/interface.png" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <MATERIAL id="defaultMaterial">
@@ -92,9 +96,32 @@
         </NODE>
         <NODE id="interface">
           <MATERIAL id="null" />
+          <TEXTURE id="interface" />
+          <!--<TRANSLATION x="-5" y="0" z="10" />
+          <ROTATION axis="y" angle="90" />-->
+          <DESCENDANTS>
+            <NODEREF id="type" />
+            <LEAF type="patch" args="10 10">
+                <CPLINE>
+
+                  <CPOINT xx="0" yy="0" zz="-0.2" ww="1" />
+<CPOINT xx="0" yy="5" zz="-0.2" ww="1" />
+
+                </CPLINE>
+                <CPLINE>
+
+
+  <CPOINT xx="10" yy="0" zz="-0.2" ww="1" />
+    <CPOINT xx="10" yy="5" zz="-0.2" ww="1" />
+                </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+        <NODE id="type" selectable="1">
+          <MATERIAL id="null" />
           <TEXTURE id="null" />
           <DESCENDANTS>
-            <LEAF  type="rectangle" args="0 1 1 0" />
+            <LEAF  type="rectangle" args="2 3 3 2" />
           </DESCENDANTS>
         </NODE>
         <NODE id="pieces">
@@ -122,10 +149,10 @@
              <NODEREF id="19" />
              <NODEREF id="20" />
              <NODEREF id="21" />
-             <NODEREF id="22" />
+             <NODEREF id="22" />0
              <NODEREF id="23" />
              <NODEREF id="24" />
-             <NODEREF id="25" />
+             <NODEREF id="25" />0
              <NODEREF id="26" />
              <NODEREF id="27" />
              <NODEREF id="28" />

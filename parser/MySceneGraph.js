@@ -1428,6 +1428,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               let y =  parseInt(nodeID.charAt(1));
               this.nodes[nodeID].position = {x: x,y: y};
               console.log(this.nodes[nodeID].position);
+              this.scene.game.tiles.push(nodeID);
             }
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
