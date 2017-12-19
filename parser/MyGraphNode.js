@@ -142,7 +142,7 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
                 this.originalMatrix,
                 newMatrix);
         } else {//proxima animacao
-            console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
+            //console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
             this.animationN++;
             this.initialAnimTime = 0;
         }
@@ -151,15 +151,13 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
 }
 
 MyGraphNode.prototype.getPosition = function() {
-    // mat4.getTranslation(this.currPosition, this.transformMatrix);
-    // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
-    // console.log(this.currPosition);
     return this.currPosition;
 }
 
 MyGraphNode.prototype.resetPositions = function() {
   this.position.x = this.initialPosition.x;
   this.position.y = this.initialPosition.y;
+  mat4.translate(this.transformMatrix, this.originalMatrix, [this.position.x, 0, this.position.y]);
   if(this.children.length != 0) {//ver os filhos deste no
     for (var i = 0; i < this.children.length; i++) {
       this.graph.getNodes()[this.children[i]].resetPositions();
