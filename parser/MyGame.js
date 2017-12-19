@@ -14,6 +14,7 @@ function MyGame(scene) {
   this.captureRequired = false;
   this.level = 1;
   this.type = 1;
+  this.film = [];
   this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
   this.showBoard = function() {
     let s = "[";
@@ -51,7 +52,13 @@ MyGame.prototype.logPicking = function (obj) {
     } else {
       switch (obj.nodeID) {
         case 'type':{
-          obj.textureID = 'coroa'
+          obj.textureID = 'coroa';
+          break;
+        }
+        case 'film':{
+          obj.textureID = 'coroa';
+          console.log(this);
+          this.playFilm();
           break;
         }
         default:
@@ -116,7 +123,10 @@ MyGame.prototype.moveOK = function () {
   this.pieceToMove.position.y = this.tileToMove.position.y;
   this.pieceToMove = null;
   this.tileToMove = null;
+
+  this.film.push(this.move);
   this.move = [];
+  console.log(this.film);
   this.player = (this.player == 1)? 2 : 1;
 }
 MyGame.prototype.removeCapturePiece = function () {
@@ -201,3 +211,16 @@ gameOver = function (data) {
       console.log('Invalid response from server! '+ data.target.response);
   }
 };
+MyGame.prototype.playFilm = function () {
+  this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
+  this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+  for (let i = 0; i < this.film.length; i++){
+
+    //sleep(3);
+  }
+};
+MyGame.prototype.playFilm_part2 = function () {
+  this.move = this.film[i];
+  this.findPieceByPosition({x:this.move[0].x,y:this.move[0].y});
+  getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+}

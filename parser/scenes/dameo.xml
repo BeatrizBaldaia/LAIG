@@ -101,18 +101,15 @@
           <ROTATION axis="y" angle="90" />-->
           <DESCENDANTS>
             <NODEREF id="type" />
+            <NODEREF id="film" />
             <LEAF type="patch" args="10 10">
                 <CPLINE>
-
                   <CPOINT xx="0" yy="0" zz="-0.2" ww="1" />
-<CPOINT xx="0" yy="5" zz="-0.2" ww="1" />
-
+                  <CPOINT xx="0" yy="5" zz="-0.2" ww="1" />
                 </CPLINE>
                 <CPLINE>
-
-
-  <CPOINT xx="10" yy="0" zz="-0.2" ww="1" />
-    <CPOINT xx="10" yy="5" zz="-0.2" ww="1" />
+                  <CPOINT xx="10" yy="0" zz="-0.2" ww="1" />
+                  <CPOINT xx="10" yy="5" zz="-0.2" ww="1" />
                 </CPLINE>
             </LEAF>
           </DESCENDANTS>
@@ -121,7 +118,14 @@
           <MATERIAL id="null" />
           <TEXTURE id="null" />
           <DESCENDANTS>
-            <LEAF  type="rectangle" args="2 3 3 2" />
+            <LEAF  type="rectangle" args="3 2 4 1" />
+          </DESCENDANTS>
+        </NODE>
+        <NODE id="film" selectable="1">
+          <MATERIAL id="null" />
+          <TEXTURE id="null" />
+          <DESCENDANTS>
+            <LEAF  type="rectangle" args="5 2 6 1" />
           </DESCENDANTS>
         </NODE>
         <NODE id="pieces">

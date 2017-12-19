@@ -1411,6 +1411,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               let y =  parseInt(piece.charAt(1));
               //alert(y);
               this.nodes[nodeID].position = {x: x,y: y};
+              this.nodes[nodeID].initialPosition = {x: x,y: y};
               console.log(this.nodes[nodeID].position);
               this.scene.game.pieces.push(nodeID);
             }
@@ -1427,6 +1428,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               x = (x == 'h') ? 8 : x;
               let y =  parseInt(nodeID.charAt(1));
               this.nodes[nodeID].position = {x: x,y: y};
+              this.nodes[nodeID].initialPosition = {x: x,y: y};
               console.log(this.nodes[nodeID].position);
               this.scene.game.tiles.push(nodeID);
             }
