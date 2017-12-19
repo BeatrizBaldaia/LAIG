@@ -8,6 +8,11 @@ jogadaValida(_,Res):- Res = 'Invalid Move'.
 endofGame(Board-Player,Res):- protocolgameOver(Board, Player),!,Res = 'End'.
 endofGame(_,Res):- Res = 'Continue'.
 
+nextMove(Board-Player-Level,Res):-
+  validMovesPC(Board, Player, Moves, Simple),
+  chooseMovePC(Moves, Move, Level, Board, Player, Simple),
+  !, Res = Move.
+
 jogadaValidaSimplesTeste(CurrBoard, Player, Move):-
 	findall(Num-Moves,getCapturesList(CurrBoard, X-Y, Player, Moves, Num), L),
 	sort(L, LSorted),
@@ -18,7 +23,6 @@ jogadaValidaSimplesTeste(CurrBoard, Player, Move):-
 		moveTeste(CurrBoard, Player, Move),
 		fail
 	).
-
 jogadaValidaCapturaTeste(CurrBoard, Player, Move, More):-
 	findall(Num-Moves,getCapturesList(CurrBoard, X-Y, Player, Moves, Num), L),
 	sort(L, LSorted),

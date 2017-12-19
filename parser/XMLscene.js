@@ -9,6 +9,7 @@ function XMLscene(interface) {
   this.interface = interface;
   this.lightValues = {};
   this.colorFactor=30;
+  this.game = new MyGame(this);
   this.update=function(currTime){
     let s = Math.sin(currTime/1000)/2 + .5;
     this.shader.setUniformsValues({uTimeFactor: s});
@@ -29,8 +30,6 @@ function XMLscene(interface) {
 
   /* CAMERA VIEW */
   this.initCameraVars();
-
-  this.game = new MyGame(this);
 
 }
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -241,4 +240,3 @@ XMLscene.prototype.updateCameraView=function(currTime) {
     }
     return 0;
 }
-

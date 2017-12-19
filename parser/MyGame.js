@@ -1,5 +1,8 @@
 let ANIMATION_VELOCITY = 10;
 let ANIMATION_HEIGHT = 3;
+let BOT_VS_BOT = 3;
+let HUMAN_VS_HUMAN = 1;
+let HUMAN_VS_BOT = 2;
 function MyGame(scene) {
   this.scene = scene;
   this.selectIndex = 0;
@@ -16,6 +19,9 @@ function MyGame(scene) {
   this.type = 1;
   this.film = [];
   this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+  let aux = this;
+  window.setInterval(function(){aux.gameCycle();},1000);
+  //this.game.gameCycle();
   this.showBoard = function() {
     let s = "[";
     for (let i = 0; i < this.board.length; i++) {
@@ -47,18 +53,16 @@ MyGame.prototype.logPicking = function (obj) {
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
       this.tileToMove = obj;
-      //console.log(this.showBoard());
       getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     } else {
       switch (obj.nodeID) {
         case 'type':{
           obj.textureID = 'coroa';
+          this.type = BOT_VS_BOT;
           break;
         }
         case 'film':{
           obj.textureID = 'coroa';
-        //  console.log(this);
-
           this.playFilm();
           break;
         }
@@ -238,4 +242,29 @@ playFilm_part2 = function (mySelf, i) {
   mySelf.pieceToMove = mySelf.findPieceByPosition({x:mySelf.move[0].x, y:mySelf.move[0].y});
   mySelf.tileToMove = mySelf.findTileByPosition({x:mySelf.move[1].x, y:mySelf.move[1].y});
   getPrologRequest(mySelf,'jogadaValida(' + mySelf.showBoard() + '-' + mySelf.player + '-' + mySelf.showMove() + ')', onSuccess);
+}
+MyGame.prototype.gameCycle = function () {
+  switch (this.type) {
+    case HUMAN_VS_HUMAN:{
+      console.log('TOUUUUUUUU');
+      break;
+    }
+    case BOT_VS_BOT:{
+      getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
+      break;
+    }
+    default:
+      console.error('Chegao ao inchegavel');
+  }
+};
+function PCplay(data){
+  console.log(data.target.response);
+  let a = data.target.response;
+  a = a.replace(/[[\]]/g, '');
+  console.log(a);
+  let aa = a.split(',');
+  this.asker.move = [{x:aa[0][0],y:aa[0][2]},{x:aa[1][0],y:aa[1][2]}];
+  this.asker.pieceToMove = this.asker.findPieceByPosition(this.asker.move[0]);
+  this.asker.tileToMove = this.asker.findTileByPosition({x:this.asker.move[1].x, y:this.asker.move[1].y});
+  getPrologRequest(this.asker,'jogadaValida(' + this.asker.showBoard() + '-' + this.asker.player + '-' + this.asker.showMove() + ')', onSuccess);
 }
