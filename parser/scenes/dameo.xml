@@ -44,13 +44,6 @@
             <ambient r="0.4" g="0.4" b="0.4" a="1" />
             <emission r="1.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
-        <MATERIAL id="casa1">
-            <shininess value="1" />
-            <specular r="0.0" g="0.0" b="0.0" a="1" />
-            <diffuse r="0" g="0" b="00" a="1" />
-            <ambient r="1" g="1" b="1" a="1" />
-            <emission r="0" g="0.0" b="0.0" a="1" />
-        </MATERIAL>
         <MATERIAL id="player1">
             <shininess value="1" />
             <specular r="0.0" g="0.0" b="0.0" a="1" />
@@ -65,12 +58,19 @@
             <ambient r="0" g="0" b="1" a="1" />
             <emission r="0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
-        <MATERIAL id="casa2">
+        <MATERIAL id="red">
             <shininess value="1" />
-            <specular r="0.0" g="0.0" b="0.0" a="1" />
-            <diffuse r="0" g="0" b="00" a="1" />
-            <ambient r="1" g="1" b="1" a="1" />
-            <emission r="1" g="1" b="1" a="1" />
+            <specular r="1" g="0.0" b="0.0" a="1" />
+            <diffuse r=".3" g="0" b="0" a="1" />
+            <ambient r=".1" g="0" b="0" a="1" />
+            <emission r="0" g="0.0" b="0.0" a="1" />
+        </MATERIAL>
+        <MATERIAL id="green">
+            <shininess value="1" />
+            <specular r="0" g="1" b="0.0" a="1" />
+            <diffuse r="0" g=".3" b="0" a="1" />
+            <ambient r="0" g=".1" b="0" a="1" />
+            <emission r="0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
     </MATERIALS>
 	  <ANIMATIONS>
@@ -99,6 +99,7 @@
           <DESCENDANTS>
             <NODEREF id="type" />
             <NODEREF id="film" />
+            <NODEREF id="level" />
             <LEAF type="patch" args="10 10">
                 <CPLINE>
                   <CPOINT xx="0" yy="0" zz="-0.2" ww="1" />
@@ -113,9 +114,16 @@
         </NODE>
         <NODE id="type" selectable="1">
           <MATERIAL id="null" />
-          <TEXTURE id="null" />
+          <TEXTURE id="clear" />
           <DESCENDANTS>
             <LEAF  type="rectangle" args="3 2 4 1" />
+          </DESCENDANTS>
+        </NODE>
+        <NODE id="level" selectable="1">
+          <MATERIAL id="green" />
+          <TEXTURE id="clear" />
+          <DESCENDANTS>
+            <LEAF  type="rectangle" args="1 2 2 1" />
           </DESCENDANTS>
         </NODE>
         <NODE id="film" selectable="1">

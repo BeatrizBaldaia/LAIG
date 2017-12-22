@@ -19,8 +19,8 @@ function MyGame(scene) {
   this.type = 1;
   this.film = [];
   this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
-  let aux = this;
-  window.setInterval(function(){aux.gameCycle();},1000);
+  //let aux = this;
+  //window.setInterval(function(){aux.gameCycle();},1000);
   //this.game.gameCycle();
   this.showBoard = function() {
     let s = "[";
@@ -58,7 +58,25 @@ MyGame.prototype.logPicking = function (obj) {
       switch (obj.nodeID) {
         case 'type':{
           obj.textureID = 'coroa';
-          this.type = BOT_VS_BOT;
+          switch (this.type) {
+            case HUMAN_VS_HUMAN:{
+              this.type = HUMAN_VS_BOT;
+              this.gameCycle();
+              break;
+            }
+            case HUMAN_VS_BOT:{
+              this.type = BOT_VS_BOT;
+              this.gameCycle();
+              break;
+            }
+            case BOT_VS_BOT:{
+              this.type = HUMAN_VS_HUMAN;
+              this.gameCycle();
+              break;
+            }
+            default:
+              console.error("No valid type");
+          }
           break;
         }
         case 'film':{
@@ -66,8 +84,18 @@ MyGame.prototype.logPicking = function (obj) {
           this.playFilm();
           break;
         }
+        case 'level':{
+          if(this.level == 1) {
+            this.level = 2;
+            obj.materialID = 'red';
+          } else if (this.level == 2) {
+            this.level = 1;
+            obj.materialID = 'green';
+          }
+          break;
+        }
         default:
-        console.error('NAo sei');//TODO
+        console.error('Objecto sem funcionalidade neste momento.');//TODO
       }
     }
   }
@@ -117,6 +145,8 @@ MyGame.prototype.moveOK = function () {
     this.scene.graph.animations[this.showMove()] = aux_animation;
     //console.log('Created animation: '+ this.showMove());
   }
+  let aux = this;
+  window.setTimeout(function(){aux.gameCycle();},this.scene.graph.animations[this.showMove()].time);
   this.pieceToMove.animation.push(this.showMove());
   this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
   if(this.pieceToMove.king){
@@ -180,7 +210,7 @@ MyGame.prototype.promotionToKing = function () {
   for(let i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] == 2){
       this.board[0][i] = 22;
-      this.findPieceByPosition({x: (i+1), y: 1}).king = true;
+      this.findPieceByPosition({x: 1, y: (i+1)}).king = true;
     }
   }
   for(let i = 0; i < this.board[this.board.length - 1].length; i++){
@@ -251,6 +281,12 @@ MyGame.prototype.gameCycle = function () {
     }
     case BOT_VS_BOT:{
       getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
+      break;
+    }
+    case HUMAN_VS_BOT:{
+      if(this.player == 2){
+        getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
+      }
       break;
     }
     default:
