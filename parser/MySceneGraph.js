@@ -1353,7 +1353,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
  * @param nodesNode LSX
  */
 MySceneGraph.prototype.parseNodes = function(nodesNode) {
-
     // Traverses nodes.
     var children = nodesNode.children;
 
@@ -1397,41 +1396,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 this.scene.game.selectNodesList[nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[nodeID].selected = aux == 0 ? false : true;
             }
-            let piece = this.reader.getString(children[i], 'piece', false);
-            if (piece != null){
-              let x = piece.charAt(0);
-              x = (x == 'a') ? 1 : x;
-              x = (x == 'b') ? 2 : x;
-              x = (x == 'c') ? 3 : x;
-              x = (x == 'd') ? 4 : x;
-              x = (x == 'e') ? 5 : x;
-              x = (x == 'f') ? 6 : x;
-              x = (x == 'g') ? 7 : x;
-              x = (x == 'h') ? 8 : x;
-              let y =  parseInt(piece.charAt(1));
-              //alert(y);
-              this.nodes[nodeID].position = {x: x,y: y};
-              this.nodes[nodeID].initialPosition = {x: x,y: y};
-              console.log(this.nodes[nodeID].position);
-              this.scene.game.pieces.push(nodeID);
-            }
-            let boardTile = this.reader.getString(children[i], 'boardTile', false);
-            if (boardTile != null){
-              let x = nodeID.charAt(0);
-              x = (x == 'a') ? 1 : x;
-              x = (x == 'b') ? 2 : x;
-              x = (x == 'c') ? 3 : x;
-              x = (x == 'd') ? 4 : x;
-              x = (x == 'e') ? 5 : x;
-              x = (x == 'f') ? 6 : x;
-              x = (x == 'g') ? 7 : x;
-              x = (x == 'h') ? 8 : x;
-              let y =  parseInt(nodeID.charAt(1));
-              this.nodes[nodeID].position = {x: x,y: y};
-              this.nodes[nodeID].initialPosition = {x: x,y: y};
-              console.log(this.nodes[nodeID].position);
-              this.scene.game.tiles.push(nodeID);
-            }
+
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
@@ -1550,7 +1515,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 }
             }
             this.nodes[nodeID].originalMatrix = mat4.clone(this.nodes[nodeID].transformMatrix);
-            mat4.translate(this.nodes[nodeID].transformMatrix, this.nodes[nodeID].transformMatrix, [this.nodes[nodeID].position.x, 0, this.nodes[nodeID].position.y]);
 
             let animationsIndex = specsNames.indexOf("ANIMATIONREFS");
             if (animationsIndex != -1){
@@ -1583,37 +1547,101 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             var sizeChildren = 0;
             for (var j = 0; j < descendants.length; j++) {
-                if (descendants[j].nodeName == "NODEREF")
-				{
+                if (descendants[j].nodeName == "NODEREF") {
+        					var curId = this.reader.getString(descendants[j], 'id');
 
-					var curId = this.reader.getString(descendants[j], 'id');
+        					this.log("   Descendant: "+curId);
 
-					this.log("   Descendant: "+curId);
-
-                    if (curId == null )
-                        this.onXMLMinorError("unable to parse descendant id");
-                    else if (curId == nodeID)
-                        return "a node may not be a child of its own";
-                    else {
-                        this.nodes[nodeID].addChild(curId);
-                        sizeChildren++;
-                    }
-                }
-                else
-					if (descendants[j].nodeName == "LEAF")
-					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);//TODO ver se esta bem
+                            if (curId == null )
+                                this.onXMLMinorError("unable to parse descendant id");
+                            else if (curId == nodeID)
+                                return "a node may not be a child of its own";
+                            else {
+                                this.nodes[nodeID].addChild(curId);
+                                sizeChildren++;
+                            }
+              } else if (descendants[j].nodeName == "LEAF") {
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
 
 						if (type != null)
 							this.log("   Leaf: "+ type);
 						else
 							this.warn("Error in leaf");
 
-						//parse leaf ADICIONAR
-						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
-
-                        sizeChildren++;
-					}
+            if(nodeID == "game"){
+              for(let i = 1; i <= 36; i++){
+                let pieceNode = new MyGraphNode(this, nodeID + 'piece' +i);
+                this.nodes[pieceNode.nodeID] = pieceNode;
+                this.nodes[nodeID].addChild(pieceNode.nodeID);
+                pieceNode.addChild('piece');
+                pieceNode.
+                sizeChildren++;
+                if(i<=18){
+                  pieceNode.materialID = 'player1';
+                } else {
+                  pieceNode.materialID = 'player2';
+                }
+                let x = 0;
+                let y = 0;
+                if (i <= 8){
+                  y = 1;
+                } else if (i <= 14) {
+                  y = 2;
+                } else if (i <= 18) {
+                  y = 3;
+                } else if (i <= 22) {
+                  y = 6;
+                } else if (i <= 28) {
+                  y = 7;
+                } else {
+                  y = 8;
+                }
+                if ((i == 1) || (i == 29)) {
+                  x = 1;
+                } else if ((i == 2) || (i == 9) || (i == 23) || (i == 30)) {
+                  x = 2;
+                } else if ((i == 3) || (i == 10) || (i == 15) || (i == 19) || (i==24) ||(i==31)) {
+                  x = 3;
+                } else if ((i == 4) || (i == 11) || (i == 16) || (i == 20) || (i==25) ||(i==32)) {
+                  x = 4;
+                } else if ((i == 5) || (i == 12) || (i == 17) || (i == 21) || (i==26) ||(i==33)) {
+                  x = 5;
+                } else if ((i == 6) || (i == 13) || (i == 18) || (i == 22) || (i==27) ||(i==34)) {
+                  x = 6;
+                } else if ((i == 7) || (i == 14) || (i==28) ||(i==35)) {
+                  x = 7;
+                } else if ((i == 8) || (i == 36)) {
+                  x = 8;
+                }
+                pieceNode.position = {x: x,y: y};
+                pieceNode.initialPosition = {x: x,y: y};
+                this.scene.game.pieces.push(pieceNode.nodeID);
+                mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [pieceNode.position.x, 0, pieceNode.position.y]);
+                this.scene.nodeList[pieceNode.nodeID] = pieceNode.nodeID;
+                this.scene.game.selectNodesList[pieceNode.nodeID] = ++this.scene.game.selectIndex;
+                this.nodes[pieceNode.nodeID].selected = true;
+              }
+              for(let i = 0; i < 64; i++) {
+                let tileNode = new MyGraphNode(this, nodeID + 'tile' + i);
+                this.nodes[tileNode.nodeID] = tileNode;
+                this.nodes[nodeID].addChild(tileNode.nodeID);
+                tileNode.addChild('tile');
+                sizeChildren++;
+                let y = (i % 8) + 1;
+                let x = Math.floor(i / 8) + 1;
+                tileNode.position = {x: x,y: y};
+                tileNode.initialPosition = {x: x,y: y};
+                this.scene.game.tiles.push(tileNode.nodeID);
+                mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [tileNode.position.x, 0, tileNode.position.y]);
+                this.scene.nodeList[tileNode.nodeID] = tileNode.nodeID;
+                this.scene.game.selectNodesList[tileNode.nodeID] = ++this.scene.game.selectIndex;
+                this.nodes[tileNode.nodeID].selected = true;
+              }
+            } else {
+  						this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]));
+              sizeChildren++;
+  					}
+          }
 					else
 						this.onXMLMinorError("unknown tag <" + descendants[j].nodeName + ">");
 
@@ -1624,10 +1652,10 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
         else
             this.onXMLMinorError("unknown tag name <" + nodeName);
     }
-if(this.nodes[this.idRoot]==null)
-return "Nao existe root";
-    console.log("Parsed nodes");
-    return null ;
+  if(this.nodes[this.idRoot]==null)
+    return "Nao existe root";
+  console.log("Parsed nodes");
+  return null ;
 }
 
 /**
