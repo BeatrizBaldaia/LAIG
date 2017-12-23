@@ -16,7 +16,6 @@ function calculateRotZ(vec) {
     if(vec[1] < 0) {
         ang = -ang;
     }
-    console.log("Par o vec "+vec+" o angulo rotZ e "+ang);
     return ang;
 }
 
@@ -33,7 +32,6 @@ function calculateRotY(vec) {
     if(vec[2] > 0) {
         ang = -ang;
     }
-    console.log("Par o vec "+vec+" o angulo rotY e "+ang);
     return ang;
 }
 
@@ -77,4 +75,13 @@ function calculateDeltaTranslation(pos, deltaPos, distanceToGo, dist) {
         pos[2] + deltaPos[2] * (distanceToGo/dist)
     ];
     return vectorToGo;
+}
+
+function pointPlusVec(point, vec, factor) {
+    let finalPoint = [
+        point[0] + factor*vec[0],
+        point[1] + factor*vec[1],
+        point[2] + factor*vec[2]
+    ];
+    return finalPoint;
 }

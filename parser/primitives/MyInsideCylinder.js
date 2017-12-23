@@ -1,5 +1,5 @@
 /**
- * @brief MyCylinder
+ * @brief MyInsideCylinder
  * @param scene scene of the cylinder
  * @param heigth heigth of the cylinder
  * @param bottomRadius radius in the bottom
@@ -10,7 +10,7 @@
  * @param bottomCap (boolean) bottom covered
  * @constructor
  */
-function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topCap, bottomCap) {
+function MyInsideCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topCap, bottomCap) {
     CGFobject.call(this,scene);
 
     this.heigth = heigth;
@@ -28,12 +28,12 @@ function MyCylinder(scene, heigth, bottomRadius, topRadius, stacks, slices, topC
     this.initBuffers();
 };
 
-MyCylinder.prototype = Object.create(CGFobject.prototype);
-MyCylinder.prototype.constructor = MyCylinder;
+MyInsideCylinder.prototype = Object.create(CGFobject.prototype);
+MyInsideCylinder.prototype.constructor = MyInsideCylinder;
 /**
- * @brief MyCylinder init buffers
+ * @brief MyInsideCylinder init buffers
  */
-MyCylinder.prototype.initBuffers = function() {
+MyInsideCylinder.prototype.initBuffers = function() {
 
     this.normals = [];
     this.indices = [];
@@ -44,11 +44,10 @@ MyCylinder.prototype.initBuffers = function() {
     var radiusInc = (this.topRadius - this.bottomRadius)/this.stacks;//incremento a dar ao raio
     var radius = this.bottomRadius;
     var tTex = 0;
-    var i =0;
-    for(i = 0; i <= this.stacks; i++) {
+    for(i = 0; i < this.stacks; i++) {
         var ang = 0;
         var sTex = 0;//valor minimo no eixo s
-        for (ang; ang <= (2*Math.PI); ang+=2*Math.PI/this.slices) {
+        for (ang; ang < (2*Math.PI); ang+=2*Math.PI/this.slices) {
             this.vertices.push(radius * Math.cos(ang), radius * Math.sin(ang), this.heigth * i/this.stacks);
             this.vertices.push((radius + radiusInc) * Math.cos(ang+(2*Math.PI)/this.slices), (radius + radiusInc) * Math.sin(ang+(2*Math.PI)/this.slices), this.heigth * (i+1)/this.stacks);//ponto da proxima stack
             this.vertices.push((radius + radiusInc) * Math.cos(ang), (radius + radiusInc) * Math.sin(ang), this.heigth * (i+1)/this.stacks);//ponto da proxim stack
@@ -67,11 +66,11 @@ MyCylinder.prototype.initBuffers = function() {
             this.normals.push(Math.cos(ang+2*Math.PI/this.slices), Math.sin(ang+2*Math.PI/this.slices), 0);
 
             this.indices.push(index);
-            this.indices.push(index+1);
             this.indices.push(index+2);
-            this.indices.push(index);
-            this.indices.push(index+3);
             this.indices.push(index+1);
+            this.indices.push(index);
+            this.indices.push(index+1);
+            this.indices.push(index+3);
             index +=4;
         }
         radius += radiusInc;
@@ -84,7 +83,7 @@ MyCylinder.prototype.initBuffers = function() {
 /**
  * @brief Displays the cylinder
  */
-MyCylinder.prototype.display= function() {
+MyInsideCylinder.prototype.display= function() {
     CGFobject.prototype.display.call(this);
     if(this.topCap == 1){
         this.scene.pushMatrix();

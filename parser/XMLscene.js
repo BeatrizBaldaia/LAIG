@@ -129,6 +129,7 @@ XMLscene.prototype.display = function() {
     this.multMatrix(this.graph.initialTransforms);
     // Draw axis
     this.axis.display();
+
     var i = 0;
     for (var key in this.lightValues) {
       if (this.lightValues.hasOwnProperty(key)) {
