@@ -1567,23 +1567,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 					if (descendants[j].nodeName == "LEAF")
 					{
 						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut']);//TODO ver se esta bem
-=======
-                if (descendants[j].nodeName == "NODEREF") {
-        					var curId = this.reader.getString(descendants[j], 'id');
-
-        					this.log("   Descendant: "+curId);
-
-                            if (curId == null )
-                                this.onXMLMinorError("unable to parse descendant id");
-                            else if (curId == nodeID)
-                                return "a node may not be a child of its own";
-                            else {
-                                this.nodes[nodeID].addChild(curId);
-                                sizeChildren++;
-                            }
-              } else if (descendants[j].nodeName == "LEAF") {
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch']);
->>>>>>> a6fbff7a863baf8425678c1597d270d201aa72fe
 
 						if (type != null)
 							this.log("   Leaf: "+ type);
