@@ -1,5 +1,8 @@
 let ANIMATION_VELOCITY = 10;
 let ANIMATION_HEIGHT = 3;
+let BOT_VS_BOT = 3;
+let HUMAN_VS_HUMAN = 1;
+let HUMAN_VS_BOT = 2;
 function MyGame(scene) {
   this.scene = scene;
   this.selectIndex = 0;
@@ -16,6 +19,9 @@ function MyGame(scene) {
   this.type = 1;
   this.film = [];
   this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+  //let aux = this;
+  //window.setInterval(function(){aux.gameCycle();},1000);
+  //this.game.gameCycle();
   this.showBoard = function() {
     let s = "[";
     for (let i = 0; i < this.board.length; i++) {
@@ -47,22 +53,49 @@ MyGame.prototype.logPicking = function (obj) {
       this.move.push(this.pieceToMove.position);
       this.move.push(obj.position);
       this.tileToMove = obj;
-      //console.log(this.showBoard());
       getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     } else {
       switch (obj.nodeID) {
         case 'type':{
           obj.textureID = 'coroa';
+          switch (this.type) {
+            case HUMAN_VS_HUMAN:{
+              this.type = HUMAN_VS_BOT;
+              this.gameCycle();
+              break;
+            }
+            case HUMAN_VS_BOT:{
+              this.type = BOT_VS_BOT;
+              this.gameCycle();
+              break;
+            }
+            case BOT_VS_BOT:{
+              this.type = HUMAN_VS_HUMAN;
+              this.gameCycle();
+              break;
+            }
+            default:
+              console.error("No valid type");
+          }
           break;
         }
         case 'film':{
           obj.textureID = 'coroa';
-          console.log(this);
           this.playFilm();
           break;
         }
+        case 'level':{
+          if(this.level == 1) {
+            this.level = 2;
+            obj.materialID = 'red';
+          } else if (this.level == 2) {
+            this.level = 1;
+            obj.materialID = 'green';
+          }
+          break;
+        }
         default:
-        console.log('NAo sei');//TODO
+        console.error('Objecto sem funcionalidade neste momento.');//TODO
       }
     }
   }
@@ -92,7 +125,7 @@ function onSuccess(data) {
       break;
     }
     default:
-      console.log('Invalid response from server! '+ data.target.response);
+      console.warn('Invalid response from server! '+ data.target.response);
   }
   this.asker.endGame();
 }
@@ -112,6 +145,8 @@ MyGame.prototype.moveOK = function () {
     this.scene.graph.animations[this.showMove()] = aux_animation;
     //console.log('Created animation: '+ this.showMove());
   }
+  let aux = this;
+  window.setTimeout(function(){aux.gameCycle();},this.scene.graph.animations[this.showMove()].time);
   this.pieceToMove.animation.push(this.showMove());
   this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
   if(this.pieceToMove.king){
@@ -126,7 +161,7 @@ MyGame.prototype.moveOK = function () {
 
   this.film.push(this.move);
   this.move = [];
-  console.log(this.film);
+  //console.log(this.film);
   this.player = (this.player == 1)? 2 : 1;
 }
 MyGame.prototype.removeCapturePiece = function () {
@@ -175,7 +210,7 @@ MyGame.prototype.promotionToKing = function () {
   for(let i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] == 2){
       this.board[0][i] = 22;
-      this.findPieceByPosition({x: (i+1), y: 1}).king = true;
+      this.findPieceByPosition({x: 1, y: (i+1)}).king = true;
     }
   }
   for(let i = 0; i < this.board[this.board.length - 1].length; i++){
@@ -188,6 +223,15 @@ MyGame.prototype.promotionToKing = function () {
 MyGame.prototype.findPieceByPosition = function (position) {
   for (let i = 0; i < this.pieces.length; i++){
     let obj = this.scene.graph.nodes[this.pieces[i]];
+    if ((obj.position.x == position.x) && (obj.position.y == position.y)) {
+      return obj;
+    }
+  }
+  return null;
+};
+MyGame.prototype.findTileByPosition = function (position) {
+  for (let i = 0; i < this.tiles.length; i++){
+    let obj = this.scene.graph.nodes[this.tiles[i]];
     if ((obj.position.x == position.x) && (obj.position.y == position.y)) {
       return obj;
     }
@@ -208,19 +252,55 @@ gameOver = function (data) {
       break;
     }
     default:
-      console.log('Invalid response from server! '+ data.target.response);
+      console.warn('Invalid response from server! '+ data.target.response);
   }
 };
 MyGame.prototype.playFilm = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+  this.player = 1;
+  let aux = this;
+  let auxFilm = this.film.slice();
   for (let i = 0; i < this.film.length; i++){
-
-    //sleep(3);
+    window.setTimeout(function(){playFilm_part2(aux,i);},1000*i);
+  }
+  window.setTimeout(function(){aux.film = auxFilm},1000*this.film.length);
+};
+playFilm_part2 = function (mySelf, i) {
+  //console.log(mySelf);
+  mySelf.move = mySelf.film[i];
+  mySelf.pieceToMove = mySelf.findPieceByPosition({x:mySelf.move[0].x, y:mySelf.move[0].y});
+  mySelf.tileToMove = mySelf.findTileByPosition({x:mySelf.move[1].x, y:mySelf.move[1].y});
+  getPrologRequest(mySelf,'jogadaValida(' + mySelf.showBoard() + '-' + mySelf.player + '-' + mySelf.showMove() + ')', onSuccess);
+}
+MyGame.prototype.gameCycle = function () {
+  switch (this.type) {
+    case HUMAN_VS_HUMAN:{
+      console.log('TOUUUUUUUU');
+      break;
+    }
+    case BOT_VS_BOT:{
+      getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
+      break;
+    }
+    case HUMAN_VS_BOT:{
+      if(this.player == 2){
+        getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
+      }
+      break;
+    }
+    default:
+      console.error('Chegao ao inchegavel');
   }
 };
-MyGame.prototype.playFilm_part2 = function () {
-  this.move = this.film[i];
-  this.findPieceByPosition({x:this.move[0].x,y:this.move[0].y});
-  getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+function PCplay(data){
+  console.log(data.target.response);
+  let a = data.target.response;
+  a = a.replace(/[[\]]/g, '');
+  console.log(a);
+  let aa = a.split(',');
+  this.asker.move = [{x:aa[0][0],y:aa[0][2]},{x:aa[1][0],y:aa[1][2]}];
+  this.asker.pieceToMove = this.asker.findPieceByPosition(this.asker.move[0]);
+  this.asker.tileToMove = this.asker.findTileByPosition({x:this.asker.move[1].x, y:this.asker.move[1].y});
+  getPrologRequest(this.asker,'jogadaValida(' + this.asker.showBoard() + '-' + this.asker.player + '-' + this.asker.showMove() + ')', onSuccess);
 }

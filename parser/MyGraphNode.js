@@ -12,9 +12,9 @@ function MyGraphNode(graph, nodeID) {
     // Leaves nodes objects.
     this.leaves = [];
     // The material ID.
-    this.materialID = null;
+    this.materialID = 'null';
     // The texture ID.
-    this.textureID = null;
+    this.textureID = 'null';
     this.selected = false;
     this.animation = [];
     this.transformMatrix = mat4.create();
@@ -29,8 +29,6 @@ function MyGraphNode(graph, nodeID) {
     this.position = {x: 0, y:0};
     this.initialPosition = {x: 0, y:0};
     this.king = false;
-    // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
-    // mat4.getTranslation(this.currPosition, this.transformMatrix);
 
 }
 /**
@@ -51,13 +49,10 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * @brief Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-  //TODO NEW_______________
-  if(this.selected) {
-    this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
-  }    //__________________________
-    /**
-     * Call for children display
-     */
+  if (((this.graph.scene.pickMode == false) && (true /*visible*/))||(this.graph.scene.pickMode == true)) {
+    if(this.selected) {
+      this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
+    }
     if(this.graph.scene.selectedNode == this.nodeID)
         this.graph.scene.setActiveShader(this.graph.scene.shader);
     this.graph.scene.pushMatrix();
@@ -125,7 +120,11 @@ MyGraphNode.prototype.display = function(parentID) {
     }
     this.graph.scene.popMatrix();
     if(this.graph.scene.selectedNode == this.nodeID)
-        this.graph.scene.setActiveShader(this.graph.scene.defaultShader);//TODO
+        this.graph.scene.setActiveShader(this.graph.scene.defaultShader);
+    if(this.selected){
+      this.graph.scene.clearPickRegistration();
+    }
+  }
 }
 /**
  * @brief Updates the animation matrix
@@ -142,7 +141,7 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
                 this.originalMatrix,
                 newMatrix);
         } else {//proxima animacao
-            console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
+            //console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
             this.animationN++;
             this.initialAnimTime = 0;
         }
@@ -151,15 +150,13 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
 }
 
 MyGraphNode.prototype.getPosition = function() {
-    // mat4.getTranslation(this.currPosition, this.transformMatrix);
-    // this.currPosition = [this.transformMatrix[12], this.transformMatrix[13], this.transformMatrix[14]];
-    // console.log(this.currPosition);
     return this.currPosition;
 }
 
 MyGraphNode.prototype.resetPositions = function() {
   this.position.x = this.initialPosition.x;
   this.position.y = this.initialPosition.y;
+  mat4.translate(this.transformMatrix, this.originalMatrix, [this.position.x, 0, this.position.y]);
   if(this.children.length != 0) {//ver os filhos deste no
     for (var i = 0; i < this.children.length; i++) {
       this.graph.getNodes()[this.children[i]].resetPositions();
