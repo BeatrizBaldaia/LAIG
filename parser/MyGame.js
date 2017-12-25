@@ -3,6 +3,7 @@ let ANIMATION_HEIGHT = 3;
 let BOT_VS_BOT = 3;
 let HUMAN_VS_HUMAN = 1;
 let HUMAN_VS_BOT = 2;
+let FILM = 4;
 function MyGame(scene) {
   this.scene = scene;
 
@@ -72,8 +73,8 @@ MyGame.prototype.logPicking = function (obj) {
   } else {
     if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null) && (this.tiles.indexOf(obj.nodeID) != -1)){
       this.move = [];
-      this.move.push(this.pieceToMove.position);
-      this.move.push(obj.position);
+      this.move.push({x:this.pieceToMove.position.x,y:this.pieceToMove.position.y});
+      this.move.push({x:obj.position.x,y:obj.position.y});
       this.tileToMove = obj;
       getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     } else {
@@ -84,6 +85,7 @@ MyGame.prototype.logPicking = function (obj) {
 
           break;
         }
+
         case 'buton_1VsPC':{
             this.type = HUMAN_VS_BOT;
             this.gameCycle();
@@ -110,6 +112,12 @@ MyGame.prototype.logPicking = function (obj) {
           }
 
             break;
+
+        // case 'film':{
+        //   obj.textureID = 'coroa';
+        //   this.type = FILM;
+        //   this.playFilm();
+        //   break;
         }
         case 'buton_level':{
           this.verifyNodeAnimation(obj);
@@ -126,6 +134,10 @@ MyGame.prototype.logPicking = function (obj) {
           break;
         }
         case 'buton_undo':{
+          break;
+        }
+        case 'undo':{
+          this.undoPlay();
           break;
         }
         default:
@@ -199,7 +211,7 @@ MyGame.prototype.moveOK = function () {
   this.pieceToMove = null;
   this.tileToMove = null;
 
-  this.film.push(this.move);
+  this.film.push(this.move.slice());
   this.move = [];
   //console.log(this.film);
   this.player = (this.player == 1)? 2 : 1;//proximo jogador a jogar
@@ -302,7 +314,13 @@ MyGame.prototype.playFilm = function () {
   for (let i = 0; i < this.film.length; i++){
     window.setTimeout(function(){playFilm_part2(aux,i);},1000*i);
   }
-  window.setTimeout(function(){aux.film = auxFilm},1000*this.film.length);
+  window.setTimeout(function(){aux.film = auxFilm; aux.type=BOT_VS_BOT;/*TODO ten de ser dinamico*/},1000*this.film.length);
+};
+MyGame.prototype.undoPlay = function () {
+     console.log(this.film[this.film.length - 1]);
+     /*this.board[][]=0;
+     this.board[][]=this.player;
+     this.findPieceByPosition();*/
 };
 
 playFilm_part2 = function (mySelf, i) {
@@ -326,6 +344,10 @@ MyGame.prototype.gameCycle = function () {
       if(this.player == 2){
         getPrologRequest(this,'nextMove('+this.showBoard()+'-'+this.player+'-'+this.level+')', PCplay);
       }
+      break;
+    }
+    case FILM:{
+
       break;
     }
     default:
