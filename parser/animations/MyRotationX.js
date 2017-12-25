@@ -2,7 +2,7 @@ function MyRotationX(graph, ang) {
     MyAnimation.call(this, graph);
 
     this.graph = graph;
-    this.ang = ang;
+    this.ang = ang*Math.PI/180;
 
     this.time = 1.5;
 
@@ -19,7 +19,8 @@ MyRotationX.prototype.getMatrix = function(initialTime, currTime) {
     var temp = currTime - initialTime;
 
     let alfa = (this.ang * temp)/(1.5/0.001);
-    if(alfa > (this.ang)) {
+    if(temp >= (1.5/0.001)) {
+        console.log("acabou animacao");
         return null;
     }
 

@@ -5,20 +5,12 @@ let HUMAN_VS_HUMAN = 1;
 let HUMAN_VS_BOT = 2;
 function MyGame(scene) {
   this.scene = scene;
-  this.selectIndex = 0;
-  this.selectNodesList = {};
-  this.pieceToMove = null;
-  this.tileToMove = null;
-  this.pieces = [];
-  this.tiles = [];
-  this.player = 1;
-  this.move = [];
-  this.animations = [];
-  this.captureRequired = false;
-  this.level = 1;
-  this.type = 1;
-  this.film = [];
-  this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+
+  this.initInterfaceVariables();
+  this.initIndexVariables();
+  this.initObjectsVariables();
+  this.initPlayInfoVariables();
+
   //let aux = this;
   //window.setInterval(function(){aux.gameCycle();},1000);
   //this.game.gameCycle();
@@ -44,6 +36,36 @@ function MyGame(scene) {
       return s;
   }
 }
+
+MyGame.prototype.initInterfaceVariables = function () {
+    this.level = 0;
+    this.type = HUMAN_VS_HUMAN;
+    this.isRecording = 1;
+    this.film = [];
+}
+
+MyGame.prototype.initIndexVariables = function () {
+    this.selectIndex = 0;
+    this.player = 1;
+}
+
+MyGame.prototype.initObjectsVariables = function () {
+    this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+    this.pieceToMove = null;
+    this.tileToMove = null;
+    this.pieces = [];
+    this.tiles = [];
+}
+
+MyGame.prototype.initPlayInfoVariables = function () {
+    this.move = [];
+    this.animations = [];
+    this.captureRequired = false;
+    this.nCaptureBy1 = 0;
+    this.nCaptureBy2 = 0;
+    this.selectNodesList = {};
+}
+
 MyGame.prototype.logPicking = function (obj) {
   if((this.pieces.indexOf(obj.nodeID) != -1) && (this.captureRequired == false)) {//obj is piece
     this.pieceToMove = obj; //Escolher a peça
@@ -56,42 +78,54 @@ MyGame.prototype.logPicking = function (obj) {
       getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
     } else {
       switch (obj.nodeID) {
-        case 'type':{
-          obj.textureID = 'coroa';
-          switch (this.type) {
-            case HUMAN_VS_HUMAN:{
-              this.type = HUMAN_VS_BOT;
-              this.gameCycle();
-              break;
-            }
-            case HUMAN_VS_BOT:{
-              this.type = BOT_VS_BOT;
-              this.gameCycle();
-              break;
-            }
-            case BOT_VS_BOT:{
-              this.type = HUMAN_VS_HUMAN;
-              this.gameCycle();
-              break;
-            }
-            default:
-              console.error("No valid type");
+        case 'buton_1Vs1':{
+          this.type = HUMAN_VS_HUMAN;
+          this.gameCycle();
+
+          break;
+        }
+        case 'buton_1VsPC':{
+            this.type = HUMAN_VS_BOT;
+            this.gameCycle();
+
+            break;
+        }
+        case 'buton_PCVsPC':{
+            this.type = BOT_VS_BOT;
+            this.gameCycle();
+
+            break;
+        }
+        case 'buton_film':{
+
+          this.verifyNodeAnimation(obj);
+          if(this.isRecording == 0) {
+              this.isRecording = 1;
+              obj.animation.push('lever_up');
+          } else {
+              this.isRecording = 0;
+              mat4.copy(obj.originalMatrix, obj.transformMatrix);
+              obj.animation.push('lever_down');
+              // this.playFilm();
           }
-          break;
+
+            break;
         }
-        case 'film':{
-          obj.textureID = 'coroa';
-          this.playFilm();
-          break;
-        }
-        case 'level':{
-          if(this.level == 1) {
-            this.level = 2;
-            obj.materialID = 'red';
-          } else if (this.level == 2) {
+        case 'buton_level':{
+          this.verifyNodeAnimation(obj);
+
+          if(this.level == 0) {
+            obj.animation.push('lever_down');
             this.level = 1;
-            obj.materialID = 'green';
+          } else {
+            mat4.copy(obj.originalMatrix, obj.transformMatrix);
+            obj.animation.push('lever_up');
+            this.level = 0;
           }
+
+          break;
+        }
+        case 'buton_undo':{
           break;
         }
         default:
@@ -100,6 +134,7 @@ MyGame.prototype.logPicking = function (obj) {
     }
   }
 }
+
 function onSuccess(data) {
   switch (data.target.response) {
     case 'OK':{
@@ -122,6 +157,12 @@ function onSuccess(data) {
       this.asker.pieceToMove = auxPiece;
       this.asker.player = auxPlayer;
       this.asker.captureRequired = true;
+      if(auxPlayer == 1) {
+        this.nCaptureBy1++;
+      } else {
+        this.nCaptureBy2++;
+      }
+
       break;
     }
     default:
@@ -130,25 +171,24 @@ function onSuccess(data) {
   this.asker.endGame();
 }
 MyGame.prototype.moveOK = function () {
-  if(this.scene.nodesWithAnimation.indexOf(this.pieceToMove.nodeID) == -1){
-    this.scene.nodesWithAnimation.push(this.pieceToMove.nodeID);
-  } else {
-    this.pieceToMove.initialAnimTime = 0;
-  }
-  if(this.scene.graph.animations.indexOf(this.showMove()) == -1){
+  let move = rhis.showMove();
+  let x = this.pieceToMove.position.x;
+  let y = this.pieceToMove.position.y;
+  this.verifyNodeAnimation(this.pieceToMove);
+  if(this.scene.graph.animations.indexOf(move) == -1){
     //Create animation
-    let p1 = [this.pieceToMove.position.x, 0, this.pieceToMove.position.y];
-    let p2 = [this.pieceToMove.position.x, ANIMATION_HEIGHT, this.pieceToMove.position.y];
+    let p1 = [x, 0, y];
+    let p2 = [x, ANIMATION_HEIGHT, y];
     let p3 = [this.tileToMove.position.x, ANIMATION_HEIGHT, this.tileToMove.position.y];
     let p4 = [this.tileToMove.position.x, 0, this.tileToMove.position.y];
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
-    this.scene.graph.animations[this.showMove()] = aux_animation;
+    this.scene.graph.animations[move] = aux_animation;
     //console.log('Created animation: '+ this.showMove());
   }
   let aux = this;
-  window.setTimeout(function(){aux.gameCycle();},this.scene.graph.animations[this.showMove()].time);
-  this.pieceToMove.animation.push(this.showMove());
-  this.board[this.pieceToMove.position.y-1][this.pieceToMove.position.x-1] = 0;
+  window.setTimeout(function(){this.gameCycle();},this.scene.graph.animations[move].time);
+  this.pieceToMove.animation.push(move);
+  this.board[y-1][x-1] = 0;
   if(this.pieceToMove.king){
     this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = (this.player==1)?11:22;
   } else {
@@ -162,45 +202,40 @@ MyGame.prototype.moveOK = function () {
   this.film.push(this.move);
   this.move = [];
   //console.log(this.film);
-  this.player = (this.player == 1)? 2 : 1;
+  this.player = (this.player == 1)? 2 : 1;//proximo jogador a jogar
 }
 MyGame.prototype.removeCapturePiece = function () {
   let position = {x: 0, y: 0};
-  if (this.tileToMove.position.x == this.pieceToMove.position.x) {
-    position.x = this.tileToMove.position.x;
+  let pieceX = this.pieceToMove.position.x;
+  let pieceY = this.pieceToMove.position.y;
+  let tileX = this.tileToMove.position.x;
+  let tileY = this.tileToMove.position.y;
+  if (tileX == pieceX) {
+    position.x = tileX;
   } else {
-    if (this.tileToMove.position.x < this.pieceToMove.position.x) {
-      position.x = this.tileToMove.position.x + 1;
+    if (tileX < pieceX) {
+      position.x = tileX + 1;
     } else {
-      position.x = this.tileToMove.position.x - 1;
+      position.x = tileX - 1;
     }
   }
-  if (this.tileToMove.position.y == this.pieceToMove.position.y) {
-    position.y = this.tileToMove.position.y;
+  if (tileY == pieceY) {
+    position.y = tileY;
   } else {
-    if (this.tileToMove.position.y < this.pieceToMove.position.y) {
-      position.y = this.tileToMove.position.y + 1;
+    if (tileY < pieceY) {
+      position.y = tileY + 1;
     } else {
-      position.y = this.tileToMove.position.y - 1;
+      position.y = tileY - 1;
     }
   }
   this.board[position.y-1][position.x-1] = 0;
+
   if(this.scene.graph.animations.indexOf('remove' + position.x + position.y) == -1){
     //Create animation
-    let p1 = [position.x, 0, position.y];
-    let p2 = [position.x, ANIMATION_HEIGHT, position.y];
-    let p3 = [0, ANIMATION_HEIGHT, 0];
-    let p4 = [0, 0, 0];
-    let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
-    this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
-    //console.log('Created animation: '+ this.showMove());
+    this.createCaptureAnimation(position);
   }
   this.capturedPiece = this.findPieceByPosition(position);
-  if(this.scene.nodesWithAnimation.indexOf(this.capturedPiece.nodeID) == -1){
-    this.scene.nodesWithAnimation.push(this.capturedPiece.nodeID);
-  } else {
-    this.capturedPiece.initialAnimTime = 0;
-  }
+  this.verifyNodeAnimation(this.capturedPiece);
   this.capturedPiece.animation.push('remove' + position.x + position.y);
   this.capturedPiece.position.x = 0;
   this.capturedPiece.position.y = 0;
@@ -220,6 +255,7 @@ MyGame.prototype.promotionToKing = function () {
     }
   }
 };
+
 MyGame.prototype.findPieceByPosition = function (position) {
   for (let i = 0; i < this.pieces.length; i++){
     let obj = this.scene.graph.nodes[this.pieces[i]];
@@ -229,6 +265,7 @@ MyGame.prototype.findPieceByPosition = function (position) {
   }
   return null;
 };
+
 MyGame.prototype.findTileByPosition = function (position) {
   for (let i = 0; i < this.tiles.length; i++){
     let obj = this.scene.graph.nodes[this.tiles[i]];
@@ -255,6 +292,7 @@ gameOver = function (data) {
       console.warn('Invalid response from server! '+ data.target.response);
   }
 };
+
 MyGame.prototype.playFilm = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
@@ -266,6 +304,7 @@ MyGame.prototype.playFilm = function () {
   }
   window.setTimeout(function(){aux.film = auxFilm},1000*this.film.length);
 };
+
 playFilm_part2 = function (mySelf, i) {
   //console.log(mySelf);
   mySelf.move = mySelf.film[i];
@@ -304,3 +343,36 @@ function PCplay(data){
   this.asker.tileToMove = this.asker.findTileByPosition({x:this.asker.move[1].x, y:this.asker.move[1].y});
   getPrologRequest(this.asker,'jogadaValida(' + this.asker.showBoard() + '-' + this.asker.player + '-' + this.asker.showMove() + ')', onSuccess);
 }
+
+MyGame.prototype.createCaptureAnimation = function (position) {
+    let p1 = [position.x, 0, position.y];
+    let p2 = [position.x, ANIMATION_HEIGHT, position.y];
+    let n;
+    if(this.player == 1) {
+        n = this.nCaptureBy1;
+    } else {
+        n = this.nCaptureBy2;
+    }
+
+    let p3 = [5, ANIMATION_HEIGHT, 5];
+    let p4;
+    if(n >= ANIMATION_HEIGHT) {
+        p4 = [5, 4 + n*0.5, 5];
+    } else {
+        p4 = [5, ANIMATION_HEIGHT, 5];
+    }
+    let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
+    this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
+    return p4;
+    //console.log('Created animation: '+ this.showMove());
+}
+
+MyGame.prototype.verifyNodeAnimation = function (piece) {
+    if(this.scene.nodesWithAnimation.indexOf(piece.nodeID) == -1){
+        this.scene.nodesWithAnimation.push(piece.nodeID);
+    } else {
+        piece.initialAnimTime = 0;
+        mat4.copy(piece.originalMatrix, piece.transformMatrix);//TODO: estou a fazer isto por causa da animacao da alavanca. nao sei se vai dar asneira com outros nos
+    }
+}
+
