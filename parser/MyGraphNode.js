@@ -81,7 +81,17 @@ MyGraphNode.prototype.display = function(parentID) {
             if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//fazer sempre o unbind antes de fazer o display de um filho porque estes podem ter aplicado uma textura
                 this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();
             }
-            this.graph.getNodes()[this.children[i]].display(this.nodeID);
+            if(this.nodeID.substring(0, 9) == "gamepiece") {
+                if(this.king) {
+                    this.graph.getNodes()[this.children[1]].display(this.nodeID);
+                    break;
+                } else {
+                    this.graph.getNodes()[this.children[0]].display(this.nodeID);
+                    break;
+                }
+            } else {
+                this.graph.getNodes()[this.children[i]].display(this.nodeID);
+            }
         }
     }
     if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {
@@ -90,20 +100,23 @@ MyGraphNode.prototype.display = function(parentID) {
     /**
      * Draw leaves
      */
+
     if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
-            var afS = 0, afT = 0;
-            if(this.graphTexturesStack.length != 0){
+            if(this.leaves[i].type.substring(0, 4) != "tile") {
+                var afS = 0, afT = 0;
+                if(this.graphTexturesStack.length != 0){
                     afS = this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][1];
                     afT = this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][2];
+                }
+                this.leaves[i].setAmplifFactor(afS, afT);
+                this.leaves[i].display();
             }
-            this.leaves[i].setAmplifFactor(afS, afT);
-            this.leaves[i].display();
         }
     }
-    if(this.king){
-      this.graphTextures['coroa'][0].unbind();
-    }
+    // if(this.king){
+    //   this.graphTextures['coroa'][0].unbind();
+    // }
 
     if(this.materialID != 'null'){//depois de um no acabar o seu display e o dos seus filhos, retira o seu material da stack
         this.graphMaterialsStack.pop();

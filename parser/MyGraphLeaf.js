@@ -6,7 +6,7 @@
 **/
 function MyGraphLeaf(graph, xmlelem) {
     this.leafObj = null;
-    this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut']); //TODO added patch
+    this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut', 'crown']); //TODO added patch
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
     for(var i=0;i<stringArray.length;i++){
@@ -49,6 +49,10 @@ function MyGraphLeaf(graph, xmlelem) {
             if(stringArray.length!=2){graph.onXMLError("Numero de args errado\n");}else{
                 this.leafObj = new MyHexNut(graph.scene,stringArray[0], stringArray[1]);
             }break;
+        }
+        case 'crown':{
+            this.leafObj = new MyCrown(graph.scene);
+            break;
         }
         default:{
             graph.onXMLMinorError("Unkown leaf");

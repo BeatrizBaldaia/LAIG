@@ -1566,7 +1566,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut']);//TODO ver se esta bem
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut', 'crown']);//TODO ver se esta bem
 
 						if (type != null)
 							this.log("   Leaf: "+ type);
@@ -1578,9 +1578,9 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 let pieceNode = new MyGraphNode(this, nodeID + 'piece' +i);
                 this.nodes[pieceNode.nodeID] = pieceNode;
                 this.nodes[nodeID].addChild(pieceNode.nodeID);
-                pieceNode.addChild('piece');
-                pieceNode.
-                sizeChildren++;
+                pieceNode.addChild('piece_man');
+                pieceNode.addChild('piece_king');
+                pieceNode.sizeChildren += 2;
                 if(i<=18){
                   pieceNode.materialID = 'player1';
                 } else {
@@ -1621,7 +1621,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 pieceNode.position = {x: x,y: y};
                 pieceNode.initialPosition = {x: x,y: y};
                 this.scene.game.pieces.push(pieceNode.nodeID);
-                mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [pieceNode.position.x, 0, pieceNode.position.y]);
+                mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [(pieceNode.position.x - 1)*0.287, 0, -(pieceNode.position.y - 1)*0.287]);
                 this.scene.nodeList[pieceNode.nodeID] = pieceNode.nodeID;
                 this.scene.game.selectNodesList[pieceNode.nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[pieceNode.nodeID].selected = true;
@@ -1637,7 +1637,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 tileNode.position = {x: x,y: y};
                 tileNode.initialPosition = {x: x,y: y};
                 this.scene.game.tiles.push(tileNode.nodeID);
-                mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [tileNode.position.x, 0, tileNode.position.y]);
+                mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [(tileNode.position.x - 1)*0.287, 0, -(tileNode.position.y - 1)*0.287]);
                 this.scene.nodeList[tileNode.nodeID] = tileNode.nodeID;
                 this.scene.game.selectNodesList[tileNode.nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[tileNode.nodeID].selected = true;
