@@ -100,6 +100,7 @@
             <NODEREF id="type" />
             <NODEREF id="film" />
             <NODEREF id="level" />
+            <NODEREF id="undo" />
             <LEAF type="patch" args="10 10">
                 <CPLINE>
                   <CPOINT xx="0" yy="0" zz="-0.2" ww="1" />
@@ -126,6 +127,13 @@
             <LEAF  type="rectangle" args="1 2 2 1" />
           </DESCENDANTS>
         </NODE>
+        <NODE id="undo" selectable="1">
+          <MATERIAL id="green" />
+          <TEXTURE id="clear" />
+          <DESCENDANTS>
+            <LEAF  type="rectangle" args="7 2 8 1" />
+          </DESCENDANTS>
+        </NODE>
         <NODE id="film" selectable="1">
           <MATERIAL id="null" />
           <TEXTURE id="null" />
@@ -133,7 +141,7 @@
             <LEAF  type="rectangle" args="5 2 6 1" />
           </DESCENDANTS>
         </NODE>
-        <NODE id="piece" >
+        <NODE id="piece_man" >
           <MATERIAL id="null" />
           <TEXTURE id="null" />
           <TRANSLATION x=".5" y=".25" z=".5" />
@@ -141,6 +149,16 @@
           <DESCENDANTS>
             <LEAF  type="sphere" args=".5 20 20" />
           </DESCENDANTS>
+        </NODE>
+        <NODE id="piece_king">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+
+            <SCALE sx="0.3" sy="0.2" sz="0.3" />
+            <TRANSLATION x="16.767" y="17.75" z="26.6" />
+            <DESCENDANTS>
+                <LEAF type="crown" args="" />
+            </DESCENDANTS>
         </NODE>
         <NODE id="tile">
           <MATERIAL id="null" />

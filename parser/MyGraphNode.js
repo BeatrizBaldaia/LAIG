@@ -171,7 +171,7 @@ MyGraphNode.prototype.resetPositions = function() {
   this.position.y = this.initialPosition.y;
   mat4.translate(this.transformMatrix, this.originalMatrix, [this.position.x, 0, this.position.y]);
   if(this.children.length != 0) {//ver os filhos deste no
-    for (var i = 0; i < this.children.length; i++) {
+    for (let i = 0; i < this.children.length; i++) {
       this.graph.getNodes()[this.children[i]].resetPositions();
     }
   }

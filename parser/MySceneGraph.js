@@ -1621,7 +1621,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 pieceNode.position = {x: x,y: y};
                 pieceNode.initialPosition = {x: x,y: y};
                 this.scene.game.pieces.push(pieceNode.nodeID);
-                mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [(pieceNode.position.x - 1)*0.287, 0, -(pieceNode.position.y - 1)*0.287]);
+                //mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [(pieceNode.position.x - 1)*0.287, 0, -(pieceNode.position.y - 1)*0.287]);
+                mat4.translate(pieceNode.transformMatrix, pieceNode.transformMatrix, [pieceNode.position.x, 0, pieceNode.position.y]);
                 this.scene.nodeList[pieceNode.nodeID] = pieceNode.nodeID;
                 this.scene.game.selectNodesList[pieceNode.nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[pieceNode.nodeID].selected = true;
@@ -1637,7 +1638,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 tileNode.position = {x: x,y: y};
                 tileNode.initialPosition = {x: x,y: y};
                 this.scene.game.tiles.push(tileNode.nodeID);
-                mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [(tileNode.position.x - 1)*0.287, 0, -(tileNode.position.y - 1)*0.287]);
+                //mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [(tileNode.position.x - 1)*0.287, 0, -(tileNode.position.y - 1)*0.287]);
+                mat4.translate(tileNode.transformMatrix, tileNode.transformMatrix, [tileNode.position.x, 0, tileNode.position.y]);
                 this.scene.nodeList[tileNode.nodeID] = tileNode.nodeID;
                 this.scene.game.selectNodesList[tileNode.nodeID] = ++this.scene.game.selectIndex;
                 this.nodes[tileNode.nodeID].selected = true;
