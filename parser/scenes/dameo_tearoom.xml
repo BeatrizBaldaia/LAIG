@@ -177,9 +177,7 @@
         </ANIMATION>
         <ANIMATION id="paint_up" speed="1.5" type="rotx" ang="-100">
         </ANIMATION>
-        <ANIMATION id="buton_on" speed="1.5" type="transz" dist="-0.04">
-        </ANIMATION>
-        <ANIMATION id="buton_off" speed="1.5" type="transz" dist="0.04">
+        <ANIMATION id="paint_spin" speed="1.5" type="roty" ang="180">
         </ANIMATION>
     </ANIMATIONS>
     <NODES>
@@ -446,6 +444,10 @@
         <NODE id="buton_level" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
@@ -464,6 +466,10 @@
         <NODE id="buton_film" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
