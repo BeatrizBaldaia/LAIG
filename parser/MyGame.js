@@ -213,10 +213,9 @@ function onSuccess(data) {
   this.asker.endGame();
 }
 MyGame.prototype.moveOK = function () {
-  let move = rhis.showMove();
+  let move = this.showMove();
   let x = this.pieceToMove.position.x;
   let y = this.pieceToMove.position.y;
-  this.verifyNodeAnimation(this.pieceToMove);
   if(this.scene.graph.animations.indexOf(move) == -1){
     //Create animation
     let p1 = [x, 0, y];
@@ -228,8 +227,10 @@ MyGame.prototype.moveOK = function () {
     //console.log('Created animation: '+ this.showMove());
   }
   let aux = this;
-  window.setTimeout(function(){this.gameCycle();},this.scene.graph.animations[move].time);
+  window.setTimeout(function(){aux.gameCycle();},aux.scene.graph.animations[move].time);
+  this.verifyNodeAnimation(this.pieceToMove);
   this.pieceToMove.animation.push(move);
+  console.log(move);
   this.board[y-1][x-1] = 0;
   if(this.pieceToMove.king){
     this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = (this.player==1)?11:22;
@@ -426,4 +427,3 @@ MyGame.prototype.verifyNodeAnimation = function (piece) {
         piece.initialAnimTime = 0;
     }
 }
-
