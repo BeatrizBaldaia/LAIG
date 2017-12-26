@@ -18,7 +18,7 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
              'animations/MyLinearAnimation.js','animations/MyBezierAnimation.js',
              'animations/MyCircularAnimation.js', 'animations/MyComboAnimation.js', 'animations/MyRotationX.js', 'animations/MyTranslationZ.js',
 			 'server.js', 'MyGame.js', 'Utils.js', 'primitives/MyCrown.js', 'primitives/MyHexNut.js', 'primitives/MyInsideCylinder.js',
-    'primitives/MyBolt.js',
+    'primitives/MyBolt.js', 'primitives/MyLamp.js',
 
 main=function()
 {
@@ -38,11 +38,13 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
-	var filename=getUrlVars()['file'] || "dameo_garage.xml";
+	var filename1=getUrlVars()['file'] || "dameo_tearoom.xml";
+    // var filename2=getUrlVars()['file'] || "dameo_garage.xml";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename, myScene);
+	var myGraph = new MySceneGraph(filename1, myScene);
+    // var myGraph = new MySceneGraph(filename2, myScene);
 
 	// start
     app.run();

@@ -135,7 +135,7 @@ MyGraphNode.prototype.display = function(parentID) {
 
     if(this.leaves.length != 0) {
         for (var i = 0; i < this.leaves.length; i++) {
-            if(this.leaves[i].type.substring(0, 4) != "tile") {
+            // if(this.nodeID.substring(0, 4) != "tile") {
                 var afS = 0, afT = 0;
                 if(this.graphTexturesStack.length != 0){
                     afS = this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][1];
@@ -143,7 +143,7 @@ MyGraphNode.prototype.display = function(parentID) {
                 }
                 this.leaves[i].setAmplifFactor(afS, afT);
                 this.leaves[i].display();
-            }
+            // }
         }
     }
     // if(this.king){

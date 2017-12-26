@@ -6,7 +6,7 @@
 **/
 function MyGraphLeaf(graph, xmlelem) {
     this.leafObj = null;
-    this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut', 'crown']); //TODO added patch
+    this.type = graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'circle', 'patch', 'hexnut', 'crown', 'lamp']); //TODO added patch
     var args = graph.reader.getString(xmlelem, 'args');
     var stringArray = args.split(" ");//array com os valores dos argumentos (args)
     for(var i=0;i<stringArray.length;i++){
@@ -45,13 +45,26 @@ function MyGraphLeaf(graph, xmlelem) {
 
             }break;
         }
+        case 'circle':{
+            if(stringArray.length!=1){graph.onXMLError("Numero de args errado\n");}else{
+                console.log("GRRRRRR");
+                this.leafObj = new MyCircle(graph.scene, stringArray[0]);
+            }
+            break;
+        }
         case 'hexnut':{
             if(stringArray.length!=2){graph.onXMLError("Numero de args errado\n");}else{
                 this.leafObj = new MyHexNut(graph.scene,stringArray[0], stringArray[1]);
             }break;
         }
         case 'crown':{
-            this.leafObj = new MyCrown(graph.scene);
+        this.leafObj = new MyCrown(graph.scene);
+        break;
+        }
+        case 'lamp':{
+            if(stringArray.length!=2){graph.onXMLError("Numero de args errado\n");}else{
+                this.leafObj = new MyLamp(graph.scene,stringArray[0], stringArray[1]);
+            }
             break;
         }
         default:{

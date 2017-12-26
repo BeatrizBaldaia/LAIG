@@ -23,6 +23,7 @@ function MySceneGraph(filename, scene) {
     this.scene = scene;
     scene.graph = this;
 
+
     this.nodes = [];
     this.butonNames = ['buton_level', 'buton_film', 'buton_1Vs1', 'buton_1VsPC', 'buton_PCVsPC', 'buton_undo'];
 
@@ -64,6 +65,7 @@ MySceneGraph.prototype.onXMLReady = function() {
     this.loadedOk = true;
 
     // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
+
     this.scene.onGraphLoaded();
 }
 
@@ -1590,7 +1592,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle','patch', 'hexnut', 'crown']);//TODO ver se esta bem
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'circle', 'patch', 'hexnut', 'crown', 'lamp']);//TODO ver se esta bem
 
 						if (type != null)
 							this.log("   Leaf: "+ type);

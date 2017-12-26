@@ -10,6 +10,7 @@ function XMLscene(interface) {
   this.lightValues = {};
   this.colorFactor=30;
   this.game = new MyGame(this);
+
   this.update=function(currTime){
     let s = Math.sin(currTime/1000)/2 + .5;
     this.shader.setUniformsValues({uTimeFactor: s});
