@@ -7,6 +7,17 @@
 function MyGraphNode(graph, nodeID) {
     this.graph = graph;
     this.nodeID = nodeID;
+
+    this.initParserVariables();
+    this.initAnimationVariables();
+    this.initGameVariables();
+    this.initButonVariables();
+}
+
+/**
+ * @brief Inicia os atributos relacionados com o parser do XML
+ */
+MyGraphNode.prototype.initParserVariables = function() {
     // IDs of child nodes.
     this.children = [];
     // Leaves nodes objects.
@@ -16,21 +27,42 @@ function MyGraphNode(graph, nodeID) {
     // The texture ID.
     this.textureID = 'null';
     this.selected = false;
+
+    this.graphTextures = this.graph.textures;
+    this.graphTexturesStack = this.graph.scene.texturesStack;
+    this.graphMaterialsStack = this.graph.scene.materialsStack;
+}
+
+/**
+ * @brief Inicia os atributos relacionados com as animacoes do no
+ */
+MyGraphNode.prototype.initAnimationVariables = function() {
     this.animation = [];
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
     this.originalMatrix = mat4.create();
     mat4.identity(this.originalMatrix);
-    this.graphTextures = this.graph.textures;
-    this.graphTexturesStack = this.graph.scene.texturesStack;
-    this.graphMaterialsStack = this.graph.scene.materialsStack;
     this.animationN = 0;
     this.initialAnimTime = 0;
+}
+
+/**
+ * @brief Inicia os atributos relacionados com as informacoes do jogo Dameo
+ */
+MyGraphNode.prototype.initGameVariables = function() {
     this.position = {x: 0, y:0};
     this.initialPosition = {x: 0, y:0};
     this.king = false;
-
 }
+
+/**
+ * @brief Inicia os atributos de caso o no ser um butao/alavanca da interface
+ */
+MyGraphNode.prototype.initButonVariables = function() {
+    this.isButon = 0;
+    this.pressed = 0;
+}
+
 /**
  * @brief Adds the reference (ID) of another node to this node's children array.
  * @param nodeID reference to add
@@ -145,7 +177,37 @@ MyGraphNode.prototype.display = function(parentID) {
  */
 MyGraphNode.prototype.updateMatrix = function(currTime) {
     this.initialAnimTime = this.initialAnimTime == 0 ? currTime : this.initialAnimTime;
+    if(this.isButon) {
+        this.getButonAnimationMatrix(currTime);
+    } else {
+        this.getNormalAnimationMatrix(currTime);
+    }
+}
 
+/**
+ * @brief Update da matrix animacao no caso de o no ser um butao
+ * @param currTime
+ */
+MyGraphNode.prototype.getButonAnimationMatrix = function(currTime) {
+
+    if(this.initialAnimTime != -1) {
+        let newMatrix = this.graph.animations[this.animation[this.pressed]].getMatrix(this.initialAnimTime, currTime);
+        if(newMatrix != null) {
+            mat4.multiply(this.transformMatrix,
+                this.originalMatrix,
+                newMatrix);
+        } else {//fim da animacao
+            mat4.copy(this.originalMatrix, this.transformMatrix);
+            this.initialAnimTime = -1;
+        }
+    }
+}
+
+/**
+ * @brief Update da matrix animacao no caso de o no nao ser um butao
+ * @param currTime
+ */
+MyGraphNode.prototype.getNormalAnimationMatrix = function(currTime) {
     if(this.animationN < this.animation.length) {//enquanto ha animacoes para reproduzir
         let newMatrix = this.graph.animations[this.animation[this.animationN]].getMatrix(this.initialAnimTime, currTime);
 
@@ -159,7 +221,6 @@ MyGraphNode.prototype.updateMatrix = function(currTime) {
             this.initialAnimTime = 0;
         }
     }
-
 }
 
 MyGraphNode.prototype.getPosition = function() {

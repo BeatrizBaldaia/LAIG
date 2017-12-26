@@ -24,6 +24,7 @@ function MySceneGraph(filename, scene) {
     scene.graph = this;
 
     this.nodes = [];
+    this.butonNames = ['buton_level', 'buton_film', 'buton_1Vs1', 'buton_1VsPC', 'buton_PCVsPC', 'buton_undo'];
 
     this.idRoot = null;                    // The id of the root element.
 
@@ -1390,6 +1391,12 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
+
+            /*Verificar se este no e um butao*/
+            if(this.butonNames.indexOf(nodeID) != -1) {
+                this.nodes[nodeID].isButon = 1;
+                this.nodes[nodeID].initialAnimTime = -1;
+            }
 
             let aux = this.reader.getFloat(children[i], 'selectable', false);
             if (aux == null ) {

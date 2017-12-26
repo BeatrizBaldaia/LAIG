@@ -103,11 +103,13 @@ MyGame.prototype.logPicking = function (obj) {
           this.verifyNodeAnimation(obj);
           if(this.isRecording == 0) {
               this.isRecording = 1;
-              obj.animation.push('lever_up');
+              obj.initialAnimTime = 0;
+              obj.pressed = 0;
           } else {
               this.isRecording = 0;
-              mat4.copy(obj.originalMatrix, obj.transformMatrix);
-              obj.animation.push('lever_down');
+              // mat4.copy(obj.originalMatrix, obj.transformMatrix);
+              obj.initialAnimTime = 0;
+              obj.pressed = 1;
               // this.playFilm();
           }
 
@@ -123,12 +125,14 @@ MyGame.prototype.logPicking = function (obj) {
           this.verifyNodeAnimation(obj);
 
           if(this.level == 0) {
-            obj.animation.push('lever_down');
             this.level = 1;
+              obj.initialAnimTime = 0;
+              obj.pressed = 1;
           } else {
-            mat4.copy(obj.originalMatrix, obj.transformMatrix);
-            obj.animation.push('lever_up');
+            // mat4.copy(obj.originalMatrix, obj.transformMatrix);
             this.level = 0;
+              obj.initialAnimTime = 0;
+              obj.pressed = 0;
           }
 
           break;
@@ -394,7 +398,7 @@ MyGame.prototype.verifyNodeAnimation = function (piece) {
         this.scene.nodesWithAnimation.push(piece.nodeID);
     } else {
         piece.initialAnimTime = 0;
-        mat4.copy(piece.originalMatrix, piece.transformMatrix);//TODO: estou a fazer isto por causa da animacao da alavanca. nao sei se vai dar asneira com outros nos
+        // mat4.copy(piece.originalMatrix, piece.transformMatrix);//TODO: estou a fazer isto por causa da animacao da alavanca. nao sei se vai dar asneira com outros nos
     }
 }
 
