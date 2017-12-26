@@ -145,7 +145,7 @@
           <MATERIAL id="null" />
           <TEXTURE id="null" />
           <TRANSLATION x=".5" y=".25" z=".5" />
-          <SCALE sx="1" sy=".5" sz="1" />
+          <!-- <SCALE sx="0.287" sy="0.287" sz="0.287" /> -->
           <DESCENDANTS>
             <LEAF  type="sphere" args=".5 20 20" />
           </DESCENDANTS>
@@ -165,6 +165,7 @@
           <TEXTURE id="clear" />
           <TRANSLATION x="0" y=".1" z="1" />
           <ROTATION axis="x" angle="-90" />
+          <!-- <SCALE sx="0.287" sy="0.287" sz="0.287" /> -->
           <DESCENDANTS>
             <LEAF  type="rectangle" args="0 1 1 0" />
           </DESCENDANTS>
@@ -172,7 +173,7 @@
         <NODE id="game">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-
+            <SCALE sx="3.48432056" sy="3.48432056" sz="3.48432056" />
             <DESCENDANTS>
             	<LEAF type="patch" />
             </DESCENDANTS>
