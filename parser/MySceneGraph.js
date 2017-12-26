@@ -1205,7 +1205,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         if (this.animations[animationID] != null )
             return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
 
-        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier', 'circular', 'combo', 'rotx']);
+        let animationType = this.reader.getItem(children[i], 'type', ['linear', 'bezier', 'circular', 'combo', 'rotx', 'transz']);
         let animationSpeed;
         if(animationType != 'combo') {
             animationSpeed = this.reader.getFloat(children[i], 'speed');
@@ -1346,6 +1346,15 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                 else if (isNaN(animationAng))
                     return "non-numeric value for animationAng (animation ID = " + animationID + ")";
                 this.animations[animationID] = new MyRotationX(this, animationAng);
+                break;
+            case 'transz':
+                animationDist = this.reader.getFloat(children[i], 'dist');
+                if (animationDist == null) {
+                    return "unable to parse animationDist";
+                }
+                else if (isNaN(animationDist))
+                    return "non-numeric value for animationAng (animation ID = " + animationID + ")";
+                this.animations[animationID] = new MyTranslationZ(this, animationDist);
                 break;
             default:{
                 return "Undefined type of animation animation ID = " + animationID + ")";

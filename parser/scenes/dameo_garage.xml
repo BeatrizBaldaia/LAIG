@@ -161,6 +161,10 @@
         </ANIMATION>
         <ANIMATION id="lever_up" speed="1.5" type="rotx" ang="-90">
         </ANIMATION>
+        <ANIMATION id="buton_on" speed="1.5" type="transz" dist="-0.04">
+        </ANIMATION>
+        <ANIMATION id="buton_off" speed="1.5" type="transz" dist="0.04">
+        </ANIMATION>
     </ANIMATIONS>
     <NODES>
 
@@ -368,33 +372,53 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_1Vs1" selectable="1">
-            <MATERIAL id="null" />
+            <MATERIAL id="yellow_buton_off" />
             <TEXTURE id="clear" />
-            <TRANSLATION x="0" y="-0.2" z="0.3" />
+            <TRANSLATION x="0" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="select_yellow_buton" />
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_1VsPC" selectable="1">
-            <MATERIAL id="null" />
+            <MATERIAL id="yellow_buton_off" />
             <TEXTURE id="clear" />
-            <TRANSLATION x="0.5" y="-0.2" z="0.3" />
+            <TRANSLATION x="0.5" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="select_yellow_buton" />
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_PCVsPC" selectable="1">
-            <MATERIAL id="null" />
+            <MATERIAL id="yellow_buton_off" />
             <TEXTURE id="clear" />
-            <TRANSLATION x="1" y="-0.2" z="0.3" />
+            <TRANSLATION x="1" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="select_yellow_buton" />
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_undo" selectable="1">
-            <MATERIAL id="null" />
+            <MATERIAL id="red_buton_off" />
             <TEXTURE id="clear" />
-            <TRANSLATION x="0.5" y="-1" z="0.3" />
+            <TRANSLATION x="0.5" y="-1" z="0" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="select_red_buton" />
             </DESCENDANTS>
@@ -432,7 +456,7 @@
         </NODE>
 
         <NODE id="select_yellow_buton">
-            <MATERIAL id="yellow_buton_off" />
+            <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <TRANSLATION x="0" y="0" z="0.025" />
             <SCALE sx="0.1" sy="0.1" sz="0.1" />
@@ -442,7 +466,7 @@
         </NODE>
 
         <NODE id="select_red_buton">
-            <MATERIAL id="red_buton_off" />
+            <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <SCALE sx="0.1" sy="0.1" sz="0.1" />
             <DESCENDANTS>

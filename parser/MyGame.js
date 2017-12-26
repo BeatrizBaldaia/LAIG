@@ -80,6 +80,13 @@ MyGame.prototype.logPicking = function (obj) {
     } else {
       switch (obj.nodeID) {
         case 'buton_1Vs1':{
+          obj.pressed = obj.pressed == 0 ? 1 : 0;
+          if(obj.pressed) {
+              obj.materialID = 'yellow_buton_on';
+          } else {
+              obj.materialID = 'yellow_buton_off';
+          }
+          obj.initialAnimTime = 0;
           this.type = HUMAN_VS_HUMAN;
           this.gameCycle();
 
@@ -87,16 +94,30 @@ MyGame.prototype.logPicking = function (obj) {
         }
 
         case 'buton_1VsPC':{
-            this.type = HUMAN_VS_BOT;
-            this.gameCycle();
+          obj.pressed = obj.pressed == 0 ? 1 : 0;
+          if(obj.pressed) {
+              obj.materialID = 'yellow_buton_on';
+          } else {
+              obj.materialID = 'yellow_buton_off';
+          }
+          obj.initialAnimTime = 0;
+          this.type = HUMAN_VS_BOT;
+          this.gameCycle();
 
-            break;
+          break;
         }
         case 'buton_PCVsPC':{
-            this.type = BOT_VS_BOT;
-            this.gameCycle();
+          obj.pressed = obj.pressed == 0 ? 1 : 0;
+          if(obj.pressed) {
+              obj.materialID = 'yellow_buton_on';
+          } else {
+              obj.materialID = 'yellow_buton_off';
+          }
+          obj.initialAnimTime = 0;
+          this.type = BOT_VS_BOT;
+          this.gameCycle();
 
-            break;
+          break;
         }
         case 'buton_film':{
 
@@ -107,7 +128,6 @@ MyGame.prototype.logPicking = function (obj) {
               obj.pressed = 0;
           } else {
               this.isRecording = 0;
-              // mat4.copy(obj.originalMatrix, obj.transformMatrix);
               obj.initialAnimTime = 0;
               obj.pressed = 1;
               // this.playFilm();
@@ -129,7 +149,6 @@ MyGame.prototype.logPicking = function (obj) {
               obj.initialAnimTime = 0;
               obj.pressed = 1;
           } else {
-            // mat4.copy(obj.originalMatrix, obj.transformMatrix);
             this.level = 0;
               obj.initialAnimTime = 0;
               obj.pressed = 0;
@@ -138,6 +157,13 @@ MyGame.prototype.logPicking = function (obj) {
           break;
         }
         case 'buton_undo':{
+          obj.pressed = obj.pressed == 0 ? 1 : 0;
+          if(obj.pressed) {
+            obj.materialID = 'red_buton_on';
+          } else {
+            obj.materialID = 'red_buton_off';
+          }
+          obj.initialAnimTime = 0;
           break;
         }
         case 'undo':{
@@ -398,7 +424,6 @@ MyGame.prototype.verifyNodeAnimation = function (piece) {
         this.scene.nodesWithAnimation.push(piece.nodeID);
     } else {
         piece.initialAnimTime = 0;
-        // mat4.copy(piece.originalMatrix, piece.transformMatrix);//TODO: estou a fazer isto por causa da animacao da alavanca. nao sei se vai dar asneira com outros nos
     }
 }
 
