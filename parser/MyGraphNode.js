@@ -105,7 +105,7 @@ MyGraphNode.prototype.display = function(parentID) {
         this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();//desaplica a textura atual, mas nao a remove da stack
     }//se textureID = null, no nao faz nada
     if(this.king){
-      this.graphTextures['coroa'][0].bind();
+      //this.graphTextures['coroa'][0].bind(); //TODO agagar??
     }
 
     if(this.children.length != 0) {//ver os filhos deste no

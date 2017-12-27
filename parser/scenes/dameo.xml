@@ -173,7 +173,6 @@
         <NODE id="game">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <SCALE sx="3.48432056" sy="3.48432056" sz="3.48432056" />
             <DESCENDANTS>
             	<LEAF type="patch" />
             </DESCENDANTS>

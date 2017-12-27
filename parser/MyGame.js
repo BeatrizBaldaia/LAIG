@@ -120,7 +120,6 @@ MyGame.prototype.logPicking = function (obj) {
           break;
         }
         case 'buton_film':{
-
           this.verifyNodeAnimation(obj);
           if(this.isRecording == 0) {
               this.isRecording = 1;
@@ -132,8 +131,7 @@ MyGame.prototype.logPicking = function (obj) {
               obj.pressed = 1;
               // this.playFilm();
           }
-
-            break;
+          break;
 
         // case 'film':{
         //   obj.textureID = 'coroa';
@@ -349,13 +347,19 @@ MyGame.prototype.playFilm = function () {
 };
 MyGame.prototype.undoPlay = function () {
      console.log(this.film[this.film.length - 1]);
-     /*this.board[][]=0;
-     this.board[][]=this.player;
-     this.findPieceByPosition();*/
+     let move = this.film[this.film.length - 1].slice();
+     let aux = move[0];
+     move[0] = move[1];
+     move[1] = aux;
+     console.log(move);
+     this.move = move;
+     this.pieceToMove = this.findPieceByPosition(this.move[0]);
+     this.tileToMove = this.findTileByPosition(this.move[1]);
+     this.moveOK();
+     this.film.length = this.film.length - 2;
 };
 
 playFilm_part2 = function (mySelf, i) {
-  //console.log(mySelf);
   mySelf.move = mySelf.film[i];
   mySelf.pieceToMove = mySelf.findPieceByPosition({x:mySelf.move[0].x, y:mySelf.move[0].y});
   mySelf.tileToMove = mySelf.findTileByPosition({x:mySelf.move[1].x, y:mySelf.move[1].y});
