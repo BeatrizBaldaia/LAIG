@@ -104,9 +104,6 @@ MyGraphNode.prototype.display = function(parentID) {
     } else if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//nao vai querer aplicar qualquer tipo de textura
         this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();//desaplica a textura atual, mas nao a remove da stack
     }//se textureID = null, no nao faz nada
-    if(this.king){
-      //this.graphTextures['coroa'][0].bind(); //TODO agagar??
-    }
 
     if(this.children.length != 0) {//ver os filhos deste no
         for (var i = 0; i < this.children.length; i++) {
@@ -116,11 +113,9 @@ MyGraphNode.prototype.display = function(parentID) {
             if(this.nodeID.substring(0, 9) == "gamepiece") {
                 if(this.king) {
                     this.graph.getNodes()[this.children[1]].display(this.nodeID);
-                    break;
-                } else {
-                    this.graph.getNodes()[this.children[0]].display(this.nodeID);
-                    break;
                 }
+                this.graph.getNodes()[this.children[0]].display(this.nodeID);
+                break;
             } else {
                 this.graph.getNodes()[this.children[i]].display(this.nodeID);
             }

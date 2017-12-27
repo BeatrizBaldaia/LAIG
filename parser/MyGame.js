@@ -11,10 +11,6 @@ function MyGame(scene) {
   this.initIndexVariables();
   this.initObjectsVariables();
   this.initPlayInfoVariables();
-
-  //let aux = this;
-  //window.setInterval(function(){aux.gameCycle();},1000);
-  //this.game.gameCycle();
   this.showBoard = function() {
     let s = "[";
     for (let i = 0; i < this.board.length; i++) {
@@ -43,6 +39,7 @@ MyGame.prototype.initInterfaceVariables = function () {
     this.type = HUMAN_VS_HUMAN;
     this.isRecording = 1;
     this.film = [];
+    this.capturedPieces = [];
 }
 
 MyGame.prototype.initIndexVariables = function () {
@@ -129,15 +126,9 @@ MyGame.prototype.logPicking = function (obj) {
               this.isRecording = 0;
               obj.initialAnimTime = 0;
               obj.pressed = 1;
-              // this.playFilm();
+               this.playFilm();
           }
           break;
-
-        // case 'film':{
-        //   obj.textureID = 'coroa';
-        //   this.type = FILM;
-        //   this.playFilm();
-        //   break;
         }
         case 'buton_level':{
           this.verifyNodeAnimation(obj);
@@ -278,6 +269,8 @@ MyGame.prototype.removeCapturePiece = function () {
   this.capturedPiece = this.findPieceByPosition(position);
   this.verifyNodeAnimation(this.capturedPiece);
   this.capturedPiece.animation.push('remove' + position.x + position.y);
+  //this.capturedPieces.push(move: this.film.length, x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece);
+  this.capturedPieces[this.film.length] = {x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece};
   this.capturedPiece.position.x = 0;
   this.capturedPiece.position.y = 0;
   this.capturedPiece = null;
@@ -286,13 +279,13 @@ MyGame.prototype.promotionToKing = function () {
   for(let i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] == 2){
       this.board[0][i] = 22;
-      this.findPieceByPosition({x: 1, y: (i+1)}).king = true;
+      this.findPieceByPosition({x: (i+1), y: 1}).king = true;
     }
   }
   for(let i = 0; i < this.board[this.board.length - 1].length; i++){
     if (this.board[this.board.length - 1][i] == 1) {
-      this.board[0][i] = 11;
-      this.findPieceByPosition({x: 8, y: (i+1)}).king = true;
+      this.board[this.board.length - 1][i] = 11;
+      this.findPieceByPosition({x: (i+1), y: 8}).king = true;
     }
   }
 };
@@ -351,13 +344,35 @@ MyGame.prototype.undoPlay = function () {
      let aux = move[0];
      move[0] = move[1];
      move[1] = aux;
+     this.undoCapturePiece();
      console.log(move);
+     console.log(this.showBoard());
      this.move = move;
      this.pieceToMove = this.findPieceByPosition(this.move[0]);
      this.tileToMove = this.findTileByPosition(this.move[1]);
+     this.player = (this.player == 1)? 2 : 1;
      this.moveOK();
+     this.player = (this.player == 1)? 2 : 1;
      this.film.length = this.film.length - 2;
+
 };
+MyGame.prototype.undoCapturePiece = function () {
+  console.log(this.capturedPieces[this.film.length-1]);
+  if(this.capturedPieces[this.film.length-1]){
+    console.log('Existe Peça');
+    let piece = this.capturedPieces[this.film.length-1];
+    this.board[piece.y-1][piece.x-1] = this.player;
+
+    if(this.scene.graph.animations.indexOf('add' + piece.x + piece.y) == -1){
+      //Create animation
+      this.createAddPieceAnimation(piece);
+    }
+    this.verifyNodeAnimation(piece.piece);
+    piece.piece.animation.push('add' + piece.x + piece.y);
+    piece.piece.position.x = piece.x;
+    piece.piece.position.y = piece.y;
+  }
+}
 
 playFilm_part2 = function (mySelf, i) {
   mySelf.move = mySelf.film[i];
@@ -420,6 +435,28 @@ MyGame.prototype.createCaptureAnimation = function (position) {
     }
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
+    return p4;
+    //console.log('Created animation: '+ this.showMove());
+}
+MyGame.prototype.createAddPieceAnimation = function (position) {
+    let p4 = [position.x, 0, position.y];
+    let p3 = [position.x, ANIMATION_HEIGHT, position.y];
+    let n;
+    if(this.player == 1) {
+        n = this.nCaptureBy1;
+    } else {
+        n = this.nCaptureBy2;
+    }
+
+    let p2 = [5, ANIMATION_HEIGHT, 5];
+    let p1;
+    if(n >= ANIMATION_HEIGHT) {
+        p1 = [5, 4 + n*0.5, 5];
+    } else {
+        p1 = [5, ANIMATION_HEIGHT, 5];
+    }
+    let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
+    this.scene.graph.animations['add' + position.x + position.y] = aux_animation;
     return p4;
     //console.log('Created animation: '+ this.showMove());
 }
