@@ -77,42 +77,45 @@ MyGame.prototype.logPicking = function (obj) {
     } else {
       switch (obj.nodeID) {
         case 'buton_1Vs1':{
-          obj.pressed = obj.pressed == 0 ? 1 : 0;
-          if(obj.pressed) {
-              obj.materialID = 'yellow_buton_on';
-          } else {
-              obj.materialID = 'yellow_buton_off';
-          }
-          obj.initialAnimTime = 0;
-          this.type = HUMAN_VS_HUMAN;
-          this.gameCycle();
 
+            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                obj.pressed = 1;
+                obj.materialID = 'yellow_buton_on';
+                obj.initialAnimTime = 0;
+                let buton1 = this.scene.graph.nodes['buton_1VsPC'];
+                let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                this.turnOffButons(buton1, buton2);
+                this.type = HUMAN_VS_HUMAN;
+                this.gameCycle();
+            }
           break;
         }
 
         case 'buton_1VsPC':{
-          obj.pressed = obj.pressed == 0 ? 1 : 0;
-          if(obj.pressed) {
-              obj.materialID = 'yellow_buton_on';
-          } else {
-              obj.materialID = 'yellow_buton_off';
-          }
-          obj.initialAnimTime = 0;
-          this.type = HUMAN_VS_BOT;
-          this.gameCycle();
+            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                obj.pressed = 1;
+                obj.materialID = 'yellow_buton_on';
+                obj.initialAnimTime = 0;
+                let buton1 = this.scene.graph.nodes['buton_1Vs1'];
+                let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                this.turnOffButons(buton1, buton2);
+                this.type = HUMAN_VS_BOT;
+                this.gameCycle();
+            }
 
           break;
         }
         case 'buton_PCVsPC':{
-          obj.pressed = obj.pressed == 0 ? 1 : 0;
-          if(obj.pressed) {
-              obj.materialID = 'yellow_buton_on';
-          } else {
-              obj.materialID = 'yellow_buton_off';
-          }
-          obj.initialAnimTime = 0;
-          this.type = BOT_VS_BOT;
-          this.gameCycle();
+            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                obj.pressed = 1;
+                obj.materialID = 'yellow_buton_on';
+                obj.initialAnimTime = 0;
+                let buton1 = this.scene.graph.nodes['buton_1Vs1'];
+                let buton2 = this.scene.graph.nodes['buton_1VsPC'];
+                this.turnOffButons(buton1, buton2);
+                this.type = BOT_VS_BOT;
+                this.gameCycle();
+            }
 
           break;
         }
@@ -147,11 +150,7 @@ MyGame.prototype.logPicking = function (obj) {
         }
         case 'buton_undo':{
           obj.pressed = obj.pressed == 0 ? 1 : 0;
-          if(obj.pressed) {
-            obj.materialID = 'red_buton_on';
-          } else {
-            obj.materialID = 'red_buton_off';
-          }
+
           obj.initialAnimTime = 0;
           break;
         }
@@ -467,4 +466,29 @@ MyGame.prototype.verifyNodeAnimation = function (piece) {
     } else {
         piece.initialAnimTime = 0;
     }
+}
+
+MyGame.prototype.turnOffButons = function (buton1, buton2) {
+    if(buton1.pressed) {
+        if(buton1.pressed) {
+            if(buton1.initialAnimTime != -1) {
+                buton1.invert = 1;
+            } else {
+                buton1.pressed = 0;
+                buton1.initialAnimTime = 0;
+                buton1.materialID = 'yellow_buton_off';
+            }
+        }
+    }
+    if(buton2.pressed) {
+        if(buton2.initialAnimTime != -1) {
+            buton2.invert = 1;
+        } else {
+            buton2.pressed = 0;
+            buton2.initialAnimTime = 0;
+            buton2.materialID = 'yellow_buton_off';
+        }
+    }
+
+
 }

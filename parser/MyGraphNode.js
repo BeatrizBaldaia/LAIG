@@ -44,6 +44,7 @@ MyGraphNode.prototype.initAnimationVariables = function() {
     mat4.identity(this.originalMatrix);
     this.animationN = 0;
     this.initialAnimTime = 0;
+    this.invert = 0;
 }
 
 /**
@@ -192,8 +193,15 @@ MyGraphNode.prototype.getButonAnimationMatrix = function(currTime) {
                 this.originalMatrix,
                 newMatrix);
         } else {//fim da animacao
+            if(this.invert && this.pressed) {
+                this.pressed = 0;
+                this.initialAnimTime = 0;
+            } else {
+                this.invert = 0;
+                this.initialAnimTime = -1;
+            }
             mat4.copy(this.originalMatrix, this.transformMatrix);
-            this.initialAnimTime = -1;
+
         }
     }
 }
