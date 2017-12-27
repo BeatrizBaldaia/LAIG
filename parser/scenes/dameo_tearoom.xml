@@ -118,6 +118,14 @@
             <file path="images_tearoom/hard.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <TEXTURE id="points1">
+            <file path="images_tearoom/points1.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="points2">
+            <file path="images_tearoom/points2.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <MATERIAL id="defaultMaterial">
@@ -210,9 +218,12 @@
                 <NODEREF id="walls" />
                 <NODEREF id="floor" />
                 <NODEREF id="interface" />
+                <NODEREF id="players_points" />
                 <NODEREF id="game" />
             </DESCENDANTS>
         </NODE>
+
+        <!--MESA COM TABULEIRO-->
         <NODE id="table">
             <MATERIAL id="wood" />
             <TEXTURE id="wood" />
@@ -363,7 +374,7 @@
             </DESCENDANTS>
         </NODE>
 
-
+        <!--CHAO E PAREDES-->
         <NODE id="floor">
             <MATERIAL id="rock" />
             <TEXTURE id="floor" />
@@ -407,6 +418,74 @@
             </DESCENDANTS>
         </NODE>
 
+        <!--PONTOS DOS JOGADORES-->
+        <NODE id="players_points">
+            <MATERIAL id="defaultMaterial" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0" y="5" z="2.5" />
+            <DESCENDANTS>
+                <NODEREF id="player1_points_aux" />
+                <NODEREF id="player2_points_aux" />
+                <NODEREF id="shelf3" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="player1_points_aux">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <TRANSLATION x="0.5" y="1.2" z="1" />
+        <DESCENDANTS>
+            <NODEREF id="player1_points" />
+        </DESCENDANTS>
+        </NODE>
+        <NODE id="player1_points" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <ROTATION axis="y" angle="90" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="frame" />
+                <NODEREF id="holder2" />
+                <NODEREF id="points1_figure" />
+                <NODEREF id="hard_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="player2_points_aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0.5" y="1.2" z="-1" />
+            <DESCENDANTS>
+                <NODEREF id="player2_points" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="player2_points" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <ROTATION axis="y" angle="90" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="frame" />
+                <NODEREF id="holder2" />
+                <NODEREF id="points2_figure" />
+                <NODEREF id="hard_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="shelf3">
+            <MATERIAL id="wood" />
+            <TEXTURE id="wood" />
+            <SCALE sx="1" sy="0.3" sz="3" />
+            <TRANSLATION x="0.5" y="-0.5" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="cube" />
+            </DESCENDANTS>
+        </NODE>
+        <!--INTERFACE-->
         <NODE id="interface">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="clear" />
@@ -436,6 +515,7 @@
                 <NODEREF id="cube" />
             </DESCENDANTS>
         </NODE>
+        <!--BOTOES DA INTERFACE-->
         <NODE id="butons">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
@@ -574,6 +654,8 @@
             </DESCENDANTS>
         </NODE>
 
+
+        <!--OBJETOS UTEIS-->
         <NODE id="frame">
             <MATERIAL id="wood" />
             <TEXTURE id="wood" />
@@ -675,6 +757,25 @@
             <SCALE sx="0.5" sy="1" sz="1" />
             <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
             <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="points1_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="points1" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="points2_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="points2" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
