@@ -1664,6 +1664,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
               }
               for(let i = 0; i < 64; i++) {
                 let tileNode = new MyGraphNode(this, nodeID + 'tile' + i);
+                tileNode.visible = false;
                 this.nodes[tileNode.nodeID] = tileNode;
                 this.nodes[nodeID].addChild(tileNode.nodeID);
                 tileNode.addChild('tile');
