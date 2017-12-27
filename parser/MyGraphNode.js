@@ -27,7 +27,7 @@ MyGraphNode.prototype.initParserVariables = function() {
     // The texture ID.
     this.textureID = 'null';
     this.selected = false;
-
+    this.visible = true;
     this.graphTextures = this.graph.textures;
     this.graphTexturesStack = this.graph.scene.texturesStack;
     this.graphMaterialsStack = this.graph.scene.materialsStack;
@@ -81,7 +81,7 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * @brief Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-  if (((this.graph.scene.pickMode == false) && (true /*visible*/))||(this.graph.scene.pickMode == true)) {
+  if (((this.graph.scene.pickMode == false) && this.visible)||(this.graph.scene.pickMode == true)) {
     if(this.selected) {
       this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
     }
@@ -143,8 +143,8 @@ MyGraphNode.prototype.display = function(parentID) {
                 }
                 this.leaves[i].setAmplifFactor(afS, afT);
                 this.leaves[i].display();
-            // }
-        }
+            }
+        // }
     }
     // if(this.king){
     //   this.graphTextures['coroa'][0].unbind();
