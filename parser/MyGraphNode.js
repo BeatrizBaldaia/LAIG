@@ -81,11 +81,7 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * @brief Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-<<<<<<< HEAD
-  if (((this.graph.scene.pickMode == false) && (true /*visible*/))||((this.graph.scene.pickMode == true)&&(true/*selectable*/))) {
-=======
   if (((this.graph.scene.pickMode == false) && this.visible)||(this.graph.scene.pickMode == true)) {
->>>>>>> c9ac9c06496802307931e9fc6374a94f2391aeb3
     if(this.selected) {
       this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
     }
