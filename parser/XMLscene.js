@@ -94,8 +94,8 @@ XMLscene.prototype.initLights = function() {
  * @brief Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-  this.freeCamera = new CGFcamera(0.4,0.1,500,vec3.fromValues(0, 20, 20),vec3.fromValues(2, 1, 3));
-  this.staticCamera = new CGFcamera(0.4,0.1,500,vec3.fromValues(0, 20, 20),vec3.fromValues(2, 1, 3));
+  this.freeCamera = new CGFcamera(0.4,0.1,500,vec3.fromValues(5, 5, 30),vec3.fromValues(5, 4, 5));
+  this.staticCamera = new CGFcamera(0.4,0.1,500,vec3.fromValues(5, 5, 30),vec3.fromValues(5, 4, 5));
   this.camera = this.staticCamera;
 }
 /** @brief Handler called when the graph is finally loaded.
@@ -190,12 +190,12 @@ XMLscene.prototype.initCameraVars = function() {
     this.cameraTransitionVel = 0;
     this.targetTransitionVel = 0;
 
-    var camera1 = {position: vec4.fromValues(0, 20, 20, 0), target: vec3.fromValues(2, 1, 3), follow: 0, type: 1};
-    var camera2 = {position: vec4.fromValues(6, 20, 7, 0), target: vec3.fromValues(2, 1, 3), follow: 0, type: 1};
-    var camera3 = {position: vec4.fromValues(6, 10, 20, 0), target: vec3.fromValues(2, 1, 3), follow: 0, type: 1};
-    var camera4 = {position: vec4.fromValues(0, 10, 7, 0), target: vec3.fromValues(2, 1, 3), follow: 0, type: 1};
-    var camera6 = {position: vec4.fromValues(0, 20, 20, 0), target: vec3.fromValues(2, 1, 3), follow: 0, type: 0};
-    var camera5 = {position: vec4.fromValues(0, 20, 20, 0), target: "bigRocket", follow: 1, type: 1};
+    var camera1 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
+    var camera2 = {position: vec4.fromValues(5, 15, 5, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
+    var camera3 = {position: vec4.fromValues(5, 7, 18, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
+    var camera4 = {position: vec4.fromValues(25, 10, 5, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
+    var camera6 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 0};
+    var camera5 = {position: vec4.fromValues(5, 5, 30, 0), target: "bigRocket", follow: 1, type: 1};
     this.camerasSet = [ camera1, camera2, camera3, camera4, camera6];
 
 }
