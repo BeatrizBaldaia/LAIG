@@ -1,11 +1,11 @@
 <SCENE>
     <INITIALS>
         <frustum near="0.1" far="500"/>
-        <translation x="0" y="0" z="0" />
+        <translation x="-1" y="1" z="0" />
         <rotation axis="x" angle="0" />
         <rotation axis="y" angle="0" />
         <rotation axis="z" angle="0" />
-        <scale sx="1" sy="1" sz="1" />
+        <scale sx="0.25" sy="0.25" sz="0.25" />
         <reference length="1" />
     </INITIALS>
     <ILLUMINATION>
@@ -16,7 +16,7 @@
     <LIGHTS>
         <LIGHT id="light0">
         <enable value ="1" />
-        <position  x="5" y="10" z="5" w="1" />
+        <position  x="15" y="30" z="15" w="1" />
         <ambient r="0" g="0" b="0" a="1.0" />
         <diffuse r=".0" g=".0" b=".0" a="1" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -44,7 +44,7 @@
         <!--</LIGHT>-->
         <LIGHT id="light4">
             <enable value ="1" />
-            <position  x="10" y="10" z="10" w="1" />
+            <position  x="30" y="30" z="30" w="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r=".7" g=".7" b=".7" a="1" />
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -188,6 +188,15 @@
         <NODE id="root">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="root_aux" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="root_aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+
+            <SCALE sx="3" sy="3" sz="3" />
             <DESCENDANTS>
                 <NODEREF id="table" />
                 <NODEREF id="board" />
