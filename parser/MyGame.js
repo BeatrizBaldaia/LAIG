@@ -11,10 +11,6 @@ function MyGame(scene) {
   this.initIndexVariables();
   this.initObjectsVariables();
   this.initPlayInfoVariables();
-
-  //let aux = this;
-  //window.setInterval(function(){aux.gameCycle();},1000);
-  //this.game.gameCycle();
   this.showBoard = function() {
     let s = "[";
     for (let i = 0; i < this.board.length; i++) {
@@ -130,15 +126,9 @@ MyGame.prototype.logPicking = function (obj) {
               this.isRecording = 0;
               obj.initialAnimTime = 0;
               obj.pressed = 1;
-              // this.playFilm();
+               this.playFilm();
           }
           break;
-
-        // case 'film':{
-        //   obj.textureID = 'coroa';
-        //   this.type = FILM;
-        //   this.playFilm();
-        //   break;
         }
         case 'buton_level':{
           this.verifyNodeAnimation(obj);
@@ -289,13 +279,13 @@ MyGame.prototype.promotionToKing = function () {
   for(let i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] == 2){
       this.board[0][i] = 22;
-      this.findPieceByPosition({x: 1, y: (i+1)}).king = true;
+      this.findPieceByPosition({x: (i+1), y: 1}).king = true;
     }
   }
   for(let i = 0; i < this.board[this.board.length - 1].length; i++){
     if (this.board[this.board.length - 1][i] == 1) {
-      this.board[0][i] = 11;
-      this.findPieceByPosition({x: 8, y: (i+1)}).king = true;
+      this.board[this.board.length - 1][i] = 11;
+      this.findPieceByPosition({x: (i+1), y: 8}).king = true;
     }
   }
 };
