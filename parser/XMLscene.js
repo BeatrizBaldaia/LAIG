@@ -14,16 +14,24 @@ function XMLscene(interface) {
   this.update=function(currTime){
     let s = Math.sin(currTime/1000)/2 + .5;
     this.shader.setUniformsValues({uTimeFactor: s});
-    for(var i = 0; i < this.nodesWithAnimation.length; i++) {
+    for(let i = 0; i < this.nodesWithAnimation.length; i++) {
       this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
     }
 
+    this.game.timeAux -= (currTime - this.game.beforeTime)/1000;
+    this.game.beforeTime = currTime;
+    this.game.timeBeforeNextPlay = Math.floor(this.game.timeAux);
+    if (this.game.timeBeforeNextPlay == 0){
+      console.log('Tiimeout, game lost!');
+    } else if (this.graph.nodes['time_panel']) {
+      this.graph.nodes['time_panel'].textureID = 'number' + this.game.timeBeforeNextPlay;
+    }
     /* CAMERA VIEW */
-      if(!this.updateCameraView(currTime)) {
-        if(this.camerasSet[this.cameraView]["follow"]) {
-            this.camera.setTarget(this.graph.nodes[this.camerasSet[this.cameraView]["target"]].getPosition());
-        }
+    if(!this.updateCameraView(currTime)) {
+      if(this.camerasSet[this.cameraView]["follow"]) {
+        this.camera.setTarget(this.graph.nodes[this.camerasSet[this.cameraView]["target"]].getPosition());
       }
+    }
   }
 
   this.setPickEnabled(true);
