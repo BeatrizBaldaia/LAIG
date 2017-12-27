@@ -38,13 +38,13 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
-	var filename1=getUrlVars()['file'] || "dameo_tearoom.xml";
-    // var filename2=getUrlVars()['file'] || "dameo_garage.xml";
+	// var filename1=getUrlVars()['file'] || "dameo_tearoom.xml";
+    var filename2=getUrlVars()['file'] || "dameo_garage.xml";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors
-	var myGraph = new MySceneGraph(filename1, myScene);
-    // var myGraph = new MySceneGraph(filename2, myScene);
+	// var myGraph = new MySceneGraph(filename1, myScene);
+    var myGraph = new MySceneGraph(filename2, myScene);
 
 	// start
     app.run();

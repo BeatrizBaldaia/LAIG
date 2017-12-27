@@ -5,7 +5,7 @@
         <rotation axis="x" angle="0" />
         <rotation axis="y" angle="0" />
         <rotation axis="z" angle="0" />
-        <scale sx="1" sy="1" sz="1" />
+        <scale sx="0.25" sy="0.25" sz="0.25" />
         <reference length="1" />
     </INITIALS>
     <ILLUMINATION>
@@ -14,40 +14,21 @@
         <background r="0" g="0" b="0" a="1" />
     </ILLUMINATION>
     <LIGHTS>
-        <!--<LIGHT id="light0">-->
-            <!--<enable value ="1" />-->
-            <!--<position  x="5" y="10" z="5" w="1" />-->
-            <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-            <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-            <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
+
         <!--</LIGHT>-->
-        <!--<LIGHT id="light1">-->
-            <!--<enable value ="1" />-->
-            <!--<position  x="0.5" y="10" z="0.5" w="1" />-->
-            <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-            <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-            <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
-        <!--<LIGHT id="light2">-->
-            <!--<enable value ="1" />-->
-            <!--<position  x="0.5" y="10" z="10" w="1" />-->
-            <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-            <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-            <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
-        <!--<LIGHT id="light3">-->
-            <!--<enable value ="1" />-->
-            <!--<position  x="10" y="10" z="0.5" w="1" />-->
-            <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-            <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-            <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
-        <LIGHT id="light4">
+        <LIGHT id="light0">
             <enable value ="1" />
-            <position  x="10" y="10" z="10" w="1" />
+            <position  x="5" y="30" z="5" w="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
-            <diffuse r="0.6" g="0.6" b="0.6" a="1" />
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r=".4" g=".4" b=".4" a="1" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+        </LIGHT>
+        <LIGHT id="light1">
+            <enable value ="0" />
+            <position  x="30" y="30" z="15" w="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r=".4" g=".4" b=".4" a="1" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
         </LIGHT>
     </LIGHTS>
     <TEXTURES>
@@ -124,7 +105,7 @@
             <shininess value="1" />
             <specular r="0.5" g="0.5" b="0.5" a="1" />
             <diffuse r="1.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
+            <ambient r="0.5" g="0.0" b="0.0" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
         <MATERIAL id="red_buton_on">
@@ -136,16 +117,16 @@
         </MATERIAL>
         <MATERIAL id="metal">
             <shininess value="1" />
-            <specular r="0.7" g="0.7" b="0.7" a="1" />
+            <specular r="0.5" g="0.5" b="0.5" a="1" />
             <diffuse r="0.37" g="0.37" b="0.37" a="1" />
-            <ambient r="0.3" g="0.3" b="0.3" a="1" />
+            <ambient r="0.185" g="0.185" b="0.185" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
         <MATERIAL id="wood">
             <shininess value="1" />
             <specular r="0.1" g="0.1" b="0.1" a="1" />
             <diffuse r="0.64" g="0.25" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
+            <ambient r="0.32" g="0.125" b="0.0" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
         <MATERIAL id="rock">
@@ -175,16 +156,20 @@
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
             <DESCENDANTS>
+                <NODEREF id="root_aux" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="root_aux">
+            <MATERIAL id="defaultMaterial" />
+            <TEXTURE id="null" />
+            <SCALE sx="3" sy="3" sz="3" />
+            <DESCENDANTS>
                 <NODEREF id="table" />
                 <NODEREF id="board" />
-                <!--<NODEREF id="pieces" />-->
                 <NODEREF id="walls" />
                 <NODEREF id="floor" />
                 <NODEREF id="panel" />
                 <NODEREF id="game" />
-                <!--<NODEREF id="piece_man" />-->
-                <!--<NODEREF id="piece_king" />-->
-                <!--<NODEREF id="tile" />-->
             </DESCENDANTS>
         </NODE>
         <NODE id="table">
