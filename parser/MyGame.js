@@ -32,6 +32,8 @@ function MyGame(scene) {
       s = s.slice(0, -1) + ']';
       return s;
   }
+  let auxiliarDate = new Date();
+  this.beforeTime = auxiliarDate.getTime();
 }
 
 MyGame.prototype.initInterfaceVariables = function () {
@@ -62,6 +64,9 @@ MyGame.prototype.initPlayInfoVariables = function () {
     this.nCaptureBy1 = 0;
     this.nCaptureBy2 = 0;
     this.selectNodesList = {};
+    this.timeBeforeNextPlay = 18;
+    this.maxTime = 18;
+    this.timeAux = 18;
 }
 
 MyGame.prototype.logPicking = function (obj) {
@@ -200,6 +205,7 @@ function onSuccess(data) {
       console.warn('Invalid response from server! '+ data.target.response);
   }
   this.asker.endGame();
+  this.asker.timeAux = this.asker.maxTime;
 }
 MyGame.prototype.moveOK = function () {
   let move = this.showMove();
@@ -219,7 +225,7 @@ MyGame.prototype.moveOK = function () {
   window.setTimeout(function(){aux.gameCycle();},aux.scene.graph.animations[move].time);
   this.verifyNodeAnimation(this.pieceToMove);
   this.pieceToMove.animation.push(move);
-  console.log(move);
+  //console.log(move);
   this.board[y-1][x-1] = 0;
   if(this.pieceToMove.king){
     this.board[this.tileToMove.position.y-1][this.tileToMove.position.x-1] = (this.player==1)?11:22;
@@ -345,8 +351,8 @@ MyGame.prototype.undoPlay = function () {
      move[0] = move[1];
      move[1] = aux;
      this.undoCapturePiece();
-     console.log(move);
-     console.log(this.showBoard());
+     // console.log(move);
+     // console.log(this.showBoard());
      this.move = move;
      this.pieceToMove = this.findPieceByPosition(this.move[0]);
      this.tileToMove = this.findTileByPosition(this.move[1]);
@@ -405,10 +411,10 @@ MyGame.prototype.gameCycle = function () {
   }
 };
 function PCplay(data){
-  console.log(data.target.response);
+  // console.log(data.target.response);
   let a = data.target.response;
   a = a.replace(/[[\]]/g, '');
-  console.log(a);
+  // console.log(a);
   let aa = a.split(',');
   this.asker.move = [{x:aa[0][0],y:aa[0][2]},{x:aa[1][0],y:aa[1][2]}];
   this.asker.pieceToMove = this.asker.findPieceByPosition(this.asker.move[0]);

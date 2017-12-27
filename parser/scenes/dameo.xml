@@ -27,6 +27,78 @@
             <file path="images/tabuleiro.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <TEXTURE id="number1">
+  <file path="images/1.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number2">
+  <file path="images/2.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number3">
+  <file path="images/3.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number4">
+  <file path="images/4.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number5">
+  <file path="images/5.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number6">
+  <file path="images/6.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number7">
+  <file path="images/7.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number8">
+  <file path="images/8.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number9">
+  <file path="images/9.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number10">
+  <file path="images/10.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number11">
+  <file path="images/11.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number12">
+  <file path="images/12.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number13">
+  <file path="images/13.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number14">
+  <file path="images/14.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number15">
+  <file path="images/15.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number16">
+  <file path="images/16.jpg" />
+  <amplif_factor s="1" t="1" />
+  </TEXTURE>
+<TEXTURE id="number17">
+  <file path="images/17.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
+<TEXTURE id="number18">
+  <file path="images/18.jpg" />
+  <amplif_factor s="1" t="1" />
+</TEXTURE>
         <TEXTURE id="coroa">
             <file path="images/coroa.jpg" />
             <amplif_factor s="1" t="1" />
@@ -98,6 +170,7 @@
           <TEXTURE id="interface" />
           <DESCENDANTS>
             <NODEREF id="type" />
+            <NODEREF id="time_panel" />
             <NODEREF id="film" />
             <NODEREF id="level" />
             <NODEREF id="undo" />
@@ -129,9 +202,16 @@
         </NODE>
         <NODE id="undo" selectable="1">
           <MATERIAL id="green" />
-          <TEXTURE id="clear" />
+          <TEXTURE id="number1" />
           <DESCENDANTS>
             <LEAF  type="rectangle" args="7 2 8 1" />
+          </DESCENDANTS>
+        </NODE>
+        <NODE id="time_panel" >
+          <MATERIAL id="null" />
+          <TEXTURE id="null" />
+          <DESCENDANTS>
+            <LEAF  type="rectangle" args="7 5 8 4" />
           </DESCENDANTS>
         </NODE>
         <NODE id="film" selectable="1">
