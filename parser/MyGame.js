@@ -186,6 +186,11 @@ function onSuccess(data) {
     }
     case 'NCapture':{
       this.asker.captureRequired = false;
+      if(this.asker.player == 1) {
+        this.asker.nCaptureBy1++;
+      } else {
+        this.asker.nCaptureBy2++;
+      }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.promotionToKing();
@@ -196,17 +201,15 @@ function onSuccess(data) {
       this.asker.captureRequired = true;
       let auxPiece = this.asker.pieceToMove;
       let auxPlayer = this.asker.player;
+      if(auxPlayer == 1) {
+        this.asker.nCaptureBy1++;
+      } else {
+        this.asker.nCaptureBy2++;
+      }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.pieceToMove = auxPiece;
       this.asker.player = auxPlayer;
-
-      if(auxPlayer == 1) {
-        this.nCaptureBy1++;
-      } else {
-        this.nCaptureBy2++;
-      }
-
       break;
     }
     default:
@@ -281,10 +284,16 @@ MyGame.prototype.removeCapturePiece = function () {
     //Create animation
     this.createCaptureAnimation(position);
   }
+  if (this.player == 1){
+    if (this.scene.graph.nodes['points1_figure']) {
+      this.scene.graph.nodes['points1_figure'].textureID = 'number' + this.nCaptureBy1;
+    }
+  } else if (this.scene.graph.nodes['points2_figure']) {
+      this.scene.graph.nodes['points2_figure'].textureID = 'number' + this.nCaptureBy2;
+  }
   this.capturedPiece = this.findPieceByPosition(position);
   this.verifyNodeAnimation(this.capturedPiece);
   this.capturedPiece.animation.push('remove' + position.x + position.y);
-  //this.capturedPieces.push(move: this.film.length, x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece);
   this.capturedPieces[this.film.length] = {x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece,captureRequired:this.captureRequired};
   this.capturedPiece.position.x = 0;
   this.capturedPiece.position.y = 0;
