@@ -1,3 +1,4 @@
+'use strict';
 let ANIMATION_VELOCITY = 10;
 let ANIMATION_HEIGHT = 3;
 let BOT_VS_BOT = 3;
@@ -68,9 +69,18 @@ MyGame.prototype.initPlayInfoVariables = function () {
     this.maxTime = 18;
     this.timeAux = 18;
 }
-
+MyGame.prototype.updateGameTime = function (currTime) {
+  this.timeAux -= (currTime - this.beforeTime)/1000;
+  this.beforeTime = currTime;
+  this.timeBeforeNextPlay = Math.floor(this.timeAux);
+  if (this.timeBeforeNextPlay < 0){
+    console.log('Tiimeout, game lost!');
+  } else if (this.scene.graph.nodes['time_panel']) {
+    this.scene.graph.nodes['time_panel'].textureID = 'number' + this.timeBeforeNextPlay;
+  }
+};
 MyGame.prototype.logPicking = function (obj) {
-  if((this.pieces.indexOf(obj.nodeID) != -1) && (this.captureRequired == false)) {//obj is piece
+  if((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/) {//obj is piece
     this.pieceToMove = obj; //Escolher a peça
   } else {
     if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null) && (this.tiles.indexOf(obj.nodeID) != -1)){
@@ -157,9 +167,6 @@ MyGame.prototype.logPicking = function (obj) {
           obj.pressed = obj.pressed == 0 ? 1 : 0;
 
           obj.initialAnimTime = 0;
-          break;
-        }
-        case 'undo':{
           this.undoPlay();
           break;
         }
@@ -178,26 +185,31 @@ function onSuccess(data) {
       break;
     }
     case 'NCapture':{
+      this.asker.captureRequired = false;
+      if(this.asker.player == 1) {
+        this.asker.nCaptureBy1++;
+      } else {
+        this.asker.nCaptureBy2++;
+      }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.promotionToKing();
-      this.asker.captureRequired = false;
+
       break;
     }
     case 'Capture':{
+      this.asker.captureRequired = true;
       let auxPiece = this.asker.pieceToMove;
       let auxPlayer = this.asker.player;
+      if(auxPlayer == 1) {
+        this.asker.nCaptureBy1++;
+      } else {
+        this.asker.nCaptureBy2++;
+      }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.pieceToMove = auxPiece;
       this.asker.player = auxPlayer;
-      this.asker.captureRequired = true;
-      if(auxPlayer == 1) {
-        this.nCaptureBy1++;
-      } else {
-        this.nCaptureBy2++;
-      }
-
       break;
     }
     default:
@@ -240,6 +252,7 @@ MyGame.prototype.moveOK = function () {
   this.move = [];
   //console.log(this.film);
   this.player = (this.player == 1)? 2 : 1;//proximo jogador a jogar
+  console.log(this.showBoard());
 }
 MyGame.prototype.removeCapturePiece = function () {
   let position = {x: 0, y: 0};
@@ -271,11 +284,17 @@ MyGame.prototype.removeCapturePiece = function () {
     //Create animation
     this.createCaptureAnimation(position);
   }
+  if (this.player == 1){
+    if (this.scene.graph.nodes['points1_figure']) {
+      this.scene.graph.nodes['points1_figure'].textureID = 'number' + this.nCaptureBy1;
+    }
+  } else if (this.scene.graph.nodes['points2_figure']) {
+      this.scene.graph.nodes['points2_figure'].textureID = 'number' + this.nCaptureBy2;
+  }
   this.capturedPiece = this.findPieceByPosition(position);
   this.verifyNodeAnimation(this.capturedPiece);
   this.capturedPiece.animation.push('remove' + position.x + position.y);
-  //this.capturedPieces.push(move: this.film.length, x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece);
-  this.capturedPieces[this.film.length] = {x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece};
+  this.capturedPieces[this.film.length] = {x:this.capturedPiece.position.x,y:this.capturedPiece.position.y,piece:this.capturedPiece,captureRequired:this.captureRequired};
   this.capturedPiece.position.x = 0;
   this.capturedPiece.position.y = 0;
   this.capturedPiece = null;
@@ -317,7 +336,7 @@ MyGame.prototype.findTileByPosition = function (position) {
 MyGame.prototype.endGame = function () {
   getPrologRequest(this,'endofGame('+this.showBoard() + '-' + this.player+')', gameOver);
 };
-gameOver = function (data) {
+function gameOver(data) {
   switch (data.target.response) {
     case 'Continue':{
       console.log('Game is still going!');
@@ -344,28 +363,40 @@ MyGame.prototype.playFilm = function () {
   window.setTimeout(function(){aux.film = auxFilm; aux.type=BOT_VS_BOT;/*TODO ten de ser dinamico*/},1000*this.film.length);
 };
 MyGame.prototype.undoPlay = function () {
-     console.log(this.film[this.film.length - 1]);
-     let move = this.film[this.film.length - 1].slice();
-     let aux = move[0];
-     move[0] = move[1];
-     move[1] = aux;
-     this.undoCapturePiece();
-     // console.log(move);
-     // console.log(this.showBoard());
-     this.move = move;
-     this.pieceToMove = this.findPieceByPosition(this.move[0]);
-     this.tileToMove = this.findTileByPosition(this.move[1]);
-     this.player = (this.player == 1)? 2 : 1;
-     this.moveOK();
-     this.player = (this.player == 1)? 2 : 1;
-     this.film.length = this.film.length - 2;
-
+  if(this.film.length == 0)
+    return;
+  let move = this.film[this.film.length - 1].slice();
+  let aux = move[0];
+  move[0] = move[1];
+  move[1] = aux;
+  let piece = this.capturedPieces[this.film.length-1];
+  let captureRequired = false;
+  if(piece)
+    captureRequired = piece.captureRequired;
+  if(captureRequired)
+    this.player = (this.player == 1)? 2 : 1;
+  if(piece)
+    this.undoCapturePiece(piece);
+  this.move = move;
+  this.pieceToMove = this.findPieceByPosition(this.move[0]);
+  this.tileToMove = this.findTileByPosition(this.move[1]);
+  this.player = (this.player == 1)? 2 : 1;
+  this.moveOK();
+  // if(!captureRequired){
+    this.player = (this.player == 1)? 2 : 1;
+  // }
+  this.capturedPieces[this.film.length-2] = null;
+  this.film.length = this.film.length - 2;
+  if(captureRequired){
+    this.pieceToaMove = this.findPieceByPosition(move[1]);
+  }
+  piece = this.capturedPieces[this.film.length-1];
+  captureRequired = false;
+  if(piece)
+    captureRequired = piece.captureRequired;
+  this.captureRequired = captureRequired;
 };
-MyGame.prototype.undoCapturePiece = function () {
-  console.log(this.capturedPieces[this.film.length-1]);
-  if(this.capturedPieces[this.film.length-1]){
-    console.log('Existe Peça');
-    let piece = this.capturedPieces[this.film.length-1];
+MyGame.prototype.undoCapturePiece = function (piece) {
     this.board[piece.y-1][piece.x-1] = this.player;
 
     if(this.scene.graph.animations.indexOf('add' + piece.x + piece.y) == -1){
@@ -376,10 +407,9 @@ MyGame.prototype.undoCapturePiece = function () {
     piece.piece.animation.push('add' + piece.x + piece.y);
     piece.piece.position.x = piece.x;
     piece.piece.position.y = piece.y;
-  }
 }
 
-playFilm_part2 = function (mySelf, i) {
+function playFilm_part2(mySelf, i) {
   mySelf.move = mySelf.film[i];
   mySelf.pieceToMove = mySelf.findPieceByPosition({x:mySelf.move[0].x, y:mySelf.move[0].y});
   mySelf.tileToMove = mySelf.findTileByPosition({x:mySelf.move[1].x, y:mySelf.move[1].y});
@@ -388,7 +418,7 @@ playFilm_part2 = function (mySelf, i) {
 MyGame.prototype.gameCycle = function () {
   switch (this.type) {
     case HUMAN_VS_HUMAN:{
-      console.log('TOUUUUUUUU');
+      //console.log('TOUUUUUUUU');
       break;
     }
     case BOT_VS_BOT:{
@@ -431,12 +461,12 @@ MyGame.prototype.createCaptureAnimation = function (position) {
         n = this.nCaptureBy2;
     }
 
-    let p3 = [5, ANIMATION_HEIGHT, 5];
+    let p3 = [0, ANIMATION_HEIGHT, 0];
     let p4;
     if(n >= ANIMATION_HEIGHT) {
-        p4 = [5, 4 + n*0.5, 5];
+        p4 = [0, 4 + n*0.5, 0];
     } else {
-        p4 = [5, ANIMATION_HEIGHT, 5];
+        p4 = [0, ANIMATION_HEIGHT, 0];
     }
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
