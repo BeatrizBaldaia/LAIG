@@ -43,6 +43,11 @@ MyInterface.prototype.init = function(application) {
         obj.scene.updateColorFactor(v);
     });
 
+    this.gui.add(this.scene, 'timeFactor', 5, 90).name('Time to Play').onChange(function(v)
+    {
+        obj.scene.updateTimeFactor(v);
+    });
+
     // add a group of controls (and open/expand by defult)
     this.gui.add(this.scene, 'cameraView', {
   			'Fixed Camera Centering': 0,

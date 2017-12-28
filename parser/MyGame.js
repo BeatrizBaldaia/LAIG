@@ -33,13 +33,12 @@ function MyGame(scene) {
       s = s.slice(0, -1) + ']';
       return s;
   }
-  let auxiliarDate = new Date();
-  this.beforeTime = auxiliarDate.getTime();
+  this.previousTime;
 }
 
 MyGame.prototype.initInterfaceVariables = function () {
     this.level = 0;
-    this.type = HUMAN_VS_HUMAN;
+    this.type = -1;
     this.isRecording = 1;
     this.film = [];
     this.capturedPieces = [];
@@ -65,119 +64,127 @@ MyGame.prototype.initPlayInfoVariables = function () {
     this.nCaptureBy1 = 0;
     this.nCaptureBy2 = 0;
     this.selectNodesList = {};
-    this.timeBeforeNextPlay = 18;
-    this.maxTime = 18;
-    this.timeAux = 18;
+    this.timeBeforeNextPlay = 30;
+    this.maxTime = 30;
+    this.timeAux = 30;
 }
 MyGame.prototype.updateGameTime = function (currTime) {
-  this.timeAux -= (currTime - this.beforeTime)/1000;
-  this.beforeTime = currTime;
-  this.timeBeforeNextPlay = Math.floor(this.timeAux);
-  if (this.timeBeforeNextPlay < 0){
-    console.log('Tiimeout, game lost!');
-  } else if (this.scene.graph.nodes['time_panel']) {
-    this.scene.graph.nodes['time_panel'].textureID = 'number' + this.timeBeforeNextPlay;
-  }
+    if(this.type != -1) {
+        this.timeAux -= (currTime - this.previousTime)/1000;
+        this.previousTime = currTime;
+        this.timeBeforeNextPlay = Math.floor(this.timeAux);
+        let timeDigit1 = this.scene.graph.nodes['time_digit1'];
+        let timeDigit2 = this.scene.graph.nodes['time_digit2'];
+        if (this.timeBeforeNextPlay < 0){
+            console.log('Timeout, game lost!');
+        } else {
+            timeDigit1.textureID = 'number' + Math.floor(this.timeBeforeNextPlay / 10);
+            timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
+        }
+    }
 };
 MyGame.prototype.logPicking = function (obj) {
-  if((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/) {//obj is piece
-    this.pieceToMove = obj; //Escolher a peça
-  } else {
-    if((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null) && (this.tiles.indexOf(obj.nodeID) != -1)){
-      this.move = [];
-      this.move.push({x:this.pieceToMove.position.x,y:this.pieceToMove.position.y});
-      this.move.push({x:obj.position.x,y:obj.position.y});
-      this.tileToMove = obj;
-      getPrologRequest(this,'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
-    } else {
-      switch (obj.nodeID) {
-        case 'buton_1Vs1':{
+        if ((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/ && (this.type == HUMAN_VS_HUMAN || this.type == HUMAN_VS_BOT)) {//obj is piece
+            this.pieceToMove = obj; //Escolher a peça
+        } else {
+            if ((this.pieces.indexOf(obj.nodeID) == -1) && (this.pieceToMove != null) && (this.tiles.indexOf(obj.nodeID) != -1) && (this.type == HUMAN_VS_HUMAN || this.type == HUMAN_VS_BOT)) {
+                this.move = [];
+                this.move.push({x: this.pieceToMove.position.x, y: this.pieceToMove.position.y});
+                this.move.push({x: obj.position.x, y: obj.position.y});
+                this.tileToMove = obj;
+                getPrologRequest(this, 'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
+            } else {
+                switch (obj.nodeID) {
+                    case 'buton_1Vs1': {
 
-            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
-                obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
-                obj.initialAnimTime = 0;
-                let buton1 = this.scene.graph.nodes['buton_1VsPC'];
-                let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
-                this.turnOffButons(buton1, buton2);
-                this.type = HUMAN_VS_HUMAN;
-                this.resetGame();
-                this.gameCycle();
+                        if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                            obj.pressed = 1;
+                            obj.materialID = 'yellow_buton_on';
+                            obj.initialAnimTime = 0;
+                            let buton1 = this.scene.graph.nodes['buton_1VsPC'];
+                            let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                            this.turnOffButons(buton1, buton2);
+                            this.type = HUMAN_VS_HUMAN;
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+                        break;
+                    }
+
+                    case 'buton_1VsPC': {
+                        if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                            obj.pressed = 1;
+                            obj.materialID = 'yellow_buton_on';
+                            obj.initialAnimTime = 0;
+                            let buton1 = this.scene.graph.nodes['buton_1Vs1'];
+                            let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                            this.turnOffButons(buton1, buton2);
+                            this.type = HUMAN_VS_BOT;
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+
+                        break;
+                    }
+                    case 'buton_PCVsPC': {
+                        if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+                            obj.pressed = 1;
+                            obj.materialID = 'yellow_buton_on';
+                            obj.initialAnimTime = 0;
+                            let buton1 = this.scene.graph.nodes['buton_1Vs1'];
+                            let buton2 = this.scene.graph.nodes['buton_1VsPC'];
+                            this.turnOffButons(buton1, buton2);
+                            this.type = BOT_VS_BOT;
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+
+                        break;
+                    }
+                    case 'buton_film': {
+                        this.verifyNodeAnimation(obj);
+                        if (this.isRecording == 0) {
+                            this.isRecording = 1;
+                            obj.initialAnimTime = 0;
+                            obj.pressed = 0;
+                        } else {
+                            this.isRecording = 0;
+                            obj.initialAnimTime = 0;
+                            obj.pressed = 1;
+                            this.playFilm();
+                        }
+                        break;
+                    }
+                    case 'buton_level': {
+                        this.verifyNodeAnimation(obj);
+
+                        if (this.level == 0) {
+                            this.level = 1;
+                            obj.initialAnimTime = 0;
+                            obj.pressed = 1;
+                        } else {
+                            this.level = 0;
+                            obj.initialAnimTime = 0;
+                            obj.pressed = 0;
+                        }
+
+                        break;
+                    }
+                    case 'buton_undo': {
+                        obj.pressed = obj.pressed == 0 ? 1 : 0;
+
+                        obj.initialAnimTime = 0;
+                        this.undoPlay();
+                        break;
+                    }
+                    default:
+                        console.error('Objecto sem funcionalidade neste momento.');//TODO
+                }
             }
-          break;
         }
-
-        case 'buton_1VsPC':{
-            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
-                obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
-                obj.initialAnimTime = 0;
-                let buton1 = this.scene.graph.nodes['buton_1Vs1'];
-                let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
-                this.turnOffButons(buton1, buton2);
-                this.type = HUMAN_VS_BOT;
-                this.resetGame();
-                this.gameCycle();
-            }
-
-          break;
-        }
-        case 'buton_PCVsPC':{
-            if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
-                obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
-                obj.initialAnimTime = 0;
-                let buton1 = this.scene.graph.nodes['buton_1Vs1'];
-                let buton2 = this.scene.graph.nodes['buton_1VsPC'];
-                this.turnOffButons(buton1, buton2);
-                this.type = BOT_VS_BOT;
-                this.resetGame();
-                this.gameCycle();
-            }
-
-          break;
-        }
-        case 'buton_film':{
-          this.verifyNodeAnimation(obj);
-          if(this.isRecording == 0) {
-              this.isRecording = 1;
-              obj.initialAnimTime = 0;
-              obj.pressed = 0;
-          } else {
-              this.isRecording = 0;
-              obj.initialAnimTime = 0;
-              obj.pressed = 1;
-               this.playFilm();
-          }
-          break;
-        }
-        case 'buton_level':{
-          this.verifyNodeAnimation(obj);
-
-          if(this.level == 0) {
-            this.level = 1;
-              obj.initialAnimTime = 0;
-              obj.pressed = 1;
-          } else {
-            this.level = 0;
-              obj.initialAnimTime = 0;
-              obj.pressed = 0;
-          }
-
-          break;
-        }
-        case 'buton_undo':{
-          obj.pressed = obj.pressed == 0 ? 1 : 0;
-
-          obj.initialAnimTime = 0;
-          this.undoPlay();
-          break;
-        }
-        default:
-        console.error('Objecto sem funcionalidade neste momento.');//TODO
-      }
-    }
-  }
 }
 
 function onSuccess(data) {
@@ -191,8 +198,10 @@ function onSuccess(data) {
       this.asker.captureRequired = false;
       if(this.asker.player == 1) {
         this.asker.nCaptureBy1++;
+        this.asker.updatePoints(1);
       } else {
         this.asker.nCaptureBy2++;
+        this.asker.updatePoints(2);
       }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
@@ -206,8 +215,10 @@ function onSuccess(data) {
       let auxPlayer = this.asker.player;
       if(auxPlayer == 1) {
         this.asker.nCaptureBy1++;
+        this.asker.updatePoints(1);
       } else {
         this.asker.nCaptureBy2++;
+        this.asker.updatePoints(2);
       }
       this.asker.removeCapturePiece();
       this.asker.moveOK();
@@ -221,6 +232,9 @@ function onSuccess(data) {
   this.asker.endGame();
   this.asker.timeAux = this.asker.maxTime;
 }
+/*
+* Movimento da peca no tabuleiro (animacao da peca a saltar)
+* */
 MyGame.prototype.moveOK = function () {
   let move = this.showMove();
   let x = this.pieceToMove.position.x;
@@ -365,37 +379,49 @@ MyGame.prototype.playFilm = function () {
 MyGame.prototype.undoPlay = function () {
   if(this.film.length == 0)
     return;
-  let move = this.film[this.film.length - 1].slice();
-  let aux = move[0];
-  move[0] = move[1];
-  move[1] = aux;
-  let piece = this.capturedPieces[this.film.length-1];
+  let move = this.film[this.film.length - 1].slice();//buscar ultimo movimento (unitario)
+  let aux = move[0];//inverter
+  move[0] = move[1];//as coordenadas
+  move[1] = aux;//do ultimo movimento
+  let piece = this.capturedPieces[this.film.length-1];//peca que foi capturada no ultimo movimento guardado
   let captureRequired = false;
-  if(piece)
-    captureRequired = piece.captureRequired;
+  if(piece) {
+      captureRequired = piece.captureRequired;
+      if(piece.materialID == 'player1') {
+          this.nCaptureBy2--;
+          this.updatePoints(2);
+      } else {
+          this.nCaptureBy1--;
+          this.updatePoints(1);
+      }
+  }
   if(captureRequired)
     this.player = (this.player == 1)? 2 : 1;
   if(piece)
-    this.undoCapturePiece(piece);
+    this.undoCapturePiece(piece);//repor no tabuleiro a peca que tinha sido capturada
   this.move = move;
   this.pieceToMove = this.findPieceByPosition(this.move[0]);
   this.tileToMove = this.findTileByPosition(this.move[1]);
   this.player = (this.player == 1)? 2 : 1;
   this.moveOK();
-  // if(!captureRequired){
-    this.player = (this.player == 1)? 2 : 1;
-  // }
-  this.capturedPieces[this.film.length-2] = null;
-  this.film.length = this.film.length - 2;
+  this.player = (this.player == 1)? 2 : 1;
+
+  this.capturedPieces[this.film.length-2] = null;//a peca que antes tinha sido capturada ja esta de volta no tabuleiro
+  this.film.length = this.film.length - 2;//apagar ultimo movimento e movimento do undo do array de movimentos ja feitos
   if(captureRequired){
-    this.pieceToaMove = this.findPieceByPosition(move[1]);
+    this.pieceToMove = this.findPieceByPosition(move[1]);//move[1] = posicao da peca apos o undo
   }
+  /*atualizar a flag captureRequired*/
   piece = this.capturedPieces[this.film.length-1];
   captureRequired = false;
   if(piece)
     captureRequired = piece.captureRequired;
   this.captureRequired = captureRequired;
 };
+
+/*
+* Volta a por no tabuleiro a peça na posicao anterior
+* */
 MyGame.prototype.undoCapturePiece = function (piece) {
     this.board[piece.y-1][piece.x-1] = this.player;
 
@@ -534,3 +560,24 @@ MyGame.prototype.resetGame = function () {
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
   this.player = 1;
 };
+
+MyGame.prototype.resetGameTime = function () {
+    let auxiliarDate = new Date();
+    this.previousTime = auxiliarDate.getTime();
+    this.timeBeforeNextPlay = this.maxTime;
+    this.timeAux = this.maxTime;
+}
+
+MyGame.prototype.updatePoints = function(player) {
+    if(player == 1) {
+        let pointsDigit1 = this.scene.graph.nodes['P1points_digit1'];
+        let pointsDigit2 = this.scene.graph.nodes['P1points_digit2'];
+        pointsDigit1.textureID = 'number' + Math.floor(this.nCaptureBy1 / 10);
+        pointsDigit2.textureID = 'number' + this.nCaptureBy1 % 10;
+    } else {
+        let pointsDigit1 = this.scene.graph.nodes['P2points_digit1'];
+        let pointsDigit2 = this.scene.graph.nodes['P2points_digit2'];
+        pointsDigit1.textureID = 'number' + Math.floor(this.nCaptureBy2 / 10);
+        pointsDigit2.textureID = 'number' + this.nCaptureBy2 % 10;
+    }
+}

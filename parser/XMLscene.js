@@ -9,6 +9,7 @@ function XMLscene(interface) {
   this.interface = interface;
   this.lightValues = {};
   this.colorFactor=30;
+  this.timeFactor=30;
   this.game = new MyGame(this);
 
   this.update=function(currTime){
@@ -17,7 +18,11 @@ function XMLscene(interface) {
     for(let i = 0; i < this.nodesWithAnimation.length; i++) {
       this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
     }
-    this.game.updateGameTime(currTime);
+    console.log(this.graph.loadedOk);
+    if(this.graph.loadedOk) {
+        this.game.updateGameTime(currTime);
+    }
+
 
     /* CAMERA VIEW */
     if(!this.updateCameraView(currTime)) {
@@ -63,6 +68,9 @@ XMLscene.prototype.init = function(application) {
 }
 XMLscene.prototype.updateColorFactor=function(v) {
   this.shader.setUniformsValues({colorScale: this.colorFactor});
+}
+XMLscene.prototype.updateTimeFactor=function(v) {
+    this.game.maxTime = this.timeFactor;
 }
 
 /**

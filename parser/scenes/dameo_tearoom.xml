@@ -166,42 +166,6 @@
         <file path="images/9.jpg" />
         <amplif_factor s="1" t="1" />
       </TEXTURE>
-      <TEXTURE id="number10">
-        <file path="images/10.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number11">
-        <file path="images/11.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number12">
-        <file path="images/12.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number13">
-        <file path="images/13.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number14">
-        <file path="images/14.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number15">
-        <file path="images/15.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number16">
-        <file path="images/16.jpg" />
-        <amplif_factor s="1" t="1" />
-        </TEXTURE>
-      <TEXTURE id="number17">
-        <file path="images/17.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
-      <TEXTURE id="number18">
-        <file path="images/18.jpg" />
-        <amplif_factor s="1" t="1" />
-      </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <MATERIAL id="defaultMaterial">
@@ -528,7 +492,7 @@
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
                 <NODEREF id="points1_figure" />
-                <NODEREF id="time_counter" />
+                <NODEREF id="counter1" />
             </DESCENDANTS>
         </NODE>
         <NODE id="player2_points_aux">
@@ -551,16 +515,25 @@
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
                 <NODEREF id="points2_figure" />
-                <NODEREF id="time_counter" />
+                <NODEREF id="counter2" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="time_counter" selectable="1">
+        <NODE id="counter1" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <SCALE sx="0.5" sy="1" sz="1" />
             <ROTATION axis="y" angle="180" />
             <DESCENDANTS>
-                <NODEREF id="numbers_figure" />
+                <NODEREF id="P1points_numbers_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="counter2" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <NODEREF id="P2points_numbers_figure" />
             </DESCENDANTS>
         </NODE>
         <NODE id="shelf3">
@@ -736,7 +709,7 @@
             <DESCENDANTS>
                 <NODEREF id="frame2" />
                 <NODEREF id="rope" />
-                <NODEREF id="numbers_figure" />
+                <NODEREF id="time_numbers_figure" />
             </DESCENDANTS>
         </NODE>
 
@@ -960,28 +933,89 @@
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="numbers_figure">
+
+        <NODE id="time_numbers_figure">
             <MATERIAL id="yellow_buton_off" />
             <TEXTURE id="null" />
             <DESCENDANTS>
+                <NODEREF id="time_digit1" />
+                <NODEREF id="time_digit2" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="P1points_numbers_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="P1points_digit1" />
+                <NODEREF id="P1points_digit2" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="P2points_numbers_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="P2points_digit1" />
+                <NODEREF id="P2points_digit2" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="time_digit1">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
                 <NODEREF id="digit1" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="time_digit2">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
                 <NODEREF id="digit2" />
             </DESCENDANTS>
         </NODE>
+        <NODE id="P1points_digit1">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
+                <NODEREF id="digit1" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="P1points_digit2">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
+                <NODEREF id="digit2" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="P2points_digit1">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
+                <NODEREF id="digit1" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="P2points_digit2">
+            <MATERIAL id="null" />
+            <TEXTURE id="number0" />
+            <DESCENDANTS>
+                <NODEREF id="digit2" />
+            </DESCENDANTS>
+        </NODE>
+
         <NODE id="digit1">
             <MATERIAL id="null" />
-            <TEXTURE id="hard" />
+            <TEXTURE id="null" />
             <SCALE sx="0.5" sy="1" sz="1" />
-            <TRANSLATION x="0" y="-0.5" z="0" />
+            <TRANSLATION x="-1" y="-0.5" z="0" />
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
         </NODE>
         <NODE id="digit2">
             <MATERIAL id="null" />
-            <TEXTURE id="easy" />
+            <TEXTURE id="null" />
             <SCALE sx="0.5" sy="1" sz="1" />
-            <TRANSLATION x="-1" y="-0.5" z="0" />
+            <TRANSLATION x="0" y="-0.5" z="0" />
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
