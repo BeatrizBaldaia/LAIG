@@ -19,7 +19,8 @@ MyRotationX.prototype.getMatrix = function(initialTime, currTime) {
     var temp = currTime - initialTime;
 
     let alfa = (this.ang * temp)/(1.5/0.001);
-    if(temp >= (1.5/0.001)) {
+    // if(temp >= (1.5/0.001)) {
+    if(Math.abs(alfa) >= Math.abs(this.ang)) {
         console.log("acabou animacao");
         return null;
     }

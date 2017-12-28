@@ -21,27 +21,14 @@
         <diffuse r=".0" g=".0" b=".0" a="1" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </LIGHT>
-        <!--<LIGHT id="light1">-->
-        <!--<enable value ="1" />-->
-        <!--<position  x="0.5" y="10" z="0.5" w="1" />-->
-        <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-        <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-        <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
-        <!--<LIGHT id="light2">-->
-        <!--<enable value ="1" />-->
-        <!--<position  x="0.5" y="10" z="10" w="1" />-->
-        <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-        <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-        <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
-        <!--<LIGHT id="light3">-->
-        <!--<enable value ="1" />-->
-        <!--<position  x="10" y="10" z="0.5" w="1" />-->
-        <!--<ambient r="0" g="0" b="0" a="1.0" />-->
-        <!--<diffuse r=".7" g=".7" b=".7" a="1" />-->
-        <!--<specular r="1.0" g="1.0" b="1.0" a="1.0" />-->
-        <!--</LIGHT>-->
+        <LIGHT id="light1">
+            <enable value ="1" />
+            <position  x="15" y="30" z="30" w="1" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r=".0" g=".0" b=".0" a="1" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </LIGHT>
+
         <LIGHT id="light4">
             <enable value ="1" />
             <position  x="30" y="30" z="30" w="1" />
@@ -99,6 +86,46 @@
             <file path="images_tearoom/lace.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <TEXTURE id="1Vs1">
+            <file path="images_tearoom/1Vs1.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="1VsPC">
+            <file path="images_tearoom/1VsPC.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="PCVsPC">
+            <file path="images_tearoom/PCVsPC.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="undo">
+            <file path="images_tearoom/undo.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="film">
+            <file path="images_tearoom/filming.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="play">
+            <file path="images_tearoom/play.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="easy">
+            <file path="images_tearoom/easy.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="hard">
+            <file path="images_tearoom/hard.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="points1">
+            <file path="images_tearoom/points1.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="points2">
+            <file path="images_tearoom/points2.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
     </TEXTURES>
     <MATERIALS>
         <MATERIAL id="defaultMaterial">
@@ -124,30 +151,16 @@
         </MATERIAL>
         <MATERIAL id="yellow_buton_off">
             <shininess value="1" />
-            <specular r="0.5" g="0.5" b="0.5" a="1" />
+            <specular r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
         <MATERIAL id="yellow_buton_on">
             <shininess value="1" />
-            <specular r="0.5" g="0.5" b="0.5" a="1" />
+            <specular r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
-            <emission r="0.0" g="0.0" b="0.0" a="1" />
-        </MATERIAL>
-        <MATERIAL id="red_buton_off">
-            <shininess value="1" />
-            <specular r="0.5" g="0.5" b="0.5" a="1" />
-            <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
-            <emission r="0.0" g="0.0" b="0.0" a="1" />
-        </MATERIAL>
-        <MATERIAL id="red_buton_on">
-            <shininess value="1" />
-            <specular r="0.5" g="0.5" b="0.5" a="1" />
-            <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-            <ambient r="0.5" g="0.5" b="0.5" a="1" />
+            <ambient r="0.4" g="0.4" b="0.4" a="1" />
             <emission r="0.0" g="0.0" b="0.0" a="1" />
         </MATERIAL>
         <MATERIAL id="metal">
@@ -205,9 +218,12 @@
                 <NODEREF id="walls" />
                 <NODEREF id="floor" />
                 <NODEREF id="interface" />
+                <NODEREF id="players_points" />
                 <NODEREF id="game" />
             </DESCENDANTS>
         </NODE>
+
+        <!--MESA COM TABULEIRO-->
         <NODE id="table">
             <MATERIAL id="wood" />
             <TEXTURE id="wood" />
@@ -358,7 +374,7 @@
             </DESCENDANTS>
         </NODE>
 
-
+        <!--CHAO E PAREDES-->
         <NODE id="floor">
             <MATERIAL id="rock" />
             <TEXTURE id="floor" />
@@ -402,6 +418,74 @@
             </DESCENDANTS>
         </NODE>
 
+        <!--PONTOS DOS JOGADORES-->
+        <NODE id="players_points">
+            <MATERIAL id="defaultMaterial" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0" y="5" z="2.5" />
+            <DESCENDANTS>
+                <NODEREF id="player1_points_aux" />
+                <NODEREF id="player2_points_aux" />
+                <NODEREF id="shelf3" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="player1_points_aux">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <TRANSLATION x="0.5" y="1.2" z="1" />
+        <DESCENDANTS>
+            <NODEREF id="player1_points" />
+        </DESCENDANTS>
+        </NODE>
+        <NODE id="player1_points" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <ROTATION axis="y" angle="90" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="frame" />
+                <NODEREF id="holder2" />
+                <NODEREF id="points1_figure" />
+                <NODEREF id="hard_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="player2_points_aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0.5" y="1.2" z="-1" />
+            <DESCENDANTS>
+                <NODEREF id="player2_points" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="player2_points" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <ROTATION axis="y" angle="90" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
+                <ANIMATIONREF id="paint_spin" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="frame" />
+                <NODEREF id="holder2" />
+                <NODEREF id="points2_figure" />
+                <NODEREF id="hard_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="shelf3">
+            <MATERIAL id="wood" />
+            <TEXTURE id="wood" />
+            <SCALE sx="1" sy="0.3" sz="3" />
+            <TRANSLATION x="0.5" y="-0.5" z="0" />
+            <DESCENDANTS>
+                <NODEREF id="cube" />
+            </DESCENDANTS>
+        </NODE>
+        <!--INTERFACE-->
         <NODE id="interface">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="clear" />
@@ -431,6 +515,7 @@
                 <NODEREF id="cube" />
             </DESCENDANTS>
         </NODE>
+        <!--BOTOES DA INTERFACE-->
         <NODE id="butons">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
@@ -490,7 +575,7 @@
         </NODE>
         <NODE id="buton_1Vs1" selectable="1">
             <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="gold" />
+            <TEXTURE id="1Vs1" />
             <SCALE sx="1" sy="1" sz="0.5" />
             <TRANSLATION x="-2" y="0" z="0" />
             <ANIMATIONREFS>
@@ -504,7 +589,7 @@
         </NODE>
         <NODE id="buton_1VsPC" selectable="1">
             <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="gold" />
+            <TEXTURE id="1VsPC" />
             <SCALE sx="1" sy="1" sz="0.5" />
             <TRANSLATION x="-0.5" y="0" z="0" />
             <ANIMATIONREFS>
@@ -518,7 +603,7 @@
         </NODE>
         <NODE id="buton_PCVsPC" selectable="1">
             <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="gold" />
+            <TEXTURE id="PCVsPC" />
             <SCALE sx="1" sy="1" sz="0.5" />
             <TRANSLATION x="1" y="0" z="0" />
             <ANIMATIONREFS>
@@ -531,8 +616,8 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_undo_aux" selectable="1">
-            <MATERIAL id="red_buton_off" />
-            <TEXTURE id="gold" />
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
             <SCALE sx="1" sy="1" sz="0.5" />
             <TRANSLATION x="2.5" y="1.3" z="0" />
 
@@ -542,7 +627,7 @@
         </NODE>
         <NODE id="buton_undo" selectable="1">
             <MATERIAL id="null" />
-            <TEXTURE id="gold" />
+            <TEXTURE id="null" />
             <ANIMATIONREFS>
                 <ANIMATIONREF id="paint_loop" />
                 <ANIMATIONREF id="paint_loop" />
@@ -551,8 +636,8 @@
             <DESCENDANTS>
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
-                <NODEREF id="record_figure" />
-                <NODEREF id="play_figure" />
+                <NODEREF id="undo_front_figure" />
+                <NODEREF id="undo_back_figure" />
             </DESCENDANTS>
         </NODE>
 
@@ -569,6 +654,8 @@
             </DESCENDANTS>
         </NODE>
 
+
+        <!--OBJETOS UTEIS-->
         <NODE id="frame">
             <MATERIAL id="wood" />
             <TEXTURE id="wood" />
@@ -617,8 +704,8 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="easy_figure">
-            <MATERIAL id="defaultMaterial" />
-            <TEXTURE id="clear" />
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="easy" />
             <SCALE sx="0.5" sy="1" sz="1" />
             <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
             <DESCENDANTS>
@@ -626,8 +713,8 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="hard_figure">
-            <MATERIAL id="defaultMaterial" />
-            <TEXTURE id="clear" />
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="hard" />
             <SCALE sx="0.5" sy="1" sz="1" />
             <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
             <ROTATION axis="y" angle="180" />
@@ -637,8 +724,8 @@
         </NODE>
 
         <NODE id="record_figure">
-            <MATERIAL id="defaultMaterial" />
-            <TEXTURE id="clear" />
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="film" />
             <SCALE sx="0.5" sy="1" sz="1" />
             <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
             <DESCENDANTS>
@@ -646,11 +733,49 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="play_figure">
-            <MATERIAL id="defaultMaterial" />
-            <TEXTURE id="clear" />
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="play" />
             <SCALE sx="0.5" sy="1" sz="1" />
             <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
             <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="undo_front_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="undo" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="undo_back_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="undo" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
+            <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="points1_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="points1" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="points2_figure">
+            <MATERIAL id="yellow_buton_off" />
+            <TEXTURE id="points2" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
