@@ -352,6 +352,8 @@ MyGame.prototype.playFilm = function () {
   window.setTimeout(function(){aux.film = auxFilm; aux.type=BOT_VS_BOT;/*TODO ten de ser dinamico*/},1000*this.film.length);
 };
 MyGame.prototype.undoPlay = function () {
+  if(this.film.length == 0)
+    return;
   let move = this.film[this.film.length - 1].slice();
   let aux = move[0];
   move[0] = move[1];
