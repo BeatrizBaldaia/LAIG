@@ -29,7 +29,6 @@ function XMLscene(interface) {
 
   this.setPickEnabled(true);
 
-
   /* CAMERA VIEW */
   this.initCameraVars();
 
@@ -53,12 +52,12 @@ XMLscene.prototype.init = function(application) {
   this.materialsStack=[];
   this.nodesWithAnimation=[];
   this.selectedNode = 0;
+  this.selectedGraph = 'tearoom';
   this.nodeList = {'No Node Selected': 0};
   this.shader = new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag");
   this.shader.setUniformsValues({uTimeFactor: 0});
-  //this.shader.setUniformsValues({uSelectColor: [0.521568627,0.88627451,0.364705882,1]});
   this.updateColorFactor();
-  this.setUpdatePeriod(10);//TODO VER VALOR
+  this.setUpdatePeriod(10);
 
 }
 XMLscene.prototype.updateColorFactor=function(v) {

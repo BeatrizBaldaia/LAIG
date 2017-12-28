@@ -91,13 +91,15 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
     // Processes each node, verifying errors.
 
     // <INITIALS>
-    var index;
+    let index;
     if ((index = nodeNames.indexOf("INITIALS")) == -1)
         return "tag <INITIALS> missing";
     else {
-        if (index != INITIALS_INDEX)
+        if (index != INITIALS_INDEX){
             this.onXMLMinorError("tag <INITIALS> out of order");
-
+            console.log(index);
+            console.log(nodeNames[0]);
+          }
         if ((error = this.parseInitials(nodes[index])) != null )
             return error;
     }
@@ -1616,10 +1618,11 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 pieceNode.addChild('piece_man');
                 pieceNode.addChild('piece_king');
                 pieceNode.sizeChildren += 2;
+                let rootAux = (this.idRoot == 'tearoom')?'tea_':'gar_';
                 if(i<=18){
-                  pieceNode.materialID = 'player1';
+                  pieceNode.materialID = rootAux+'player1';
                 } else {
-                  pieceNode.materialID = 'player2';
+                  pieceNode.materialID = rootAux+'player2';
                 }
                 let x = 0;
                 let y = 0;
