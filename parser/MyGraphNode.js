@@ -231,12 +231,29 @@ MyGraphNode.prototype.getPosition = function() {
 }
 
 MyGraphNode.prototype.resetPositions = function() {
-  this.position.x = this.initialPosition.x;
-  this.position.y = this.initialPosition.y;
-  mat4.translate(this.transformMatrix, this.originalMatrix, [this.position.x, 0, this.position.y]);
+  if(this.nodeID.substring(0, 9) == "gamepiece") {
+    if(this.graph.animations.indexOf('reset' + this.nodeID) == -1){
+      this.createResetAnimation();
+    }
+    this.graph.scene.game.verifyNodeAnimation(this);
+    this.animation.push('reset' + this.nodeID);
+    this.position.x = this.initialPosition.x;
+    this.position.y = this.initialPosition.y;
+    this.king = false;
+  }
   if(this.children.length != 0) {//ver os filhos deste no
     for (let i = 0; i < this.children.length; i++) {
       this.graph.getNodes()[this.children[i]].resetPositions();
     }
   }
 }
+
+MyGraphNode.prototype.createResetAnimation = function () {
+  let p1 = [this.position.x, 0, this.position.y];
+  let p2 = [this.position.x, ANIMATION_HEIGHT, this.position.y];
+  let p3 = [this.initialPosition.x, ANIMATION_HEIGHT, this.initialPosition.y];
+  let p4 = [this.initialPosition.x, 0, this.initialPosition.y];
+  let aux_animation = new MyBezierAnimation(this.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
+  this.graph.animations['reset'+this.nodeID] = aux_animation;
+  return aux_animation;
+};

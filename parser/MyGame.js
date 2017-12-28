@@ -101,6 +101,7 @@ MyGame.prototype.logPicking = function (obj) {
                 let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
                 this.turnOffButons(buton1, buton2);
                 this.type = HUMAN_VS_HUMAN;
+                this.resetGame();
                 this.gameCycle();
             }
           break;
@@ -115,6 +116,7 @@ MyGame.prototype.logPicking = function (obj) {
                 let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
                 this.turnOffButons(buton1, buton2);
                 this.type = HUMAN_VS_BOT;
+                this.resetGame();
                 this.gameCycle();
             }
 
@@ -129,6 +131,7 @@ MyGame.prototype.logPicking = function (obj) {
                 let buton2 = this.scene.graph.nodes['buton_1VsPC'];
                 this.turnOffButons(buton1, buton2);
                 this.type = BOT_VS_BOT;
+                this.resetGame();
                 this.gameCycle();
             }
 
@@ -250,7 +253,6 @@ MyGame.prototype.moveOK = function () {
 
   this.film.push(this.move.slice());
   this.move = [];
-  //console.log(this.film);
   this.player = (this.player == 1)? 2 : 1;//proximo jogador a jogar
   console.log(this.showBoard());
 }
@@ -352,9 +354,7 @@ function gameOver(data) {
 };
 
 MyGame.prototype.playFilm = function () {
-  this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
-  this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
-  this.player = 1;
+  this.resetGame();
   let aux = this;
   let auxFilm = this.film.slice();
   for (let i = 0; i < this.film.length; i++){
@@ -528,3 +528,9 @@ MyGame.prototype.turnOffButons = function (buton1, buton2) {
 
 
 }
+
+MyGame.prototype.resetGame = function () {
+  this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
+  this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
+  this.player = 1;
+};
