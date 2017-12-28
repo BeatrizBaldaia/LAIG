@@ -96,7 +96,7 @@ MyGame.prototype.logPicking = function (obj) {
 
             if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
                 obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
+                // obj.materialID = 'yellow_buton_on'; //TODO
                 obj.initialAnimTime = 0;
                 let buton1 = this.scene.graph.nodes['buton_1VsPC'];
                 let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
@@ -111,7 +111,7 @@ MyGame.prototype.logPicking = function (obj) {
         case 'buton_1VsPC':{
             if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
                 obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
+                // obj.materialID = 'yellow_buton_on'; //TODO
                 obj.initialAnimTime = 0;
                 let buton1 = this.scene.graph.nodes['buton_1Vs1'];
                 let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
@@ -126,7 +126,7 @@ MyGame.prototype.logPicking = function (obj) {
         case 'buton_PCVsPC':{
             if((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
                 obj.pressed = 1;
-                obj.materialID = 'yellow_buton_on';
+                // obj.materialID = 'yellow_buton_on'; //TODO
                 obj.initialAnimTime = 0;
                 let buton1 = this.scene.graph.nodes['buton_1Vs1'];
                 let buton2 = this.scene.graph.nodes['buton_1VsPC'];

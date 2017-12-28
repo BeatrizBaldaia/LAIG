@@ -117,7 +117,7 @@ MyGraphNode.prototype.display = function(parentID) {
                 }
                 this.graph.getNodes()[this.children[0]].display(this.nodeID);
                 break;
-            } else if ((this.nodeID == 'piece_man')||(this.nodeID == 'piece_king')||(this.nodeID == 'buton_level')||(this.nodeID == 'buton_film')) {
+            } else if ((this.nodeID == 'piece_man')||(this.nodeID == 'piece_king')||(this.nodeID == 'buton_level')||(this.nodeID == 'buton_film')||(this.nodeID == 'buton_1Vs1')||(this.nodeID == 'buton_1VsPC')||(this.nodeID == 'buton_PCVsPC')||(this.nodeID == 'buton_undo')) {
               let aux = (this.graph.idRoot == 'tearoom')?'tea_':'gar_';
               this.graph.getNodes()[aux+this.nodeID].display(this.nodeID);
             } else {

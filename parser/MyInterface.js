@@ -54,8 +54,10 @@ MyInterface.prototype.init = function(application) {
     {
         obj.scene.updateCameraVelocity(v);
     }).name('Game View');
-
-    this.gui.add(this.scene, 'selectedGraph', [ 'tearoom', 'garage'] );
+let a = this.scene;
+    this.gui.add(this.scene, 'selectedGraph', [ 'tearoom', 'garage'] ).onChange(function () {
+      a.graph.idRoot = a.selectedGraph;
+    });
     this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
 
     return true;

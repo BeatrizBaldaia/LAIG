@@ -406,10 +406,7 @@
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <SCALE sx="0.5" sy="0.5" sz="0.5" />
-             <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" /> -->
             <ROTATION axis="x" angle="-90" />
-            <!-- <TRANSLATION x="50.3" y="-79.8" z="35.5" /> -->
-            <!--<TRANSLATION x="50.3" y="35.5" z="79.8" />-->
             <DESCENDANTS>
                 <LEAF type="cylinder" args="1 1 1 20 20 1 1" />
             </DESCENDANTS>
@@ -417,9 +414,6 @@
         <NODE id="gar_piece_man">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
-
-            <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" />
-            <TRANSLATION x="50.3" y="35.5" z="79.8" /> -->
             <DESCENDANTS>
                 <LEAF type="hexnut" args="200 1" />
             </DESCENDANTS>
@@ -437,7 +431,6 @@
             <MATERIAL id="tea_metal" />
             <TEXTURE id="gold" />
             <SCALE sx="0.5" sy="0.5" sz="0.5" />
-            <!-- <SCALE sx="0.3" sy="0.2" sz="0.3" /> -->
             <TRANSLATION x="0" y="1" z="0" />
             <DESCENDANTS>
                 <NODEREF id="piece_king_aux"/>
@@ -446,9 +439,6 @@
         <NODE id="gar_piece_king">
             <MATERIAL id="gar_metal" />
             <TEXTURE id="gold" />
-
-            <!-- <SCALE sx="0.3" sy="0.2" sz="0.3" />
-            <TRANSLATION x="16.767" y="17.75" z="26.6" /> -->
             <DESCENDANTS>
                 <NODEREF id="piece_king_aux"/>
             </DESCENDANTS>
@@ -562,8 +552,151 @@
             </DESCENDANTS>
         </NODE>
 
-        <!-- tea -->
-        <!-- gar -->
+        <NODE id="buton_1Vs1" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="tea_buton_1Vs1" />
+                <NODEREF id="gar_buton_1Vs1" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tea_buton_1Vs1" >
+            <MATERIAL id="tea_yellow_buton_off" />
+            <TEXTURE id="1Vs1" />
+            <SCALE sx="1" sy="1" sz="0.5" />
+            <TRANSLATION x="-2" y="0" z="0" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_up" />
+                <ANIMATIONREF id="paint_down" />
+            </ANIMATIONREFS>
+
+            <DESCENDANTS>
+                <NODEREF id="buton_template" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="gar_buton_1Vs1" >
+            <MATERIAL id="gar_yellow_buton_off" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="select_yellow_buton" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="buton_1VsPC" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="tea_buton_1VsPC" />
+                <NODEREF id="gar_buton_1VsPC" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tea_buton_1VsPC" >
+            <MATERIAL id="tea_yellow_buton_off" />
+            <TEXTURE id="1VsPC" />
+            <SCALE sx="1" sy="1" sz="0.5" />
+            <TRANSLATION x="-0.5" y="0" z="0" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_up" />
+                <ANIMATIONREF id="paint_down" />
+            </ANIMATIONREFS>
+
+            <DESCENDANTS>
+                <NODEREF id="buton_template" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="gar_buton_1VsPC" >
+            <MATERIAL id="gar_yellow_buton_off" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0.5" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="select_yellow_buton" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="buton_PCVsPC" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="tea_buton_PCVsPC" />
+                <NODEREF id="gar_buton_PCVsPC" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tea_buton_PCVsPC" >
+            <MATERIAL id="tea_yellow_buton_off" />
+            <TEXTURE id="PCVsPC" />
+            <SCALE sx="1" sy="1" sz="0.5" />
+            <TRANSLATION x="1" y="0" z="0" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_up" />
+                <ANIMATIONREF id="paint_down" />
+            </ANIMATIONREFS>
+
+            <DESCENDANTS>
+                <NODEREF id="buton_template" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="gar_buton_PCVsPC" >
+            <MATERIAL id="gar_yellow_buton_off" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="1" y="-0.2" z="0.05" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="select_yellow_buton" />
+            </DESCENDANTS>
+        </NODE>
+
+        <NODE id="buton_undo" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <DESCENDANTS>
+                <NODEREF id="tea_buton_undo" />
+                <NODEREF id="gar_buton_undo" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tea_buton_undo" >
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_loop" />
+                <ANIMATIONREF id="paint_loop" />
+            </ANIMATIONREFS>
+
+            <DESCENDANTS>
+                <NODEREF id="frame" />
+                <NODEREF id="holder2" />
+                <NODEREF id="undo_front_figure" />
+                <NODEREF id="undo_back_figure" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="gar_buton_undo" >
+            <MATERIAL id="red_buton_off" />
+            <TEXTURE id="clear" />
+            <TRANSLATION x="0.5" y="-1" z="0" />
+
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="buton_off" />
+                <ANIMATIONREF id="buton_on" />
+            </ANIMATIONREFS>
+            <DESCENDANTS>
+                <NODEREF id="select_red_buton" />
+            </DESCENDANTS>
+        </NODE>
+
         <!-- *********************************** OTHER ******************************************* -->
 
         <NODE id="tearoom">
@@ -740,7 +873,6 @@
             </DESCENDANTS>
         </NODE>
 
-        <!--CHAO E PAREDES-->
         <NODE id="floor">
             <MATERIAL id="rock" />
             <TEXTURE id="board_wood" />
@@ -773,16 +905,6 @@
                 <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
             </DESCENDANTS>
         </NODE>
-        <!-- <NODE id="front_wall">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <TRANSLATION x="5" y="5" z="0" />
-            <SCALE sx="10" sy="10" sz="1" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-        </NODE> -->
 
         <!--PONTOS DOS JOGADORES-->
         <NODE id="players_points">
@@ -811,7 +933,6 @@
             <ROTATION axis="y" angle="90" />
             <ANIMATIONREFS>
                 <ANIMATIONREF id="paint_spin" />
-                <!--<ANIMATIONREF id="paint_spin" />-->
             </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
@@ -834,7 +955,6 @@
             <ROTATION axis="y" angle="90" />
             <ANIMATIONREFS>
                 <ANIMATIONREF id="paint_spin" />
-                <!--<ANIMATIONREF id="paint_spin" />-->
             </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
@@ -899,10 +1019,10 @@
             <DESCENDANTS>
                 <NODEREF id="buton_level_aux" />
                 <NODEREF id="buton_film_aux" />
-                <!-- <NODEREF id="buton_1Vs1" /> -->
-                <!-- <NODEREF id="buton_1VsPC" /> -->
-                <!-- <NODEREF id="buton_PCVsPC" /> -->
-                <!-- <NODEREF id="buton_undo_aux" /> -->
+                <NODEREF id="buton_1Vs1" />
+                <NODEREF id="buton_1VsPC" />
+                <NODEREF id="buton_PCVsPC" />
+                <NODEREF id="buton_undo_aux" />
             </DESCENDANTS>
         </NODE>
         <NODE id="buton_level_aux">
@@ -923,73 +1043,7 @@
             </DESCENDANTS>
         </NODE>
 
-        <!-- <NODE id="buton_1Vs1" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="1Vs1" />
-            <SCALE sx="1" sy="1" sz="0.5" />
-            <TRANSLATION x="-2" y="0" z="0" />
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="paint_up" />
-                <ANIMATIONREF id="paint_down" />
-            </ANIMATIONREFS>
 
-            <DESCENDANTS>
-                <NODEREF id="buton_template" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_1VsPC" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="1VsPC" />
-            <SCALE sx="1" sy="1" sz="0.5" />
-            <TRANSLATION x="-0.5" y="0" z="0" />
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="paint_up" />
-                <ANIMATIONREF id="paint_down" />
-            </ANIMATIONREFS>
-
-            <DESCENDANTS>
-                <NODEREF id="buton_template" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_PCVsPC" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="PCVsPC" />
-            <SCALE sx="1" sy="1" sz="0.5" />
-            <TRANSLATION x="1" y="0" z="0" />
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="paint_up" />
-                <ANIMATIONREF id="paint_down" />
-            </ANIMATIONREFS>
-
-            <DESCENDANTS>
-                <NODEREF id="buton_template" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_undo_aux" selectable="1">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <SCALE sx="1" sy="1" sz="0.5" />
-            <TRANSLATION x="2.5" y="1.3" z="0" />
-
-            <DESCENDANTS> -->
-                <!-- <NODEREF id="buton_undo" /> -->
-            <!-- </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_undo" selectable="1">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="paint_loop" />
-                <ANIMATIONREF id="paint_loop" />
-            </ANIMATIONREFS>
-
-            <DESCENDANTS>
-                <NODEREF id="frame" />
-                <NODEREF id="holder2" />
-                <NODEREF id="undo_front_figure" />
-                <NODEREF id="undo_back_figure" />
-            </DESCENDANTS>
-        </NODE> -->
         <NODE id="time_panel" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1115,8 +1169,6 @@
         <NODE id="rope">
             <MATERIAL id="null" />
             <TEXTURE id="steel" />
-            <!--<SCALE sx="0.05" sy="0.5" sz="0.05" />-->
-
             <TRANSLATION x="0" y="0.75" z="-0.125" />
             <DESCENDANTS>
                 <NODEREF id="rope1" />
@@ -1184,25 +1236,6 @@
                 <LEAF  type="rectangle" args="0 1 1 0" />
             </DESCENDANTS>
         </NODE>
-        <!-- <NODE id="undo_front_figure">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="undo" />
-            <SCALE sx="0.5" sy="1" sz="1" />
-            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
-            <DESCENDANTS>
-                <LEAF  type="rectangle" args="0 1 1 0" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="undo_back_figure">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="undo" />
-            <SCALE sx="0.5" sy="1" sz="1" />
-            <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
-            <ROTATION axis="y" angle="180" />
-            <DESCENDANTS>
-                <LEAF  type="rectangle" args="0 1 1 0" />
-            </DESCENDANTS>
-        </NODE> -->
 
         <NODE id="points1_figure">
             <MATERIAL id="tea_yellow_buton_off" />
@@ -1223,7 +1256,6 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="numbers_figure">
-            <!-- <MATERIAL id="yellow_buton_off" /> -->
             <MATERIAL id="null" />
             <TEXTURE id="null" />
             <DESCENDANTS>
@@ -1335,95 +1367,6 @@
             </DESCENDANTS>
         </NODE>
 
-        <!-- *********************************** UTILS ******************************************* -->
-
-        <NODE id="cube">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <DESCENDANTS>
-                <NODEREF id="cube top" />
-                <NODEREF id="cube front" />
-                <NODEREF id="cube left" />
-                <NODEREF id="cube right" />
-                <NODEREF id="cube back" />
-                <NODEREF id="cube under" />
-            </DESCENDANTS>
-
-        </NODE>
-
-        <NODE id="cube top">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="0" y="0.5" z="0" />
-            <ROTATION axis="x" angle="-90" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <NODE id="cube front">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="0" y="0" z="0.5" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <NODE id="cube left">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="-0.5" y="0" z="0" />
-            <ROTATION axis="y" angle="-90" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <NODE id="cube right">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="0.5" y="0" z="0" />
-            <ROTATION axis="y" angle="90" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <NODE id="cube back">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="0" y="0" z="-0.5" />
-            <ROTATION axis="x" angle="180" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <NODE id="cube under">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-
-            <TRANSLATION x="0" y="-0.5" z="0" />
-            <ROTATION axis="x" angle="90" />
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-
-        </NODE>
-        <!--  _________________________      -->
         <NODE id="garage">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
@@ -1512,19 +1455,6 @@
             </DESCENDANTS>
         </NODE>
 
-        <!-- <NODE id="floor">
-            <MATERIAL id="rock" />
-            <TEXTURE id="floor" />
-            <TRANSLATION x="5" y="0" z="5" />
-            <ROTATION axis="x" angle="-90" />
-            <SCALE sx="10" sy="10" sz="1" />
-
-
-            <DESCENDANTS>
-                <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
-            </DESCENDANTS>
-        </NODE> -->
-
         <NODE id="garage_walls">
             <MATERIAL id="rock" />
             <TEXTURE id="wall" />
@@ -1582,67 +1512,14 @@
             <DESCENDANTS>
                 <NODEREF id="buton_level" />
                 <NODEREF id="buton_film" />
-                <!-- <NODEREF id="buton_1Vs1" /> -->
-                <!-- <NODEREF id="buton_1VsPC" /> -->
-                <!-- <NODEREF id="buton_PCVsPC" /> -->
-                <!-- <NODEREF id="buton_undo" /> -->
+                <NODEREF id="buton_1Vs1" />
+                <NODEREF id="buton_1VsPC" />
+                <NODEREF id="buton_PCVsPC" />
+                <NODEREF id="buton_undo" />
             </DESCENDANTS>
         </NODE>
 
-        <!-- <NODE id="buton_1Vs1" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="clear" />
-            <TRANSLATION x="0" y="-0.2" z="0.05" />
-
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="buton_off" />
-                <ANIMATIONREF id="buton_on" />
-            </ANIMATIONREFS>
-            <DESCENDANTS>
-                <NODEREF id="select_yellow_buton" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_1VsPC" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="clear" />
-            <TRANSLATION x="0.5" y="-0.2" z="0.05" />
-
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="buton_off" />
-                <ANIMATIONREF id="buton_on" />
-            </ANIMATIONREFS>
-            <DESCENDANTS>
-                <NODEREF id="select_yellow_buton" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_PCVsPC" selectable="1">
-            <MATERIAL id="yellow_buton_off" />
-            <TEXTURE id="clear" />
-            <TRANSLATION x="1" y="-0.2" z="0.05" />
-
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="buton_off" />
-                <ANIMATIONREF id="buton_on" />
-            </ANIMATIONREFS>
-            <DESCENDANTS>
-                <NODEREF id="select_yellow_buton" />
-            </DESCENDANTS>
-        </NODE> -->
-        <!-- <NODE id="buton_undo" selectable="1">
-            <MATERIAL id="red_buton_off" />
-            <TEXTURE id="clear" />
-            <TRANSLATION x="0.5" y="-1" z="0" />
-
-            <ANIMATIONREFS>
-                <ANIMATIONREF id="buton_off" />
-                <ANIMATIONREF id="buton_on" />
-            </ANIMATIONREFS>
-            <DESCENDANTS>
-                <NODEREF id="select_red_buton" />
-            </DESCENDANTS>
-        </NODE> -->
-
-        <!-- <NODE id="on_off_buton">
+        <NODE id="on_off_buton">
             <MATERIAL id="red_buton_off" />
             <TEXTURE id="clear" />
 
@@ -1650,7 +1527,7 @@
                 <NODEREF id="on_part" />
                 <NODEREF id="off_part" />
             </DESCENDANTS>
-        </NODE> -->
+        </NODE>
         <NODE id="on_part">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1695,7 +1572,6 @@
         <NODE id="lever">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
-            <!--<TRANSLATION x="6" y="3.3" z="7" />-->
             <DESCENDANTS>
                 <NODEREF id="lever_part1" />
                 <NODEREF id="lever_part2" />
@@ -1723,16 +1599,37 @@
                 <NODEREF id="cube" />
             </DESCENDANTS>
         </NODE>
+        <NODE id="buton_undo_aux">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="1" sy="1" sz="0.5" />
+            <TRANSLATION x="2.5" y="1.3" z="0" />
 
-
-
-
-
-        <!-- *********************************** PECAS E CASA DO BOARD ******************************************* -->
-
+            <DESCENDANTS> -->
+                <NODEREF id="buton_undo" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="undo_front_figure">
+            <MATERIAL id="tea_yellow_buton_off" />
+            <TEXTURE id="undo" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="-0.5" y="-0.5" z="0.1" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="undo_back_figure">
+            <MATERIAL id="tea_yellow_buton_off" />
+            <TEXTURE id="undo" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <TRANSLATION x="0.5" y="-0.5" z="-0.1" />
+            <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <LEAF  type="rectangle" args="0 1 1 0" />
+            </DESCENDANTS>
+        </NODE>
         <!-- *********************************** UTILS ******************************************* -->
 
-        <!--
         <NODE id="cube">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1748,8 +1645,7 @@
 
         </NODE>
 
-
-         <NODE id="cube top">
+        <NODE id="cube top">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
 
@@ -1761,8 +1657,6 @@
             </DESCENDANTS>
 
         </NODE>
-
-
         <NODE id="cube front">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1774,8 +1668,6 @@
             </DESCENDANTS>
 
         </NODE>
-
-
         <NODE id="cube left">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1788,8 +1680,6 @@
             </DESCENDANTS>
 
         </NODE>
-
-
         <NODE id="cube right">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1802,8 +1692,6 @@
             </DESCENDANTS>
 
         </NODE>
-
-
         <NODE id="cube back">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1816,8 +1704,6 @@
             </DESCENDANTS>
 
         </NODE>
-
-
         <NODE id="cube under">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
@@ -1829,6 +1715,7 @@
                 <LEAF type="rectangle" args="-0.5 0.5 0.5 -0.5" />
             </DESCENDANTS>
 
-        </NODE> -->
+        </NODE>
+
     </NODES>
 </SCENE>
