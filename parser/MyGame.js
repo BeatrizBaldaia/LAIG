@@ -185,20 +185,22 @@ function onSuccess(data) {
       break;
     }
     case 'NCapture':{
+      this.asker.captureRequired = false;
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.promotionToKing();
-      this.asker.captureRequired = false;
+
       break;
     }
     case 'Capture':{
+      this.asker.captureRequired = true;
       let auxPiece = this.asker.pieceToMove;
       let auxPlayer = this.asker.player;
       this.asker.removeCapturePiece();
       this.asker.moveOK();
       this.asker.pieceToMove = auxPiece;
       this.asker.player = auxPlayer;
-      this.asker.captureRequired = true;
+
       if(auxPlayer == 1) {
         this.nCaptureBy1++;
       } else {
@@ -371,18 +373,18 @@ MyGame.prototype.undoPlay = function () {
   this.tileToMove = this.findTileByPosition(this.move[1]);
   this.player = (this.player == 1)? 2 : 1;
   this.moveOK();
-  if(!captureRequired){
+  // if(!captureRequired){
     this.player = (this.player == 1)? 2 : 1;
-  }
+  // }
   this.capturedPieces[this.film.length-2] = null;
   this.film.length = this.film.length - 2;
   if(captureRequired){
     this.pieceToaMove = this.findPieceByPosition(move[1]);
   }
-  // piece = this.capturedPieces[this.film.length-1];
-  // captureRequired = false;
-  // if(piece)
-  //   captureRequired = piece.captureRequired;
+  piece = this.capturedPieces[this.film.length-1];
+  captureRequired = false;
+  if(piece)
+    captureRequired = piece.captureRequired;
   this.captureRequired = captureRequired;
 };
 MyGame.prototype.undoCapturePiece = function (piece) {
