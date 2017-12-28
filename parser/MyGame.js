@@ -74,7 +74,8 @@ MyGame.prototype.updateGameTime = function (currTime) {
   this.beforeTime = currTime;
   this.timeBeforeNextPlay = Math.floor(this.timeAux);
   if (this.timeBeforeNextPlay < 0){
-    console.log('Tiimeout, game lost!');
+    this.timeAux = this.maxTime;
+    console.log('Timeout, game lost!');
   } else if (this.scene.graph.nodes['time_panel']) {
     this.scene.graph.nodes['time_panel'].textureID = 'number' + this.timeBeforeNextPlay;
   }
