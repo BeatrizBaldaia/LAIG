@@ -520,15 +520,15 @@
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <ROTATION axis="y" angle="90" />
-            <!--<ANIMATIONREFS>-->
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
                 <!--<ANIMATIONREF id="paint_spin" />-->
-                <!--<ANIMATIONREF id="paint_spin" />-->
-            <!--</ANIMATIONREFS>-->
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
                 <NODEREF id="points1_figure" />
-                <NODEREF id="hard_figure" />
+                <NODEREF id="time_counter" />
             </DESCENDANTS>
         </NODE>
         <NODE id="player2_points_aux">
@@ -543,15 +543,24 @@
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <ROTATION axis="y" angle="90" />
-            <!--<ANIMATIONREFS>-->
+            <ANIMATIONREFS>
+                <ANIMATIONREF id="paint_spin" />
                 <!--<ANIMATIONREF id="paint_spin" />-->
-                <!--<ANIMATIONREF id="paint_spin" />-->
-            <!--</ANIMATIONREFS>-->
+            </ANIMATIONREFS>
             <DESCENDANTS>
                 <NODEREF id="frame" />
                 <NODEREF id="holder2" />
                 <NODEREF id="points2_figure" />
-                <NODEREF id="hard_figure" />
+                <NODEREF id="time_counter" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="time_counter" selectable="1">
+            <MATERIAL id="null" />
+            <TEXTURE id="clear" />
+            <SCALE sx="0.5" sy="1" sz="1" />
+            <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <NODEREF id="numbers_figure" />
             </DESCENDANTS>
         </NODE>
         <NODE id="shelf3">
@@ -721,12 +730,13 @@
         <NODE id="time_panel" selectable="1">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
+            <ROTATION axis="y" angle="90" />
+            <TRANSLATION x="-5" y="7" z="0.25" />
 
             <DESCENDANTS>
                 <NODEREF id="frame2" />
                 <NODEREF id="rope" />
                 <NODEREF id="numbers_figure" />
-                <NODEREF id="undo_back_figure" />
             </DESCENDANTS>
         </NODE>
 
@@ -845,7 +855,7 @@
             <TEXTURE id="steel" />
             <!--<SCALE sx="0.05" sy="0.5" sz="0.05" />-->
 
-            <TRANSLATION x="0" y="1" z="0" />
+            <TRANSLATION x="0" y="0.75" z="-0.125" />
             <DESCENDANTS>
                 <NODEREF id="rope1" />
                 <NODEREF id="rope2" />
