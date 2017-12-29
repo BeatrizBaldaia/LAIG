@@ -47,7 +47,6 @@ function MyGraphLeaf(graph, xmlelem) {
         }
         case 'circle':{
             if(stringArray.length!=1){graph.onXMLError("Numero de args errado\n");}else{
-                console.log("GRRRRRR");
                 this.leafObj = new MyCircle(graph.scene, stringArray[0]);
             }
             break;

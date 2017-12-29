@@ -253,38 +253,43 @@ MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
   }
 };
 MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
-  this.verifyNodeAnimation(obj);
+  let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_film'] : this.scene.graph.nodes['tea_buton_film'];
+    this.verifyNodeAnimation(obj);
+    this.verifyNodeAnimation(otherObj);
   if (this.isRecording == 0) {
       this.isRecording = 1;
       obj.initialAnimTime = 0;
       obj.pressed = 0;
   } else {
       let type = this.type;
-      let buton;
+      let buton1, buton2;
       switch (type) {
           case HUMAN_VS_HUMAN:
-              buton = this.scene.graph.nodes[prefix+'buton_1Vs1'];
-              this.turnOffButon(buton);
+              buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
+              buton2 = this.scene.graph.nodes['gar_buton_1Vs1'];
+              this.turnOffButon(buton1, buton2);
               break;
           case HUMAN_VS_BOT:
-              buton = this.scene.graph.nodes[prefix+'buton_1VsPC'];
-              this.turnOffButon(buton);
+              buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
+              buton2 = this.scene.graph.nodes['gar_buton_1VsPC'];
+              this.turnOffButon(buton1, buton2);
               break;
           case BOT_VS_BOT:
-              buton = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
-              this.turnOffButon(buton);
+              buton1 = this.scene.graph.nodes['tea_buton_PCVsPC'];
+              buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
+              this.turnOffButon(buton1, buton2);
               break;
           default:
               console.error('Invalid Type');
-              buton = null;
+              buton1 = null;
       }
-      if (buton) {
+      if (buton1) {
           this.isRecording = 0;
           obj.initialAnimTime = 0;
           obj.pressed = 1;
           let aux = this;
           window.setTimeout(function () {
-              aux.playFilm(buton, obj, prefix);
+              aux.playFilm(buton1, obj, prefix);
           }, 1000);
           this.type = FILM;
       }
