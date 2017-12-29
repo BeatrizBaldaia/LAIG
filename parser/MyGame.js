@@ -33,7 +33,8 @@ function MyGame(scene) {
       s = s.slice(0, -1) + ']';
       return s;
   }
-  this.previousTime;
+  let auxiliarDate = new Date();
+  this.previousTime = auxiliarDate.getTime();
 }
 
 MyGame.prototype.initInterfaceVariables = function () {
@@ -81,6 +82,7 @@ MyGame.prototype.updateGameTime = function (currTime) {
             this.gameOver();
         } else {
             timeDigit1.textureID = 'number' + Math.floor(this.timeBeforeNextPlay / 10);
+            console.log(this.timeBeforeNextPlay);
             timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
         }
     }
@@ -213,17 +215,20 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
       switch (type) {
         case HUMAN_VS_HUMAN:
           buton = this.scene.graph.nodes[prefix+'buton_1Vs1'];
+          this.turnOffButon(buton);
           break;
         case HUMAN_VS_BOT:
           buton = this.scene.graph.nodes[prefix+'buton_1VsPC'];
+          this.turnOffButon(buton);
           break;
         case BOT_VS_BOT:
           buton = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
+          this.turnOffButon(buton);
           break;
         default:
           console.error('Invalid Type');
+          buton = null;
       }
-      this.turnOffButon(buton);
       this.playFilm(buton, obj, prefix);
       this.type = FILM;
   }
@@ -476,14 +481,19 @@ MyGame.prototype.undoCapturePiece = function (piece) {
     piece.piece.position.y = piece.y;
 }
 MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
+  let auxFilm = this.film.slice();
   this.resetGame();
   let aux = this;
-  let auxFilm = this.film.slice();
+  this.film = auxFilm.slice();
   for (let i = 0; i < this.film.length; i++){
     window.setTimeout(function(){playFilm_part2(aux,i);},1000*i);
   }
-  let prefix = buton.nodeID.substring(0, 4);
-  let sufix = buton.nodeID.substring(4);
+  let prefix;
+  let sufix;
+  if(buton){
+    prefix = buton.nodeID.substring(0, 4);
+    sufix = buton.nodeID.substring(4);
+  }
   let function_name;
   switch (sufix) {
     case 'buton_1Vs1':
@@ -496,9 +506,10 @@ MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
       function_name = this.logPicking_buton_PCVsPC;
       break;
     default:
+      function_name = function(a,b,c) {};
       console.error('Invalid Type' + sufix);
   }
-  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix)},1000*this.film.length);
+  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix)},1000*this.film.length+1);
 };
 function playFilm_part2(mySelf, i) {
   mySelf.move = mySelf.film[i];
@@ -594,6 +605,8 @@ MyGame.prototype.resetGame = function () {
   this.nCaptureBy2 = 0;
   this.updatePoints(1);
   this.updatePoints(2);
+  this.film = [];
+  this.capturedPieces = [];
 };
 
 MyGame.prototype.resetGameTime = function () {
