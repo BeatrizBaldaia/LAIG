@@ -38,7 +38,7 @@ function MyGame(scene) {
 }
 
 MyGame.prototype.initInterfaceVariables = function () {
-    this.level = 0;
+    this.level = 1;
     this.type = -1;
     this.isRecording = 1;
     this.film = [];
