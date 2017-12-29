@@ -18,7 +18,6 @@ function XMLscene(interface) {
     for(let i = 0; i < this.nodesWithAnimation.length; i++) {
       this.graph.nodes[this.nodesWithAnimation[i]].updateMatrix(currTime);
     }
-    console.log(this.graph.loadedOk);
     if(this.graph.loadedOk) {
         this.game.updateGameTime(currTime);
     }

@@ -94,15 +94,24 @@ MyGame.prototype.logPicking = function (obj) {
                 this.tileToMove = obj;
                 getPrologRequest(this, 'jogadaValida(' + this.showBoard() + '-' + this.player + '-' + this.showMove() + ')', onSuccess);
             } else {
-                switch (obj.nodeID) {
+                let substr;
+                let prefix;
+                if(obj.nodeID.length > 5) {
+                    substr = obj.nodeID.substring(4, obj.nodeID.length);
+                    prefix = obj.nodeID.substring(0, 4);
+                } else {
+                    substr = "";
+                }
+                console.log("substring: "+substr);
+                switch (substr) {
                     case 'buton_1Vs1': {
 
                         if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
                             obj.pressed = 1;
                             // obj.materialID = 'yellow_buton_on';
                             obj.initialAnimTime = 0;
-                            let buton1 = this.scene.graph.nodes['buton_1VsPC'];
-                            let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                            let buton1 = this.scene.graph.nodes[prefix+'buton_1VsPC'];
+                            let buton2 = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
                             this.turnOffButons(buton1, buton2);
                             this.type = HUMAN_VS_HUMAN;
                             this.resetGameTime();
@@ -117,8 +126,8 @@ MyGame.prototype.logPicking = function (obj) {
                             obj.pressed = 1;
                             // obj.materialID = 'yellow_buton_on';
                             obj.initialAnimTime = 0;
-                            let buton1 = this.scene.graph.nodes['buton_1Vs1'];
-                            let buton2 = this.scene.graph.nodes['buton_PCVsPC'];
+                            let buton1 = this.scene.graph.nodes[prefix+'buton_1Vs1'];
+                            let buton2 = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
                             this.turnOffButons(buton1, buton2);
                             this.type = HUMAN_VS_BOT;
                             this.resetGameTime();
@@ -133,8 +142,8 @@ MyGame.prototype.logPicking = function (obj) {
                             obj.pressed = 1;
                             obj.materialID = 'yellow_buton_on';
                             obj.initialAnimTime = 0;
-                            let buton1 = this.scene.graph.nodes['buton_1Vs1'];
-                            let buton2 = this.scene.graph.nodes['buton_1VsPC'];
+                            let buton1 = this.scene.graph.nodes[prefix+'buton_1Vs1'];
+                            let buton2 = this.scene.graph.nodes[prefix+'buton_1VsPC'];
                             this.turnOffButons(buton1, buton2);
                             this.type = BOT_VS_BOT;
                             this.resetGameTime();
@@ -186,6 +195,7 @@ MyGame.prototype.logPicking = function (obj) {
             }
         }
 }
+
 
 function onSuccess(data) {
   switch (data.target.response) {
@@ -300,13 +310,7 @@ MyGame.prototype.removeCapturePiece = function () {
     //Create animation
     this.createCaptureAnimation(position);
   }
-  if (this.player == 1){
-    if (this.scene.graph.nodes['points1_figure']) {
-      this.scene.graph.nodes['points1_figure'].textureID = 'number' + this.nCaptureBy1;
-    }
-  } else if (this.scene.graph.nodes['points2_figure']) {
-      this.scene.graph.nodes['points2_figure'].textureID = 'number' + this.nCaptureBy2;
-  }
+
   this.capturedPiece = this.findPieceByPosition(position);
   this.verifyNodeAnimation(this.capturedPiece);
   this.capturedPiece.animation.push('remove' + position.x + position.y);

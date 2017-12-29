@@ -1415,10 +1415,14 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
 
             /*Verificar se este no e um butao*/
-            if(this.butonNames.indexOf(nodeID) != -1) {
-                this.nodes[nodeID].isButon = 1;
-                this.nodes[nodeID].initialAnimTime = -1;
+            if(nodeID.length > 5) {
+                let substr = nodeID.substring(4, nodeID.length);
+                if(this.butonNames.indexOf(substr) != -1) {
+                    this.nodes[nodeID].isButon = 1;
+                    this.nodes[nodeID].initialAnimTime = -1;
+                }
             }
+
 
             let aux = this.reader.getFloat(children[i], 'selectable', false);
             if (aux == null ) {
@@ -1618,11 +1622,11 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 pieceNode.addChild('piece_man');
                 pieceNode.addChild('piece_king');
                 pieceNode.sizeChildren += 2;
-                let rootAux = (this.idRoot == 'tearoom')?'tea_':'gar_';
+
                 if(i<=18){
-                  pieceNode.materialID = rootAux+'player1';
+                  pieceNode.materialID = 'player1';
                 } else {
-                  pieceNode.materialID = rootAux+'player2';
+                  pieceNode.materialID = 'player2';
                 }
                 let x = 0;
                 let y = 0;
