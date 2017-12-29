@@ -13,10 +13,10 @@
 function MyCrown(scene) {
     CGFobject.call(this,scene);
 
-    this.slices = 600;
-    this.stacks = 200;
+    this.slices = 100;
+    this.stacks = 50;
 
-    this.bottomCrown = new MyCylinder(scene, 1, 0.3, 0.3, 200, 200, 0, 0);
+    this.bottomCrown = new MyCylinder(scene, .5, 0.3, 0.3, 12, 12, 0, 0);
 
     this.initBuffers();
 };

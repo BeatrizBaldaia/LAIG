@@ -286,7 +286,6 @@
     <NODES>
 
         <ROOT id="tearoom" />
-
         <!-- The root node -->
         <NODE id="tearoom">
             <MATERIAL id="defaultMaterial" />
@@ -1169,7 +1168,7 @@
             <TEXTURE id="clear" />
             <!-- <SCALE sx="0.287" sy="1" sz="0.287" /> -->
             <!-- <TRANSLATION x="17" y="3.55" z="28.3" /> -->
-            <TRANSLATION x="-0.5" y="0'" z=".5" />
+            <TRANSLATION x="-0.5" y=".25" z=".5" />
             <ROTATION axis="x" angle="-90" />
             <DESCENDANTS>
                 <LEAF  type="rectangle" args="0 1 1 0" />
@@ -1188,7 +1187,7 @@
         <NODE id="tea_piece_man">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <SCALE sx="0.5" sy="0.5" sz="0.5" />
+            <SCALE sx="0.4" sy="0.4" sz="0.4" />
             <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" /> -->
             <ROTATION axis="x" angle="-90" />
             <!-- <TRANSLATION x="50.3" y="-79.8" z="35.5" /> -->
@@ -1214,8 +1213,9 @@
         <NODE id="game">
             <MATERIAL id="null" />
             <TEXTURE id="null" />
-            <SCALE sx="0.287" sy="0.287" sz="0.287" />
-            <TRANSLATION x="16.7" y="12.75" z="19.6" />
+            <!-- <TRANSLATION x="16.5" y="12.75" z="19.7" /> -->
+            <TRANSLATION x="4.78" y="3.5" z="5.75" />
+            <SCALE sx="0.28" sy="0.28" sz="0.28" />
             <DESCENDANTS>
                 <LEAF type="patch" />
             </DESCENDANTS>
@@ -1611,7 +1611,7 @@
         <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" />
         <TRANSLATION x="50.3" y="35.5" z="79.8" /> -->
         <DESCENDANTS>
-            <LEAF type="hexnut" args="40 1" />
+            <LEAF type="hexnut" args="32 1" />
         </DESCENDANTS>
     </NODE>
     </NODES>
