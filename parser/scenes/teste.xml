@@ -387,7 +387,7 @@
         <NODE id="teacup2">
             <MATERIAL id="defaultMaterial" />
             <TEXTURE id="null" />
-            <TRANSLATION x="2" y="0.5" z="1.5" />
+            <TRANSLATION x="2" y="0.25" z="1.5" />
 
             <DESCENDANTS>
                 <NODEREF id="teacup" />
