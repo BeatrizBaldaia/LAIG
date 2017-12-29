@@ -19,6 +19,7 @@ server :-
 	port(Port),
 	write('Opened Server'),nl,nl,
 	socket_server_open(Port, Socket),
+	write('Server Socket Opened'),nl,nl,
 	server_loop(Socket),
 	socket_server_close(Socket),
 	write('Closed Server'),nl.
