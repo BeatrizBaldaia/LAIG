@@ -274,6 +274,14 @@
         </ANIMATION>
         <ANIMATION id="paint_loop" speed="1.5" type="roty" ang="360">
         </ANIMATION>
+        <ANIMATION id="lever_down" speed="1.5" type="rotx" ang="90">
+        </ANIMATION>
+        <ANIMATION id="lever_up" speed="1.5" type="rotx" ang="-90">
+        </ANIMATION>
+        <ANIMATION id="buton_on" speed="1.5" type="transz" dist="-0.04">
+        </ANIMATION>
+        <ANIMATION id="buton_off" speed="1.5" type="transz" dist="0.04">
+        </ANIMATION>
     </ANIMATIONS>
     <NODES>
 
@@ -1189,19 +1197,7 @@
                 <LEAF type="cylinder" args="1 1 1 20 20 1 1" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="gar_piece_man">
-          <!-- TODO Errado, a alterar -->
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <SCALE sx="0.5" sy="0.5" sz="0.5" />
-            <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" /> -->
-            <ROTATION axis="x" angle="-90" />
-            <!-- <TRANSLATION x="50.3" y="-79.8" z="35.5" /> -->
-            <!--<TRANSLATION x="50.3" y="35.5" z="79.8" />-->
-            <DESCENDANTS>
-                <LEAF type="cylinder" args="1 1 1 20 20 1 1" />
-            </DESCENDANTS>
-        </NODE>
+
 
         <NODE id="piece_king">
             <MATERIAL id="metal" />
@@ -1324,7 +1320,6 @@
             </DESCENDANTS>
 
         </NODE>
-    </NODES>
 
 
     <!-- *********************************** GARAGE ROOT ******************************************* -->
@@ -1352,11 +1347,11 @@
 
     <NODE id="gar_table">
         <MATERIAL id="wood" />
-        <TEXTURE id="wood" />
+        <TEXTURE id="gar_wood" />
         <TRANSLATION x="6" y="3" z="7" />
         <DESCENDANTS>
-            <NODEREF id="top" />
-            <NODEREF id="legs" />
+            <NODEREF id="gar_top" />
+            <NODEREF id="gar_legs" />
         </DESCENDANTS>
     </NODE>
     <NODE id="gar_top">
@@ -1417,9 +1412,9 @@
             <NODEREF id="cube" />
         </DESCENDANTS>
     </NODE>
-    <NODE id="tea_floor">
+    <NODE id="gar_floor">
         <MATERIAL id="null" />
-        <TEXTURE id="tea_floor" />
+        <TEXTURE id="gar_floor" />
 
         <DESCENDANTS>
             <NODEREF id="floor" />
@@ -1427,7 +1422,7 @@
     </NODE>
     <NODE id="gar_walls">
         <MATERIAL id="null" />
-        <TEXTURE id="tea_wall" />
+        <TEXTURE id="gar_wall" />
         <DESCENDANTS>
             <NODEREF id="walls" />
         </DESCENDANTS>
@@ -1608,4 +1603,16 @@
             <NODEREF id="cube" />
         </DESCENDANTS>
     </NODE>
+
+    <NODE id="gar_piece_man">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+
+        <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" />
+        <TRANSLATION x="50.3" y="35.5" z="79.8" /> -->
+        <DESCENDANTS>
+            <LEAF type="hexnut" args="40 1" />
+        </DESCENDANTS>
+    </NODE>
+    </NODES>
 </SCENE>

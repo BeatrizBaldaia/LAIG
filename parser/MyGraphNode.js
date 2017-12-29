@@ -82,7 +82,8 @@ MyGraphNode.prototype.addLeaf = function(leaf) {
  * @brief Displays the node
  */
 MyGraphNode.prototype.display = function(parentID) {
-    if((this.graph.idRoot.substring(0, 4) == 'gar' && this.nodeID.substring(0, 4) == 'tea') || (this.graph.idRoot.substring(0, 4) == 'tea' && this.nodeID.substring(0, 4) == 'gar')) {
+    let prefix = this.nodeID.substring(0, 3);
+    if((prefix == 'tea' || prefix == 'gar') && (prefix != this.graph.idRoot.substring(0, 3))) {
         return;
     }
   if (((this.graph.scene.pickMode == false) && this.visible)||(this.graph.scene.pickMode == true)) {
@@ -114,18 +115,18 @@ MyGraphNode.prototype.display = function(parentID) {
             if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {//fazer sempre o unbind antes de fazer o display de um filho porque estes podem ter aplicado uma textura
                 this.graphTextures[this.graphTexturesStack[this.graphTexturesStack.length - 1]][0].unbind();
             }
+            let prefix = this.children[i].substring(0, 3);
+            if((prefix == 'tea' || prefix == 'gar') && (prefix != this.graph.idRoot.substring(0, 3))) {
+                continue;
+            }
             if(this.nodeID.substring(0, 9) == "gamepiece") {
                 if(this.king) {
                     this.graph.getNodes()[this.children[1]].display(this.nodeID);
                 }
                 this.graph.getNodes()[this.children[0]].display(this.nodeID);
-                break;
-            } else if ((this.nodeID == 'piece_man')||(this.nodeID == 'piece_king')||(this.nodeID == 'buton_level')||(this.nodeID == 'buton_film')||(this.nodeID == 'buton_1Vs1')||(this.nodeID == 'buton_1VsPC')||(this.nodeID == 'buton_PCVsPC')||(this.nodeID == 'buton_undo')) {
-              let aux = (this.graph.idRoot == 'tearoom')?'tea_':'gar_';
-              this.graph.getNodes()[aux+this.nodeID].display(this.nodeID);
-            } else {
-              this.graph.getNodes()[this.children[i]].display(this.nodeID);
+                continue;
             }
+            this.graph.getNodes()[this.children[i]].display(this.nodeID);
         }
     }
     if(this.textureID == 'clear' && (this.graphTexturesStack.length!=0)) {
