@@ -33,7 +33,7 @@ jogadaValidaCapturaTeste(CurrBoard, Player, Move, More):-
 		fail,
 		(ite(NCaptures = 1,
 			(More = no, member(Move, Best)),
-			(More = yes, turnToOneCapture(Best, NewBest), member(Move, NewBest))))
+			(More = yes, turnToOneCapture(Best, NewBest), member(Move, NewBest),nl,nl,write(NewBest),nl,nl)))
 	).
 
 moveTeste(CurrBoard, Player, [X-Y,NewX-NewY]):-

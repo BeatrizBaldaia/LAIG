@@ -77,6 +77,8 @@ MyGame.prototype.updateGameTime = function (currTime) {
         let timeDigit2 = this.scene.graph.nodes['time_digit2'];
         if (this.timeBeforeNextPlay < 0){
             console.log('Timeout, game lost!');
+            this.timeAux = this.maxTime;
+            this.gameOver();
         } else {
             timeDigit1.textureID = 'number' + Math.floor(this.timeBeforeNextPlay / 10);
             timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
@@ -347,7 +349,10 @@ MyGame.prototype.findPieceByPosition = function (position) {
   }
   return null;
 };
-
+MyGame.prototype.gameOver = function () {
+    alert('END OF GAME!');
+    this.resetGame();
+};
 MyGame.prototype.findTileByPosition = function (position) {
   for (let i = 0; i < this.tiles.length; i++){
     let obj = this.scene.graph.nodes[this.tiles[i]];
@@ -368,6 +373,7 @@ function gameOver(data) {
     }
     case 'End':{
       console.log('Game has ended');
+      this.asker.gameOver();
       break;
     }
     default:
