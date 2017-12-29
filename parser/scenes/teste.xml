@@ -1356,7 +1356,6 @@
             <NODEREF id="gar_time_panel" />
             <NODEREF id="gar_players_points" />
             <NODEREF id="tire1" />
-            <NODEREF id="gar_player2_points" />
 
         </DESCENDANTS>
     </NODE>
