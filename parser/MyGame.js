@@ -491,24 +491,11 @@ function PCplay(data){
 MyGame.prototype.createCaptureAnimation = function (position) {
     let p1 = [position.x, 0, position.y];
     let p2 = [position.x, ANIMATION_HEIGHT, position.y];
-    let n;
-    if(this.player == 1) {
-        n = this.nCaptureBy1;
-    } else {
-        n = this.nCaptureBy2;
-    }
-
-    let p3 = [0, ANIMATION_HEIGHT, 0];
-    let p4;
-    if(n >= ANIMATION_HEIGHT) {
-        p4 = [0, 4 + n*0.5, 0];
-    } else {
-        p4 = [0, ANIMATION_HEIGHT, 0];
-    }
+    let p3 = [-2.5, ANIMATION_HEIGHT, -1];
+    let p4 = [-2, -3, -.5];
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
-    return p4;
-    //console.log('Created animation: '+ this.showMove());
+    return;
 }
 MyGame.prototype.createAddPieceAnimation = function (position) {
     let p4 = [position.x, 0, position.y];
