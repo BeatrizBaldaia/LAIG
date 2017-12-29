@@ -82,6 +82,11 @@ MyGame.prototype.updateGameTime = function (currTime) {
             timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
         }
     }
+    if(this.pieceToMove){
+      this.scene.selectedNode = this.pieceToMove.nodeID;
+    } else {
+      this.scene.selectedNode = null;
+    }
 };
 MyGame.prototype.logPicking = function (obj) {
         if ((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/ && (this.type == HUMAN_VS_HUMAN || this.type == HUMAN_VS_BOT)) {//obj is piece
@@ -391,18 +396,20 @@ MyGame.prototype.undoPlay = function () {
   let captureRequired = false;
   if(piece) {
       captureRequired = piece.captureRequired;
-      if(piece.materialID == 'player1') {
-          this.nCaptureBy2--;
-          this.updatePoints(2);
-      } else {
-          this.nCaptureBy1--;
-          this.updatePoints(1);
-      }
+      console.log(piece.materialID);
   }
   if(captureRequired)
     this.player = (this.player == 1)? 2 : 1;
-  if(piece)
+  if(piece){
     this.undoCapturePiece(piece);//repor no tabuleiro a peca que tinha sido capturada
+    if(this.player == 1) {
+        this.nCaptureBy2--;
+        this.updatePoints(2);
+    } else {
+        this.nCaptureBy1--;
+        this.updatePoints(1);
+    }
+  }
   this.move = move;
   this.pieceToMove = this.findPieceByPosition(this.move[0]);
   this.tileToMove = this.findTileByPosition(this.move[1]);
@@ -563,6 +570,10 @@ MyGame.prototype.resetGame = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
   this.player = 1;
+  this.nCaptureBy1 = 0;
+  this.nCaptureBy2 = 0;
+  this.updatePoints(1);
+  this.updatePoints(2);
 };
 
 MyGame.prototype.resetGameTime = function () {
