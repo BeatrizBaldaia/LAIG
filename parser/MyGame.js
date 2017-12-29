@@ -112,50 +112,70 @@ MyGame.prototype.logPicking = function (obj) {
                 }
                 switch (substr) {
                     case 'buton_1Vs1': {
-                      this.logPicking_buton_1Vs1(obj,prefix);
-                      this.resetGameTime();
-                      this.resetGame();
-                      this.gameCycle();
+                        if(this.type != FILM) {
+                            this.logPicking_buton_1Vs1(obj,prefix);
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+
                       break;
                     }
                     case 'buton_1VsPC': {
-                      this.logPicking_buton_1VsPC(obj,prefix);
-                      this.resetGameTime();
-                      this.resetGame();
-                      this.gameCycle();
+                        if(this.type != FILM) {
+                            this.logPicking_buton_1VsPC(obj,prefix);
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+
                       break;
                     }
                     case 'buton_PCVsPC': {
-                      this.logPicking_buton_PCVsPC(obj,prefix);
-                      this.resetGameTime();
-                      this.resetGame();
-                      this.gameCycle();
+                        if(this.type != FILM) {
+                            this.logPicking_buton_PCVsPC(obj,prefix);
+                            this.resetGameTime();
+                            this.resetGame();
+                            this.gameCycle();
+                        }
+
                       break;
                     }
                     case 'buton_film': {
-                      this.logPicking_buton_film(obj,prefix);
+                        if(this.type != FILM) {
+                            this.logPicking_buton_film(obj,prefix);
+                        }
+
                       break;
                     }
                     case 'buton_level': {
+                        let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_level'] : this.scene.graph.nodes['tea_buton_level'];
                         this.verifyNodeAnimation(obj);
-
+                        this.verifyNodeAnimation(otherObj);
                         if (this.level == 0) {
                             this.level = 1;
                             obj.initialAnimTime = 0;
                             obj.pressed = 1;
+                            otherObj.initialAnimTime = 0;
+                            otherObj.pressed = 1;
                         } else {
                             this.level = 0;
                             obj.initialAnimTime = 0;
                             obj.pressed = 0;
+                            otherObj.initialAnimTime = 0;
+                            otherObj.pressed = 0;
                         }
 
                         break;
                     }
                     case 'buton_undo': {
-                        obj.pressed = obj.pressed == 0 ? 1 : 0;
+                        if(this.type != FILM) {
+                            obj.pressed = obj.pressed == 0 ? 1 : 0;
 
-                        obj.initialAnimTime = 0;
-                        this.undoPlay();
+                            obj.initialAnimTime = 0;
+                            this.undoPlay();
+                        }
+
                         break;
                     }
                     case 'player1_points': {
@@ -181,33 +201,52 @@ MyGame.prototype.logPicking = function (obj) {
 
 MyGame.prototype.logPicking_buton_1Vs1 = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+      let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_1Vs1'] : this.scene.graph.nodes['tea_buton_1Vs1'];
       obj.pressed = 1;
+      otherObj.pressed = 1;
       this.scene.graph.nodes['gar_buton_1Vs1'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes[prefix+'buton_1VsPC'];
-      let buton2 = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
+      otherObj.initialAnimTime = 0;
+      let buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
+      let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
+      this.turnOffButons(buton1, buton2);
+      buton1 = this.scene.graph.nodes['gar_buton_1VsPC'];
+      buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
       this.turnOffButons(buton1, buton2);
       this.type = HUMAN_VS_HUMAN;
   }
 };
 MyGame.prototype.logPicking_buton_1VsPC = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+      let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_1VsPC'] : this.scene.graph.nodes['tea_buton_1VsPC'];
       obj.pressed = 1;
+      otherObj.pressed = 1;
       this.scene.graph.nodes['gar_buton_1VsPC'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes[prefix+'buton_1Vs1'];
-      let buton2 = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
+      otherObj.initialAnimTime = 0;
+      let buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
+      let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
       this.turnOffButons(buton1, buton2);
+      buton1 = this.scene.graph.nodes['gar_buton_1Vs1'];
+      buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
+      this.turnOffButons(buton1, buton2);
+
       this.type = HUMAN_VS_BOT;
   }
 };
 MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
+      let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_PCVsPC'] : this.scene.graph.nodes['tea_buton_PCVsPC'];
       obj.pressed = 1;
+      otherObj.pressed = 1;
       this.scene.graph.nodes['gar_buton_PCVsPC'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes[prefix+'buton_1Vs1'];
-      let buton2 = this.scene.graph.nodes[prefix+'buton_1VsPC'];
+      otherObj.initialAnimTime = 0;
+      let buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
+      let buton2 = this.scene.graph.nodes['tea_buton_1VsPC'];
+      this.turnOffButons(buton1, buton2);
+      buton1 = this.scene.graph.nodes['gar_buton_1Vs1'];
+      buton2 = this.scene.graph.nodes['gar_buton_1VsPC'];
       this.turnOffButons(buton1, buton2);
       this.type = BOT_VS_BOT;
 
@@ -220,30 +259,36 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
       obj.initialAnimTime = 0;
       obj.pressed = 0;
   } else {
-      this.isRecording = 0;
-      obj.initialAnimTime = 0;
-      obj.pressed = 1;
       let type = this.type;
       let buton;
       switch (type) {
-        case HUMAN_VS_HUMAN:
-          buton = this.scene.graph.nodes[prefix+'buton_1Vs1'];
-          this.turnOffButon(buton);
-          break;
-        case HUMAN_VS_BOT:
-          buton = this.scene.graph.nodes[prefix+'buton_1VsPC'];
-          this.turnOffButon(buton);
-          break;
-        case BOT_VS_BOT:
-          buton = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
-          this.turnOffButon(buton);
-          break;
-        default:
-          console.error('Invalid Type');
-          buton = null;
+          case HUMAN_VS_HUMAN:
+              buton = this.scene.graph.nodes[prefix+'buton_1Vs1'];
+              this.turnOffButon(buton);
+              break;
+          case HUMAN_VS_BOT:
+              buton = this.scene.graph.nodes[prefix+'buton_1VsPC'];
+              this.turnOffButon(buton);
+              break;
+          case BOT_VS_BOT:
+              buton = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
+              this.turnOffButon(buton);
+              break;
+          default:
+              console.error('Invalid Type');
+              buton = null;
       }
-      this.playFilm(buton, obj, prefix);
-      this.type = FILM;
+      if (buton) {
+          this.isRecording = 0;
+          obj.initialAnimTime = 0;
+          obj.pressed = 1;
+          let aux = this;
+          window.setTimeout(function () {
+              aux.playFilm(buton, obj, prefix);
+          }, 1000);
+          this.type = FILM;
+      }
+
   }
 };
 
@@ -640,4 +685,8 @@ MyGame.prototype.updatePoints = function(player) {
         pointsDigit1.textureID = 'number' + Math.floor(this.nCaptureBy2 / 10);
         pointsDigit2.textureID = 'number' + this.nCaptureBy2 % 10;
     }
+}
+
+MyGame.prototype.turnOnButon = function(buton) {
+
 }

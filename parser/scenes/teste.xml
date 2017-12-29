@@ -286,9 +286,9 @@
         </ANIMATION>
         <ANIMATION id="paint_loop" speed="1.5" type="roty" ang="360">
         </ANIMATION>
-        <ANIMATION id="lever_down" speed="1.5" type="rotx" ang="90">
+        <ANIMATION id="lever_down" speed="1.5" type="rotx" ang="-90">
         </ANIMATION>
-        <ANIMATION id="lever_up" speed="1.5" type="rotx" ang="-90">
+        <ANIMATION id="lever_up" speed="1.5" type="rotx" ang="90">
         </ANIMATION>
         <ANIMATION id="buton_on" speed="1.5" type="transz" dist="-0.04">
         </ANIMATION>
