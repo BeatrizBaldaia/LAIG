@@ -1197,19 +1197,7 @@
                 <LEAF type="cylinder" args="1 1 1 20 20 1 1" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="gar_piece_man">
-          <!-- TODO Errado, a alterar -->
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
-            <SCALE sx="0.5" sy="0.5" sz="0.5" />
-            <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" /> -->
-            <ROTATION axis="x" angle="-90" />
-            <!-- <TRANSLATION x="50.3" y="-79.8" z="35.5" /> -->
-            <!--<TRANSLATION x="50.3" y="35.5" z="79.8" />-->
-            <DESCENDANTS>
-                <LEAF type="cylinder" args="1 1 1 20 20 1 1" />
-            </DESCENDANTS>
-        </NODE>
+
 
         <NODE id="piece_king">
             <MATERIAL id="metal" />
