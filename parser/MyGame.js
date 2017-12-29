@@ -407,7 +407,6 @@ function gameOver(data) {
   }
 };
 
-
 MyGame.prototype.undoPlay = function () {
   if(this.film.length == 0)
     return;
@@ -557,35 +556,11 @@ MyGame.prototype.createAddPieceAnimation = function (position) {
 MyGame.prototype.verifyNodeAnimation = function (piece) {
     if(this.scene.nodesWithAnimation.indexOf(piece.nodeID) == -1){
         this.scene.nodesWithAnimation.push(piece.nodeID);
-    } else {
+    } else if(piece.animationN >= piece.animation.length) {
         piece.initialAnimTime = 0;
     }
 }
 
-// MyGame.prototype.turnOffButons = function (buton1, buton2) {
-//     if(buton1.pressed) {
-//         if(buton1.pressed) {
-//             if(buton1.initialAnimTime != -1) {
-//                 buton1.invert = 1;
-//             } else {
-//                 buton1.pressed = 0;
-//                 buton1.initialAnimTime = 0;
-//                 this.scene.graph.nodes['gar_'+buton1.nodeID.substring(4, buton1.nodeID.length)].materialID = 'yellow_buton_off';
-//             }
-//         }
-//     }
-//     if(buton2.pressed) {
-//         if(buton2.initialAnimTime != -1) {
-//             buton2.invert = 1;
-//         } else {
-//             buton2.pressed = 0;
-//             buton2.initialAnimTime = 0;
-//             this.scene.graph.nodes['gar_'+buton2.nodeID.substring(4, buton2.nodeID.length)].materialID = 'yellow_buton_off';
-//         }
-//     }
-//
-//
-// }
 MyGame.prototype.turnOffButons = function (buton1, buton2) {
   this.turnOffButon(buton1);
   this.turnOffButon(buton2);
