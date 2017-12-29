@@ -25,7 +25,7 @@ function MySceneGraph(filename, scene) {
 
 
     this.nodes = [];
-    this.butonNames = ['buton_level', 'buton_film', 'buton_1Vs1', 'buton_1VsPC', 'buton_PCVsPC', 'buton_undo'];
+    this.butonNames = ['buton_level', 'buton_film', 'buton_1Vs1', 'buton_1VsPC', 'buton_PCVsPC', 'buton_undo', 'player1_points', 'player2_points'];
 
     this.idRoot = null;                    // The id of the root element.
 
