@@ -145,17 +145,25 @@ XMLscene.prototype.display = function() {
 
     var i = 0;
     for (var key in this.lightValues) {
-      if (this.lightValues.hasOwnProperty(key)) {
-        if (this.lightValues[key]) {
-          this.lights[i].setVisible(true);
-          this.lights[i].enable();
+        if(key.substring(0, 3) != this.graph.idRoot.substring(0, 3)) {
+            if (this.lightValues.hasOwnProperty(key)) {
+                this.lights[i].setVisible(false);
+                this.lights[i].disable();
+            }
         } else {
-          this.lights[i].setVisible(false);
-          this.lights[i].disable();
+            if (this.lightValues.hasOwnProperty(key)) {
+                if (this.lightValues[key]) {
+                    this.lights[i].setVisible(true);
+                    this.lights[i].enable();
+                } else {
+                    this.lights[i].setVisible(false);
+                    this.lights[i].disable();
+                }
+            }
         }
         this.lights[i].update();
         i++;
-      }
+
     }
 
     this.logPicking();

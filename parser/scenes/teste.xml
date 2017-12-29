@@ -44,7 +44,7 @@
             <specular r="0.5" g="0.5" b="0.5" a="1.0" />
         </LIGHT>
         <LIGHT id="gar_light1">
-            <enable value ="0" />
+            <enable value ="1" />
             <position  x="30" y="30" z="15" w="1" />
             <ambient r="0" g="0" b="0" a="1.0" />
             <diffuse r=".4" g=".4" b=".4" a="1" />
@@ -663,8 +663,7 @@
                 <NODEREF id="tea_buton_undo_aux" />
             </DESCENDANTS>
         </NODE>
-        <NODE id="tea_buton_level_aux"
-        >
+        <NODE id="tea_buton_level_aux">
             <MATERIAL id="null" />
             <TEXTURE id="clear" />
             <TRANSLATION x="-1" y="3.3" z="0" />

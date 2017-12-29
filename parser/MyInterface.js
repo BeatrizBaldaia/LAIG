@@ -59,7 +59,14 @@ MyInterface.prototype.init = function(application) {
     }).name('Game View');
 let a = this.scene;
     this.gui.add(this.scene, 'selectedGraph', [ 'tearoom', 'garage'] ).onChange(function () {
-      a.graph.idRoot = a.selectedGraph;
+        a.graph.idRoot = a.selectedGraph;
+        for (var key in a.lightValues) {
+            if (key.substring(0, 3) != a.graph.idRoot.substring(0, 3)) {
+                a.lightValues[key] = false;
+            } else {
+                a.lightValues[key] = a.graph.lights[key][0];
+            }
+        }
     });
     // this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
 
@@ -82,8 +89,13 @@ MyInterface.prototype.addLightsGroup = function(lights) {
 
     for (var key in lights) {
         if (lights.hasOwnProperty(key)) {
-            this.scene.lightValues[key] = lights[key][0];
-            group.add(this.scene.lightValues, key);
+            if(key.substring(0, 3) != this.scene.graph.idRoot.substring(0, 3)) {
+                this.scene.lightValues[key] = false;
+            } else {
+                this.scene.lightValues[key] = lights[key][0];
+            }
+
+            group.add(this.scene.lightValues, key).listen();
         }
     }
 
