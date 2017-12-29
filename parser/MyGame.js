@@ -391,18 +391,20 @@ MyGame.prototype.undoPlay = function () {
   let captureRequired = false;
   if(piece) {
       captureRequired = piece.captureRequired;
-      if(piece.materialID == 'player1') {
-          this.nCaptureBy2--;
-          this.updatePoints(2);
-      } else {
-          this.nCaptureBy1--;
-          this.updatePoints(1);
-      }
+      console.log(piece.materialID);
   }
   if(captureRequired)
     this.player = (this.player == 1)? 2 : 1;
-  if(piece)
+  if(piece){
     this.undoCapturePiece(piece);//repor no tabuleiro a peca que tinha sido capturada
+    if(this.player == 1) {
+        this.nCaptureBy2--;
+        this.updatePoints(2);
+    } else {
+        this.nCaptureBy1--;
+        this.updatePoints(1);
+    }
+  }
   this.move = move;
   this.pieceToMove = this.findPieceByPosition(this.move[0]);
   this.tileToMove = this.findTileByPosition(this.move[1]);
