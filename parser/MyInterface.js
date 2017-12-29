@@ -36,8 +36,6 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
-    this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
-
     this.gui.add(this.scene, 'colorFactor', 1, 60).onChange(function(v)
     {
         obj.scene.updateColorFactor(v);
@@ -63,7 +61,7 @@ let a = this.scene;
     this.gui.add(this.scene, 'selectedGraph', [ 'tearoom', 'garage'] ).onChange(function () {
       a.graph.idRoot = a.selectedGraph;
     });
-    this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
+    // this.gui.add(this.scene, 'selectedNode', this.scene.nodeList).name('Select a node');
 
     return true;
 };
