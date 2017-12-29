@@ -159,6 +159,20 @@ MyGame.prototype.logPicking = function (obj) {
                         this.undoPlay();
                         break;
                     }
+                    case 'player1_points': {
+                        obj.pressed = obj.pressed == 0 ? 1 : 0;
+
+                        obj.initialAnimTime = 0;
+
+                        break;
+                    }
+                    case 'player2_points': {
+                        obj.pressed = obj.pressed == 0 ? 1 : 0;
+
+                        obj.initialAnimTime = 0;
+
+                        break;
+                    }
                     default:
                         console.error('Objecto sem funcionalidade neste momento.');//TODO
                 }
@@ -509,7 +523,7 @@ MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
       function_name = function(a,b,c) {};
       console.error('Invalid Type' + sufix);
   }
-  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix)},1000*this.film.length+1);
+  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix); aux.gameCycle();},1000*this.film.length+1);
 };
 function playFilm_part2(mySelf, i) {
   mySelf.move = mySelf.film[i];
@@ -520,7 +534,6 @@ function playFilm_part2(mySelf, i) {
 MyGame.prototype.gameCycle = function () {
   switch (this.type) {
     case HUMAN_VS_HUMAN:{
-      //console.log('TOUUUUUUUU');
       break;
     }
     case BOT_VS_BOT:{
@@ -556,8 +569,8 @@ function PCplay(data){
 MyGame.prototype.createCaptureAnimation = function (position) {
     let p1 = [position.x, 0, position.y];
     let p2 = [position.x, ANIMATION_HEIGHT, position.y];
-    let p3 = [-2.5, ANIMATION_HEIGHT, -1];
-    let p4 = [-2, -3, -.5];
+    let p3 = [-3, ANIMATION_HEIGHT, -1];
+    let p4 = [-3, -2, -1];
     let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
     return;
@@ -565,8 +578,8 @@ MyGame.prototype.createCaptureAnimation = function (position) {
 MyGame.prototype.createAddPieceAnimation = function (position) {
   let p4 = [position.x, 0, position.y];
   let p3 = [position.x, ANIMATION_HEIGHT, position.y];
-  let p2 = [-2.5, ANIMATION_HEIGHT, -1];
-  let p1 = [-2, -3, -.5];
+  let p2 = [-3, ANIMATION_HEIGHT, -1];
+  let p1 = [-3, -2, -1];
   let aux_animation = new MyBezierAnimation(this.scene.graph, p1, p2, p3, p4, ANIMATION_VELOCITY);
   this.scene.graph.animations['add' + position.x + position.y] = aux_animation;
   return;
