@@ -144,6 +144,14 @@
             <file path="images_tearoom/hard.jpg" />
             <amplif_factor s="1" t="1" />
         </TEXTURE>
+        <TEXTURE id="tire">
+            <file path="images_garage/tire.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
+        <TEXTURE id="rims">
+            <file path="images_garage/rims.jpg" />
+            <amplif_factor s="1" t="1" />
+        </TEXTURE>
         <TEXTURE id="points1">
             <file path="images_tearoom/points1.jpg" />
             <amplif_factor s="1" t="1" />
@@ -765,8 +773,8 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="tea_time_panel" selectable="1">
-            <MATERIAL id="null" />
-            <TEXTURE id="null" />
+            <MATERIAL id="wood" />
+            <TEXTURE id="tea_wood" />
             <ROTATION axis="y" angle="90" />
             <TRANSLATION x="-5" y="7" z="0.25" />
 
@@ -841,8 +849,8 @@
         </NODE>
 
         <NODE id="frame2">
-            <MATERIAL id="wood" />
-            <TEXTURE id="tea_wood" />
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
 
             <DESCENDANTS>
                 <NODEREF id="border2_1" />
@@ -888,7 +896,7 @@
             </DESCENDANTS>
         </NODE>
         <NODE id="rope">
-            <MATERIAL id="null" />
+            <MATERIAL id="defaultMaterial" />
             <TEXTURE id="steel" />
             <!--<SCALE sx="0.05" sy="0.5" sz="0.05" />-->
 
@@ -1342,6 +1350,9 @@
             <NODEREF id="gar_floor" />
             <NODEREF id="panel" />
             <NODEREF id="game" />
+            <NODEREF id="gar_time_panel" />
+            <NODEREF id="gar_players_points" />
+            <NODEREF id="tire1" />
         </DESCENDANTS>
     </NODE>
 
@@ -1614,5 +1625,129 @@
             <LEAF type="hexnut" args="40 1" />
         </DESCENDANTS>
     </NODE>
+
+    <NODE id="gar_time_panel" selectable="1">
+        <MATERIAL id="metal" />
+        <TEXTURE id="metal2" />
+        <SCALE sx="1.5" sy="1" sz="0.5" />
+        <TRANSLATION x="5" y="8" z="0.5" />
+
+        <DESCENDANTS>
+            <NODEREF id="frame2" />
+            <NODEREF id="time_numbers_figure" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="gar_players_points">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="clear" />
+        <SCALE sx="1.5" sy="1.5" sz="1.5" />
+        <TRANSLATION x="0" y="3" z="3" />
+        <DESCENDANTS>
+            <NODEREF id="gar_player1_points_aux" />
+            <NODEREF id="gar_player2_points_aux" />
+            <NODEREF id="shelf3" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="gar_player1_points_aux">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <TRANSLATION x="0.8" y="0.8" z="1" />
+        <SCALE sx="5" sy="1" sz="1" />
+
+        <DESCENDANTS>
+            <NODEREF id="gar_player1_points" />
+        </DESCENDANTS>
+    </NODE>
+    <NODE id="gar_player1_points" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <ROTATION axis="y" angle="90" />
+
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="paint_spin" />
+            <!--<ANIMATIONREF id="paint_spin" />-->
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="tire" />
+            <NODEREF id="points1_figure" />
+            <NODEREF id="counter1" />
+        </DESCENDANTS>
+    </NODE>
+    <NODE id="gar_player2_points_aux">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <TRANSLATION x="0.8" y="0.8" z="-1" />
+        <SCALE sx="5" sy="1" sz="1" />
+
+        <DESCENDANTS>
+            <NODEREF id="gar_player2_points" />
+        </DESCENDANTS>
+    </NODE>
+    <NODE id="gar_player2_points" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="clear" />
+        <ROTATION axis="y" angle="90" />
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="paint_spin" />
+            <!--<ANIMATIONREF id="paint_spin" />-->
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="tire" />
+            <NODEREF id="points2_figure" />
+            <NODEREF id="counter2" />
+        </DESCENDANTS>
+    </NODE>
+        <NODE id="tire1">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="1" sy="1" sz="10" />
+            <TRANSLATION x="9" y="0.8" z="0.03" />
+            <DESCENDANTS>
+                <NODEREF id="tire" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tire">
+            <MATERIAL id="null" />
+            <TEXTURE id="null" />
+            <SCALE sx="1" sy="1" sz="0.1" />
+            <TRANSLATION x="0" y="0" z="0.5" />
+            <DESCENDANTS>
+                <NODEREF id="tire_arc" />
+                <NODEREF id="tire_top" />
+                <NODEREF id="tire_back" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tire_arc">
+            <MATERIAL id="null" />
+            <TEXTURE id="tire" />
+            <SCALE sx="0.8" sy="0.8" sz="0.5" />
+            <TRANSLATION x="0" y="0" z="-0.5" />
+            <DESCENDANTS>
+                <LEAF type="cylinder" args="1 1 1 20 20 0 0" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tire_top">
+            <MATERIAL id="null" />
+            <TEXTURE id="rims" />
+            <SCALE sx="0.8" sy="0.8" sz="1" />
+            <TRANSLATION x="0" y="0" z="0.25" />
+            <DESCENDANTS>
+                <LEAF type="circle" args="20" />
+            </DESCENDANTS>
+        </NODE>
+        <NODE id="tire_back">
+            <MATERIAL id="null" />
+            <TEXTURE id="rims" />
+            <SCALE sx="0.8" sy="0.8" sz="1" />
+            <TRANSLATION x="0" y="0" z="-0.25" />
+            <ROTATION axis="y" angle="180" />
+            <DESCENDANTS>
+                <LEAF type="circle" args="20" />
+            </DESCENDANTS>
+        </NODE>
+
     </NODES>
+
 </SCENE>
