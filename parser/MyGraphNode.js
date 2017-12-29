@@ -86,7 +86,7 @@ MyGraphNode.prototype.display = function(parentID) {
     if((prefix == 'tea' || prefix == 'gar') && (prefix != this.graph.idRoot.substring(0, 3))) {
         return;
     }
-  if (((this.graph.scene.pickMode == false) /*&& this.visible*/)||(this.graph.scene.pickMode == true)) {
+  if (((this.graph.scene.pickMode == false) && this.visible)||(this.graph.scene.pickMode == true)) {
     if(this.selected) {
       this.graph.scene.registerForPick(this.graph.scene.game.selectNodesList[this.nodeID], this);
     }
