@@ -45,7 +45,7 @@ MyCircularAnimation.prototype.getMatrix = function(initialTime, currTime) {
 
 }
 MyCircularAnimation.prototype.getLastMatrix = function() {
-	let (alfa = (this.angleInicial+this.angleRotate)
+	let alfa = (this.angleInicial+this.angleRotate)
 	let aux = mat4.create();
     mat4.identity(aux);
 
