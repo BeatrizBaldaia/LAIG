@@ -224,7 +224,7 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
           console.error('Invalid Type');
       }
       this.turnOffButon(buton);
-      this.playFilm(buton);
+      this.playFilm(buton, obj, prefix);
       this.type = FILM;
   }
 };
@@ -468,7 +468,7 @@ MyGame.prototype.undoCapturePiece = function (piece) {
     piece.piece.position.x = piece.x;
     piece.piece.position.y = piece.y;
 }
-MyGame.prototype.playFilm = function (buton) {
+MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
   this.resetGame();
   let aux = this;
   let auxFilm = this.film.slice();
@@ -491,7 +491,7 @@ MyGame.prototype.playFilm = function (buton) {
     default:
       console.error('Invalid Type' + sufix);
   }
-  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix);},1000*this.film.length);
+  window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix)},1000*this.film.length);
 };
 function playFilm_part2(mySelf, i) {
   mySelf.move = mySelf.film[i];
