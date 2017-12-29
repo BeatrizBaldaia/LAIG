@@ -565,6 +565,10 @@ MyGame.prototype.resetGame = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
   this.player = 1;
+  this.nCaptureBy1 = 0;
+  this.nCaptureBy2 = 0;
+  this.updatePoints(1);
+  this.updatePoints(2);
 };
 
 MyGame.prototype.resetGameTime = function () {
