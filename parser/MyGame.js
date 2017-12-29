@@ -82,6 +82,11 @@ MyGame.prototype.updateGameTime = function (currTime) {
             timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
         }
     }
+    if(this.pieceToMove){
+      this.scene.selectedNode = this.pieceToMove.nodeID;
+    } else {
+      this.scene.selectedNode = null;
+    }
 };
 MyGame.prototype.logPicking = function (obj) {
         if ((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/ && (this.type == HUMAN_VS_HUMAN || this.type == HUMAN_VS_BOT)) {//obj is piece

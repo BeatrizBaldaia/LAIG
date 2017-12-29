@@ -22,7 +22,6 @@ function XMLscene(interface) {
         this.game.updateGameTime(currTime);
     }
 
-
     /* CAMERA VIEW */
     if(!this.updateCameraView(currTime)) {
       if(this.camerasSet[this.cameraView]["follow"]) {
