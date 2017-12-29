@@ -1608,8 +1608,6 @@
         <MATERIAL id="null" />
         <TEXTURE id="clear" />
         <SCALE sx="0.5" sy="0.4" sz="0.5" />
-        <!-- <SCALE sx="0.1" sy="0.1" sz="0.1" />
-        <TRANSLATION x="50.3" y="35.5" z="79.8" /> -->
         <DESCENDANTS>
             <LEAF type="hexnut" args="32 1" />
         </DESCENDANTS>
