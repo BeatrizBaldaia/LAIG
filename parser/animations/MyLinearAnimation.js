@@ -104,3 +104,30 @@ MyLinearAnimation.prototype.getMatrix = function(initialTime, currTime) {
 
     return resultMatrix;
 }
+MyLinearAnimation.prototype.getLastMatrix = function() {
+    var temp = currTime - initialTime;
+    var state = this.timesPerLine.length;
+
+    var ang = this.calculateAng(this.controlPoints[state - 1], this.controlPoints[state]);
+    var deltaTime = this.timesPerLine[this.timesPerLine.length-1];
+
+		var resultMatrix;
+    resultMatrix=mat4.create();
+    mat4.identity(resultMatrix);
+
+    var vec = [(this.controlPoints[state][0] - this.controlPoints[state - 1][0]),
+        (this.controlPoints[state][1] - this.controlPoints[state - 1][1]),
+        (this.controlPoints[state][2] - this.controlPoints[state - 1][2])];
+	var vecDist = Math.sqrt(Math.pow(vec[0], 2) + Math.pow(vec[1], 2) + Math.pow(vec[2], 2));
+	var deltaDist = this.velocity * (deltaTime)
+	var delta = deltaDist/vecDist;
+
+	vec[0] *= delta;
+    vec[1] *= delta;
+    vec[2] *= delta;
+    resultMatrix = mat4.translate(resultMatrix, resultMatrix, vec);
+    resultMatrix = mat4.translate(resultMatrix, resultMatrix, this.controlPoints[state - 1]);
+    resultMatrix = mat4.rotateY(resultMatrix, resultMatrix, ang);
+
+    return resultMatrix;
+}
