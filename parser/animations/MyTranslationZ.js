@@ -32,3 +32,16 @@ MyTranslationZ.prototype.getMatrix = function(initialTime, currTime) {
     return aux;
 
 }
+MyTranslationZ.prototype.getLastMatrix = function() {
+    var temp = (1.5/0.001);
+
+    let deltaDist = (this.dist * temp)/(1.5/0.001);
+
+    let aux = mat4.create();
+    mat4.identity(aux);
+
+    aux = mat4.translate(aux, aux, [0,0,deltaDist]);
+
+    return aux;
+
+}

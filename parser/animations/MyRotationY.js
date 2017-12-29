@@ -32,3 +32,13 @@ MyRotationY.prototype.getMatrix = function(initialTime, currTime) {
     return aux;
 
 }
+MyRotationY.prototype.getLastMatrix = function() {
+    
+    let aux = mat4.create();
+    mat4.identity(aux);
+
+    aux = mat4.rotate(aux, aux, this.ang, [0,1,0]);
+
+    return aux;
+
+}

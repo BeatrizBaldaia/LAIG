@@ -223,7 +223,7 @@ MyGraphNode.prototype.getNormalAnimationMatrix = function(currTime) {
                 this.originalMatrix,
                 newMatrix);
         } else {//proxima animacao
-            //console.log("NOVA ANIMACAO: "+this.animation[this.animationN]);
+            mat4.multiply(this.transformMatrix,this.originalMatrix,this.graph.animations[this.animation[this.animationN]].getLastMatrix());
             this.animationN++;
             this.initialAnimTime = 0;
         }

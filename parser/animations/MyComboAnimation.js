@@ -50,3 +50,7 @@ MyComboAnimation.prototype.getMatrix = function(initialTime, currTime) {
         return resultMatrix;
 	}
 }
+MyComboAnimation.prototype.getLastMatrix = function() {
+	var resultMatrix = this.graph.animations[this.animationsSet[this.animationsSet.length-1]].getLastMatrix();
+  return resultMatrix;
+}
