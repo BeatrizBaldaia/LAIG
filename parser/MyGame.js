@@ -82,7 +82,6 @@ MyGame.prototype.updateGameTime = function (currTime) {
             this.gameOver();
         } else {
             timeDigit1.textureID = 'number' + Math.floor(this.timeBeforeNextPlay / 10);
-            console.log(this.timeBeforeNextPlay);
             timeDigit2.textureID = 'number' + this.timeBeforeNextPlay % 10;
         }
     }
