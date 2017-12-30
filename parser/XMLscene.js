@@ -251,7 +251,7 @@ XMLscene.prototype.updateCameraView=function(currTime) {
             this.previousTime = 0;
             this.timeACC = 0;
         } else {//ainda e preciso mover a camara
-            
+
             let deltaTime = 0;
             if(this.previousTime != 0) {
                 deltaTime = currTime - this.previousTime;

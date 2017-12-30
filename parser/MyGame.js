@@ -302,14 +302,18 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
       otherObj.pressed = 0;
   } else {
       let type = this.type;
+      let buton1;
       switch (type) {
           case HUMAN_VS_HUMAN:
+              buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
               this.turnOffButon('buton_1Vs1');
               break;
           case HUMAN_VS_BOT:
+              buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
               this.turnOffButon('buton_1VsPC');
               break;
           case BOT_VS_BOT:
+              buton1 = this.scene.graph.nodes['tea_buton_PCVsPC'];
               this.turnOffButon('buton_PCVsPC');
               break;
           default:
