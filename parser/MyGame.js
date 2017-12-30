@@ -5,6 +5,11 @@ let BOT_VS_BOT = 3;
 let HUMAN_VS_HUMAN = 1;
 let HUMAN_VS_BOT = 2;
 let FILM = 4;
+/**
+ * @brief MyGame class, representing the game.
+ * @param scene scene of the game
+ * @constructor
+**/
 function MyGame(scene) {
   this.scene = scene;
 
@@ -36,7 +41,9 @@ function MyGame(scene) {
   let auxiliarDate = new Date();
   this.previousTime = auxiliarDate.getTime();
 }
-
+/**
+ * @brief Initiates the variables related to the interface
+**/
 MyGame.prototype.initInterfaceVariables = function () {
     this.level = 0;
     this.type = -1;
@@ -44,12 +51,16 @@ MyGame.prototype.initInterfaceVariables = function () {
     this.film = [];
     this.capturedPieces = [];
 }
-
+/**
+ * @brief Initiates the variables related to the indexs
+**/
 MyGame.prototype.initIndexVariables = function () {
     this.selectIndex = 0;
     this.player = 1;
 }
-
+/**
+ * @brief Initiates the variables related to the objects in the game
+**/
 MyGame.prototype.initObjectsVariables = function () {
     this.board = [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
     this.pieceToMove = null;
@@ -57,7 +68,9 @@ MyGame.prototype.initObjectsVariables = function () {
     this.pieces = [];
     this.tiles = [];
 }
-
+/**
+ * @brief Initiates the variables related to the game play
+**/
 MyGame.prototype.initPlayInfoVariables = function () {
     this.move = [];
     this.animations = [];
@@ -69,6 +82,10 @@ MyGame.prototype.initPlayInfoVariables = function () {
     this.maxTime = 30;
     this.timeAux = 30;
 }
+/**
+ * @brief Updates the Timeout clock in the game
+ * @param currTime The time in miliseconds
+**/
 MyGame.prototype.updateGameTime = function (currTime) {
     if(this.type != -1) {
         this.timeAux -= (currTime - this.previousTime)/1000;
@@ -91,6 +108,10 @@ MyGame.prototype.updateGameTime = function (currTime) {
       this.scene.selectedNode = null;
     }
 };
+/**
+ * @brief Deals with the picking of objects
+ * @param obj Objecto selected with the mouse
+**/
 MyGame.prototype.logPicking = function (obj) {
         if ((this.pieces.indexOf(obj.nodeID) != -1) /*&& (this.captureRequired == false)*/ && (this.type == HUMAN_VS_HUMAN || this.type == HUMAN_VS_BOT)) {//obj is piece
             this.pieceToMove = obj; //Escolher a peça
@@ -196,7 +217,11 @@ MyGame.prototype.logPicking = function (obj) {
             }
         }
 }
-
+/**
+ * @brief Deal with the press of the buton 1Vs1
+ * @param obj the buton pressed
+ * @param prefix the prefix of the graph
+**/
 MyGame.prototype.logPicking_buton_1Vs1 = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
       let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_1Vs1'] : this.scene.graph.nodes['tea_buton_1Vs1'];
@@ -209,6 +234,11 @@ MyGame.prototype.logPicking_buton_1Vs1 = function (obj, prefix) {
       this.type = HUMAN_VS_HUMAN;
   }
 };
+/**
+ * @brief Deal with the press of the buton 1VsPC
+ * @param obj the buton pressed
+ * @param prefix the prefix of the graph
+**/
 MyGame.prototype.logPicking_buton_1VsPC = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
       let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_1VsPC'] : this.scene.graph.nodes['tea_buton_1VsPC'];
@@ -222,6 +252,11 @@ MyGame.prototype.logPicking_buton_1VsPC = function (obj, prefix) {
       this.type = HUMAN_VS_BOT;
   }
 };
+/**
+ * @brief Deal with the press of the buton PCVsPC
+ * @param obj the buton pressed
+ * @param prefix the prefix of the graph
+**/
 MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
   if ((obj.pressed == 0) && (obj.invert == 0) && (obj.initialAnimTime == -1)) {
       let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_PCVsPC'] : this.scene.graph.nodes['tea_buton_PCVsPC'];
@@ -235,6 +270,11 @@ MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
 
   }
 };
+/**
+ * @brief Deal with the press of the buton undo
+ * @param obj the buton pressed
+ * @param prefix the prefix of the graph
+**/
 MyGame.prototype.logPicking_buton_undo = function (obj, prefix) {
     if ((obj.invert == 0) && (obj.initialAnimTime == -1)) {
         let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_undo'] : this.scene.graph.nodes['tea_buton_undo'];
@@ -245,6 +285,11 @@ MyGame.prototype.logPicking_buton_undo = function (obj, prefix) {
         otherObj.initialAnimTime = 0;
     }
 };
+/**
+ * @brief Deal with the press of the buton film
+ * @param obj the buton pressed
+ * @param prefix the prefix of the graph
+**/
 MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
   let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_film'] : this.scene.graph.nodes['tea_buton_film'];
     this.verifyNodeAnimation(obj);
@@ -286,7 +331,10 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
 
   }
 };
-
+/**
+ * @brief Receives the response from the server to a jogadavalida query
+ * @param data the response
+**/
 function onSuccess(data) {
   switch (data.target.response) {
     case 'OK':{
@@ -332,8 +380,8 @@ function onSuccess(data) {
   this.asker.endGame();
   this.asker.timeAux = this.asker.maxTime;
 }
-/*
-* Movimento da peca no tabuleiro (animacao da peca a saltar)
+/**
+* @brief Movimento da peca no tabuleiro (animacao da peca a saltar)
 * */
 MyGame.prototype.moveOK = function () {
   let move = this.showMove();
@@ -370,6 +418,9 @@ MyGame.prototype.moveOK = function () {
   this.player = (this.player == 1)? 2 : 1;//proximo jogador a jogar
   console.log(this.showBoard());
 }
+/**
+ * @brief Remove a peça capturada numa jogada
+**/
 MyGame.prototype.removeCapturePiece = function () {
   let position = {x: 0, y: 0};
   let pieceX = this.pieceToMove.position.x;
@@ -409,6 +460,9 @@ MyGame.prototype.removeCapturePiece = function () {
   this.capturedPiece.position.y = 0;
   this.capturedPiece = null;
 }
+/**
+ * @brief Promove as pecas a reis quando apropriado
+**/
 MyGame.prototype.promotionToKing = function () {
   for(let i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] == 2){
@@ -423,7 +477,11 @@ MyGame.prototype.promotionToKing = function () {
     }
   }
 };
-
+/**
+ * @brief Finds a piece given a position
+ * @param position the position of the piece
+ * @return The piece found, or NULL
+**/
 MyGame.prototype.findPieceByPosition = function (position) {
   for (let i = 0; i < this.pieces.length; i++){
     let obj = this.scene.graph.nodes[this.pieces[i]];
@@ -433,6 +491,9 @@ MyGame.prototype.findPieceByPosition = function (position) {
   }
   return null;
 };
+/**
+ * @brief Deals with a game over ocorrence
+**/
 MyGame.prototype.gameOver = function () {
     alert('END OF GAME!');
     this.turnOffButons('buton_1VsPC', 'buton_PCVsPC');
@@ -441,6 +502,11 @@ MyGame.prototype.gameOver = function () {
 
     this.resetGame();
 };
+/**
+ * @brief Finds a tile given a position
+ * @param position the position of the tile
+ * @return The tile found, or NULL
+**/
 MyGame.prototype.findTileByPosition = function (position) {
   for (let i = 0; i < this.tiles.length; i++){
     let obj = this.scene.graph.nodes[this.tiles[i]];
@@ -450,9 +516,16 @@ MyGame.prototype.findTileByPosition = function (position) {
   }
   return null;
 };
+/**
+ * @brief Asks the server if a board, means that the game is over
+**/
 MyGame.prototype.endGame = function () {
   getPrologRequest(this,'endofGame('+this.showBoard() + '-' + this.player+')', gameOver);
 };
+/**
+ * @brief Receives the response from the server to a gameover query
+ * @param data the response
+**/
 function gameOver(data) {
   switch (data.target.response) {
     case 'Continue':{
@@ -468,7 +541,9 @@ function gameOver(data) {
       console.warn('Invalid response from server! '+ data.target.response);
   }
 };
-
+/**
+ * @brief Reverte a ultima jogada
+**/
 MyGame.prototype.undoPlay = function () {
   if(this.film.length == 0)
     return;
@@ -513,9 +588,9 @@ MyGame.prototype.undoPlay = function () {
     captureRequired = piece.captureRequired;
   this.captureRequired = captureRequired;
 };
-
-/*
-* Volta a por no tabuleiro a peça na posicao anterior
+/**
+* @brief Volta a por no tabuleiro a peça na posicao anterior
+* @param piece Peca a devolver ao tabuleiro
 * */
 MyGame.prototype.undoCapturePiece = function (piece) {
     this.board[piece.y-1][piece.x-1] = this.player;
@@ -529,6 +604,12 @@ MyGame.prototype.undoCapturePiece = function (piece) {
     piece.piece.position.x = piece.x;
     piece.piece.position.y = piece.y;
 }
+/**
+* @brief Mostra o filme the todas as jogadas efectuadas ate ao momento
+* @param buton Butao do tipo de jogo atualizar
+* @param filmObj Butao de filme
+* @param filmpPrefix prefixo do ambiente
+* */
 MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
   let auxFilm = this.film.slice();
   this.resetGame();
@@ -560,12 +641,20 @@ MyGame.prototype.playFilm = function (buton, filmObj, filmpPrefix) {
   }
   window.setTimeout(function(){aux.film = auxFilm; function_name.call(aux,buton, prefix); aux.logPicking_buton_film(filmObj,filmpPrefix); aux.gameCycle();},1000*this.film.length+1000);
 };
+/**
+* @brief Função do filme que se repete a cada movimento
+* @param mySelf O jogo
+* @param i index da jogada
+* */
 function playFilm_part2(mySelf, i) {
   mySelf.move = mySelf.film[i];
   mySelf.pieceToMove = mySelf.findPieceByPosition({x:mySelf.move[0].x, y:mySelf.move[0].y});
   mySelf.tileToMove = mySelf.findTileByPosition({x:mySelf.move[1].x, y:mySelf.move[1].y});
   getPrologRequest(mySelf,'jogadaValida(' + mySelf.showBoard() + '-' + mySelf.player + '-' + mySelf.showMove() + ')', onSuccess);
 }
+/**
+* @brief ciclo de jogo
+* */
 MyGame.prototype.gameCycle = function () {
   switch (this.type) {
     case HUMAN_VS_HUMAN:{
@@ -589,6 +678,10 @@ MyGame.prototype.gameCycle = function () {
       console.error('Chegao ao inchegavel');
   }
 };
+/**
+ * @brief Receives the response from the server to a nextMove query
+ * @param data the response
+**/
 function PCplay(data){
   // console.log(data.target.response);
   let a = data.target.response;
@@ -600,7 +693,10 @@ function PCplay(data){
   this.asker.tileToMove = this.asker.findTileByPosition({x:this.asker.move[1].x, y:this.asker.move[1].y});
   getPrologRequest(this.asker,'jogadaValida(' + this.asker.showBoard() + '-' + this.asker.player + '-' + this.asker.showMove() + ')', onSuccess);
 }
-
+/**
+ * @brief Cria a animação que remove uma peca desta posicao
+ * @param position posicao da peca
+**/
 MyGame.prototype.createCaptureAnimation = function (position) {
     let p1 = [position.x, 0, position.y];
     let p2 = [position.x, ANIMATION_HEIGHT, position.y];
@@ -610,6 +706,10 @@ MyGame.prototype.createCaptureAnimation = function (position) {
     this.scene.graph.animations['remove' + position.x + position.y] = aux_animation;
     return;
 }
+/**
+ * @brief Cria a animação que devolve uma peca a esta posicao
+ * @param position posicao da peca
+**/
 MyGame.prototype.createAddPieceAnimation = function (position) {
   let p4 = [position.x, 0, position.y];
   let p3 = [position.x, ANIMATION_HEIGHT, position.y];
@@ -619,7 +719,10 @@ MyGame.prototype.createAddPieceAnimation = function (position) {
   this.scene.graph.animations['add' + position.x + position.y] = aux_animation;
   return;
 }
-
+/**
+ * @brief Verifia se a peca tem animacao e altera o tempo de inicio da animacao no no se necessario
+ * @param piece  peca
+**/
 MyGame.prototype.verifyNodeAnimation = function (piece) {
     if(this.scene.nodesWithAnimation.indexOf(piece.nodeID) == -1){
         this.scene.nodesWithAnimation.push(piece.nodeID);
@@ -627,11 +730,19 @@ MyGame.prototype.verifyNodeAnimation = function (piece) {
         piece.initialAnimTime = 0;
     }
 }
-
+/**
+ * @brief Desliga os botoes
+ * @param buton1 botao a desligar
+ * @param buton2 botao a desligar
+**/
 MyGame.prototype.turnOffButons = function (buton1, buton2) {
   this.turnOffButon(buton1);
   this.turnOffButon(buton2);
 };
+/**
+ * @brief Desliga o botao
+ * @param buton botao a desligar
+**/
 MyGame.prototype.turnOffButon = function (buton) {
     let teaButon = this.scene.graph.nodes['tea_'+buton];
     let garButon = this.scene.graph.nodes['gar_'+buton];
@@ -648,6 +759,9 @@ MyGame.prototype.turnOffButon = function (buton) {
             }
         }
 }
+/**
+ * @brief Faz reset das variaveis necessarias para começar o jogo
+**/
 MyGame.prototype.resetGame = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
   this.board =  [[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,2,2,2,2,0,0],[0,2,2,2,2,2,2,0],[2,2,2,2,2,2,2,2]];
@@ -659,14 +773,19 @@ MyGame.prototype.resetGame = function () {
   this.film = [];
   this.capturedPieces = [];
 };
-
+/**
+ * @brief Faz reset tempo que existe ate a proxima jogada
+**/
 MyGame.prototype.resetGameTime = function () {
     let auxiliarDate = new Date();
     this.previousTime = auxiliarDate.getTime();
     this.timeBeforeNextPlay = this.maxTime;
     this.timeAux = this.maxTime;
 }
-
+/**
+ * @brief Faz update do numero de capturas do jogador
+ * @param player jogador
+**/
 MyGame.prototype.updatePoints = function(player) {
     if(player == 1) {
         let pointsDigit1 = this.scene.graph.nodes['P1points_digit1'];
@@ -679,8 +798,4 @@ MyGame.prototype.updatePoints = function(player) {
         pointsDigit1.textureID = 'number' + Math.floor(this.nCaptureBy2 / 10);
         pointsDigit2.textureID = 'number' + this.nCaptureBy2 % 10;
     }
-}
-
-MyGame.prototype.turnOnButon = function(buton) {
-
 }
