@@ -169,11 +169,8 @@ MyGame.prototype.logPicking = function (obj) {
                         break;
                     }
                     case 'buton_undo': {
-                        let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_undo'] : this.scene.graph.nodes['tea_buton_undo'];
                         if(this.type == HUMAN_VS_HUMAN) {
-                            obj.pressed = obj.pressed == 0 ? 1 : 0;
-                            this.turnOffButons(obj, otherObj);
-                            // obj.initialAnimTime = 0;
+                            this.logPicking_buton_undo(obj, prefix);
                             this.undoPlay();
                         }
 
@@ -252,6 +249,16 @@ MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
       this.type = BOT_VS_BOT;
 
   }
+};
+MyGame.prototype.logPicking_buton_undo = function (obj, prefix) {
+    if ((obj.invert == 0) && (obj.initialAnimTime == -1)) {
+        let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_undo'] : this.scene.graph.nodes['tea_buton_undo'];
+        let state = obj.pressed == 1 ? 0 : 1;
+        obj.pressed = state;
+        otherObj.pressed = state;
+        obj.initialAnimTime = 0;
+        otherObj.initialAnimTime = 0;
+    }
 };
 MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
   let otherObj = prefix == 'tea_' ? this.scene.graph.nodes['gar_buton_film'] : this.scene.graph.nodes['tea_buton_film'];
@@ -652,7 +659,6 @@ MyGame.prototype.turnOffButons = function (buton1, buton2) {
   this.turnOffButon(buton2);
 };
 MyGame.prototype.turnOffButon = function (buton) {
-    if(buton.pressed) {
         if(buton.pressed) {
             if(buton.initialAnimTime != -1) {
                 buton.invert = 1;
@@ -662,7 +668,6 @@ MyGame.prototype.turnOffButon = function (buton) {
                 this.scene.graph.nodes['gar_'+buton.nodeID.substring(4, buton.nodeID.length)].materialID = 'yellow_buton_off';
             }
         }
-    }
 }
 MyGame.prototype.resetGame = function () {
   this.scene.graph.nodes[this.scene.graph.idRoot].resetPositions();
