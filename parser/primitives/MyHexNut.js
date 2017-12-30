@@ -1,4 +1,4 @@
-/* @param scene scene of the circle
+/** @param scene scene of the circle
 * @param slices number of parts of the circle
 * @constructor
 */
