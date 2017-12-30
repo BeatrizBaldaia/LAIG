@@ -23,11 +23,8 @@ function XMLscene(interface) {
     }
 
     /* CAMERA VIEW */
-    if(!this.updateCameraView(currTime)) {
-      if(this.camerasSet[this.cameraView]["follow"]) {
-        this.camera.setTarget(this.graph.nodes[this.camerasSet[this.cameraView]["target"]].getPosition());
-      }
-    }
+      this.updateCameraView(currTime);
+
   }
 
   this.setPickEnabled(true);
@@ -204,12 +201,11 @@ XMLscene.prototype.initCameraVars = function() {
     this.cameraTransitionVel = 0;
     this.targetTransitionVel = 0;
 
-    var camera1 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
-    var camera2 = {position: vec4.fromValues(5, 15, 5, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
-    var camera3 = {position: vec4.fromValues(5, 7, 18, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
-    var camera4 = {position: vec4.fromValues(25, 10, 5, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 1};
-    var camera6 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), follow: 0, type: 0};
-    var camera5 = {position: vec4.fromValues(5, 5, 30, 0), target: "bigRocket", follow: 1, type: 1};
+    var camera1 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), type: 1};
+    var camera2 = {position: vec4.fromValues(5, 15, 5, 0), target: vec3.fromValues(5, 4, 5), type: 1};
+    var camera3 = {position: vec4.fromValues(5, 7, 18, 0), target: vec3.fromValues(5, 4, 5), type: 1};
+    var camera4 = {position: vec4.fromValues(25, 10, 5, 0), target: vec3.fromValues(5, 4, 5), type: 1};
+    var camera6 = {position: vec4.fromValues(5, 5, 30, 0), target: vec3.fromValues(5, 4, 5), type: 0};
     this.camerasSet = [ camera1, camera2, camera3, camera4, camera6];
 
 }
@@ -231,12 +227,7 @@ XMLscene.prototype.updateCameraVelocity=function(v) {
     }
 
     this.cameraTransitionVel = (distanceBetweenPoints(this.camera["position"], this.camerasSet[this.cameraView]["position"])) / 2000;
-    if(this.camerasSet[this.cameraView]["follow"]) {
-        let targetPos = this.graph.nodes[this.camerasSet[this.cameraView]["target"]].getPosition();
-        this.targetTransitionVel = (distanceBetweenPoints(this.camera["target"], targetPos)) / 2000;
-    } else {
-        this.targetTransitionVel = (distanceBetweenPoints(this.camera["target"], this.camerasSet[this.cameraView]["target"])) / 2000;
-    }
+    this.targetTransitionVel = (distanceBetweenPoints(this.camera["target"], this.camerasSet[this.cameraView]["target"])) / 2000;
 
 }
 
@@ -260,10 +251,7 @@ XMLscene.prototype.updateCameraView=function(currTime) {
             this.previousTime = 0;
             this.timeACC = 0;
         } else {//ainda e preciso mover a camara
-            if(this.camerasSet[this.cameraView]["follow"]) {
-                let targetPos = this.graph.nodes[this.camerasSet[this.cameraView]["target"]].getPosition();
-                this.targetTransitionVel = (distanceBetweenPoints(this.camera["target"], targetPos)) / 2000;
-            }
+            
             let deltaTime = 0;
             if(this.previousTime != 0) {
                 deltaTime = currTime - this.previousTime;
