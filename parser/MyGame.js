@@ -457,10 +457,15 @@ MyGame.prototype.findPieceByPosition = function (position) {
 };
 MyGame.prototype.gameOver = function () {
     alert('END OF GAME!');
-    let prefix = this.scene.graph.idRoot.substring(0,3) + '_';
-    let buton1 = this.scene.graph.nodes[prefix+'buton_1VsPC'];
-    let buton2 = this.scene.graph.nodes[prefix+'buton_PCVsPC'];
-    let buton3 = this.scene.graph.nodes[prefix+'buton_1Vs1'];
+    let buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
+    let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
+    let buton3 = this.scene.graph.nodes['tea_buton_1Vs1'];
+    this.turnOffButons(buton1, buton2);
+    this.turnOffButon(buton3);
+
+    buton1 = this.scene.graph.nodes['gar_buton_1VsPC'];
+    buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
+    buton3 = this.scene.graph.nodes['gar_buton_1Vs1'];
     this.turnOffButons(buton1, buton2);
     this.turnOffButon(buton3);
     this.type = -1;
