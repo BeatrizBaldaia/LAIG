@@ -205,12 +205,7 @@ MyGame.prototype.logPicking_buton_1Vs1 = function (obj, prefix) {
       this.scene.graph.nodes['gar_buton_1Vs1'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
       otherObj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
-      let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
-      this.turnOffButons(buton1, buton2);
-      buton1 = this.scene.graph.nodes['gar_buton_1VsPC'];
-      buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
-      this.turnOffButons(buton1, buton2);
+      this.turnOffButons('buton_1VsPC', 'buton_PCVsPC');
       this.type = HUMAN_VS_HUMAN;
   }
 };
@@ -222,12 +217,7 @@ MyGame.prototype.logPicking_buton_1VsPC = function (obj, prefix) {
       this.scene.graph.nodes['gar_buton_1VsPC'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
       otherObj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
-      let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
-      this.turnOffButons(buton1, buton2);
-      buton1 = this.scene.graph.nodes['gar_buton_1Vs1'];
-      buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
-      this.turnOffButons(buton1, buton2);
+      this.turnOffButons('buton_1Vs1', 'buton_PCVsPC');
 
       this.type = HUMAN_VS_BOT;
   }
@@ -240,12 +230,7 @@ MyGame.prototype.logPicking_buton_PCVsPC = function (obj, prefix) {
       this.scene.graph.nodes['gar_buton_PCVsPC'].materialID = 'yellow_buton_on';
       obj.initialAnimTime = 0;
       otherObj.initialAnimTime = 0;
-      let buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
-      let buton2 = this.scene.graph.nodes['tea_buton_1VsPC'];
-      this.turnOffButons(buton1, buton2);
-      buton1 = this.scene.graph.nodes['gar_buton_1Vs1'];
-      buton2 = this.scene.graph.nodes['gar_buton_1VsPC'];
-      this.turnOffButons(buton1, buton2);
+      this.turnOffButons('buton_1Vs1', 'buton_1VsPC');
       this.type = BOT_VS_BOT;
 
   }
@@ -272,22 +257,15 @@ MyGame.prototype.logPicking_buton_film = function (obj, prefix) {
       otherObj.pressed = 0;
   } else {
       let type = this.type;
-      let buton1, buton2;
       switch (type) {
           case HUMAN_VS_HUMAN:
-              buton1 = this.scene.graph.nodes['tea_buton_1Vs1'];
-              buton2 = this.scene.graph.nodes['gar_buton_1Vs1'];
-              this.turnOffButons(buton1, buton2);
+              this.turnOffButon('buton_1Vs1');
               break;
           case HUMAN_VS_BOT:
-              buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
-              buton2 = this.scene.graph.nodes['gar_buton_1VsPC'];
-              this.turnOffButons(buton1, buton2);
+              this.turnOffButon('buton_1VsPC');
               break;
           case BOT_VS_BOT:
-              buton1 = this.scene.graph.nodes['tea_buton_PCVsPC'];
-              buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
-              this.turnOffButons(buton1, buton2);
+              this.turnOffButon('buton_PCVsPC');
               break;
           default:
               console.error('Invalid Type');
@@ -457,17 +435,8 @@ MyGame.prototype.findPieceByPosition = function (position) {
 };
 MyGame.prototype.gameOver = function () {
     alert('END OF GAME!');
-    let buton1 = this.scene.graph.nodes['tea_buton_1VsPC'];
-    let buton2 = this.scene.graph.nodes['tea_buton_PCVsPC'];
-    let buton3 = this.scene.graph.nodes['tea_buton_1Vs1'];
-    this.turnOffButons(buton1, buton2);
-    this.turnOffButon(buton3);
-
-    buton1 = this.scene.graph.nodes['gar_buton_1VsPC'];
-    buton2 = this.scene.graph.nodes['gar_buton_PCVsPC'];
-    buton3 = this.scene.graph.nodes['gar_buton_1Vs1'];
-    this.turnOffButons(buton1, buton2);
-    this.turnOffButon(buton3);
+    this.turnOffButons('buton_1VsPC', 'buton_PCVsPC');
+    this.turnOffButon('buton_1Vs1');
     this.type = -1;
 
     this.resetGame();
@@ -664,13 +633,18 @@ MyGame.prototype.turnOffButons = function (buton1, buton2) {
   this.turnOffButon(buton2);
 };
 MyGame.prototype.turnOffButon = function (buton) {
-        if(buton.pressed) {
-            if(buton.initialAnimTime != -1) {
-                buton.invert = 1;
+    let teaButon = this.scene.graph.nodes['tea_'+buton];
+    let garButon = this.scene.graph.nodes['gar_'+buton];
+        if(teaButon.pressed) {
+            if(teaButon.initialAnimTime != -1) {
+                teaButon.invert = 1;
+                garButon.invert = 1;
             } else {
-                buton.pressed = 0;
-                buton.initialAnimTime = 0;
-                this.scene.graph.nodes['gar_'+buton.nodeID.substring(4, buton.nodeID.length)].materialID = 'yellow_buton_off';
+                teaButon.pressed = 0;
+                teaButon.initialAnimTime = 0;
+                garButon.pressed = 0;
+                garButon.initialAnimTime = 0;
+                garButon.materialID = 'yellow_buton_off';
             }
         }
 }
